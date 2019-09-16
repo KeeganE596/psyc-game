@@ -25,7 +25,7 @@ public class Gnatt : MonoBehaviour
 
     private void Update()
     {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, velocity * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, velocity * Time.deltaTime);
 
         if (target_Score.score >= 200) {
             velocity = 0;

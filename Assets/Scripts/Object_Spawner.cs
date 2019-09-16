@@ -46,14 +46,16 @@ public class Object_Spawner : MonoBehaviour
         BoxCollider2D collider = left.AddComponent<BoxCollider2D>();
         collider.size = new Vector3(1f, Mathf.Abs(topRightScreenPoint.y - bottomLeftScreenPoint.y), 0f);
         collider.offset = new Vector2(collider.size.x / 2f, collider.size.y / 2f);
-
+        collider.isTrigger = true;
+        
         left.transform.position = new Vector3(((bottomLeftScreenPoint.x - topRightScreenPoint.x) / 2f) - collider.size.x, bottomLeftScreenPoint.y, 0f);
-
+    
 
         // Create Right Colliders
         collider = right.AddComponent<BoxCollider2D>();
         collider.size = new Vector3(1f, Mathf.Abs(topRightScreenPoint.y - bottomLeftScreenPoint.y), 0f);
         collider.offset = new Vector2(collider.size.x / 2f, collider.size.y / 2f);
+        collider.isTrigger = true;
 
         right.transform.position = new Vector3(topRightScreenPoint.x, bottomLeftScreenPoint.y, 0f);
     }

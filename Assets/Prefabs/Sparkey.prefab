@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2074947721}
   - component: {fileID: 2074947720}
   - component: {fileID: 8051883688874931611}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sparkey
   m_TagString: Spark
   m_Icon: {fileID: 0}

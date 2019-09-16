@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Spark : MonoBehaviour
 {
-
-   
     [HideInInspector ]public float velocity = 1;
 
-
     public float acceleration = 0.1f;
+    private float mul = 1;
     public GameObject sparkParticle;
 
     private bool isActive = false;
@@ -18,8 +16,6 @@ public class Spark : MonoBehaviour
     private Rigidbody2D rb;
     private Rigidbody2D targetrb;
     
-
-  
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Score_Circle").GetComponent<Transform>();
@@ -29,19 +25,17 @@ public class Spark : MonoBehaviour
 
     }
 
-    private float mul = 1;
     private void Update()
     {
-        
-        if (isActive == true) {
-            
+        if (isActive == true) { //When Spark has been tapped
             mul += acceleration;
             float step = (velocity * Time.deltaTime) * mul;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
         }
     }
 
-    public void Activate() {
+    //When Spark is tapped this method is executed from TouchDetection
+    public void Activate() {    
         isActive = true;
         Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
     }

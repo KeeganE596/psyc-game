@@ -17,9 +17,10 @@ public class TouchDetection : MonoBehaviour
     public float throwForce = 0.3f;
 
     GameObject gnattObject;
-    string obj = "";
 
-
+    GameObject aoeObject;
+    public GameObject aoePrefab;
+    
 
     private void Update()
     {
@@ -28,63 +29,64 @@ public class TouchDetection : MonoBehaviour
         Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
         RaycastHit2D hit = Physics2D.Raycast(screenPos,Vector2.zero);
 
-        
         //Raycast from camera
-
         if (hit /*&& (Input.GetMouseButtonDown(0) || Input.touchCount <= 0*/)
         {
-
             if (hit.collider.gameObject.tag == "Spark")
             {
                 //if raycast hits gameobject with tag "Spark" Run this code.
                 Spark spark = hit.collider.GetComponent<Spark>();
                 spark.Activate();
-                obj = "spark";
             }
 
-            if (hit.collider.gameObject.tag == "Gnatt")
-            {
-                obj = "gnatt";
-                gnattObject = hit.collider.gameObject;
-            }
+           // if (hit.collider.gameObject.tag == "Gnatt")
+            //{
+            //    gnattObject = hit.collider.gameObject;
+            //}
         }
         
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && obj == "gnatt")
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             //get touch position and mark time when screen is touched
             touchTimeStart = Time.time;
             startPos = Input.GetTouch(0).position;
+
+            //Make AOE object to detect for gnatt collisions with swipe
+            Vector2 aoeStartPos = Camera.main.ScreenToWorldPoint(startPos);
+            aoeObject = Instantiate(aoePrefab, aoeStartPos, Quaternion.identity);
         }
 
         //when finger is released
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && obj == "gnatt")
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             //get time when released
             touchTimeFinish = Time.time;
-
-            // calculate swipte time interval
+            // calculate swipe time interval
             timeInterval = touchTimeFinish - touchTimeStart;
-
             //get release finger position
             endPos = Input.GetTouch(0).position;
-
             //calculate swipe direction in 2D space
             direction = startPos - endPos;
 
-            //add force onto rigid body depending on swipe time, direction and throw force.
-            Rigidbody2D rb = gnattObject.GetComponent<Rigidbody2D>();
-            rb.isKinematic = false;
-            rb.gravityScale = 0;
-            rb.AddForce(-direction / timeInterval * throwForce);
+            //Move AOE swipe with actual touch input swipe
+            Vector2 aoeStartPos = Camera.main.ScreenToWorldPoint(startPos);
+            Vector2 aoeEndPos = Camera.main.ScreenToWorldPoint(endPos);
+            aoeObject.transform.position = Vector2.MoveTowards(aoeStartPos, aoeEndPos, (1 * Time.deltaTime));
 
-            CircleCollider2D gnattcollider = gnattObject.GetComponent<CircleCollider2D>();
-            gnattcollider.enabled = false;
+            if(startPos != endPos && !aoeObject.GetComponent<AoeSwipe>().isGnattsEmpty()) {
+                List<GameObject> hitGnatts = aoeObject.GetComponent<AoeSwipe>().getGnatts();
+                foreach(GameObject g in hitGnatts) {
+                    //add force onto rigid body depending on swipe time, direction and throw force.
+                    Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
+                    rb.AddForce(-direction / timeInterval * throwForce);
 
-            Destroy(gnattObject, 3f);
-            obj = "";
+                    g.GetComponent<CircleCollider2D>().enabled = false;
+
+                    Destroy(g, 2f);
+                }
+            }
+            
+            Destroy(aoeObject, 0.5f);
         }
-
     }
-
-
 }

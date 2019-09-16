@@ -9,6 +9,8 @@ TagManager:
   - Gnatt
   - Rings
   - QuadMetaBall
+  - AOESwipe
+  - Test
   layers:
   - Default
   - TransparentFX
@@ -24,9 +26,9 @@ TagManager:
   - Metaball_1
   - Metaball_2
   - Background
-  - 
-  - 
-  - 
+  - Gnatts
+  - Sparks
+  - TestLayer
   - 
   - 
   - 
