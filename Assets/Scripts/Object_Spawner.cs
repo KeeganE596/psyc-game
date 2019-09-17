@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Object_Spawner : MonoBehaviour
 {
-
+    bool startGame;
     public GameObject sparkPrefab;
     public GameObject gnattsPrefab;
 
@@ -28,9 +28,22 @@ public class Object_Spawner : MonoBehaviour
 
         StartCoroutine(sparkSpawn());
         StartCoroutine(gnattSpawn());   
- }
+    }
     private void Awake()
     {
+        left = new GameObject("Left");
+        left.layer = LayerMask.NameToLayer("Spawn Colliders");
+        right = new GameObject("Right");
+        right.layer = LayerMask.NameToLayer("Spawn Colliders");
+        //startGame = false;
+    }
+
+    void startup() {
+        CreateGnattSpawners();
+
+        StartCoroutine(sparkSpawn());
+        StartCoroutine(gnattSpawn());
+
         left = new GameObject("Left");
         left.layer = LayerMask.NameToLayer("Spawn Colliders");
         right = new GameObject("Right");

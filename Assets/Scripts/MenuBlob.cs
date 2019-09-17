@@ -26,8 +26,7 @@ public class MenuBlob : MonoBehaviour
 
     public void Update()
     {
-        if (anim.GetBool("leftblob") == true)
-        {
+        if (anim.GetBool("leftblob") == true) {
         }
         else {
             PlayText.SetActive(false);

@@ -2,6 +2,8 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
+    <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.2.0f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
+    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -108,7 +110,9 @@
      <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\Gnatt.cs" />
+     <Compile Include="Assets\Scripts\MainMenu_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\MenuBlob.cs" />
+     <Compile Include="Assets\Scripts\MenuItem.cs" />
      <Compile Include="Assets\Scripts\Object_Spawner.cs" />
      <Compile Include="Assets\Scripts\ParticleSystemAutoDestroy.cs" />
      <Compile Include="Assets\Scripts\Score_manager.cs" />

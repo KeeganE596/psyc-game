@@ -458,7 +458,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 8192
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 1743875912}
+  m_TargetTexture: {fileID: 1776784315}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1001,7 +1001,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1743875912
+--- !u!84 &1776784315
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
