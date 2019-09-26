@@ -17,43 +17,47 @@ public class TouchDetection : MonoBehaviour
     public float throwForce = 0.3f;
 
     GameObject gnattObject;
-
-    GameObject aoeObject;
     public GameObject aoePrefab;
+    GameObject aoeObject;
+    AoeSwipe aoeScript;
     
+
+    Vector3 mousePos;
+    Vector2 aoeStartPos;
+    Vector2 aoeEndPos;
+
+    private void Start() {
+        aoeObject = Instantiate(aoePrefab, new Vector2(0, 0), Quaternion.identity);
+        aoeScript = aoeObject.GetComponent<AoeSwipe>();
+        aoeObject.SetActive(false);
+    }
 
     private void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10;
-        Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-        RaycastHit2D hit = Physics2D.Raycast(screenPos,Vector2.zero);
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
+            mousePos = Input.mousePosition;
+            mousePos.z = 10;
+            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
+            RaycastHit2D hit = Physics2D.Raycast(screenPos,Vector2.zero);
 
-        //Raycast from camera
-        if (hit /*&& (Input.GetMouseButtonDown(0) || Input.touchCount <= 0*/)
-        {
-            if (hit.collider.gameObject.tag == "Spark")
-            {
+            //Raycast from camera
+            //if (hit /*&& (Input.GetMouseButtonDown(0) || Input.touchCount <= 0*/) {
+            if (hit && hit.collider.gameObject.CompareTag("Spark")) {
                 //if raycast hits gameobject with tag "Spark" Run this code.
                 Spark spark = hit.collider.GetComponent<Spark>();
                 spark.Activate();
             }
 
-           // if (hit.collider.gameObject.tag == "Gnatt")
-            //{
-            //    gnattObject = hit.collider.gameObject;
-            //}
-        }
-        
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
             //get touch position and mark time when screen is touched
             touchTimeStart = Time.time;
             startPos = Input.GetTouch(0).position;
 
-            //Make AOE object to detect for gnatt collisions with swipe
+            //Move aoeObject for detecting gnatts in swipe
+            aoeObject.SetActive(true);
+            aoeScript.clearGnatts();
             Vector2 aoeStartPos = Camera.main.ScreenToWorldPoint(startPos);
-            aoeObject = Instantiate(aoePrefab, aoeStartPos, Quaternion.identity);
+            //aoeObject = Instantiate(aoePrefab, aoeStartPos, Quaternion.identity);
+            aoeObject.transform.position = aoeStartPos;
         }
 
         //when finger is released
@@ -68,25 +72,24 @@ public class TouchDetection : MonoBehaviour
             //calculate swipe direction in 2D space
             direction = startPos - endPos;
 
-            //Move AOE swipe with actual touch input swipe
-            Vector2 aoeStartPos = Camera.main.ScreenToWorldPoint(startPos);
-            Vector2 aoeEndPos = Camera.main.ScreenToWorldPoint(endPos);
-            aoeObject.transform.position = Vector2.MoveTowards(aoeStartPos, aoeEndPos, (1 * Time.deltaTime));
+            //Flick gnatts away
+            if(startPos != endPos && !aoeScript.isGnattsEmpty()) {
+                aoeScript.flickGnatts(direction, timeInterval, throwForce);
+                // List<GameObject> hitGnatts = aoeScript.getGnatts();
+                // foreach(GameObject g in hitGnatts) {
+                //     //add force onto rigid body depending on swipe time, direction and throw force.
+                //     Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
+                //     rb.AddForce(-direction / timeInterval * throwForce);
+                //     Debug.Log(timeInterval);
+                //     g.GetComponent<CircleCollider2D>().enabled = false;
 
-            if(startPos != endPos && !aoeObject.GetComponent<AoeSwipe>().isGnattsEmpty()) {
-                List<GameObject> hitGnatts = aoeObject.GetComponent<AoeSwipe>().getGnatts();
-                foreach(GameObject g in hitGnatts) {
-                    //add force onto rigid body depending on swipe time, direction and throw force.
-                    Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
-                    rb.AddForce(-direction / timeInterval * throwForce);
-
-                    g.GetComponent<CircleCollider2D>().enabled = false;
-
-                    Destroy(g, 2f);
-                }
+                //     Destroy(g, 2f);
+                // }
+                aoeScript.clearGnatts();
             }
             
-            Destroy(aoeObject, 0.5f);
+            aoeObject.SetActive(false);
+            //Destroy(aoeObject, 0.5f);
         }
     }
 }
