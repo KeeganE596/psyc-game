@@ -41,6 +41,7 @@ public class MenuBlob : MonoBehaviour
         anim.SetBool("rightblob", newValue); 
     }
 
+    
   }
 
 
