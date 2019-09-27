@@ -22,7 +22,7 @@ public class SequenceAnimator : MonoBehaviour
     IEnumerator DoAnimation() {
         while (true) {
             foreach (var animator in _animators) {
-                animator.SetTrigger("DoAnimation");
+               // animator.SetTrigger("DoAnimation");
                 yield return new WaitForSeconds(WaitBetween);
                     
             }

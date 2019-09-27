@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.2.0f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
-    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -105,23 +103,22 @@
      <Compile Include="Assets\Metaball stuff\Scripts\QuitInput.cs" />
      <Compile Include="Assets\Metaball stuff\Scripts\Spawner.cs" />
      <Compile Include="Assets\Metaball stuff\Scripts\SquishAndRotate.cs" />
-     <Compile Include="Assets\Scripts\Animation_events.cs" />
-     <Compile Include="Assets\Scripts\AoeSwipe.cs" />
      <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Gnatt.cs" />
+     <Compile Include="Assets\Scripts\GameObjects\ParticleSystemAutoDestroy.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Spark.cs" />
-     <Compile Include="Assets\Scripts\GameTemplate\GameInstructions.cs" />
-     <Compile Include="Assets\Scripts\GameTemplate\GameTimer.cs" />
-     <Compile Include="Assets\Scripts\MainMenu\MainMenu_TouchDetection.cs" />
+     <Compile Include="Assets\Scripts\GameTemplate\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\MainMenu\Animation_events.cs" />
+     <Compile Include="Assets\Scripts\MainMenu\MainMenu_Animations.cs" />
      <Compile Include="Assets\Scripts\MainMenu\Menu_InformationButton.cs" />
      <Compile Include="Assets\Scripts\MainMenu\MenuBlob.cs" />
      <Compile Include="Assets\Scripts\MainMenu\MenuItem.cs" />
-     <Compile Include="Assets\Scripts\Object_Spawner.cs" />
-     <Compile Include="Assets\Scripts\ParticleSystemAutoDestroy.cs" />
-     <Compile Include="Assets\Scripts\Score_manager.cs" />
      <Compile Include="Assets\Scripts\SequenceAnimator.cs" />
+     <Compile Include="Assets\Scripts\Swipey\AoeSwipe.cs" />
+     <Compile Include="Assets\Scripts\Swipey\Object_Spawner.cs" />
+     <Compile Include="Assets\Scripts\Swipey\Score_manager.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordSpawner.cs" />

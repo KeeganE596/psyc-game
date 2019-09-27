@@ -11,6 +11,10 @@ TagManager:
   - QuadMetaBall
   - AOESwipe
   - Test
+  - TouchBlob
+  - GameManager
+  - NextGame
+  - Play
   layers:
   - Default
   - TransparentFX

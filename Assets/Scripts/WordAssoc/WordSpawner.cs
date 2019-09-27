@@ -8,8 +8,7 @@ public class WordSpawner : MonoBehaviour
     List<string> words;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         words = new List<string>();
 
         words.Add("courage");   words.Add("caring");   words.Add("excitement");
@@ -18,8 +17,7 @@ public class WordSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         
     }
 }

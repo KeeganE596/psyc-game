@@ -7,9 +7,13 @@ public class GameManager : MonoBehaviour
 {
     List<string> gamesList;
 
+    int gamesWon;
+
     // Start is called before the first frame update
     void Start()
     {
+        gamesWon = 0;
+
         gamesList = new List<string>();
         gamesList.Add("swipeAway_Game");
         gamesList.Add("wordAssociation");
@@ -24,7 +28,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextGame() {
-        //Application.LoadLevel(gamesList[0]); 
+        gamesWon++;
+        SceneManager.LoadScene(gamesList[0]);
+    }
+
+    public void ToMainMenu() {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void StartGame() {
+        gamesWon = 0;
         SceneManager.LoadScene(gamesList[0]);
     }
 }

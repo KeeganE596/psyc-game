@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Score_manager : MonoBehaviour
 {
-
+    public GameObject levelManagerObj;
+    LevelManager levelManager;
     public int score = 0;
     public Text scoreText;
     private Animator anim;
@@ -17,27 +18,19 @@ public class Score_manager : MonoBehaviour
 
     public Spark Spark;
 
-    public GameObject restartButton;
     public CameraShake cameraShake;
 
     [HideInInspector]
     public Camera effectCamera;
 
   
-
-
-    // Start is called before the first frame update
-    void awake()
-    {
-        score = 0;       
-    }
     private void Start()
     {
-        restartButton.SetActive(false);
+        score = 0; 
         Rings.SetActive(false);
         anim = gameObject.GetComponent<Animator>();
         m_SpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-        
+        levelManager = levelManagerObj.GetComponent<LevelManager>();
     }
 
     public void addScore() {
@@ -45,7 +38,7 @@ public class Score_manager : MonoBehaviour
     }
     public void minusScore() {
 
-        StartCoroutine(cameraShake.Shake( 0.1f, 0.2f));
+        StartCoroutine(cameraShake.Shake(0.1f, 0.2f));
         cameraShake.transform.position = new Vector3 (0,0,0);
         score = score - 10;
 
@@ -103,8 +96,9 @@ public class Score_manager : MonoBehaviour
         spawner.spawningSpark = false;
 
         //changes colliders of Gnatts to dynamic to allow pushing collision on final animation
-        changeColliders();
+        //changeColliders();
 
+        levelManager.GameWon();
     }
 
 
@@ -144,14 +138,12 @@ public class Score_manager : MonoBehaviour
         //     anim.SetBool("100 Points", true);
         //     anim.SetBool("150 Points", true);
         // }
-        // if (score >= 200) {
-        //     changeColliders();
-        //     endLevel();
-        //     scoreText.text = "Level Complete";
-        //     restartButton.SetActive(true);
-        // }
+        if (score >= 50) {
+            endLevel();
+            //scoreText.text = "Level Complete";
+        }
 
-        if ( ishurt == true) {
+        if (ishurt == true) {
             StartCoroutine(flashHurt());
         }
         ishurt = false;

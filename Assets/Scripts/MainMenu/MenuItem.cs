@@ -5,12 +5,12 @@ using UnityEngine;
 public class MenuItem : MonoBehaviour
 {
     public GameObject forScript;
-    MainMenu_TouchDetection mmScript;
+    MainMenu_Animations mmScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        mmScript = forScript.GetComponent<MainMenu_TouchDetection>();
+        mmScript = forScript.GetComponent<MainMenu_Animations>();
     }
 
     // Update is called once per frame
