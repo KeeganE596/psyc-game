@@ -7,7 +7,7 @@ public class GameTimer : MonoBehaviour
 {
 
     public float timeRemaining;
-    float maxTime = 5f;
+    float maxTime = 8f;
 
     public Slider timeSlider;
     bool startTimer;
