@@ -7,6 +7,12 @@ public class Menu_InformationButton : MonoBehaviour
 {
 
     private Animator anim;
+    public GameObject CloseInfoButton;
+
+    private void Awake()
+    {
+        CloseInfoButton.SetActive(false);
+    }
 
     private void Start()
     {
@@ -17,5 +23,11 @@ public class Menu_InformationButton : MonoBehaviour
     {
 
         anim.SetBool("showInfo", newValue);
+        CloseInfoButton.SetActive(newValue);
+    }
+    public void Close_InformationPanel(bool newValue) {
+        anim.SetBool("showInfo", newValue);
+        CloseInfoButton.SetActive(newValue);
+        
     }
 }

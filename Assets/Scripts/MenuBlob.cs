@@ -11,11 +11,13 @@ public class MenuBlob : MonoBehaviour
     public GameObject rightToggle;
     public GameObject PlayText;
     public GameObject startGameButton;
+    public GameObject SettingsText;
 
     private void Awake()
     {
         PlayText.SetActive(false);
         startGameButton.SetActive(false);
+        SettingsText.SetActive(false);
     }
 
 
@@ -24,24 +26,43 @@ public class MenuBlob : MonoBehaviour
         anim = blob.GetComponent<Animator>();
     }
 
-    public void Update()
-    {
-        if (anim.GetBool("leftblob") == true) {
-        }
-        else {
-            PlayText.SetActive(false);
-            startGameButton.SetActive(false);
-        }
-    }
-
     public void Toggle_changedL(bool newValue) {
         anim.SetBool("leftblob", newValue);
-    }
-    public void Toggle_changedR(bool newValue) {
-        anim.SetBool("rightblob", newValue); 
+        if(newValue)
+        {
+            StartCoroutine("playTextDisplay");
+        }
+        else
+        {
+            PlayText.SetActive(false);
+        }    
     }
 
-    
-  }
+    public void Toggle_changedR(bool newValue) {
+        anim.SetBool("rightblob", newValue);
+        if (newValue)
+        {
+            StartCoroutine("settingsTextDisplay");
+        }
+        else {
+            SettingsText.SetActive(false);
+
+        }
+
+    }
+
+    IEnumerator playTextDisplay()
+    {
+        yield return new WaitForSeconds(0.6f);
+        PlayText.SetActive(true);
+    }
+
+    IEnumerator settingsTextDisplay()
+    {
+        yield return new WaitForSeconds(0.6f);
+        SettingsText.SetActive(true);
+    }
+
+}
 
 
