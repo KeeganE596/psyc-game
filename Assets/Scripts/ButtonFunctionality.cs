@@ -12,6 +12,6 @@ public class ButtonFunctionality : MonoBehaviour
     }
 
     public void startGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("swipeAway_Game");
     }
 }

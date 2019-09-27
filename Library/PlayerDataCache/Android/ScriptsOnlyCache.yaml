@@ -2,17 +2,23 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Animation_events
+    - AoeSwipe
     - ButtonFunctionality
     - CameraShake
+    - GameInstructions
+    - GameTimer
     - Gnatt
+    - MainMenu_TouchDetection
     - MenuBlob
+    - MenuItem
+    - Menu_InformationButton
     - Object_Spawner
     - ParticleSystemAutoDestroy
     - Score_manager
     - SequenceAnimator
     - Spark
     - SquishAndRotate
-    - TouchDetection
+    - Swipey_TouchDetection
     - UnityStandardAssets.ImageEffects.MetaballCameraEffect
     Unity.Postprocessing.Runtime.dll:
     - UnityEngine.Rendering.PostProcessing.AmbientOcclusion
@@ -36,6 +42,8 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    Unity.VectorGraphics.dll:
+    - SVGImage
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -54,6 +62,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
   sceneClasses:
@@ -93,55 +102,63 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9956}
     - Class: 114
-      Script: {instanceID: 9978}
+      Script: {instanceID: 9976}
     - Class: 114
-      Script: {instanceID: 10114}
+      Script: {instanceID: 9980}
     - Class: 114
-      Script: {instanceID: 10246}
+      Script: {instanceID: 10116}
     - Class: 114
-      Script: {instanceID: 10394}
+      Script: {instanceID: 10202}
     - Class: 114
-      Script: {instanceID: 10426}
+      Script: {instanceID: 10248}
     - Class: 114
-      Script: {instanceID: 10734}
+      Script: {instanceID: 10396}
     - Class: 114
-      Script: {instanceID: 10762}
+      Script: {instanceID: 10428}
     - Class: 114
-      Script: {instanceID: 10972}
+      Script: {instanceID: 10738}
     - Class: 114
-      Script: {instanceID: 11052}
+      Script: {instanceID: 10766}
     - Class: 114
-      Script: {instanceID: 11200}
+      Script: {instanceID: 10778}
     - Class: 114
-      Script: {instanceID: 11224}
+      Script: {instanceID: 11058}
     - Class: 114
-      Script: {instanceID: 11480}
+      Script: {instanceID: 11206}
     - Class: 114
-      Script: {instanceID: 11494}
+      Script: {instanceID: 11230}
     - Class: 114
-      Script: {instanceID: 11502}
+      Script: {instanceID: 11352}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11486}
     - Class: 114
-      Script: {instanceID: 11704}
+      Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11794}
+      Script: {instanceID: 11508}
     - Class: 114
-      Script: {instanceID: 11812}
+      Script: {instanceID: 11540}
     - Class: 114
-      Script: {instanceID: 11926}
+      Script: {instanceID: 11712}
     - Class: 114
-      Script: {instanceID: 11980}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 12004}
+      Script: {instanceID: 11820}
     - Class: 114
-      Script: {instanceID: 12126}
+      Script: {instanceID: 11934}
     - Class: 114
-      Script: {instanceID: 12218}
+      Script: {instanceID: 11988}
     - Class: 114
-      Script: {instanceID: 12258}
+      Script: {instanceID: 12012}
     - Class: 114
-      Script: {instanceID: 12278}
+      Script: {instanceID: 12134}
+    - Class: 114
+      Script: {instanceID: 12226}
+    - Class: 114
+      Script: {instanceID: 12266}
+    - Class: 114
+      Script: {instanceID: 12286}
+    - Class: 114
+      Script: {instanceID: 15478}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -194,45 +211,156 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9956}
     - Class: 114
-      Script: {instanceID: 9978}
+      Script: {instanceID: 9980}
     - Class: 114
-      Script: {instanceID: 10114}
+      Script: {instanceID: 10116}
     - Class: 114
-      Script: {instanceID: 10200}
+      Script: {instanceID: 10202}
     - Class: 114
-      Script: {instanceID: 10246}
+      Script: {instanceID: 10248}
     - Class: 114
-      Script: {instanceID: 10266}
+      Script: {instanceID: 10268}
     - Class: 114
-      Script: {instanceID: 10394}
+      Script: {instanceID: 10396}
     - Class: 114
-      Script: {instanceID: 10426}
+      Script: {instanceID: 10428}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10734}
+      Script: {instanceID: 10518}
     - Class: 114
-      Script: {instanceID: 10924}
+      Script: {instanceID: 10738}
     - Class: 114
-      Script: {instanceID: 10972}
+      Script: {instanceID: 10930}
     - Class: 114
-      Script: {instanceID: 11052}
+      Script: {instanceID: 10978}
     - Class: 114
-      Script: {instanceID: 11200}
+      Script: {instanceID: 11058}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11206}
     - Class: 114
-      Script: {instanceID: 11728}
+      Script: {instanceID: 11540}
     - Class: 114
-      Script: {instanceID: 11794}
+      Script: {instanceID: 11736}
     - Class: 114
-      Script: {instanceID: 11978}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 11980}
+      Script: {instanceID: 11986}
     - Class: 114
-      Script: {instanceID: 12126}
+      Script: {instanceID: 11988}
     - Class: 114
-      Script: {instanceID: 12258}
+      Script: {instanceID: 12134}
+    - Class: 114
+      Script: {instanceID: 12266}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/swipeAway_Game.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
+    - Class: 72
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9956}
+    - Class: 114
+      Script: {instanceID: 9980}
+    - Class: 114
+      Script: {instanceID: 10116}
+    - Class: 114
+      Script: {instanceID: 10202}
+    - Class: 114
+      Script: {instanceID: 10248}
+    - Class: 114
+      Script: {instanceID: 10268}
+    - Class: 114
+      Script: {instanceID: 10396}
+    - Class: 114
+      Script: {instanceID: 10428}
+    - Class: 114
+      Script: {instanceID: 10454}
+    - Class: 114
+      Script: {instanceID: 10518}
+    - Class: 114
+      Script: {instanceID: 10738}
+    - Class: 114
+      Script: {instanceID: 10930}
+    - Class: 114
+      Script: {instanceID: 10978}
+    - Class: 114
+      Script: {instanceID: 11058}
+    - Class: 114
+      Script: {instanceID: 11206}
+    - Class: 114
+      Script: {instanceID: 11486}
+    - Class: 114
+      Script: {instanceID: 11540}
+    - Class: 114
+      Script: {instanceID: 11712}
+    - Class: 114
+      Script: {instanceID: 11736}
+    - Class: 114
+      Script: {instanceID: 11802}
+    - Class: 114
+      Script: {instanceID: 11986}
+    - Class: 114
+      Script: {instanceID: 11988}
+    - Class: 114
+      Script: {instanceID: 12134}
+    - Class: 114
+      Script: {instanceID: 12266}
+    - Class: 114
+      Script: {instanceID: 12308}
+    - Class: 114
+      Script: {instanceID: 15470}
+    - Class: 114
+      Script: {instanceID: 15472}
+    - Class: 114
+      Script: {instanceID: 16948}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -260,6 +388,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
     className: PostProcessLayer
+  - hash:
+      serializedVersion: 2
+      Hash: 30fb4599e8b6d6ffe9390020d3a08200
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu_TouchDetection
   - hash:
       serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
@@ -532,6 +666,12 @@ ScriptsOnlyBuild:
     className: RectMask2D
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AoeSwipe
+  - hash:
+      serializedVersion: 2
       Hash: 8792e8356998aff9da84718837517b33
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.ImageEffects
@@ -610,6 +750,12 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAsset
   - hash:
       serializedVersion: 2
+      Hash: 057769deae34ba98030ca33166e2482b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MenuItem
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -658,10 +804,10 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: c6c47ab7413e3603b0e12e1cae620376
+      Hash: 680c3f5319cfffc49739b567ee85720b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: TouchDetection
+    className: Swipey_TouchDetection
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -916,7 +1062,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: bd8c6749bc67997bfd7df57bc84c278a
+      Hash: 1f5019441c5f6b17198e3bfe8b02223e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuBlob
@@ -1100,8 +1246,45 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WordSpawner
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameInstructions
+  - hash:
+      serializedVersion: 2
+      Hash: 63abadec6ae51d8ec0856440968b4b2c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameTimer
+  - hash:
+      serializedVersion: 2
+      Hash: c165a98835ceaab4175c0459371143a1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WordAssoc_TouchDetection
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
+      Hash: 2083f00474945118d26db0435553aa28
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Menu_InformationButton
   platform: 13
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/Br4d_/Desktop/sparky/sparkalphav0.01.apk
+  - Assets/Scenes/swipeAway_Game.unity
+  playerPath: C:/Users/VEC/Desktop/Sparkey.apk

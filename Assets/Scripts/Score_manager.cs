@@ -83,9 +83,9 @@ public class Score_manager : MonoBehaviour
         anim.ResetTrigger("Hurt_1");
         anim.ResetTrigger("Hurt_2");
         anim.ResetTrigger("Hurt_3");
-        anim.SetBool("50 Points", false);
-        anim.SetBool("100 Points", false);
-        anim.SetBool("150 Points", false);
+        //anim.SetBool("50 Points", false);
+       // anim.SetBool("100 Points", false);
+        //anim.SetBool("150 Points", false);
         anim.ResetTrigger("End");
     }
 
@@ -120,36 +120,36 @@ public class Score_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = score.ToString();
-        if (score < 50) {
-            anim.SetBool("50 Points", false);
-            anim.SetBool("100 Points", false);
-            anim.SetBool("150 Points", false);
-        }
+        //scoreText.text = score.ToString();
+        // if (score < 50) {
+        //     anim.SetBool("50 Points", false);
+        //     anim.SetBool("100 Points", false);
+        //     anim.SetBool("150 Points", false);
+        // }
 
-        if (score >= 50 && score < 100) {
-            anim.SetBool("50 Points", true);
-            anim.SetBool("100 Points", false);
-            anim.SetBool("150 Points", false);
-        }
-        if (score >= 100 && score < 150)
-        {
-            anim.SetBool("50 Points", true);
-            anim.SetBool("100 Points", true);
-            anim.SetBool("150 Points", false);
-        }
-        if (score >= 150 && score < 200)
-        {
-            anim.SetBool("50 Points", true);
-            anim.SetBool("100 Points", true);
-            anim.SetBool("150 Points", true);
-        }
-        if (score >= 200) {
-            changeColliders();
-            endLevel();
-            scoreText.text = "Level Complete";
-            restartButton.SetActive(true);
-        }
+        // if (score >= 50 && score < 100) {
+        //     anim.SetBool("50 Points", true);
+        //     anim.SetBool("100 Points", false);
+        //     anim.SetBool("150 Points", false);
+        // }
+        // if (score >= 100 && score < 150)
+        // {
+        //     anim.SetBool("50 Points", true);
+        //     anim.SetBool("100 Points", true);
+        //     anim.SetBool("150 Points", false);
+        // }
+        // if (score >= 150 && score < 200)
+        // {
+        //     anim.SetBool("50 Points", true);
+        //     anim.SetBool("100 Points", true);
+        //     anim.SetBool("150 Points", true);
+        // }
+        // if (score >= 200) {
+        //     changeColliders();
+        //     endLevel();
+        //     scoreText.text = "Level Complete";
+        //     restartButton.SetActive(true);
+        // }
 
         if ( ishurt == true) {
             StartCoroutine(flashHurt());
