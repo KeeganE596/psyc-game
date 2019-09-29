@@ -23,6 +23,8 @@ public class Score_manager : MonoBehaviour
     [HideInInspector]
     public Camera effectCamera;
 
+    bool levelEnded;
+
   
     private void Start()
     {
@@ -31,6 +33,7 @@ public class Score_manager : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         m_SpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         levelManager = levelManagerObj.GetComponent<LevelManager>();
+        levelEnded = false;
     }
 
     public void addScore() {
@@ -138,7 +141,8 @@ public class Score_manager : MonoBehaviour
         //     anim.SetBool("100 Points", true);
         //     anim.SetBool("150 Points", true);
         // }
-        if (score >= 50) {
+        if (score >= 50 && !levelEnded) {
+            levelEnded = true;
             endLevel();
             //scoreText.text = "Level Complete";
         }

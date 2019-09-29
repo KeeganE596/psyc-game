@@ -23,8 +23,7 @@ public class Swipey_TouchDetection : MonoBehaviour
     
 
     Vector3 mousePos;
-    Vector2 aoeStartPos;
-    Vector2 aoeEndPos;
+    RaycastHit2D hit;
 
     private void Start() {
         aoeObject = Instantiate(aoePrefab, new Vector2(0, 0), Quaternion.identity);
@@ -34,56 +33,45 @@ public class Swipey_TouchDetection : MonoBehaviour
 
     private void Update()
     {
+        //when mouse/touch clicked
         if (Input.GetMouseButtonDown(0)) {
-            mousePos = Input.mousePosition;
-            mousePos.z = 10;
-            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            RaycastHit2D hit = Physics2D.Raycast(screenPos,Vector2.zero);
+            startPos = Input.mousePosition;
+            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(startPos), Vector2.zero);
 
             //Raycast from camera
             if (hit && hit.collider.gameObject.CompareTag("Spark")) {
                 //if raycast hits gameobject with tag "Spark" Run this code.
-                Spark spark = hit.collider.GetComponent<Spark>();
-                spark.Activate();
+                hit.collider.GetComponent<Spark>().Activate();
             }
 
             //get touch position and mark time when screen is touched
             touchTimeStart = Time.time;
-            startPos = Input.mousePosition;
 
             //Move aoeObject for detecting gnatts in swipe
             aoeObject.SetActive(true);
             aoeScript.clearGnatts();
-            Vector2 aoeStartPos = Camera.main.ScreenToWorldPoint(startPos);
-            //aoeObject = Instantiate(aoePrefab, aoeStartPos, Quaternion.identity);
-            aoeObject.transform.position = aoeStartPos;
+            aoeObject.transform.position = Camera.main.ScreenToWorldPoint(startPos);
         }
         else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-            mousePos = Input.mousePosition;
-            mousePos.z = 10;
-            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            RaycastHit2D hit = Physics2D.Raycast(screenPos,Vector2.zero);
+            startPos = Input.GetTouch(0).position;
+            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(startPos), Vector2.zero);
 
             //Raycast from camera
             if (hit && hit.collider.gameObject.CompareTag("Spark")) {
                 //if raycast hits gameobject with tag "Spark" Run this code.
-                Spark spark = hit.collider.GetComponent<Spark>();
-                spark.Activate();
+                hit.collider.GetComponent<Spark>().Activate();
             }
 
             //get touch position and mark time when screen is touched
             touchTimeStart = Time.time;
-            startPos = Input.GetTouch(0).position;
 
             //Move aoeObject for detecting gnatts in swipe
             aoeObject.SetActive(true);
             aoeScript.clearGnatts();
-            Vector2 aoeStartPos = Camera.main.ScreenToWorldPoint(startPos);
-            //aoeObject = Instantiate(aoePrefab, aoeStartPos, Quaternion.identity);
-            aoeObject.transform.position = aoeStartPos;
+            aoeObject.transform.position = Camera.main.ScreenToWorldPoint(startPos);
         }
 
-        //when finger is released
+        //when mouse/touch released
         if (Input.GetMouseButtonUp(0)){
             //get time when released
             touchTimeFinish = Time.time;

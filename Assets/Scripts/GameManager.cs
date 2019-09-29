@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
         gamesList = new List<string>();
         gamesList.Add("swipeAway_Game");
-        gamesList.Add("wordAssociation");
+        gamesList.Add("wordAssociation_Game");
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextGame() {
-        gamesWon++;
-        SceneManager.LoadScene(gamesList[0]);
+        SceneManager.LoadScene(gamesList[Random.Range(0, gamesList.Count)]);
     }
 
     public void ToMainMenu() {
@@ -38,6 +37,14 @@ public class GameManager : MonoBehaviour
 
     public void StartGame() {
         gamesWon = 0;
-        SceneManager.LoadScene(gamesList[0]);
+        SceneManager.LoadScene(gamesList[Random.Range(0, gamesList.Count)]);
+    }
+
+    public int NumberOfGamesWon() {
+        return gamesWon;
+    }
+
+    public void AddToGamesWon() {
+        gamesWon++;
     }
 }

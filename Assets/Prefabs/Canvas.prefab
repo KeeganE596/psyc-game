@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 5608952028880945807}
   m_Layer: 5
   m_Name: playAgain_text
-  m_TagString: NextGame
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1350,7 +1350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5608952029558367344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1430,7 +1430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5608952030067491985
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2118,7 +2118,7 @@ GameObject:
   - component: {fileID: 5608952030550423634}
   - component: {fileID: 5608952030550423633}
   m_Layer: 5
-  m_Name: explain_text (1)
+  m_Name: games_won_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

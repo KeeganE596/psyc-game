@@ -120,6 +120,7 @@
      <Compile Include="Assets\Scripts\Swipey\Object_Spawner.cs" />
      <Compile Include="Assets\Scripts\Swipey\Score_manager.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_TouchDetection.cs" />
+     <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchBlob.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordSpawner.cs" />
      <None Include="Assets\Metaball stuff\PostProcessing\Resources\Shaders\DepthOfField.shader" />

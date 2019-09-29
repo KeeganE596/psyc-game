@@ -12,25 +12,22 @@ public class Spark : MonoBehaviour
 
     private bool isActive = false;
 
-    private Transform target;
+    //private Transform target;
+    private Vector2 target;
     private Rigidbody2D rb;
     private Rigidbody2D targetrb;
     
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Score_Circle").GetComponent<Transform>();
-        targetrb = GameObject.FindGameObjectWithTag("Score_Circle").GetComponent<Rigidbody2D>();
-
-        rb = GetComponent<Rigidbody2D>();
-
+        //target = GameObject.FindGameObjectWithTag("Score_Circle").GetComponent<Transform>();
+        target = new Vector2(0, 0);
     }
 
     private void Update()
     {
         if (isActive == true) { //When Spark has been tapped
             mul += acceleration;
-            float step = (velocity * Time.deltaTime) * mul;
-            transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+            transform.position = Vector2.MoveTowards(transform.position, target, ((velocity * Time.deltaTime) * mul));
         }
     }
 
