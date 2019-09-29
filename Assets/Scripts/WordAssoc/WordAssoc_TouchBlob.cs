@@ -5,17 +5,27 @@ using TMPro;
 
 public class WordAssoc_TouchBlob : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D col) {
-        if(col.gameObject.CompareTag("Word") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
-            col.enabled = false;
-            hitWord(col.gameObject);
-        }
+
+    int wordsCaught;
+    public GameObject canvas;
+    LevelManager levelManager;
+
+    public int winAmount = 6;
+
+    void Start() {
+        wordsCaught = 0;
+        levelManager = canvas.GetComponent<LevelManager>();
     }
 
     void OnTriggerStay2D(Collider2D col) {
         if(col.gameObject.CompareTag("Word") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
-                col.enabled = false;
-                hitWord(col.gameObject);
+            col.enabled = false;
+            hitWord(col.gameObject);
+            wordsCaught++;
+
+            if(wordsCaught > winAmount) {
+                levelManager.GameWon();
+            }
         }
     }
 

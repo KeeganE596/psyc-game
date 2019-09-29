@@ -12,26 +12,20 @@ public class Spark : MonoBehaviour
 
     private bool isActive = false;
 
-    //private Transform target;
     private Vector2 target;
-    private Rigidbody2D rb;
-    private Rigidbody2D targetrb;
     
-    private void Start()
-    {
-        //target = GameObject.FindGameObjectWithTag("Score_Circle").GetComponent<Transform>();
+    private void Start() {
         target = new Vector2(0, 0);
     }
 
-    private void Update()
-    {
-        if (isActive == true) { //When Spark has been tapped
+    private void Update() {
+        if (isActive == true) {
             mul += acceleration;
             transform.position = Vector2.MoveTowards(transform.position, target, ((velocity * Time.deltaTime) * mul));
         }
     }
 
-    //When Spark is tapped this method is executed from TouchDetection
+    //Activate Spark when it is clicked/tapped, called from Swipey_TouchDetection
     public void Activate() {    
         isActive = true;
         Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);

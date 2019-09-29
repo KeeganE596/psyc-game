@@ -141,7 +141,7 @@ public class Score_manager : MonoBehaviour
         //     anim.SetBool("100 Points", true);
         //     anim.SetBool("150 Points", true);
         // }
-        if (score >= 50 && !levelEnded) {
+        if (score >= 80 && !levelEnded) {
             levelEnded = true;
             endLevel();
             //scoreText.text = "Level Complete";
@@ -149,22 +149,24 @@ public class Score_manager : MonoBehaviour
 
         if (ishurt == true) {
             StartCoroutine(flashHurt());
+            ishurt = false;
         }
-        ishurt = false;
+        
     }
 
     public void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Spark" && vulnerable == true) {           
             addScore();
-            Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
+            //Destroy(col.gameObject);
         }
         if(col.gameObject.tag == "Gnatt" && vulnerable == true)
         {
             minusScore();
             ishurt = true;
-            Destroy(col.gameObject);
-
+            col.gameObject.SetActive(false);
+            //Destroy(col.gameObject);
         }
     }
 

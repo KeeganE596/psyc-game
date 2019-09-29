@@ -9,9 +9,9 @@ public class LevelManager : MonoBehaviour
 {
     //Game Slider Setup
     float timeRemaining;
-    float maxTime = 8f;
+    public float maxTime = 15f;
     public Slider timeSlider;
-    bool startTimer;
+    bool playing;
 
     //Referencing Game Manager
     GameObject gameManager;
@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
         losePanel.SetActive(false);
 
         timeSlider.gameObject.SetActive(false);
-        startTimer = false;
+        playing = false;
         timeRemaining = maxTime;
 
         gameManager = GameObject.FindWithTag("GameManager");
@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!startTimer && (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))) {
+        if(!playing && (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))) {
             //Raycast for touch/click detection
             mousePos = Input.mousePosition;
             hit = Physics2D.Raycast(mousePos,Vector2.zero);
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
         
 
         //Start game timer/slider
-        if(startTimer) {
+        if(playing) {
             timeSlider.value = CalculateSliderValue();
 
             if(timeRemaining <= 0) {
@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour
     public void StartGame() {
         instructionsPanel.SetActive(false); //Turn instructions off
         timeSlider.gameObject.SetActive(true);   //Turn slider on
-        startTimer = true;
+        playing = true;
     }
 
     float CalculateSliderValue() {
@@ -92,17 +92,40 @@ public class LevelManager : MonoBehaviour
     }
 
     public void GameWon() {
-        startTimer = false;
+        playing = false;
         gameManagerScript.AddToGamesWon();
         winPanel.SetActive(true);
-        string winText = "You've won " + gameManagerScript.NumberOfGamesWon() + " games in a row!";
+        
+        int wins = gameManagerScript.NumberOfGamesWon();
+        string winText;
+        if(wins == 1) {
+            winText = "You've won 1 game!";
+        }
+        else {
+            winText = "You've won " + wins + " games in a row!";
+        }
         winPanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = winText;
     }
 
     public void GameLost() {
-        startTimer = false;
+        playing = false;
         losePanel.SetActive(true);
-        string loseText = "You won " + gameManagerScript.NumberOfGamesWon() + " games this time.";
+
+        int wins = gameManagerScript.NumberOfGamesWon();
+        string loseText;
+        if(wins == 0) {
+            loseText = "You won no games this time.";
+        }
+        else if(wins == 1) {
+            loseText = "You won 1 game this time.";
+        }
+        else {
+            loseText = "You won " + wins + " games this time.";
+        }
         losePanel.gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = loseText;
+    }
+
+    public bool isPlaying() {
+        return playing;
     }
 }
