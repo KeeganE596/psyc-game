@@ -31,4 +31,7 @@ public class Spark : MonoBehaviour
         Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
     }
 
+    public void Deactivate() {    
+        isActive = false;
+    }
 }

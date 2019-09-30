@@ -21,8 +21,8 @@ public class Swipey_Spawner : MonoBehaviour
     void Start()
     {
         levelManager = canvas.GetComponent<LevelManager>();
-        //playing = levelManager.isPlaying();
-        playing = true;
+        playing = levelManager.isPlaying();
+        //playing = true;
         timer = 0;
 
         sparx = new List<GameObject>();
@@ -55,43 +55,48 @@ public class Swipey_Spawner : MonoBehaviour
             }
         }
         else {
-           // playing = levelManager.isPlaying();
+           playing = levelManager.isPlaying();
         }
     }
 
     void spawnSpark() {
-        //Get rendom position to spawn word at
-         Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-300), Random.Range(50, Screen.height-100)));
+        if(sparkIndex < sparx.Count) {
+            //Get random position to spawn word at
+            Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-300), Random.Range(50, Screen.height-100)));
 
-        //check position isnt too close to middle
-        if((spawnPos.x < -0.75 || spawnPos.x > 0.75) && (spawnPos.y < -0.75 || spawnPos.y > 0.75)) {
-            GameObject sp = sparx[sparkIndex];
-            sp.transform.position = spawnPos;
-            sp.SetActive(true);
-            sparkIndex++;
+            //check position isnt too close to middle
+            if((spawnPos.x < -0.75 || spawnPos.x > 0.75) && (spawnPos.y < -0.75 || spawnPos.y > 0.75)) {
+                GameObject sp = sparx[sparkIndex];
+                sp.transform.position = spawnPos;
+                sp.SetActive(true);
+                sparkIndex++;
 
-            if(sparkIndex >= sparx.Count && sparx[0].activeSelf) { sparkIndex = 0; }
+                if(sparkIndex >= sparx.Count && !sparx[0].activeSelf) { sparkIndex = 0; }
+            }
         }
     }
 
     void spawnGnatt() {
-        int side = Random.Range(0, 2);
-        Vector2 spawnPos;
+        if(gnattIndex < gnatts.Count) {
+            int side = Random.Range(0, 2);
+            Vector2 spawnPos;
 
-        if(side == 0) {
-            float y = Random.Range(0, Screen.height);
-            spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(-10, y));
+            if(side == 0) {
+                float y = Random.Range(0, Screen.height);
+                spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(-10, y));
+            }
+            else {
+                float y = Random.Range(0, Screen.height);
+                spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width+10, y));
+            }
+
+            GameObject gn = gnatts[gnattIndex];
+            gn.transform.position = spawnPos;
+            gn.SetActive(true);
+            gnattIndex++;
+
+            if(gnattIndex >= gnatts.Count && !gnatts[0].activeSelf) { gnattIndex = 0; }
         }
-        else {
-            float y = Random.Range(0, Screen.height);
-            spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width+10, y));
-        }
-
-        GameObject gn = gnatts[gnattIndex];
-        gn.transform.position = spawnPos;
-        gn.SetActive(true);
-        gnattIndex++;
-
-        if(gnattIndex >= gnatts.Count && gnatts[0].activeSelf) { gnattIndex = 0; }
+        
     }
 }

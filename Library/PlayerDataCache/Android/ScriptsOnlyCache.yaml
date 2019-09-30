@@ -2,25 +2,27 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Animation_events
-    - AoeSwipe
-    - ButtonFunctionality
     - CameraShake
-    - GameInstructions
     - GameManager
-    - GameTimer
     - Gnatt
-    - MainMenu_TouchDetection
+    - LevelManager
+    - MainMenu_Animations
     - MenuBlob
     - MenuItem
     - Menu_InformationButton
     - Object_Spawner
     - ParticleSystemAutoDestroy
-    - Score_manager
     - SequenceAnimator
     - Spark
     - SquishAndRotate
+    - Swipey_AoeSwipe
+    - Swipey_ScoreManager
+    - Swipey_Spawner
     - Swipey_TouchDetection
     - UnityStandardAssets.ImageEffects.MetaballCameraEffect
+    - WordAssoc_Spawner
+    - WordAssoc_TouchBlob
+    - WordAssoc_TouchDetection
     Unity.Postprocessing.Runtime.dll:
     - UnityEngine.Rendering.PostProcessing.AmbientOcclusion
     - UnityEngine.Rendering.PostProcessing.AutoExposure
@@ -42,14 +44,17 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshPro
     - TMPro.TextMeshProUGUI
     Unity.VectorGraphics.dll:
     - SVGImage
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -107,7 +112,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9980}
     - Class: 114
-      Script: {instanceID: 10116}
+      Script: {instanceID: 10118}
     - Class: 114
       Script: {instanceID: 10206}
     - Class: 114
@@ -117,19 +122,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10432}
     - Class: 114
-      Script: {instanceID: 10744}
+      Script: {instanceID: 10742}
     - Class: 114
-      Script: {instanceID: 10772}
+      Script: {instanceID: 10770}
     - Class: 114
-      Script: {instanceID: 10784}
+      Script: {instanceID: 10782}
     - Class: 114
-      Script: {instanceID: 11066}
+      Script: {instanceID: 11064}
     - Class: 114
-      Script: {instanceID: 11216}
+      Script: {instanceID: 11202}
     - Class: 114
-      Script: {instanceID: 11240}
+      Script: {instanceID: 11214}
     - Class: 114
-      Script: {instanceID: 11362}
+      Script: {instanceID: 11238}
+    - Class: 114
+      Script: {instanceID: 11360}
     - Class: 114
       Script: {instanceID: 11496}
     - Class: 114
@@ -137,29 +144,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 11550}
+      Script: {instanceID: 11722}
     - Class: 114
-      Script: {instanceID: 11720}
+      Script: {instanceID: 11812}
     - Class: 114
-      Script: {instanceID: 11810}
+      Script: {instanceID: 11830}
     - Class: 114
-      Script: {instanceID: 11828}
+      Script: {instanceID: 11944}
     - Class: 114
-      Script: {instanceID: 11942}
+      Script: {instanceID: 11998}
     - Class: 114
-      Script: {instanceID: 11996}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 12144}
     - Class: 114
-      Script: {instanceID: 12142}
+      Script: {instanceID: 12202}
     - Class: 114
-      Script: {instanceID: 12200}
+      Script: {instanceID: 12238}
     - Class: 114
-      Script: {instanceID: 12236}
+      Script: {instanceID: 12278}
     - Class: 114
-      Script: {instanceID: 12276}
-    - Class: 114
-      Script: {instanceID: 12296}
+      Script: {instanceID: 12298}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -195,6 +200,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 58
       Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
     - Class: 72
       Script: {instanceID: 0}
     - Class: 74
@@ -214,9 +221,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9980}
     - Class: 114
-      Script: {instanceID: 10116}
-    - Class: 114
-      Script: {instanceID: 10138}
+      Script: {instanceID: 10118}
     - Class: 114
       Script: {instanceID: 10206}
     - Class: 114
@@ -232,39 +237,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10522}
     - Class: 114
-      Script: {instanceID: 10608}
+      Script: {instanceID: 10742}
     - Class: 114
-      Script: {instanceID: 10744}
+      Script: {instanceID: 10936}
     - Class: 114
-      Script: {instanceID: 10938}
+      Script: {instanceID: 10984}
     - Class: 114
-      Script: {instanceID: 10986}
+      Script: {instanceID: 11064}
     - Class: 114
-      Script: {instanceID: 11066}
-    - Class: 114
-      Script: {instanceID: 11204}
-    - Class: 114
-      Script: {instanceID: 11216}
+      Script: {instanceID: 11406}
     - Class: 114
       Script: {instanceID: 11496}
     - Class: 114
-      Script: {instanceID: 11550}
+      Script: {instanceID: 11588}
     - Class: 114
-      Script: {instanceID: 11720}
+      Script: {instanceID: 11722}
     - Class: 114
-      Script: {instanceID: 11744}
+      Script: {instanceID: 11746}
     - Class: 114
-      Script: {instanceID: 11810}
-    - Class: 114
-      Script: {instanceID: 11994}
+      Script: {instanceID: 11812}
     - Class: 114
       Script: {instanceID: 11996}
     - Class: 114
-      Script: {instanceID: 12142}
+      Script: {instanceID: 11998}
     - Class: 114
-      Script: {instanceID: 12276}
+      Script: {instanceID: 12144}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 12278}
+    - Class: 114
+      Script: {instanceID: 12320}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -285,6 +286,91 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
+    Assets/Scenes/wordAssociation_Game.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 72
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9956}
+    - Class: 114
+      Script: {instanceID: 9980}
+    - Class: 114
+      Script: {instanceID: 10024}
+    - Class: 114
+      Script: {instanceID: 10118}
+    - Class: 114
+      Script: {instanceID: 10126}
+    - Class: 114
+      Script: {instanceID: 10252}
+    - Class: 114
+      Script: {instanceID: 10400}
+    - Class: 114
+      Script: {instanceID: 10432}
+    - Class: 114
+      Script: {instanceID: 10742}
+    - Class: 114
+      Script: {instanceID: 10884}
+    - Class: 114
+      Script: {instanceID: 11064}
+    - Class: 114
+      Script: {instanceID: 11406}
+    - Class: 114
+      Script: {instanceID: 11496}
+    - Class: 114
+      Script: {instanceID: 11722}
+    - Class: 114
+      Script: {instanceID: 11812}
+    - Class: 114
+      Script: {instanceID: 11998}
+    - Class: 114
+      Script: {instanceID: 12144}
+    - Class: 114
+      Script: {instanceID: 12154}
+    - Class: 114
+      Script: {instanceID: 12278}
+    - Class: 114
+      Script: {instanceID: 12320}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
   scriptHashData:
   - hash:
       serializedVersion: 2
@@ -294,10 +380,10 @@ ScriptsOnlyBuild:
     className: PostProcessLayer
   - hash:
       serializedVersion: 2
-      Hash: 30fb4599e8b6d6ffe9390020d3a08200
+      Hash: f04013aa1d86be6b13cf4036a746c0ce
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: MainMenu_TouchDetection
+    className: MainMenu_Animations
   - hash:
       serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
@@ -322,6 +408,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
+  - hash:
+      serializedVersion: 2
+      Hash: d283be0a45bdb05550c31dc94debe2c9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WordAssoc_TouchBlob
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -378,16 +470,10 @@ ScriptsOnlyBuild:
     className: MotionBlur
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 13a92848787785c4f60063aa57cba4de
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: WordSpawner
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameInstructions
+    className: WordAssoc_Spawner
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -585,7 +671,7 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: AoeSwipe
+    className: Swipey_AoeSwipe
   - hash:
       serializedVersion: 2
       Hash: 8792e8356998aff9da84718837517b33
@@ -616,12 +702,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
-  - hash:
-      serializedVersion: 2
-      Hash: 63abadec6ae51d8ec0856440968b4b2c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameTimer
   - hash:
       serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
@@ -732,7 +812,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: 680c3f5319cfffc49739b567ee85720b
+      Hash: 03f480e6735aa7984da12454ece9b9ba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Swipey_TouchDetection
@@ -846,6 +926,12 @@ ScriptsOnlyBuild:
     className: SVGImage
   - hash:
       serializedVersion: 2
+      Hash: 021eb4074da9379736509b2e82138eae
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelManager
+  - hash:
+      serializedVersion: 2
       Hash: 12e64d607873da15ad3f833620350d51
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -906,6 +992,12 @@ ScriptsOnlyBuild:
     className: ButtonFunctionality
   - hash:
       serializedVersion: 2
+      Hash: ff890061c2504ed3e9a4b8fa1e1d4344
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Swipey_Spawner
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -924,10 +1016,10 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: b4c65b605cb058b42fb6ddf9cef06fb1
+      Hash: 8f307f2d3d1a2771eada54b437952c0b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Score_manager
+    className: Swipey_ScoreManager
   - hash:
       serializedVersion: 2
       Hash: a8c33406fd5a44e89bd47fea3b45028f
@@ -1190,4 +1282,5 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/swipeAway_Game.unity
-  playerPath: E:/Scratch/sparky/BUILDS/sparky_1.apk
+  - Assets/Scenes/wordAssociation_Game.unity
+  playerPath: E:/Scratch/sparky/BUILDS/sparky_2.1.apk
