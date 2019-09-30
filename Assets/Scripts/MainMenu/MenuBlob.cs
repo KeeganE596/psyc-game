@@ -7,17 +7,18 @@ public class MenuBlob : MonoBehaviour
 {
     public GameObject blob;
     private Animator anim;
-    public GameObject leftToggle;
-    public GameObject rightToggle;
     public GameObject PlayText;
     public GameObject startGameButton;
     public GameObject SettingsText;
+    public GameObject Toggle_allButton;
+
 
     private void Awake()
     {
         PlayText.SetActive(false);
         startGameButton.SetActive(false);
         SettingsText.SetActive(false);
+        Toggle_allButton.SetActive(false);
     }
 
 
@@ -31,9 +32,11 @@ public class MenuBlob : MonoBehaviour
         if(newValue)
         {
             StartCoroutine("playTextDisplay");
+            Toggle_allButton.SetActive(true);
         }
         else
         {
+            Toggle_allButton.SetActive(false);
             startGameButton.SetActive(false);
             PlayText.SetActive(false);
         }    
@@ -44,27 +47,42 @@ public class MenuBlob : MonoBehaviour
         if (newValue)
         {
             StartCoroutine("settingsTextDisplay");
+            Toggle_allButton.SetActive(true);
+
         }
         else {
             SettingsText.SetActive(false);
-
+            Toggle_allButton.SetActive(false);
         }
 
     }
 
     IEnumerator playTextDisplay()
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.4f);
         startGameButton.SetActive(true);
         PlayText.SetActive(true);
     }
 
     IEnumerator settingsTextDisplay()
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.4f);
         SettingsText.SetActive(true);
     }
 
+    public void toggle_all(bool newValue) {
+            anim.SetBool("rightblob", !newValue);
+            anim.SetBool("leftblob", !newValue);
+            startGameButton.SetActive(false);
+            SettingsText.SetActive(false);
+            PlayText.SetActive(false);
+            Toggle_allButton.SetActive(false);
+
+    }
+
+
+
 }
+
 
 
