@@ -37,8 +37,10 @@ public class LevelManager : MonoBehaviour
         playing = false;
         timeRemaining = maxTime;
 
-        gameManager = GameObject.FindWithTag("GameManager");
-        gameManagerScript = gameManager.GetComponent<GameManager>();
+        //gameManager = GameObject.FindWithTag("GameManager");
+        //gameManagerScript = gameManager.GetComponent<GameManager>();
+
+        setupAssets();
     }
 
     // Update is called once per frame
@@ -127,5 +129,15 @@ public class LevelManager : MonoBehaviour
 
     public bool isPlaying() {
         return playing;
+    }
+
+    public void setupAssets() {
+        Debug.Log(Screen.width + ", " + Screen.height);
+
+        //RectTransform sliderRt = timeSlider.gameObject.GetComponent<RectTransform>();
+        //sliderRt.localPosition = new Vector2(0, 0);
+        //Debug.Log(sliderRt);
+        //timeSlider.gameObject.transform.position = new Vector2(0, Screen.height);
+        //timeSlider.gameObject.transform.localScale = new Vector2(Screen.width/500, Screen.height/500);
     }
 }

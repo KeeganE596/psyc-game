@@ -16,6 +16,7 @@ TagManager:
   - NextGame
   - Play
   - Word
+  - BadWord
   layers:
   - Default
   - TransparentFX
