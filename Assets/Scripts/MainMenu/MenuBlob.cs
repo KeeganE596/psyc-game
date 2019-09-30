@@ -8,9 +8,13 @@ public class MenuBlob : MonoBehaviour
     public GameObject blob;
     private Animator anim;
     public GameObject PlayText;
-    public GameObject startGameButton;
     public GameObject SettingsText;
     public GameObject Toggle_allButton;
+    public GameObject settingsPanel;
+
+    public GameObject startGameButton;
+    public GameObject settingsButton;
+
 
 
     private void Awake()
@@ -19,6 +23,7 @@ public class MenuBlob : MonoBehaviour
         startGameButton.SetActive(false);
         SettingsText.SetActive(false);
         Toggle_allButton.SetActive(false);
+        settingsButton.SetActive(false);
     }
 
 
@@ -38,6 +43,7 @@ public class MenuBlob : MonoBehaviour
         {
             Toggle_allButton.SetActive(false);
             startGameButton.SetActive(false);
+            settingsButton.SetActive(false);
             PlayText.SetActive(false);
         }    
     }
@@ -53,6 +59,7 @@ public class MenuBlob : MonoBehaviour
         else {
             SettingsText.SetActive(false);
             Toggle_allButton.SetActive(false);
+            settingsButton.SetActive(false);
         }
 
     }
@@ -68,15 +75,19 @@ public class MenuBlob : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         SettingsText.SetActive(true);
+        settingsButton.SetActive(true);
     }
 
     public void toggle_all(bool newValue) {
             anim.SetBool("rightblob", !newValue);
             anim.SetBool("leftblob", !newValue);
+            anim.SetBool("centerblob", !newValue);
             startGameButton.SetActive(false);
             SettingsText.SetActive(false);
             PlayText.SetActive(false);
             Toggle_allButton.SetActive(false);
+            settingsButton.SetActive(false);
+            settingsPanel.SetActive(false);
 
     }
 
