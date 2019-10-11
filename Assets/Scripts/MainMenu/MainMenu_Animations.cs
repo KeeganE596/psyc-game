@@ -48,4 +48,15 @@ public class MainMenu_Animations : MonoBehaviour
     public void Toggle_changedR(bool newValue) {
         anim.SetBool("rightblob", newValue); 
     }
+
+    public void openSettingsPanel(bool newValue)
+    {
+        anim.SetBool("centerblob", newValue);
+
+
+    }
+
+
+
+
 }

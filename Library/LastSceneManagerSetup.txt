@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Games/wordAssociation_Game.unity
+- path: Assets/Scenes/Games/breathing_Game.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

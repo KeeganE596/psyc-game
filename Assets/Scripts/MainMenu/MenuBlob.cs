@@ -14,6 +14,9 @@ public class MenuBlob : MonoBehaviour
 
     public GameObject startGameButton;
     public GameObject settingsButton;
+    public GameObject settingsText;
+    public GameObject informationPanel;
+
 
 
 
@@ -89,10 +92,36 @@ public class MenuBlob : MonoBehaviour
             settingsButton.SetActive(false);
             settingsPanel.SetActive(false);
 
+
+
+    }
+
+    public void toggleSettingsPanel(bool newValue)
+    {
+        anim.SetBool("centerblob", newValue);
+        settingsButton.SetActive(false);
+        SettingsText.SetActive(false);
+        settingsPanel.SetActive(true);
+
     }
 
 
+    public void Toggle_InformationPanel(bool newValue)
+    {
 
+        anim.SetBool("showInfo", newValue);
+    }
+    public void Close_InformationPanel(bool newValue)
+    {
+        anim.SetBool("showInfo", newValue);
+    }
+
+    public void showSettingsPanel(bool newValue)
+    {
+        settingsPanel.SetActive(newValue);
+        informationPanel.SetActive(newValue);
+
+    }
 }
 
 

@@ -112,7 +112,10 @@
     <Compile Include="Assets\Metaball stuff\Scripts\QuitInput.cs" />
     <Compile Include="Assets\Metaball stuff\Scripts\Spawner.cs" />
     <Compile Include="Assets\Metaball stuff\Scripts\SquishAndRotate.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Breathing\Breathing_TouchDetection.cs" />
+=======
+>>>>>>> 760ba088b5be40eee159e529e9f6e2e6a06a5bcd
     <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
@@ -122,7 +125,10 @@
     <Compile Include="Assets\Scripts\GameObjects\Spark.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Animation_events.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenu_Animations.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\MainMenu\Menu_InformationButton.cs" />
+=======
+>>>>>>> 760ba088b5be40eee159e529e9f6e2e6a06a5bcd
     <Compile Include="Assets\Scripts\MainMenu\MenuBlob.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MenuItem.cs" />
     <Compile Include="Assets\Scripts\MainMenu\OpenURL.cs" />
