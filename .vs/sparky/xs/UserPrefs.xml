@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{ABD5598B-0123-F74D-D6E3-EE94D146AD3C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/WordAssoc/WordAssoc_Spawner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/WordAssoc/WordAssoc_TouchDetection.cs">
     <Files>
       <File FileName="Assets/Scripts/WordAssoc/WordAssoc_TouchBlob.cs" Line="38" Column="28" />
       <File FileName="Assets/Scripts/WordAssoc/WordAssoc_Spawner.cs" Line="33" Column="86" />
       <File FileName="Assets/Scripts/GameManagers/LevelManager.cs" Line="98" Column="1" />
+      <File FileName="Assets/Scripts/Breathing/Breathing_TouchDetection.cs" Line="16" Column="9" />
+      <File FileName="Assets/Scripts/WordAssoc/WordAssoc_TouchDetection.cs" Line="40" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,9 +13,10 @@
           <Node name="sparky" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
+                <Node name="Breathing" expanded="True" />
                 <Node name="GameManagers" expanded="True" />
                 <Node name="WordAssoc" expanded="True">
-                  <Node name="WordAssoc_Spawner.cs" selected="True" />
+                  <Node name="WordAssoc_TouchDetection.cs" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -29,7 +32,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="baa56bca-99e1-449c-81ee-ae1622fc8f87" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ccc02ffd-c384-4260-a0f8-4207e592f8cc" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
