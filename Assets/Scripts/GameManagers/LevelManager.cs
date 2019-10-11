@@ -37,8 +37,8 @@ public class LevelManager : MonoBehaviour
         playing = false;
         timeRemaining = maxTime;
 
-        //gameManager = GameObject.FindWithTag("GameManager");
-        //gameManagerScript = gameManager.GetComponent<GameManager>();
+        gameManager = GameObject.FindWithTag("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManager>();
 
         setupAssets();
     }
