@@ -47,6 +47,7 @@ public class WordAssoc_Spawner : MonoBehaviour
             timer += Time.deltaTime;
             badtimer += Time.deltaTime;
 
+            //Good words spawning timer logic
             if(timer > 1 && words.Count > 0) {
                 //Get rendom position to spawn word at
                 Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-300), Random.Range(50, Screen.height-100)));
@@ -62,8 +63,8 @@ public class WordAssoc_Spawner : MonoBehaviour
                     timer = 0;
                 }
             }
-            if (badtimer > 1.5 && badWords.Count > 0)
-            {
+            //Bad words spawning timer logic
+            if (badtimer > 1.5 && badWords.Count > 0) {
                 //Get rendom position to spawn word at
                 Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width - 300), Random.Range(50, Screen.height - 100)));
 
@@ -85,22 +86,24 @@ public class WordAssoc_Spawner : MonoBehaviour
     }
 
     bool CheckPos(Vector2 pos) {
-        if ((pos.x < -0.75 || pos.x > 0.75) && (pos.y < -0.75 || pos.y > 0.75)) {
-            if(wordPositions.Count == 0) {
+        if ((pos.x < -0.75 || pos.x > 0.75) && (pos.y < -0.75 || pos.y > 0.75)) {   //Check not to close to center blob
+            if(wordPositions.Count == 0) {  //If its the first word just spawn anywhere
+                wordPositions.Add(pos);
                 return true;
             }
-            foreach (Vector2 p in wordPositions) {
-                if ((pos.x - p.x > 5) || (pos.x - p.x < -5)) {
-                    Debug.Log((pos.x - p.x));
-                    if ((pos.y - p.y > 3) || (pos.y - p.y < -3)) {
-                        Debug.Log("yas");
-                        wordPositions.Add(pos);
-                        return true;
+            bool check = true;
+            foreach (Vector2 p in wordPositions) {  //Check all positions of current words, if to close check=false
+                if ((pos.x - p.x < 3.25) && (pos.x - p.x > -3.25)) {
+                    if ((pos.y - p.y < 1.25) && (pos.y - p.y > -1.25)) {
+                        check = false;
                     }
                 }
             }
+            if(check) {
+                wordPositions.Add(pos);
+                return true;
+            }
         }
-        Debug.Log("wawa");
         return false; 
     }
 }
