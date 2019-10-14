@@ -19,8 +19,8 @@ public class WordAssoc_TouchDetection : MonoBehaviour
     {
         // Add a Line Renderer to the GameObject
          line = this.gameObject.AddComponent<LineRenderer>();
-         line.startWidth = (0.03f);
-         line.endWidth = (0.04f);
+         line.startWidth = (0.04f);
+         line.endWidth = (0.05f);
          line.SetPosition(0, new Vector2(0, 0));
          line.gameObject.layer = 11;
     }

@@ -23,12 +23,14 @@ public class WordAssoc_TouchBlob : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col) {
         if(col.gameObject.CompareTag("Word") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
-            col.enabled = false;
+            
             hitWord(col.gameObject);
             wordsCaught++;
             caughtWords.Add(col.gameObject);
+            col.enabled = false;
 
-            if(wordsCaught > winAmount) {
+            if(wordsCaught >= winAmount) {
+                wordsCaught = 0;
                 levelManager.GameWon();
             }
         }
@@ -36,7 +38,6 @@ public class WordAssoc_TouchBlob : MonoBehaviour
             col.enabled = false;
             hitBadWord(col.gameObject);
             wordsCaught = 0;
-
         }
     }
 
@@ -57,6 +58,8 @@ public class WordAssoc_TouchBlob : MonoBehaviour
 
         foreach(GameObject w in caughtWords) {
             Destroy(w.GetComponent<LineRenderer>());
+            w.GetComponentInChildren<Collider2D>().enabled = true;
+            w.transform.parent.gameObject.GetComponent<TextMeshPro>().color = new Color32(101, 101, 101, 255);
         }
 
     }

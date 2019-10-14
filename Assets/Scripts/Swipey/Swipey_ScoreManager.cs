@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Swipey_ScoreManager : MonoBehaviour
 {
-    public GameObject levelManagerObj;
+    public GameObject canvas;
     LevelManager levelManager;
     public int score = 0;
     public Text scoreText;
@@ -32,7 +32,8 @@ public class Swipey_ScoreManager : MonoBehaviour
         Rings.SetActive(false);
         anim = gameObject.GetComponent<Animator>();
         m_SpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-        levelManager = levelManagerObj.GetComponent<LevelManager>();
+        
+        levelManager = canvas.GetComponent<LevelManager>();
         levelEnded = false;
     }
 
@@ -103,16 +104,6 @@ public class Swipey_ScoreManager : MonoBehaviour
 
         levelManager.GameWon();
     }
-
-
-    // public void changeColliders() {
-    //     foreach(GameObject g in GameObject.FindGameObjectsWithTag("Gnatt"))
-    //     {
-    //         Rigidbody2D body = g.GetComponent<Rigidbody2D>();
-    //         body.bodyType = RigidbodyType2D.Dynamic;
-    //     }
-        
-    // }
 
     // Update is called once per frame
     void Update()

@@ -8,10 +8,14 @@ using TMPro;
 public class LevelManager : MonoBehaviour
 {
     //Game Slider Setup
+    public bool usingTimer = false;
     float timeRemaining;
     public float maxTime = 15f;
     public Slider timeSlider;
     bool playing;
+    //Game Points Setup
+    public bool usingPoints = false;
+    public int maxPoints = 3;
 
     //Referencing Game Manager
     GameObject gameManager;
@@ -69,7 +73,7 @@ public class LevelManager : MonoBehaviour
         
 
         //Start game timer/slider
-        if(playing) {
+        if(playing && usingTimer) {
             timeSlider.value = CalculateSliderValue();
 
             if(timeRemaining <= 0) {
@@ -132,7 +136,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void setupAssets() {
-        Debug.Log(Screen.width + ", " + Screen.height);
+        //Debug.Log(Screen.width + ", " + Screen.height);
 
         //RectTransform sliderRt = timeSlider.gameObject.GetComponent<RectTransform>();
         //sliderRt.localPosition = new Vector2(0, 0);
