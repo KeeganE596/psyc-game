@@ -174,7 +174,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 8192
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 1474165495}
+  m_TargetTexture: {fileID: 1424727067}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -2748,7 +2748,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1368762626}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1474165495
+--- !u!84 &1424727067
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2761,8 +2761,8 @@ RenderTexture:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 3
-  m_Width: 816
-  m_Height: 459
+  m_Width: 1252
+  m_Height: 680
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthFormat: 2
@@ -3764,7 +3764,7 @@ Transform:
   m_GameObject: {fileID: 1968204249}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.011, y: -0.025, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.07}
   m_Children: []
   m_Father: {fileID: 6685797916172781908}
   m_RootOrder: 0
@@ -3809,7 +3809,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: 52f27afaf69b19b48b00fe65e14e9d50,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4044,7 +4044,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: 8298371f880e8354e85fdad65ff82a2a,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4349,7 +4349,7 @@ Transform:
   m_GameObject: {fileID: 3824901206932371726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.07}
   m_Children: []
   m_Father: {fileID: 6685797916988420050}
   m_RootOrder: 0
