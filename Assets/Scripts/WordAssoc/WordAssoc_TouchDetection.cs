@@ -44,7 +44,7 @@ public class WordAssoc_TouchDetection : MonoBehaviour
         }
         else{
             Vector2 newPos = Vector2.MoveTowards(
-                new Vector2(touch_blob.transform.position.x, touch_blob.transform.position.y), new Vector2(0,0), (25 * Time.deltaTime));
+            new Vector2(touch_blob.transform.position.x, touch_blob.transform.position.y), new Vector2(0,0), (25 * Time.deltaTime));
             touch_blob.transform.position = newPos;
             line.SetPosition(1, newPos);
         }

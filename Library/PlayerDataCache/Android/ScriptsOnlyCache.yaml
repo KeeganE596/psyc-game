@@ -388,8 +388,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12310}
     - Class: 114
       Script: {instanceID: 12386}
-    - Class: 114
-      Script: {instanceID: 14630}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1024,7 +1022,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 49eeabce70d3bc3e0f78fc89a69c10bc
+      Hash: c2d71f0a67fbc400b6e03653bb4695de
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Breathing_TouchDetection
@@ -1102,7 +1100,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 8f307f2d3d1a2771eada54b437952c0b
+      Hash: e6b929539968822b1daedbc28df65566
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Swipey_ScoreManager
@@ -1371,4 +1369,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Games/swipeAway_Game.unity
   - Assets/Scenes/Games/wordAssociation_Game.unity
   - Assets/Scenes/Games/breathing_Game.unity
-  playerPath: E:/Scratch/sparky/BUILDS/sparky_3.apk
+  playerPath: E:/Scratch/sparky/BUILDS/sparky_3.1.apk

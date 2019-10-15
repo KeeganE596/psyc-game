@@ -6,6 +6,15 @@ public class Breathing_TouchDetection : MonoBehaviour
 {
     public GameObject expandBlob;
 
+    public GameObject outerAreaMaxObj;
+    float outerAreaMax;
+    public GameObject outerAreaMinObj;
+    float outerAreaMin;
+    public GameObject innerAreaMaxObj;
+    float innerAreaMax;
+    public GameObject innerAreaMinObj;
+    float innerAreaMin;
+
     public GameObject countCircle_1;
     public GameObject countCircle_2;
     public GameObject countCircle_3;
@@ -32,6 +41,11 @@ public class Breathing_TouchDetection : MonoBehaviour
 
         levelManagerScript = canvas.GetComponent<LevelManager>();
         maxPoints = levelManagerScript.maxPoints;
+
+        outerAreaMax = outerAreaMaxObj.transform.localScale.x;
+        outerAreaMin = outerAreaMinObj.transform.localScale.x;
+        innerAreaMax = innerAreaMaxObj.transform.localScale.x;
+        innerAreaMin = innerAreaMinObj.transform.localScale.x;
     }
 
     
@@ -44,7 +58,7 @@ public class Breathing_TouchDetection : MonoBehaviour
             held = true;
         }
         else if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) {
-            if(expandBlob.transform.localScale.x < 1.5 || expandBlob.transform.localScale.x > 1.69) {
+            if(expandBlob.transform.localScale.x < outerAreaMin || expandBlob.transform.localScale.x > outerAreaMax) {
                 held = false;
                 inBreathe = false;
                 breatheCount = 0;
@@ -56,7 +70,7 @@ public class Breathing_TouchDetection : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) {
-            if(expandBlob.transform.localScale.x >= 0.55 && expandBlob.transform.localScale.x <= 0.67 && inBreathe) {
+            if(expandBlob.transform.localScale.x <= innerAreaMax && expandBlob.transform.localScale.x >= innerAreaMin && inBreathe) {
                 breatheCount++;
                 setCountMarkers();
             }
@@ -83,7 +97,6 @@ public class Breathing_TouchDetection : MonoBehaviour
     }
 
     void setCountMarkers() {
-        Debug.Log("Setting");
         if(breatheCount == 0) {
             countCircle_1.gameObject.GetComponent<SpriteRenderer>().color = offColor;
             countCircle_2.gameObject.GetComponent<SpriteRenderer>().color = offColor;

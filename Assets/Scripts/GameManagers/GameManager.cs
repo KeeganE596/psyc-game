@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void NextGame() {
         int nextGame = Random.Range(0, gamesList.Count);
-        if(nextGame == currentGame) { NextGame(); }
+        if(nextGame == currentGame) { NextGame(); } //Choose another game if the current game (just played) is picked
         else {
             currentGame = nextGame;
             SceneManager.LoadScene(gamesList[nextGame]);

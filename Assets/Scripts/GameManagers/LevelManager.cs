@@ -100,6 +100,7 @@ public class LevelManager : MonoBehaviour
     public void GameWon() {
         playing = false;
         gameManagerScript.AddToGamesWon();
+        //gameManagerScript.NextGame();
         winPanel.SetActive(true);
         
         int wins = gameManagerScript.NumberOfGamesWon();
