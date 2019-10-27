@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private float SCREEN_WIDTH = Screen.width;
+    private float SCREEN_HEIGHT = Screen.height;
+
     List<string> gamesList;
 
     int currentGame;
@@ -43,7 +46,8 @@ public class GameManager : MonoBehaviour
     public void StartGame() {
         gamesWon = 0;
         //currentGame = Random.Range(0, gamesList.Count);
-        SceneManager.LoadScene("description");
+        //SceneManager.LoadScene("description");
+        NextGame();
     }
 
     public int NumberOfGamesWon() {
@@ -52,5 +56,13 @@ public class GameManager : MonoBehaviour
 
     public void AddToGamesWon() {
         gamesWon++;
+    }
+
+    public float getWidth() {
+        return SCREEN_WIDTH;
+    }
+
+    public float getHeight() {
+        return SCREEN_HEIGHT;
     }
 }
