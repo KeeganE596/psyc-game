@@ -65,7 +65,12 @@ public class LevelManager : MonoBehaviour
                     gameManagerScript.NextGame();
                 }
                 else if(hit.collider.gameObject.CompareTag("Respawn")) {
-                    gameManagerScript.StartGame();
+                    if(gameManagerScript.isPlayingChooseGame()) {
+                        gameManagerScript.StartGame("choose");
+                    }
+                    else {
+                        gameManagerScript.StartGame("random");
+                    }
                 }
                 else if(hit.collider.gameObject.CompareTag("Finish")) {
                     gameManagerScript.ToMainMenu();

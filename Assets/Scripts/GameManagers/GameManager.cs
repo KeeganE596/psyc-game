@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private float SCREEN_WIDTH = Screen.width;
     private float SCREEN_HEIGHT = Screen.height;
+    bool playingChooseGame;
 
     List<string> gamesList;
 
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        playingChooseGame = false;
+
         gamesWon = 0;
         currentGame = 0;
 
@@ -31,11 +34,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextGame() {
-        int nextGame = Random.Range(0, gamesList.Count);
-        if(nextGame == currentGame) { NextGame(); } //Choose another game if the current game (just played) is picked
+        if(playingChooseGame) {
+            SceneManager.LoadScene("chooseGame");
+        }
         else {
-            currentGame = nextGame;
-            SceneManager.LoadScene(gamesList[nextGame]);
+            int nextGame = Random.Range(0, gamesList.Count);
+            if(nextGame == currentGame) { NextGame(); } //Choose another game if the current game (just played) is picked
+            else {
+             currentGame = nextGame;
+                SceneManager.LoadScene(gamesList[nextGame]);
+            }
         }
     }
 
@@ -43,11 +51,20 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    public void StartGame() {
+    public void StartGame(string type) {
         gamesWon = 0;
-        //currentGame = Random.Range(0, gamesList.Count);
-        //SceneManager.LoadScene("description");
-        NextGame();
+
+        if(type == "random") {
+            NextGame();
+        }
+        if(type == "choose") {
+            playingChooseGame = true;
+            SceneManager.LoadScene("chooseGame");
+        }
+    }
+
+    public void PickGame(string name) {
+        SceneManager.LoadScene(name + "_Game");
     }
 
     public int NumberOfGamesWon() {
@@ -64,5 +81,9 @@ public class GameManager : MonoBehaviour
 
     public float getHeight() {
         return SCREEN_HEIGHT;
+    }
+
+    public bool isPlayingChooseGame() {
+        return playingChooseGame;
     }
 }

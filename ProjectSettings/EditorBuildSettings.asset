@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Games/breathing_Game.unity
     guid: 503ed124b354e4f5e873684182007a47
+  - enabled: 1
+    path: Assets/Scenes/chooseGame.unity
+    guid: 9a2825809eae19f43bd8fbe83603e76f
   m_configObjects: {}

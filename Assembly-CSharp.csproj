@@ -105,7 +105,6 @@
      <Compile Include="Assets\Scripts\MainMenu\Animation_events.cs" />
      <Compile Include="Assets\Scripts\MainMenu\MainMenu_Animations.cs" />
      <Compile Include="Assets\Scripts\MainMenu\MenuBlob.cs" />
-     <Compile Include="Assets\Scripts\MainMenu\MenuItem.cs" />
      <Compile Include="Assets\Scripts\MainMenu\OpenURL.cs" />
      <Compile Include="Assets\Scripts\Swipey\Object_Spawner.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_AoeSwipe.cs" />
