@@ -8,17 +8,17 @@ public class Swipey_ScoreManager : MonoBehaviour
     public GameObject canvas;
     LevelManager levelManager;
     public int score = 0;
-    public Text scoreText;
+    Text scoreText;
     private Animator anim;
     private SpriteRenderer m_SpriteRenderer;
     private bool ishurt = false;
     public bool vulnerable = true;
     public GameObject Rings;
-    public Object_Spawner spawner;
+    Object_Spawner spawner;
 
     public Spark Spark;
 
-    public CameraShake cameraShake;
+     CameraShake cameraShake;
 
     [HideInInspector]
     public Camera effectCamera;
@@ -42,8 +42,8 @@ public class Swipey_ScoreManager : MonoBehaviour
     }
     public void minusScore() {
 
-        StartCoroutine(cameraShake.Shake(0.1f, 0.2f));
-        cameraShake.transform.position = new Vector3 (0,0,0);
+        //StartCoroutine(cameraShake.Shake(0.1f, 0.2f));
+        //cameraShake.transform.position = new Vector3 (0,0,0);
         score = score - 10;
 
         if (score >= 0 && score < 50) {
@@ -95,13 +95,6 @@ public class Swipey_ScoreManager : MonoBehaviour
         //makes colliders invincible for animation
         vulnerable = false;
 
-        //stop spawning sparks and gnatts
-        spawner.spawningGnatt = false;
-        spawner.spawningSpark = false;
-
-        //changes colliders of Gnatts to dynamic to allow pushing collision on final animation
-        //changeColliders();
-
         levelManager.GameWon();
     }
 
@@ -139,7 +132,7 @@ public class Swipey_ScoreManager : MonoBehaviour
         }
 
         if (ishurt == true) {
-            StartCoroutine(flashHurt());
+            StartCoroutine("flashHurt");
             ishurt = false;
         }
         
@@ -147,7 +140,8 @@ public class Swipey_ScoreManager : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Spark" && vulnerable == true) {           
+        if (col.gameObject.tag == "Spark" && vulnerable == true) {       
+            Debug.Log("hit");    
             addScore();
             this.gameObject.transform.GetChild(0).gameObject.transform.localScale += new Vector3(1f, 1f, 0);
             col.gameObject.GetComponent<Spark>().Deactivate();

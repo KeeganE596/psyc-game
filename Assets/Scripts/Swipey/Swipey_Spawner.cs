@@ -39,8 +39,7 @@ public class Swipey_Spawner : MonoBehaviour
             gnattNum  = Random.Range(0, 2);
             if(gnattNum == 0) { gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity)); }
             else if(gnattNum == 1) { gnatts.Add(Instantiate(gnatt_2, new Vector2(0, 0), Quaternion.identity)); }
-            
-            gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity));
+    
             gnatts[i].SetActive(false);
         }
         gnattIndex = 0;

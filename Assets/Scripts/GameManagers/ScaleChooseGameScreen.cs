@@ -37,5 +37,23 @@ public class ScaleChooseGameScreen : MonoBehaviour
             }
             count++;
         }
+
+        GameObject[] blobs = GameObject.FindGameObjectsWithTag("TouchBlob");
+        Vector3 worldScale = Camera.main.ScreenToWorldPoint(new Vector3(SCREEN_WIDTH, SCREEN_HEIGHT, 0f));
+        count = 1;
+
+        foreach(GameObject b in blobs) {
+            b.transform.localScale = new Vector2(worldScale.x*0.05f, worldScale.x*0.05f);
+            if(count == 1) {
+                b.transform.position = new Vector2(-(worldScale.x*0.5f), 0);
+            }
+            else if(count == 2) {
+                b.transform.position = new Vector2(0, 0);
+            }
+            else if(count == 3) {
+                b.transform.position = new Vector2(worldScale.x*0.5f, 0);
+            }
+            count++;
+        }
     }
 }

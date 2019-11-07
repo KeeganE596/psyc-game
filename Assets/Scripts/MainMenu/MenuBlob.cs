@@ -13,6 +13,7 @@ public class MenuBlob : MonoBehaviour
     public GameObject settingsPanel;
 
     public GameObject startGameButton;
+    public GameObject startChooseGameButton;
     public GameObject settingsButton;
     public GameObject settingsText;
     public GameObject informationPanel;
@@ -24,6 +25,7 @@ public class MenuBlob : MonoBehaviour
     {
         PlayText.SetActive(false);
         startGameButton.SetActive(false);
+        startChooseGameButton.SetActive(false);
         SettingsText.SetActive(false);
         Toggle_allButton.SetActive(false);
         settingsButton.SetActive(false);
@@ -46,6 +48,7 @@ public class MenuBlob : MonoBehaviour
         {
             Toggle_allButton.SetActive(false);
             startGameButton.SetActive(false);
+            startChooseGameButton.SetActive(false);
             settingsButton.SetActive(false);
             PlayText.SetActive(false);
         }    
@@ -71,7 +74,8 @@ public class MenuBlob : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         startGameButton.SetActive(true);
-        PlayText.SetActive(true);
+        startChooseGameButton.SetActive(true);
+        //PlayText.SetActive(true);
     }
 
     IEnumerator settingsTextDisplay()
@@ -86,6 +90,7 @@ public class MenuBlob : MonoBehaviour
             anim.SetBool("leftblob", !newValue);
             anim.SetBool("centerblob", !newValue);
             startGameButton.SetActive(false);
+            startChooseGameButton.SetActive(false);
             SettingsText.SetActive(false);
             PlayText.SetActive(false);
             Toggle_allButton.SetActive(false);
