@@ -5,7 +5,8 @@ using UnityEngine;
 public class Swipey_Spawner : MonoBehaviour
 {
     List<GameObject> sparx;
-    public GameObject spark;
+    public GameObject spark_1;
+    public GameObject spark_2;
     int sparkIndex;
 
     List<GameObject> gnatts;
@@ -27,8 +28,12 @@ public class Swipey_Spawner : MonoBehaviour
         timer = 0;
 
         sparx = new List<GameObject>();
+        int sparkNum = 0;
         for(int i=0; i<20; i++) {
-            sparx.Add(Instantiate(spark, new Vector2(0, 0), Quaternion.identity));
+            sparkNum = Random.Range(0, 2);
+            if(sparkNum == 0) { sparx.Add(Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity)); }
+            else if(sparkNum == 1) { sparx.Add(Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity)); }
+
             sparx[i].SetActive(false);
         }
         sparkIndex = 0;
@@ -36,7 +41,7 @@ public class Swipey_Spawner : MonoBehaviour
         gnatts = new List<GameObject>();
         int gnattNum = 0;
         for(int i=0; i<20; i++) {
-            gnattNum  = Random.Range(0, 2);
+            gnattNum = Random.Range(0, 2);
             if(gnattNum == 0) { gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity)); }
             else if(gnattNum == 1) { gnatts.Add(Instantiate(gnatt_2, new Vector2(0, 0), Quaternion.identity)); }
     
@@ -85,6 +90,7 @@ public class Swipey_Spawner : MonoBehaviour
         if(gnattIndex < gnatts.Count) {
             int side = Random.Range(0, 2);
             Vector2 spawnPos;
+            GameObject gn = gnatts[gnattIndex];
 
             if(side == 0) {
                 float y = Random.Range(0, Screen.height);
@@ -93,9 +99,9 @@ public class Swipey_Spawner : MonoBehaviour
             else {
                 float y = Random.Range(0, Screen.height);
                 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width+10, y));
+                gn.transform.localScale = new Vector3(-(gn.transform.localScale.x), gn.transform.localScale.y, gn.transform.localScale.z);
             }
 
-            GameObject gn = gnatts[gnattIndex];
             gn.transform.position = spawnPos;
             gn.SetActive(true);
             gnattIndex++;
