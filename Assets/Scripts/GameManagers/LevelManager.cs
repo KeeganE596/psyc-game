@@ -23,11 +23,15 @@ public class LevelManager : MonoBehaviour
 
     //Referencing text panels
     public GameObject instructionsPanel;
-    public GameObject winPanel;
+    public GameObject randomWinPanel;
+    public GameObject chooseWinPanel;
+    GameObject winPanel;
     public GameObject losePanel;
     float mainTextSize;
     float titleTextSize;
     float buttonTextSize;
+    float SCREEN_WIDTH = Screen.width;
+    float SCREEN_HEIGHT = Screen.height;
 
     //Mouse Position for touch/click raycast
     Vector3 mousePos;
@@ -36,10 +40,6 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instructionsPanel.SetActive(true);
-        winPanel.SetActive(false);
-        losePanel.SetActive(false);
-
         timeSlider.gameObject.SetActive(false);
         playing = false;
         timeRemaining = maxTime;
@@ -47,6 +47,15 @@ public class LevelManager : MonoBehaviour
         gameManager = GameObject.FindWithTag("GameManager");
         gameManagerScript = gameManager.GetComponent<GameManager>();
 
+        if(gameManagerScript.isPlayingChooseGame()) {
+            winPanel = chooseWinPanel;
+        }
+        else {
+            winPanel = randomWinPanel;
+        }
+        instructionsPanel.SetActive(true);
+        winPanel.SetActive(false);
+        losePanel.SetActive(false);
         
         setFontSizes();
         setupAssets();
@@ -62,7 +71,12 @@ public class LevelManager : MonoBehaviour
 
             if (hit) {
                 if(hit.collider.gameObject.CompareTag("NextGame")) {
-                    gameManagerScript.NextGame();
+                    if(gameManagerScript.isPlayingChooseGame()) {
+                        gameManagerScript.PlaySameGame();
+                    }
+                    else {
+                        gameManagerScript.NextGame();
+                    }
                 }
                 else if(hit.collider.gameObject.CompareTag("Respawn")) {
                     if(gameManagerScript.isPlayingChooseGame()) {
@@ -110,7 +124,6 @@ public class LevelManager : MonoBehaviour
     public void GameWon() {
         playing = false;
         gameManagerScript.AddToGamesWon();
-        //gameManagerScript.NextGame();
         winPanel.SetActive(true);
         
         int wins = gameManagerScript.NumberOfGamesWon();
@@ -147,16 +160,16 @@ public class LevelManager : MonoBehaviour
     }
 
     public void setFontSizes() {
-        mainTextSize = gameManagerScript.getHeight()/20.5f;
-        titleTextSize = gameManagerScript.getHeight()/15f;
-        buttonTextSize = gameManagerScript.getHeight()/19f;
+        mainTextSize = SCREEN_HEIGHT/20.5f;
+        titleTextSize = SCREEN_HEIGHT/15f;
+        buttonTextSize = SCREEN_HEIGHT/19f;
     }
 
 
     //Scale instructions/win/lose text panels
     public void setupAssets() {
-        timeSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(gameManagerScript.getWidth(), gameManagerScript.getHeight()*0.1f);
-        timeSlider.GetComponent<RectTransform>().localPosition = new Vector2(0, gameManagerScript.getHeight()*0.5f);
+        timeSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
+        timeSlider.GetComponent<RectTransform>().localPosition = new Vector2(0, SCREEN_HEIGHT*0.5f);
         
         GameObject instructionsPanel = gameObject.transform.GetChild(1).gameObject;
         scaleInstructions(instructionsPanel);
@@ -170,29 +183,29 @@ public class LevelManager : MonoBehaviour
 
     //Do the scaling transformations for the panels
     public void scaleInstructions(GameObject panel) {
-        panel.GetComponent<RectTransform>().sizeDelta = new Vector2(gameManagerScript.getWidth(), gameManagerScript.getHeight());
+        panel.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         GameObject titleText = panel.transform.GetChild(0).gameObject;
-        titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(gameManagerScript.getWidth(), gameManagerScript.getHeight()*0.1f);
-        titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, (gameManagerScript.getHeight()*0.5f)-gameManagerScript.getHeight()*0.25f);
+        titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
+        titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, (SCREEN_HEIGHT*0.5f)-SCREEN_HEIGHT*0.25f);
         titleText.GetComponent<TextMeshProUGUI>().fontSize = titleTextSize;
 
         GameObject mainText = panel.transform.GetChild(1).gameObject;
-        mainText.GetComponent<RectTransform>().sizeDelta = new Vector2(gameManagerScript.getWidth()*0.75f, gameManagerScript.getHeight()*0.25f);
+        mainText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH*0.75f, SCREEN_HEIGHT*0.25f);
         mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
         mainText.GetComponent<TextMeshProUGUI>().fontSize = mainTextSize;
 
         if(panel.transform.childCount > 3) {    //If lose panel
             GameObject playAgainButton = panel.transform.GetChild(2).gameObject;
-            playAgainButton.GetComponent<RectTransform>().localPosition = new Vector2(-(gameManagerScript.getHeight()*0.25f), -(gameManagerScript.getHeight()*0.25f));
+            playAgainButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_HEIGHT*0.25f), -(SCREEN_HEIGHT*0.25f));
             playAgainButton.GetComponent<TextMeshProUGUI>().fontSize = buttonTextSize;
             GameObject menuButton = panel.transform.GetChild(3).gameObject;
-            menuButton.GetComponent<RectTransform>().localPosition = new Vector2(gameManagerScript.getHeight()*0.25f, -(gameManagerScript.getHeight()*0.25f));
+            menuButton.GetComponent<RectTransform>().localPosition = new Vector2(SCREEN_HEIGHT*0.25f, -(SCREEN_HEIGHT*0.25f));
             menuButton.GetComponent<TextMeshProUGUI>().fontSize = buttonTextSize;
         }
         else {  //If win or instructions panel
             GameObject playButton = panel.transform.GetChild(2).gameObject;
-            playButton.GetComponent<RectTransform>().localPosition = new Vector2(0, -(gameManagerScript.getHeight()*0.25f));
+            playButton.GetComponent<RectTransform>().localPosition = new Vector2(0, -(SCREEN_HEIGHT*0.25f));
             playButton.GetComponent<TextMeshProUGUI>().fontSize = buttonTextSize;
         }
     }

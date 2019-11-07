@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenu() {
         SceneManager.LoadScene("Menu");
+        Destroy(this.gameObject);
     }
 
     public void StartGame(string type) {
@@ -65,6 +66,10 @@ public class GameManager : MonoBehaviour
 
     public void PickGame(string name) {
         SceneManager.LoadScene(name + "_Game");
+    }
+
+    public void PlaySameGame() {
+        SceneManager.LoadScene(gamesList[currentGame]);
     }
 
     public int NumberOfGamesWon() {

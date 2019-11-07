@@ -17,6 +17,7 @@ TagManager:
   - Play
   - Word
   - BadWord
+  - ChooseButton
   layers:
   - Default
   - TransparentFX

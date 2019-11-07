@@ -9,7 +9,8 @@ public class Swipey_Spawner : MonoBehaviour
     int sparkIndex;
 
     List<GameObject> gnatts;
-    public GameObject gnatt;
+    public GameObject gnatt_1;
+    public GameObject gnatt_2;
     int gnattIndex;
 
     public GameObject canvas;
@@ -33,8 +34,13 @@ public class Swipey_Spawner : MonoBehaviour
         sparkIndex = 0;
 
         gnatts = new List<GameObject>();
+        int gnattNum = 0;
         for(int i=0; i<20; i++) {
-            gnatts.Add(Instantiate(gnatt, new Vector2(0, 0), Quaternion.identity));
+            gnattNum  = Random.Range(0, 2);
+            if(gnattNum == 0) { gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity)); }
+            else if(gnattNum == 1) { gnatts.Add(Instantiate(gnatt_2, new Vector2(0, 0), Quaternion.identity)); }
+            
+            gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity));
             gnatts[i].SetActive(false);
         }
         gnattIndex = 0;
