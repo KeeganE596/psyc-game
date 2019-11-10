@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 499788668808366178}
   - component: {fileID: 3390990766288886195}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7226749086442417956}
   - component: {fileID: 4929191561146634773}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ Transform:
   - {fileID: 1522606633738355115}
   - {fileID: 4180926772058676656}
   m_Father: {fileID: 9073909324329278015}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3322570685571186302
 GameObject:
@@ -227,7 +227,7 @@ Transform:
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 9073909324329278015}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2712235989518253511
 SpriteRenderer:
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 213756169588622926}
   - component: {fileID: 832596922915341043}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 9140897825379913685}
   - component: {fileID: 8239987300363465149}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 1522606633738355115}
   - component: {fileID: 6181071364528520487}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,9 +800,9 @@ Transform:
   - {fileID: 6302288005972145836}
   - {fileID: 7523190654311705329}
   - {fileID: 1653136723319941402}
+  - {fileID: 5615941756623499818}
   - {fileID: 4485391724356844087}
   - {fileID: 5962225579903110155}
-  - {fileID: 5615941756623499818}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
-  acceleration: 0.075
+  acceleration: 0.05
   sparkParticle: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
     type: 3}
 --- !u!95 &8051883688874931611
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 4180926772058676656}
   - component: {fileID: 2474776215744301559}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1069,7 +1069,7 @@ Transform:
   m_LocalScale: {x: 8.5, y: 8.5, z: 8}
   m_Children: []
   m_Father: {fileID: 9073909324329278015}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1121492288956852400
 SpriteRenderer:

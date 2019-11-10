@@ -9,6 +9,7 @@ public class Spark : MonoBehaviour
     public float acceleration = 0.1f;
     private float mul = 1;
     public GameObject sparkParticle;
+    private Animator anim;
 
     private bool isActive = false;
 
@@ -28,10 +29,13 @@ public class Spark : MonoBehaviour
     //Activate Spark when it is clicked/tapped, called from Swipey_TouchDetection
     public void Activate() {    
         isActive = true;
+        anim = this.gameObject.GetComponent<Animator>();
+        anim.SetTrigger("Activate");
         Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
     }
 
     public void Deactivate() {    
         isActive = false;
     }
+
 }
