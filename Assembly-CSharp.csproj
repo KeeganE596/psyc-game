@@ -94,6 +94,7 @@
      <Compile Include="Assets\Metaball stuff\Scripts\QuitInput.cs" />
      <Compile Include="Assets\Metaball stuff\Scripts\Spawner.cs" />
      <Compile Include="Assets\Metaball stuff\Scripts\SquishAndRotate.cs" />
+     <Compile Include="Assets\Scripts\Breathing\Breathing_Touch.cs" />
      <Compile Include="Assets\Scripts\Breathing\Breathing_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />

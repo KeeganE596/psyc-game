@@ -56,7 +56,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -1126,7 +1125,7 @@ ScriptsOnlyBuild:
     className: ButtonFunctionality
   - hash:
       serializedVersion: 2
-      Hash: 1ee4d762c062f95e88da53b4321f791a
+      Hash: 2f7f18be2ffe3d551ba5c9e6fc57dadb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Swipey_Spawner

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Breathing_TouchDetection : MonoBehaviour
 {
@@ -24,11 +25,14 @@ public class Breathing_TouchDetection : MonoBehaviour
     public float expandSpeed = 0.014f;
     public float compressSpeed = 0.01f;
 
+    public GameObject breatheTextObj;
+    TextMeshPro breatheText; 
+
     bool held;
     bool inBreathe;
     int breatheCount;
     int maxPoints;
-
+    int breatheTimer;
     public GameObject canvas;
     LevelManager levelManagerScript;
 
@@ -36,6 +40,7 @@ public class Breathing_TouchDetection : MonoBehaviour
     void Start() {
         held = false;
         breatheCount = 0;
+        breatheTimer = 0;
 
         setCountMarkers();
 
@@ -46,6 +51,8 @@ public class Breathing_TouchDetection : MonoBehaviour
         outerAreaMin = outerAreaMinObj.transform.localScale.x;
         innerAreaMax = innerAreaMaxObj.transform.localScale.x;
         innerAreaMin = innerAreaMinObj.transform.localScale.x;
+
+        breatheText = breatheTextObj.GetComponent<TextMeshPro>();
     }
 
     
@@ -56,6 +63,9 @@ public class Breathing_TouchDetection : MonoBehaviour
         if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) {
             expandBlob.transform.localScale += new Vector3(expandSpeed, expandSpeed, 0);  //breathing expand speed
             held = true;
+
+            breatheTimer += (int) Time.deltaTime;
+            setBreatheText();
         }
         else if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) {
             if(expandBlob.transform.localScale.x < outerAreaMin || expandBlob.transform.localScale.x > outerAreaMax) {
@@ -110,6 +120,16 @@ public class Breathing_TouchDetection : MonoBehaviour
         }
         else if(breatheCount == 3) {
             countCircle_3.gameObject.GetComponent<SpriteRenderer>().color = onColor;
+        }
+    }
+
+    public void setBreatheText() {
+        if(!inBreathe) {
+            breatheText.text = "Breathe In.." + breatheTimer + "..";
+        }
+        else {
+            breatheTimer = 0;
+            breatheText.text = "Breathe Out.." + breatheTimer + "..";
         }
     }
 }
