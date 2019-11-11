@@ -140,8 +140,7 @@ public class Swipey_ScoreManager : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Spark" && vulnerable == true) {       
-            Debug.Log("hit");    
+        if (col.gameObject.tag == "Spark" && vulnerable == true) {          
             addScore();
             this.gameObject.transform.GetChild(0).gameObject.transform.localScale += new Vector3(1f, 1f, 0);
             col.gameObject.GetComponent<Spark>().Deactivate();

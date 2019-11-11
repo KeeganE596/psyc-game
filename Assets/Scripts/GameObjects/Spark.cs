@@ -27,8 +27,8 @@ public class Spark : MonoBehaviour
     }
 
     //Activate Spark when it is clicked/tapped, called from Swipey_TouchDetection
-    public void Activate() {    
-        isActive = true;
+    public void Activate() {  
+        StartCoroutine("Pause");  
         anim = this.gameObject.GetComponent<Animator>();
         anim.SetTrigger("Activate");
         Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
@@ -38,4 +38,8 @@ public class Spark : MonoBehaviour
         isActive = false;
     }
 
+    IEnumerator Pause() {
+        yield return new WaitForSeconds(0.35f);
+        isActive = true;
+    }
 }
