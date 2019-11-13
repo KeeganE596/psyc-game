@@ -14,30 +14,27 @@ public class WordAssoc_TouchBlob : MonoBehaviour
 
     List<GameObject> caughtWords;
 
+    void Awake() {
+        levelManager = canvas.GetComponent<LevelManager>();
+    }
+
     void Start() {
         wordsCaught = 0;
-        levelManager = canvas.GetComponent<LevelManager>();
-
         caughtWords = new List<GameObject>();
     }
 
     void OnTriggerStay2D(Collider2D col) {
         if(col.gameObject.CompareTag("Word") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
-            
             hitWord(col.gameObject);
-            wordsCaught++;
-            caughtWords.Add(col.gameObject);
-            col.enabled = false;
-
-            if(wordsCaught >= winAmount) {
-                wordsCaught = 0;
-                levelManager.GameWon();
-            }
         }
-        if (col.gameObject.CompareTag("BadWord") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
-            col.enabled = false;
+        else if(col.gameObject.CompareTag("WordParent") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
+            hitWord(col.gameObject.transform.GetChild(0).gameObject);
+        }
+        else if (col.gameObject.CompareTag("BadWord") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
             hitBadWord(col.gameObject);
-            wordsCaught = 0;
+        }
+        else if (col.gameObject.CompareTag("BadWordParent") && (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
+            hitBadWord(col.gameObject.transform.GetChild(0).gameObject);
         }
     }
 
@@ -51,6 +48,15 @@ public class WordAssoc_TouchBlob : MonoBehaviour
         line.SetPosition(1, new Vector2(0, 0));
         line.SetPosition(0, word.transform.position);
         line.gameObject.layer = 11;
+
+        wordsCaught++;
+        caughtWords.Add(word);
+        word.GetComponent<Collider2D>().enabled = false;
+
+        if(wordsCaught >= winAmount) {
+            wordsCaught = 0;
+            levelManager.GameWon();
+        }
     }
 
     void hitBadWord(GameObject word) {
@@ -62,5 +68,7 @@ public class WordAssoc_TouchBlob : MonoBehaviour
             w.transform.parent.gameObject.GetComponent<TextMeshPro>().color = new Color32(101, 101, 101, 255);
         }
 
+        word.GetComponent<Collider2D>().enabled = false;
+        wordsCaught = 0;
     }
 }

@@ -16,7 +16,7 @@ public class Swipey_ScoreManager : MonoBehaviour
     public GameObject Rings;
     Object_Spawner spawner;
 
-    public Spark Spark;
+    //public Spark Spark;
 
      CameraShake cameraShake;
 
@@ -25,15 +25,15 @@ public class Swipey_ScoreManager : MonoBehaviour
 
     bool levelEnded;
 
-  
-    private void Start()
-    {
+    void Awake() {
+        levelManager = canvas.GetComponent<LevelManager>();
+    }
+    private void Start() {
         score = 0; 
         Rings.SetActive(false);
         anim = gameObject.GetComponent<Animator>();
         m_SpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         
-        levelManager = canvas.GetComponent<LevelManager>();
         levelEnded = false;
     }
 
@@ -125,7 +125,7 @@ public class Swipey_ScoreManager : MonoBehaviour
             anim.SetBool("100 Points", true);
             anim.SetBool("150 Points", true);
         }
-        if (score >= 80 && !levelEnded) {
+        if (score >= 90 && !levelEnded) {
             levelEnded = true;
             endLevel();
             //scoreText.text = "Level Complete";
@@ -140,13 +140,13 @@ public class Swipey_ScoreManager : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Spark" && vulnerable == true) {          
+        if (col.gameObject.tag == "Spark" && vulnerable == true && levelManager.isPlaying()) {          
             addScore();
             this.gameObject.transform.GetChild(0).gameObject.transform.localScale += new Vector3(1f, 1f, 0);
             col.gameObject.GetComponent<Spark>().Deactivate();
             col.gameObject.SetActive(false);
         }
-        if(col.gameObject.tag == "Gnatt" && vulnerable == true) {
+        if(col.gameObject.tag == "Gnatt" && vulnerable == true && levelManager.isPlaying()) {
             minusScore();
             ishurt = true;
             col.gameObject.SetActive(false);

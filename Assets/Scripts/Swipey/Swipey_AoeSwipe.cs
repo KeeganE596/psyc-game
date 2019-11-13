@@ -7,17 +7,14 @@ public class Swipey_AoeSwipe : MonoBehaviour
     List<GameObject> gnatts;
     GameObject[] gs;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
+    void Awake() {
         gnatts = new List<GameObject>(5);
     }
 
-    public void OnTriggerEnter2D(Collider2D col)
-     {
-         if (col.gameObject.CompareTag("Gnatt")) {
-             gnatts.Add(col.gameObject);
-         }
+    public void OnTriggerEnter2D(Collider2D col) {
+        if (col.gameObject.CompareTag("Gnatt")) {
+            gnatts.Add(col.gameObject);
+        }
      }
 
     //Return the List of Gnatts that has collided with AOE Swipe
@@ -41,7 +38,6 @@ public class Swipey_AoeSwipe : MonoBehaviour
 
             g.GetComponent<CircleCollider2D>().enabled = false;
             g.GetComponent<Gnatt>().Despawn();
-            //Destroy(g, 2f);
         }
         gnatts.Clear();
     }

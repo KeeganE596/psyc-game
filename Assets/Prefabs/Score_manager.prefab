@@ -338,14 +338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdba90c09a7d324a8d58ce2699c7548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   score: 0
-  scoreText: {fileID: 0}
   vulnerable: 1
   Rings: {fileID: 877154804105352520}
-  spawner: {fileID: 0}
-  Spark: {fileID: 2074947720, guid: 5b5079ca3c8736542b5a773811364d87, type: 3}
-  restartButton: {fileID: 0}
-  cameraShake: {fileID: 0}
   effectCamera: {fileID: 0}
 --- !u!1 &7168412023762058526
 GameObject:

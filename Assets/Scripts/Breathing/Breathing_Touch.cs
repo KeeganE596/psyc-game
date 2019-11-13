@@ -7,19 +7,15 @@ public class Breathing_Touch : MonoBehaviour
 {
     public GameObject expandBlob;
     Transform expandBlobTransform;
-    public GameObject outerAreaMaxObj;
+    public GameObject breatheLimitParent;
     float outerAreaMax;
-    public GameObject outerAreaMinObj;
     float outerAreaMin;
-    public GameObject innerAreaMaxObj;
     float innerAreaMax;
-    public GameObject innerAreaMinObj;
     float innerAreaMin;
 
     Vector3 worldScale;
+
     public GameObject countCircle;
-    //public GameObject countCircle_2;
-    //public GameObject countCircle_3;
     Color offColor = new Color32(150, 150, 150, 255);
     Color onColor = Color.white;
     int breatheCount;
@@ -43,26 +39,40 @@ public class Breathing_Touch : MonoBehaviour
     float holdTimer;
     bool isHolding = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    int levelScaler;
+
+    void Awake() {
         levelManagerScript = canvas.GetComponent<LevelManager>();
-        maxPoints = levelManagerScript.maxPoints;
+    }
+    // Start is called before the first frame update
+    void Start() {
+        levelScaler = levelManagerScript.getNumberGamesWon();
 
         worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
 
         expandBlobTransform = expandBlob.GetComponent<Transform>();
         breatheText = breatheTextObj.GetComponent<TextMeshPro>();
 
-        outerAreaMax = outerAreaMaxObj.transform.localScale.x;
-        outerAreaMin = outerAreaMinObj.transform.localScale.x;
-        innerAreaMax = innerAreaMaxObj.transform.localScale.x;
-        innerAreaMin = innerAreaMinObj.transform.localScale.x;
+        outerAreaMax = breatheLimitParent.transform.GetChild(0).gameObject.transform.localScale.x;
+        outerAreaMin = breatheLimitParent.transform.GetChild(1).gameObject.transform.localScale.x;
+        innerAreaMax = breatheLimitParent.transform.GetChild(2).gameObject.transform.localScale.x;
+        innerAreaMin = breatheLimitParent.transform.GetChild(3).gameObject.transform.localScale.x;
 
         isBreathingIn = 1;
         holdTimer = 0;
 
         breatheCount = -1;
+
+        
+        if(levelScaler%2 == 0 && levelScaler-3 > 0) {
+            maxPoints = 3 + (levelScaler-3);
+        }
+        else if(levelScaler == 0 || levelScaler == 1){ 
+            maxPoints = 3;
+        }
+        else {
+            maxPoints = 3 + (levelScaler-2);
+        }
 
         setupScoreCounters();
     }
@@ -152,7 +162,7 @@ public class Breathing_Touch : MonoBehaviour
     void setupScoreCounters() {
         scoreCounters = new List<GameObject>();
         for(int i=0; i<maxPoints; i++) {
-            Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+worldScale.y)-((worldScale.y/maxPoints)*(i+1))-(worldScale.y/maxPoints), 0);
+            Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+worldScale.y)-((worldScale.y/(maxPoints+1))*(i+1))-(worldScale.y/maxPoints), 0);
             scoreCounters.Add(Instantiate(countCircle, pos, Quaternion.identity));
             scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
         }

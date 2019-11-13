@@ -36,16 +36,19 @@ public class Breathing_TouchDetection : MonoBehaviour
     public GameObject canvas;
     LevelManager levelManagerScript;
 
+    void Awake() {
+        levelManagerScript = canvas.GetComponent<LevelManager>();
+    }
     // Start is called before the first frame update
     void Start() {
         held = false;
         breatheCount = 0;
         breatheTimer = 0;
 
-        setCountMarkers();
-
-        levelManagerScript = canvas.GetComponent<LevelManager>();
-        maxPoints = levelManagerScript.maxPoints;
+        //setCountMarkers();
+        
+        //maxPoints = levelManagerScript.maxPoints;
+        maxPoints = 1000;
 
         outerAreaMax = outerAreaMaxObj.transform.localScale.x;
         outerAreaMin = outerAreaMinObj.transform.localScale.x;

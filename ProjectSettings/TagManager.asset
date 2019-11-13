@@ -18,6 +18,13 @@ TagManager:
   - Word
   - BadWord
   - ChooseButton
+  - WordParent
+  - BadWordParent
+  - MenuButton
+  - Instructions
+  - Win
+  - Lose
+  - LevelManager
   layers:
   - Default
   - TransparentFX

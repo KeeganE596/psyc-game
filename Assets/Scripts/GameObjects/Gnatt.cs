@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Gnatt : MonoBehaviour
 {
-
     public float velocity = 1;
 
     private Vector2 target;
@@ -12,10 +11,19 @@ public class Gnatt : MonoBehaviour
     bool doDespawn;
     float timer;
 
+    SpriteRenderer sprite;
+    float alpha = 1;
+
+    void Awake() {
+        velocity = 1 + (GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>().getNumberGamesWon()*0.1f);
+    }
+
     private void Start() {
         target = new Vector2(0, 0);
         doDespawn = false;
         timer = 0;
+
+        sprite = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update() {
@@ -23,6 +31,8 @@ public class Gnatt : MonoBehaviour
 
         if(doDespawn) {
             timer += Time.deltaTime;
+            alpha -= 0.035f;
+            sprite.color = new Color(1, 1, 1, alpha);
 
             if(timer > 2f) {
                 this.gameObject.SetActive(false);

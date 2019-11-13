@@ -19,9 +19,17 @@ public class WordAssoc_Spawner : MonoBehaviour
 
     float timer;
     float badtimer;
+    float badSpawnTime;
 
+    int levelScaler;
+    void Awake() {
+        levelManager = canvas.GetComponent<LevelManager>();
+    }
     // Start is called before the first frame update
     void Start() {
+        playing = levelManager.isPlaying();
+        levelScaler = levelManager.getNumberGamesWon();
+
         words = new List<string>();
         badWords = new List<string>();
         wordPositions = new List<Vector2>();
@@ -32,24 +40,26 @@ public class WordAssoc_Spawner : MonoBehaviour
 
         badWords.Add("impatient"); badWords.Add("anger"); badWords.Add("disrespect");
         badWords.Add("can't"); badWords.Add("dishonest"); badWords.Add("impossible");
+        badWords.Add("hate");
 
         timer = 0.5f;
         badtimer = 0.25f;
-
-        levelManager = canvas.GetComponent<LevelManager>();
-        playing = levelManager.isPlaying();
+        if(levelScaler <= 10) {
+            badSpawnTime = 2.5f - (0.1f*levelScaler);
+        }
+        else { badSpawnTime = 2.5f - (0.1f*10); }
     }
 
     // Update is called once per frame
     void Update() {
         //Check player isn't on instruction screen
-        if(playing) {
+        if(levelManager.isPlaying()) {
             timer += Time.deltaTime;
             badtimer += Time.deltaTime;
 
             //Good words spawning timer logic
-            if(timer > 1 && words.Count > 0) {
-                //Get rendom position to spawn word at
+            if(timer > 1.2f && words.Count > 0) {
+                //Get random position to spawn word at
                 Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-300), Random.Range(50, Screen.height-100)));
     
                 //check position isnt too close to middle
@@ -64,7 +74,7 @@ public class WordAssoc_Spawner : MonoBehaviour
                 }
             }
             //Bad words spawning timer logic
-            if (badtimer > 1.5 && badWords.Count > 0) {
+            if (badtimer > badSpawnTime && badWords.Count > 0) {
                 //Get rendom position to spawn word at
                 Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width - 300), Random.Range(50, Screen.height - 100)));
 
@@ -79,9 +89,6 @@ public class WordAssoc_Spawner : MonoBehaviour
                     badtimer = 0;
                 }
             }
-        }
-        else {
-            playing = levelManager.isPlaying();
         }
     }
 

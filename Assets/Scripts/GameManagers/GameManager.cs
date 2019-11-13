@@ -5,32 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private float SCREEN_WIDTH = Screen.width;
-    private float SCREEN_HEIGHT = Screen.height;
     bool playingChooseGame;
 
     List<string> gamesList;
 
-    int currentGame;
+    int currentGameNum;
+    string currentGameName;
     int gamesWon;
 
+    void Awake() {
+        DontDestroyOnLoad(this.gameObject);
+    }
     // Start is called before the first frame update
     void Start() {
         playingChooseGame = false;
 
         gamesWon = 0;
-        currentGame = 0;
+        currentGameNum = 0;
+        currentGameName = "";
 
         gamesList = new List<string>();
         gamesList.Add("swipeAway_Game");
         gamesList.Add("wordAssociation_Game");
         gamesList.Add("breathing_Game");
-
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    // Update is called once per frame
-    void Update() {
     }
 
     public void NextGame() {
@@ -39,9 +36,9 @@ public class GameManager : MonoBehaviour
         }
         else {
             int nextGame = Random.Range(0, gamesList.Count);
-            if(nextGame == currentGame) { NextGame(); } //Choose another game if the current game (just played) is picked
+            if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
             else {
-             currentGame = nextGame;
+             currentGameNum = nextGame;
                 SceneManager.LoadScene(gamesList[nextGame]);
             }
         }
@@ -64,12 +61,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PickGame(string name) {
-        SceneManager.LoadScene(name + "_Game");
+    public void PickGame(string gameName) {
+        currentGameName = gameName;
+        SceneManager.LoadScene(gameName + "_Game");
     }
 
     public void PlaySameGame() {
-        SceneManager.LoadScene(gamesList[currentGame]);
+        SceneManager.LoadScene(currentGameName + "_Game");
     }
 
     public int NumberOfGamesWon() {
@@ -78,14 +76,6 @@ public class GameManager : MonoBehaviour
 
     public void AddToGamesWon() {
         gamesWon++;
-    }
-
-    public float getWidth() {
-        return SCREEN_WIDTH;
-    }
-
-    public float getHeight() {
-        return SCREEN_HEIGHT;
     }
 
     public bool isPlayingChooseGame() {

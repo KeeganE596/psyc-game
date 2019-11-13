@@ -21,9 +21,7 @@ public class Object_Spawner : MonoBehaviour
     public bool spawningGnatt = true;
     public bool spawningSpark = true;
 
-    private void Start()
-    {
-        
+    private void Start() {
         CreateGnattSpawners();
 
         StartCoroutine(sparkSpawn());

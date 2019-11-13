@@ -78,6 +78,7 @@
      <Compile Include="Assets\Metaball stuff\PostProcessing\Editor\Utils\EditorResources.cs" />
      <Compile Include="Assets\Metaball stuff\PostProcessing\Editor\Utils\FxStyles.cs" />
      <Compile Include="Assets\Metaball stuff\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Editor\ReporterEditor.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>E:/Scratch/sparky/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>

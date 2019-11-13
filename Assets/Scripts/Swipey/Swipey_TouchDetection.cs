@@ -31,8 +31,7 @@ public class Swipey_TouchDetection : MonoBehaviour
         aoeObject.SetActive(false);
     }
 
-    private void Update()
-    {
+    private void Update() {
         //when mouse/touch clicked
         if (Input.GetMouseButtonDown(0)) {
             //get mouse click position
