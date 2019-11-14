@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//ObjectSpawner: REDUNDANT spawner script for swipey game.
+//SPWIPEY_SPAWNER SCRIPT NOW USED
 public class Object_Spawner : MonoBehaviour
 {
     bool startGame;

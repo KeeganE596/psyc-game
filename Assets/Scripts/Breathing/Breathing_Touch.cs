@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Breathing_Touch: touch detection for breathing game. Also manages the score
 public class Breathing_Touch : MonoBehaviour
 {
     public GameObject expandBlob;
@@ -145,7 +146,6 @@ public class Breathing_Touch : MonoBehaviour
             breatheText.text = "Breathe In.." + (int) breatheTimer + "..";
         }
         else if(isBreathingIn==-1) {
-            //breatheTimer = 0;
             breatheText.text = "Breathe Out.." + (int) breatheTimer + "..";
         }
         else if(holdTimer <= 1 && !wasLastBreathingIn) {

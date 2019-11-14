@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//GameManager: holds the list of games and tally of number of games won. It is used to change scenes,
+//load the next game and keep track of the previous game for the different play types.
+//This will persist on an object through the whole game
 public class GameManager : MonoBehaviour
 {
     bool playingChooseGame;
@@ -35,10 +38,10 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("chooseGame");
         }
         else {
-            int nextGame = Random.Range(0, gamesList.Count);
+            int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
             if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
             else {
-             currentGameNum = nextGame;
+                currentGameNum = nextGame;
                 SceneManager.LoadScene(gamesList[nextGame]);
             }
         }
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenu() {
         SceneManager.LoadScene("Menu");
-        Destroy(this.gameObject);
+        Destroy(this.gameObject);   //Destroy this gameobject as new GameManager will instantiate on menu load
     }
 
     public void StartGame(string type) {

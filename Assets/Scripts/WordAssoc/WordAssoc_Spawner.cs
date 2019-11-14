@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//WordAssoc_Spawner: spanws good and bad words at the appropriate times
 public class WordAssoc_Spawner : MonoBehaviour
 {
     List<string> words;
@@ -98,6 +99,7 @@ public class WordAssoc_Spawner : MonoBehaviour
                 wordPositions.Add(pos);
                 return true;
             }
+
             bool check = true;
             foreach (Vector2 p in wordPositions) {  //Check all positions of current words, if to close check=false
                 if ((pos.x - p.x < 3.25) && (pos.x - p.x > -3.25)) {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//WordAssoc_TouchDetection:Detect mouse/touch input and move the touch blob to follow the input
+//if held down
 public class WordAssoc_TouchDetection : MonoBehaviour
 {
     public GameObject touch_blob;
@@ -15,19 +17,17 @@ public class WordAssoc_TouchDetection : MonoBehaviour
     RaycastHit2D hit;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         // Add a Line Renderer to the GameObject
          line = this.gameObject.AddComponent<LineRenderer>();
          line.startWidth = (0.04f);
          line.endWidth = (0.05f);
          line.SetPosition(0, new Vector2(0, 0));
-         line.gameObject.layer = 11;
+         line.gameObject.layer = 11;    //add to metaball layer
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         mousePos = Input.mousePosition;
         screenPos = Camera.main.ScreenToWorldPoint(mousePos);
         hit = Physics2D.Raycast(screenPos,Vector2.zero);
@@ -43,8 +43,8 @@ public class WordAssoc_TouchDetection : MonoBehaviour
             line.SetPosition(1, toPos);
         }
         else{
-            Vector2 newPos = Vector2.MoveTowards(
-            new Vector2(touch_blob.transform.position.x, touch_blob.transform.position.y), new Vector2(0,0), (25 * Time.deltaTime));
+            Vector2 newPos = 
+                    Vector2.MoveTowards(new Vector2(touch_blob.transform.position.x, touch_blob.transform.position.y), new Vector2(0,0), (25 * Time.deltaTime));
             touch_blob.transform.position = newPos;
             line.SetPosition(1, newPos);
         }

@@ -11,8 +11,7 @@ public class MainMenu_Animations : MonoBehaviour
     public GameObject PlayText;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         PlayText.SetActive(false);
         anim = blob.GetComponent<Animator>();
     }
@@ -49,11 +48,8 @@ public class MainMenu_Animations : MonoBehaviour
         anim.SetBool("rightblob", newValue); 
     }
 
-    public void openSettingsPanel(bool newValue)
-    {
+    public void openSettingsPanel(bool newValue) {
         anim.SetBool("centerblob", newValue);
-
-
     }
 
 

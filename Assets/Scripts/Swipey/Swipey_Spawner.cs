@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Swipey_Spawner: Spawns in sparkas and gnatts att the appropriate times.
+//Stores sparks and Gnatts in object pools to mitigate need to instantiate/destroy objects all the time
+//Ability to have different spark and gnatt types
 public class Swipey_Spawner : MonoBehaviour
 {
-    List<GameObject> sparx;
+    List<GameObject> sparks;
     public GameObject spark_1;
     public GameObject spark_2;
     int sparkIndex;
@@ -14,7 +17,6 @@ public class Swipey_Spawner : MonoBehaviour
     public GameObject gnatt_2;
     int gnattIndex;
 
-    public GameObject canvas;
     LevelManager levelManager;
     bool playing;
     float sparkTimer;
@@ -35,23 +37,24 @@ public class Swipey_Spawner : MonoBehaviour
 
         sparkTimer = 0;
         sparkSpawnTime = levelManager.maxTime/15;   //maxtime/neededpoints(10)*1.5
+        sparks = new List<GameObject>();
+        int sparkNum = 0;
+        for(int i=0; i<20; i++) {
+            sparkNum = Random.Range(0, 2);
+            if(sparkNum == 0) { sparks.Add(Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity)); }
+            else if(sparkNum == 1) { sparks.Add(Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity)); }
+
+            sparks[i].SetActive(false);
+        }
+        sparkIndex = 0;
+
         gnattTimer = 0;
         if(levelScaler < 10) {  //scale gnatt spawn speed depending on level number
             gnattSpawnTime = 2 - ((2*0.9f)*(levelScaler*0.1f));
         }
-        else { gnattSpawnTime = 2 - ((2*0.9f)*(9.5f*0.1f)); }
-
-        sparx = new List<GameObject>();
-        int sparkNum = 0;
-        for(int i=0; i<20; i++) {
-            sparkNum = Random.Range(0, 2);
-            if(sparkNum == 0) { sparx.Add(Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity)); }
-            else if(sparkNum == 1) { sparx.Add(Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity)); }
-
-            sparx[i].SetActive(false);
+        else { 
+            gnattSpawnTime = 2 - ((2*0.9f)*(9.5f*0.1f)); 
         }
-        sparkIndex = 0;
-
         gnatts = new List<GameObject>();
         int gnattNum = 0;
         for(int i=0; i<(levelManager.maxTime/gnattSpawnTime); i++) {
@@ -83,7 +86,7 @@ public class Swipey_Spawner : MonoBehaviour
     }
 
     void spawnSpark() {
-        if(sparkIndex >= sparx.Count) {
+        if(sparkIndex >= sparks.Count) {
             sparkIndex = 0;
         }
         //Get random position to spawn spark at
@@ -91,11 +94,11 @@ public class Swipey_Spawner : MonoBehaviour
 
         //check position isnt too close to middle
         if((spawnPos.x < -0.75 || spawnPos.x > 0.75) && (spawnPos.y < -0.75 || spawnPos.y > 0.75)) {
-            if(sparx[sparkIndex].activeSelf) {
+            if(sparks[sparkIndex].activeSelf) {
                 sparkIndex++;
                 spawnSpark();
             }
-            GameObject sp = sparx[sparkIndex];
+            GameObject sp = sparks[sparkIndex];
             sp.transform.position = spawnPos;
             sp.SetActive(true);
             sparkIndex++;
@@ -115,22 +118,21 @@ public class Swipey_Spawner : MonoBehaviour
             spawnGnatt();
         }
         GameObject gn = gnatts[gnattIndex];
-        int side = Random.Range(0, 2);
+        int side = Random.Range(0, 2);  //pick which side of screen to spawn on
         Vector2 spawnPos;
 
-        if(side == 0) {
+        if(side == 0) { //if left side of screen
             float y = Random.Range(0, Screen.height);
             spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(-10, y));
         }
-        else {
+        else {  //if right side of screen
             float y = Random.Range(0, Screen.height);
             spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width+10, y));
-            gn.transform.localScale = new Vector3(-(gn.transform.localScale.x), gn.transform.localScale.y, gn.transform.localScale.z);
+            gn.transform.localScale = new Vector3(-(gn.transform.localScale.x), gn.transform.localScale.y, gn.transform.localScale.z);  //flip sprite
         }
 
         gn.transform.position = spawnPos;
         gn.SetActive(true);
         gnattIndex++;
-
     }
 }

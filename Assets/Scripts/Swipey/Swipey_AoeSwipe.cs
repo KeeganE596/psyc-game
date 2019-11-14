@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Swipey_AoeSwipe: controls an invisible object which is moved to where the user swipes
+//and detects gnatts inside its collider, these gnatts are then 'swiped' away
 public class Swipey_AoeSwipe : MonoBehaviour
 {
     List<GameObject> gnatts;
-    GameObject[] gs;
 
     void Awake() {
         gnatts = new List<GameObject>(5);
     }
 
     public void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Gnatt")) {
+        if(col.gameObject.CompareTag("Gnatt")) {
             gnatts.Add(col.gameObject);
         }
      }
@@ -22,7 +23,7 @@ public class Swipey_AoeSwipe : MonoBehaviour
         return gnatts;
      }
 
-    //Return if any Gnatts have been hit
+    //Return if hit Gnatts list is empty
      public bool isGnattsEmpty() {
         if(gnatts.Count > 0) {
             return false;
@@ -30,6 +31,7 @@ public class Swipey_AoeSwipe : MonoBehaviour
         return true;
      }
 
+    //Apply force to all gantts that have been 'hit' and call their despawn method
      public void flickGnatts(Vector2 direction, float timeInterval, float throwForce) {
         foreach(GameObject g in gnatts) {
             //add force onto rigid body depending on swipe time, direction and throw force.

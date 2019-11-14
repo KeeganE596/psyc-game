@@ -25,6 +25,7 @@ TagManager:
   - Win
   - Lose
   - LevelManager
+  - Thought
   layers:
   - Default
   - TransparentFX

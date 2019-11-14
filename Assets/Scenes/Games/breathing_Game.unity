@@ -282,7 +282,7 @@ Transform:
   m_Father: {fileID: 1617393423}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &394372005
+--- !u!84 &474471709
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,8 +358,7 @@ MonoBehaviour:
   m_text: Breathe In..1..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83e74e061244eb7458d1bd102dc698b2, type: 2}
-  m_sharedMaterial: {fileID: 9063914145161547885, guid: 83e74e061244eb7458d1bd102dc698b2,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ceda5c2c6d0d155429b101c2fa1f046f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -481,7 +480,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 9063914145161547885, guid: 83e74e061244eb7458d1bd102dc698b2, type: 2}
+  - {fileID: 2100000, guid: ceda5c2c6d0d155429b101c2fa1f046f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -902,6 +901,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5608952030246854055, guid: 28eb35c16ff30cd41985841eab22716f,
+        type: 3}
+      propertyPath: usingPoints
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5608952030246854053, guid: 28eb35c16ff30cd41985841eab22716f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1006,11 +1010,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5608952030246854055, guid: 28eb35c16ff30cd41985841eab22716f,
-        type: 3}
-      propertyPath: usingPoints
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5608952030074909846, guid: 28eb35c16ff30cd41985841eab22716f,
         type: 3}
@@ -1133,10 +1132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expandBlob: {fileID: 127173480}
-  outerAreaMaxObj: {fileID: 294824689}
-  outerAreaMinObj: {fileID: 1328922111}
-  innerAreaMaxObj: {fileID: 707141574}
-  innerAreaMinObj: {fileID: 1252308478}
+  breatheLimitParent: {fileID: 0}
   countCircle_1: {fileID: 0}
   countCircle_2: {fileID: 0}
   countCircle_3: {fileID: 0}

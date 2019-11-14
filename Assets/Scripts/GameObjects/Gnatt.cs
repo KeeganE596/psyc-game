@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Gnatt: GameObject in the Swipey game, always move towards the center, 
+//when swiped despawn is called and gnatt will fade away over a couple seconds
 public class Gnatt : MonoBehaviour
 {
-    public float velocity = 1;
+    float velocity = 1;
 
-    private Vector2 target;
+    readonly Vector2 target = new Vector2(0, 0);
 
     bool doDespawn;
     float timer;
@@ -15,14 +17,13 @@ public class Gnatt : MonoBehaviour
     float alpha = 1;
 
     void Awake() {
+        //Set movement velocity to scale with level number
         velocity = 1 + (GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>().getNumberGamesWon()*0.1f);
     }
 
     private void Start() {
-        target = new Vector2(0, 0);
         doDespawn = false;
         timer = 0;
-
         sprite = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -31,6 +32,7 @@ public class Gnatt : MonoBehaviour
 
         if(doDespawn) {
             timer += Time.deltaTime;
+            //Fade out sprite
             alpha -= 0.035f;
             sprite.color = new Color(1, 1, 1, alpha);
 

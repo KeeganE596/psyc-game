@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Scale Choose Game Screen: properly scale and control the choose game screen
 public class ScaleChooseGameScreen : MonoBehaviour
 {
     //Referencing Game Manager
-    GameObject gameManager;
-    GameManager gameManagerScript;
+    GameManager gameManager;
     public GameObject canvas;
     private float SCREEN_WIDTH = Screen.width;
     private float SCREEN_HEIGHT = Screen.height;
 
     void Awake() {
-        gameManager = GameObject.FindWithTag("GameManager");
-        gameManagerScript = gameManager.GetComponent<GameManager>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
     // Start is called before the first frame update
     void Start() {
@@ -68,6 +67,6 @@ public class ScaleChooseGameScreen : MonoBehaviour
     }
 
     public void PlayGame(string gameName) {
-        gameManagerScript.PickGame(gameName);
+        gameManager.PickGame(gameName);
     }
 }

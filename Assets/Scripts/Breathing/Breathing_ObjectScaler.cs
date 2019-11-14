@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Breathing_ObjectScaler: scale the limit circles depending on the level number and screen res
 public class Breathing_ObjectScaler : MonoBehaviour
 {
     LevelManager levelManager;
@@ -17,6 +18,7 @@ public class Breathing_ObjectScaler : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+        
         if(levelManager.getNumberGamesWon() < 6) {
             levelScaler = levelManager.getNumberGamesWon()*0.02f;
         }

@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Breathing_TouchDetection: REDUNDANT - replaced with Breathing_Touch. Keeping in case of switch back.
+//Old touch mechanics, hold down to grow circle, release when in large green ring, wait for circle
+//to contract, when in small green ring tap and hold again to grow ring, repeat.
 public class Breathing_TouchDetection : MonoBehaviour
 {
     public GameObject expandBlob;
-
-    public GameObject outerAreaMaxObj;
+    public GameObject breatheLimitParent;
     float outerAreaMax;
-    public GameObject outerAreaMinObj;
-    float outerAreaMin;
-    public GameObject innerAreaMaxObj;
+    float outerAreaMin;    
     float innerAreaMax;
-    public GameObject innerAreaMinObj;
     float innerAreaMin;
 
     public GameObject countCircle_1;
@@ -50,10 +49,10 @@ public class Breathing_TouchDetection : MonoBehaviour
         //maxPoints = levelManagerScript.maxPoints;
         maxPoints = 1000;
 
-        outerAreaMax = outerAreaMaxObj.transform.localScale.x;
-        outerAreaMin = outerAreaMinObj.transform.localScale.x;
-        innerAreaMax = innerAreaMaxObj.transform.localScale.x;
-        innerAreaMin = innerAreaMinObj.transform.localScale.x;
+        outerAreaMax = breatheLimitParent.transform.GetChild(0).gameObject.transform.localScale.x;
+        outerAreaMin = breatheLimitParent.transform.GetChild(1).gameObject.transform.localScale.x;
+        innerAreaMax = breatheLimitParent.transform.GetChild(2).gameObject.transform.localScale.x;
+        innerAreaMin = breatheLimitParent.transform.GetChild(3).gameObject.transform.localScale.x;
 
         breatheText = breatheTextObj.GetComponent<TextMeshPro>();
     }

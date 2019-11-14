@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+//LevelManager: each level has a canvas with this levelmanager script.
+//This controls the text panels before and after games - also scaling them to fit the device resolution,
+//It also controls the game time slider and whether the game is playing or not. 
+//In game scripts can reference this to start/end games and get information about the game type
 public class LevelManager : MonoBehaviour
 {
     //Game Slider Setup
@@ -31,14 +35,8 @@ public class LevelManager : MonoBehaviour
     float SCREEN_WIDTH = Screen.width;
     float SCREEN_HEIGHT = Screen.height;
 
-    //Mouse Position for touch/click raycast
-    Vector3 mousePos;
-    RaycastHit2D hit;
-
     void Awake() {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        setFontSizes();
-        setupAssets();
     }
 
     // Start is called before the first frame update
@@ -47,6 +45,7 @@ public class LevelManager : MonoBehaviour
         playing = false;
         timeRemaining = maxTime;
 
+        //Setup text panels
         if(gameManager.isPlayingChooseGame() && gameManager.NumberOfGamesWon() > 0) {
             instructionsPanel.SetActive(false);
             StartGame();
@@ -54,6 +53,9 @@ public class LevelManager : MonoBehaviour
         else { instructionsPanel.SetActive(true); }
         winPanel.SetActive(false);
         losePanel.SetActive(false);
+        panelBackground.GetComponent<Image>().color = new Color32(161, 161, 161, 255);
+        setFontSizes();
+        setupAssets();
     }
 
     // Update is called once per frame
@@ -72,7 +74,6 @@ public class LevelManager : MonoBehaviour
         }
     }
     
-    //Starts the timer and game when user clicks play button
     public void StartGame() {
         TurnOffInstructions();
         timeSlider.gameObject.SetActive(true);   //Turn slider on
@@ -84,14 +85,12 @@ public class LevelManager : MonoBehaviour
     }
 
     public void GameWon() {
-        playing = false;
-        gameManager.AddToGamesWon();
-        panelBackground.SetActive(true);
-        menuButton.SetActive(true);
+        EndGame();
         winPanel.SetActive(true);
         losePanel.SetActive(false);
-        timeSlider.gameObject.SetActive(false);
+        panelBackground.GetComponent<Image>().color = new Color32(74, 156, 48, 255);
         
+        gameManager.AddToGamesWon();
         int wins = gameManager.NumberOfGamesWon();
         string winText;
         if(wins == 1) {
@@ -101,21 +100,14 @@ public class LevelManager : MonoBehaviour
             winText = "You've won " + wins + " games in a row!";
         }
 
-        /*if(wins > 10) {
-            EndGameRound(winPanel);
-            winText += "\n\nYou won the round!!";
-        }*/
-
         winPanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = winText;
     }
 
     public void GameLost() {
-        playing = false;
-        panelBackground.SetActive(true);
-        menuButton.SetActive(true);
+        EndGame();
         losePanel.SetActive(true);
         winPanel.SetActive(false);
-        timeSlider.gameObject.SetActive(false);
+        panelBackground.GetComponent<Image>().color = new Color32(190, 74, 44, 255);
 
         int wins = gameManager.NumberOfGamesWon();
         string loseText;
@@ -131,6 +123,23 @@ public class LevelManager : MonoBehaviour
         losePanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You ran out of time to finish that game.\n\n" + loseText;
     }
 
+    public void NextGame() {
+        if(gameManager.isPlayingChooseGame()) {
+            gameManager.PlaySameGame();
+        }
+        else {
+            gameManager.NextGame();
+        }
+    }
+
+    public void ToMainMenu() {
+        gameManager.ToMainMenu();
+    }
+
+    public int getNumberGamesWon() {
+        return gameManager.NumberOfGamesWon();
+    }
+
     public bool isPlaying() {
         return playing;
     }
@@ -140,7 +149,6 @@ public class LevelManager : MonoBehaviour
         titleTextSize = SCREEN_HEIGHT/15f;
         buttonTextSize = SCREEN_HEIGHT/19f;
     }
-
 
     //Scale instructions/win/lose text panels
     public void setupAssets() {
@@ -174,31 +182,16 @@ public class LevelManager : MonoBehaviour
         playButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
     }
 
-    public void EndGameRound(GameObject panel) {
-        GameObject playAgainButton = panel.transform.GetChild(2).gameObject;
-        playAgainButton.SetActive(false);
-    }
-
-    public void NextGame() {
-        if(gameManager.isPlayingChooseGame()) {
-            gameManager.PlaySameGame();
-        }
-        else {
-            gameManager.NextGame();
-        }
-    }
-
-    public void ToMainMenu() {
-        gameManager.ToMainMenu();
-    }
-
-    public int getNumberGamesWon() {
-        return gameManager.NumberOfGamesWon();
-    }
-
     public void TurnOffInstructions() {
         panelBackground.SetActive(false);
         menuButton.SetActive(false);
         instructionsPanel.SetActive(false); //Turn instructions off
+    }
+
+    public void EndGame() {
+        playing = false;
+        panelBackground.SetActive(true);
+        menuButton.SetActive(true);
+        timeSlider.gameObject.SetActive(false);
     }
 }

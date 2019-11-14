@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Animation_events : MonoBehaviour
 {
-
     public GameObject PlayText;
     public GameObject StartGameButton;
     public GameObject settingsPanel;

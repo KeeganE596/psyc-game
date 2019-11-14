@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Swipey_ScoreManager: manages the game score and center blob animations,
+//ends the game when score is reached
 public class Swipey_ScoreManager : MonoBehaviour
 {
-    public GameObject canvas;
     LevelManager levelManager;
-    public int score = 0;
+    int score = 0;
     Text scoreText;
     private Animator anim;
     private SpriteRenderer m_SpriteRenderer;
@@ -26,8 +27,9 @@ public class Swipey_ScoreManager : MonoBehaviour
     bool levelEnded;
 
     void Awake() {
-        levelManager = canvas.GetComponent<LevelManager>();
+        levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
+
     private void Start() {
         score = 0; 
         Rings.SetActive(false);
@@ -41,7 +43,6 @@ public class Swipey_ScoreManager : MonoBehaviour
         score = score + 10;
     }
     public void minusScore() {
-
         //StartCoroutine(cameraShake.Shake(0.1f, 0.2f));
         //cameraShake.transform.position = new Vector3 (0,0,0);
         score = score - 10;
@@ -62,7 +63,6 @@ public class Swipey_ScoreManager : MonoBehaviour
             anim.ResetTrigger("Hurt_2");
             anim.SetTrigger("Hurt_3");
         }
-
     }
     IEnumerator flashHurt() {
         m_SpriteRenderer.enabled = true;
@@ -87,10 +87,10 @@ public class Swipey_ScoreManager : MonoBehaviour
     }
 
     public void endLevel() {
-
         //disables score collider and sets up gameobjects for animation
         Rings.SetActive(true);
         anim.SetTrigger("End");
+        gameObject.GetComponent<Collider2D>().enabled = false;
 
         //makes colliders invincible for animation
         vulnerable = false;
@@ -99,47 +99,42 @@ public class Swipey_ScoreManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         //scoreText.text = score.ToString();
         if (score < 50) {
             anim.SetBool("50 Points", false);
             anim.SetBool("100 Points", false);
             anim.SetBool("150 Points", false);
         }
-
-        if (score >= 50 && score < 100) {
+        else if (score >= 50 && score < 100) {
             anim.SetBool("50 Points", true);
             anim.SetBool("100 Points", false);
             anim.SetBool("150 Points", false);
         }
-        if (score >= 100 && score < 150)
-        {
+        else if (score >= 100 && score < 150) {
             anim.SetBool("50 Points", true);
             anim.SetBool("100 Points", true);
             anim.SetBool("150 Points", false);
         }
-        if (score >= 150 && score < 200)
-        {
+        else if (score >= 150 && score < 200) {
             anim.SetBool("50 Points", true);
             anim.SetBool("100 Points", true);
             anim.SetBool("150 Points", true);
         }
+        
         if (score >= 90 && !levelEnded) {
             levelEnded = true;
             endLevel();
             //scoreText.text = "Level Complete";
         }
 
-        if (ishurt == true) {
+        if (ishurt) {
             StartCoroutine("flashHurt");
             ishurt = false;
         }
-        
     }
 
-    public void OnCollisionEnter2D(Collision2D col)
-    {
+    public void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.tag == "Spark" && vulnerable == true && levelManager.isPlaying()) {          
             addScore();
             this.gameObject.transform.GetChild(0).gameObject.transform.localScale += new Vector3(1f, 1f, 0);
