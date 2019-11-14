@@ -65,7 +65,10 @@ public class Breathing_Touch : MonoBehaviour
         breatheCount = -1;
 
         
-        if(levelScaler%2 == 0 && levelScaler-3 > 0) {
+        if(levelScaler < 3) { maxPoints = 3; }
+        else if(levelScaler < 6) { maxPoints = 4; }
+        else { maxPoints = 5; }
+        /*if(levelScaler%2 == 0 && levelScaler-3 > 0) {
             maxPoints = 3 + (levelScaler-3);
         }
         else if(levelScaler == 0 || levelScaler == 1){ 
@@ -73,7 +76,7 @@ public class Breathing_Touch : MonoBehaviour
         }
         else {
             maxPoints = 3 + (levelScaler-2);
-        }
+        }*/
 
         setupScoreCounters();
     }
@@ -162,7 +165,7 @@ public class Breathing_Touch : MonoBehaviour
     void setupScoreCounters() {
         scoreCounters = new List<GameObject>();
         for(int i=0; i<maxPoints; i++) {
-            Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+worldScale.y)-((worldScale.y/(maxPoints+1))*(i+1))-(worldScale.y/maxPoints), 0);
+            Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+worldScale.y)-((worldScale.y*2)/(maxPoints+1))*(i+1), 0);
             scoreCounters.Add(Instantiate(countCircle, pos, Quaternion.identity));
             scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
         }

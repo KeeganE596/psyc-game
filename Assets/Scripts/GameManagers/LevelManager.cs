@@ -132,6 +132,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void RestartGame() {
+        gameManager.ResetGame();
+        NextGame();
+    }
+
     public void ToMainMenu() {
         gameManager.ToMainMenu();
     }

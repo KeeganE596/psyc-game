@@ -12,6 +12,7 @@ public class Swipey_ScoreManager : MonoBehaviour
     Text scoreText;
     private Animator anim;
     private SpriteRenderer m_SpriteRenderer;
+    //float alpha;
     private bool ishurt = false;
     public bool vulnerable = true;
     public GameObject Rings;
@@ -35,12 +36,16 @@ public class Swipey_ScoreManager : MonoBehaviour
         Rings.SetActive(false);
         anim = gameObject.GetComponent<Animator>();
         m_SpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        //alpha = 0.1f;
+        //m_SpriteRenderer.color = new Color(1, 1, 1, alpha);
         
         levelEnded = false;
     }
 
     public void addScore() {
         score = score + 10;
+        //alpha += 0.1f;
+        //m_SpriteRenderer.color = new Color(1, 1, 1, alpha);
     }
     public void minusScore() {
         //StartCoroutine(cameraShake.Shake(0.1f, 0.2f));
@@ -63,6 +68,8 @@ public class Swipey_ScoreManager : MonoBehaviour
             anim.ResetTrigger("Hurt_2");
             anim.SetTrigger("Hurt_3");
         }
+        //alpha -= 0.1f;
+        //m_SpriteRenderer.color = new Color(1, 1, 1, alpha);
     }
     IEnumerator flashHurt() {
         m_SpriteRenderer.enabled = true;

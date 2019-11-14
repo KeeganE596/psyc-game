@@ -84,4 +84,10 @@ public class GameManager : MonoBehaviour
     public bool isPlayingChooseGame() {
         return playingChooseGame;
     }
+
+    public void ResetGame() {
+        gamesWon = 0;
+        currentGameNum = 0;
+        currentGameName = "";
+    }
 }
