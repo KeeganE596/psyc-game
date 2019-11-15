@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3876437929930071640}
   - component: {fileID: 5731487760949806076}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 7143237614672237810}
   - component: {fileID: 9180204469595728624}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,7 +576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e47d76b52d39e48b4f89bf0edce1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1
   acceleration: 0.075
   sparkParticle: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
     type: 3}
@@ -610,7 +609,7 @@ GameObject:
   - component: {fileID: 9158346196123200124}
   - component: {fileID: 620521300739251259}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -887,7 +886,7 @@ GameObject:
   - component: {fileID: 6204158475058934266}
   - component: {fileID: 2875141331230816077}
   m_Layer: 0
-  m_Name: Misc_circle
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
