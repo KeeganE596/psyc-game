@@ -17,6 +17,19 @@ public class Spark : MonoBehaviour
     private void Start() {
         isActive = false;
         velocityMultiplier = 1;
+
+        Debug.Log(gameObject.name);
+
+        //plays correct spawn animation based off instantiated name
+        if (gameObject.name == "Spark_01(Clone)")
+        {
+            anim = this.gameObject.GetComponent<Animator>();
+            anim.SetTrigger("SparkPrefab_01");
+        }
+        if (gameObject.name == "Spark_02(Clone)") {
+            anim = this.gameObject.GetComponent<Animator>();
+            anim.SetTrigger("SparkPrefab_02");
+        } 
     }
 
     private void Update() {
