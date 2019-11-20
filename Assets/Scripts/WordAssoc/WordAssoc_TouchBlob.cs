@@ -15,6 +15,8 @@ public class WordAssoc_TouchBlob : MonoBehaviour
 
     List<GameObject> caughtWords;
 
+    public GameObject sparkParticle;
+
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
@@ -40,6 +42,8 @@ public class WordAssoc_TouchBlob : MonoBehaviour
     }
 
     void hitWord(GameObject word) {
+        Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
+
         word.transform.parent.gameObject.GetComponent<TextMeshPro>().color = new Color32(255, 255, 255, 255);   //make word white
         
         //Add line from word to center

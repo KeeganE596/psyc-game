@@ -29,6 +29,10 @@ public class LevelManager : MonoBehaviour
     public GameObject losePanel;
     public GameObject menuButton;
     public GameObject panelBackground;
+
+    //Referencing pause objects
+    public GameObject pausePanel;
+    public GameObject pauseButton;
     float mainTextSize;
     float titleTextSize;
     float buttonTextSize;
@@ -45,6 +49,9 @@ public class LevelManager : MonoBehaviour
         playing = false;
         timeRemaining = maxTime;
 
+        pauseButton.SetActive(false);
+        pausePanel.SetActive(false);
+
         //Setup text panels
         if(gameManager.isPlayingChooseGame() && gameManager.NumberOfGamesWon() > 0) {
             instructionsPanel.SetActive(false);
@@ -53,7 +60,7 @@ public class LevelManager : MonoBehaviour
         else { instructionsPanel.SetActive(true); }
         winPanel.SetActive(false);
         losePanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(161, 161, 161, 255);
+        panelBackground.GetComponent<Image>().color = new Color32(166, 203, 209, 255);
         setFontSizes();
         setupAssets();
     }
@@ -77,6 +84,7 @@ public class LevelManager : MonoBehaviour
     public void StartGame() {
         TurnOffInstructions();
         timeSlider.gameObject.SetActive(true);   //Turn slider on
+        pauseButton.SetActive(true);    //Turn on pause button
         playing = true;
     }
 
@@ -107,7 +115,7 @@ public class LevelManager : MonoBehaviour
         EndGame();
         losePanel.SetActive(true);
         winPanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(190, 74, 44, 255);
+        panelBackground.GetComponent<Image>().color = new Color32(70, 120, 138, 255);
 
         int wins = gameManager.NumberOfGamesWon();
         string loseText;
@@ -120,7 +128,7 @@ public class LevelManager : MonoBehaviour
         else {
             loseText = "You won " + wins + " games this time.";
         }
-        losePanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You ran out of time to finish that game.\n\n" + loseText;
+        losePanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = loseText;
     }
 
     public void NextGame() {
@@ -156,22 +164,24 @@ public class LevelManager : MonoBehaviour
     }
 
     //Scale instructions/win/lose text panels
-    public void setupAssets() {
+    void setupAssets() {
         panelBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
+        panelBackground.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
 
         timeSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
         timeSlider.GetComponent<RectTransform>().localPosition = new Vector2(0, SCREEN_HEIGHT*0.5f);
 
         menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
         menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = mainTextSize;
-        
+
+        scalePausePanel();
         scaleInstructions(instructionsPanel);
         scaleInstructions(winPanel);
         scaleInstructions(losePanel);
     }
 
     //Do the scaling transformations for the panels
-    public void scaleInstructions(GameObject panel) {
+    void scaleInstructions(GameObject panel) {
         GameObject titleText = panel.transform.GetChild(0).gameObject;
         titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
         titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, (SCREEN_HEIGHT*0.5f)-SCREEN_HEIGHT*0.25f);
@@ -187,6 +197,23 @@ public class LevelManager : MonoBehaviour
         playButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
     }
 
+    void scalePausePanel() {
+        pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.06f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.9f));
+        pauseButton.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.08f, SCREEN_HEIGHT*0.08f);
+        pauseButton.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.065f, SCREEN_HEIGHT*0.065f);
+
+        pausePanel.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
+        pausePanel.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
+
+        GameObject contButton = pausePanel.transform.GetChild(0).gameObject;
+        contButton.GetComponent<RectTransform>().localPosition = new Vector2(0, -(SCREEN_HEIGHT*0.2f));
+        contButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
+
+        GameObject menuButton = pausePanel.transform.GetChild(1).gameObject;
+        menuButton.GetComponent<RectTransform>().localPosition = new Vector2(0, (SCREEN_HEIGHT*0.2f));
+        menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
+    }
+
     public void TurnOffInstructions() {
         panelBackground.SetActive(false);
         menuButton.SetActive(false);
@@ -195,8 +222,22 @@ public class LevelManager : MonoBehaviour
 
     public void EndGame() {
         playing = false;
+        pauseButton.SetActive(false);
         panelBackground.SetActive(true);
         menuButton.SetActive(true);
         timeSlider.gameObject.SetActive(false);
+    }
+
+    public void PauseGame() {
+        playing = !playing;
+
+        if(playing) {
+            pausePanel.SetActive(false);
+            pauseButton.SetActive(true);
+        }
+        else {
+            pausePanel.SetActive(true);
+            pauseButton.SetActive(false);
+        }
     }
 }

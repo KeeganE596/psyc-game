@@ -23,6 +23,7 @@ public class WordAssoc_Spawner : MonoBehaviour
     float badSpawnTime;
 
     int levelScaler;
+    
     void Awake() {
         levelManager = canvas.GetComponent<LevelManager>();
     }

@@ -20,6 +20,12 @@ public class Swipey_TouchDetection : MonoBehaviour
     Vector3 mousePos;
     RaycastHit2D hit;
 
+    LevelManager levelManager;
+    
+    void Awake() {
+        levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
+    }
+
     private void Start() {
         aoeObject = Instantiate(aoePrefab, new Vector2(0, 0), Quaternion.identity);
         aoeScript = aoeObject.GetComponent<Swipey_AoeSwipe>();
@@ -33,11 +39,6 @@ public class Swipey_TouchDetection : MonoBehaviour
             startPos = Input.mousePosition;
             doClick();
         }
-        /*else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-            //get finger tap position
-            startPos = Input.GetTouch(0).position;
-            doClick();
-        }*/
 
         //when mouse/touch released
         if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)){
@@ -45,39 +46,38 @@ public class Swipey_TouchDetection : MonoBehaviour
             endPos = Input.mousePosition;
             doRelease();
         }
-        /*else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
-            //get release finger position
-            endPos = Input.GetTouch(0).position;
-            doRelease();
-        }*/
     }
 
     void doClick() {
-        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(startPos), Vector2.zero);
+        if(levelManager.isPlaying()) {
+            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(startPos), Vector2.zero);
 
-        //Raycast from camera
-        if (hit && hit.collider.gameObject.CompareTag("Spark")) {
-            //if raycast hits gameobject with tag "Spark" Run this code.
-            hit.collider.GetComponent<Spark>().Activate();
+            //Raycast from camera
+            if (hit && hit.collider.gameObject.CompareTag("Spark")) {
+                //if raycast hits gameobject with tag "Spark" Run this code.
+                hit.collider.GetComponent<Spark>().Activate();
+            }
+
+            //get touch position and mark time when screen is touched
+            touchTimeStart = Time.time;
+
+            //Move aoeObject for detecting gnatts in swipe
+            aoeObject.SetActive(true);
+            aoeScript.clearGnatts();
+            aoeObject.transform.position = Camera.main.ScreenToWorldPoint(startPos);
         }
-
-        //get touch position and mark time when screen is touched
-        touchTimeStart = Time.time;
-
-        //Move aoeObject for detecting gnatts in swipe
-        aoeObject.SetActive(true);
-        aoeScript.clearGnatts();
-        aoeObject.transform.position = Camera.main.ScreenToWorldPoint(startPos);
     }
 
     void doRelease() {
-        //get time when released
-        touchTimeFinish = Time.time;
+        if(levelManager.isPlaying()) {
+            //get time when released
+            touchTimeFinish = Time.time;
 
-        //Flick gnatts away
-        if(startPos != endPos && !aoeScript.isGnattsEmpty()) {
-            aoeScript.flickGnatts((startPos - endPos), (touchTimeFinish - touchTimeStart), throwForce);
+            //Flick gnatts away
+            if(startPos != endPos && !aoeScript.isGnattsEmpty()) {
+                aoeScript.flickGnatts((startPos - endPos), (touchTimeFinish - touchTimeStart), throwForce);
+            }
+            aoeObject.SetActive(false);
         }
-        aoeObject.SetActive(false);
     }
 }

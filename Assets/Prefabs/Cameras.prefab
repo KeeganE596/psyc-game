@@ -221,12 +221,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3b19114be8bfa4f848da0d0f138dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 3
-  blurSpread: 0.6
+  iterations: 1
+  blurSpread: -0.5
   blurShader: {fileID: 4800000, guid: 57e6deea7c2924e22a5138e2b70bb4dc, type: 3}
   cutOutMaterial: {fileID: 2100000, guid: d5c0106e08a52ab4c89dabe7772d546e, type: 2}
   innerColor: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
-  outerColor: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
+  outerColor: {r: 1, g: 1, b: 1, a: 1}
   bgCamera: {fileID: 2763469131691886338}
 --- !u!1 &2763469132028650970
 GameObject:

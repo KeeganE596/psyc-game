@@ -32,8 +32,7 @@ public class Breathing_Touch : MonoBehaviour
     bool held;
     bool inBreathe;
     float breatheTimer;
-    public GameObject canvas;
-    LevelManager levelManagerScript;
+    LevelManager levelManager;
 
     int isBreathingIn;
     bool wasLastBreathingIn;
@@ -43,11 +42,11 @@ public class Breathing_Touch : MonoBehaviour
     int levelScaler;
 
     void Awake() {
-        levelManagerScript = canvas.GetComponent<LevelManager>();
+        levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
     // Start is called before the first frame update
     void Start() {
-        levelScaler = levelManagerScript.getNumberGamesWon();
+        levelScaler = levelManager.getNumberGamesWon();
 
         worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
 
@@ -63,27 +62,17 @@ public class Breathing_Touch : MonoBehaviour
         holdTimer = 0;
 
         breatheCount = -1;
-
         
         if(levelScaler < 3) { maxPoints = 3; }
         else if(levelScaler < 6) { maxPoints = 4; }
         else { maxPoints = 5; }
-        /*if(levelScaler%2 == 0 && levelScaler-3 > 0) {
-            maxPoints = 3 + (levelScaler-3);
-        }
-        else if(levelScaler == 0 || levelScaler == 1){ 
-            maxPoints = 3;
-        }
-        else {
-            maxPoints = 3 + (levelScaler-2);
-        }*/
 
         setupScoreCounters();
     }
 
     // Update is called once per frame
     void Update() {
-        if(levelManagerScript.isPlaying()) {
+        if(levelManager.isPlaying()) {
             if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) {
                 if(expandBlobTransform.localScale.x >= outerAreaMin && expandBlobTransform.localScale.x <= outerAreaMax && !isHolding) {
                     setHolding(4);
@@ -139,7 +128,7 @@ public class Breathing_Touch : MonoBehaviour
             setBreatheText();
             //Debug.Log(isHolding);
             if(breatheCount == maxPoints-1) {
-                levelManagerScript.GameWon();
+                levelManager.GameWon();
             }
         }
     }
