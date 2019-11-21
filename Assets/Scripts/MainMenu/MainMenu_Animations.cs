@@ -6,8 +6,8 @@ public class MainMenu_Animations : MonoBehaviour
 {
     public GameObject blob;
     private Animator anim;
-    public GameObject leftToggle;
-    public GameObject rightToggle;
+    //public GameObject leftToggle;
+    //public GameObject rightToggle;
     public GameObject PlayText;
 
     // Start is called before the first frame update
@@ -17,8 +17,7 @@ public class MainMenu_Animations : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
     }
 
     public void menuItemDetected(string name) {

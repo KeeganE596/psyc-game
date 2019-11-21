@@ -107,6 +107,7 @@
      <Compile Include="Assets\Scripts\GameObjects\ParticleSystemAutoDestroy.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Spark.cs" />
      <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtObject.cs" />
+     <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtsController.cs" />
      <Compile Include="Assets\Scripts\Inspection\Inspection_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\MainMenu\Animation_events.cs" />
      <Compile Include="Assets\Scripts\MainMenu\MainMenu_Animations.cs" />

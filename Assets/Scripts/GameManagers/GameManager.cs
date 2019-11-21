@@ -16,8 +16,22 @@ public class GameManager : MonoBehaviour
     string currentGameName;
     int gamesWon;
 
+    Color bgColor;
+    public GameObject bgColorObj;
+    Color lightBlue = new Color32(166, 203, 209, 255);
+    Color lightPink = new Color32(214, 161, 198, 255);
+    Color lightGreen = new Color32(179, 217, 158, 255);
+    Color lightOrange = new Color32(231, 192, 148, 255);
+
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
+
+        if(bgColor[3] == 0) {
+            setColor("lightBlue");
+        } 
+        else {
+            setColor(bgColor);
+        }
     }
     // Start is called before the first frame update
     void Start() {
@@ -31,6 +45,11 @@ public class GameManager : MonoBehaviour
         gamesList.Add("swipeAway_Game");
         gamesList.Add("wordAssociation_Game");
         gamesList.Add("breathing_Game");
+
+        Debug.Log(bgColor);
+        
+        
+        bgColorObj.transform.GetChild(0).gameObject.GetComponent<SVGImage>().color = Color.white;
     }
 
     public void NextGame() {
@@ -49,7 +68,22 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenu() {
         SceneManager.LoadScene("Menu");
-        Destroy(this.gameObject);   //Destroy this gameobject as new GameManager will instantiate on menu load
+        Destroy(this.gameObject, 2);   //Destroy this gameobject as new GameManager will instantiate on menu load
+
+        Debug.Log(GameObject.FindGameObjectsWithTag("GameManager").Length);
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("GameManager")) {
+            g.GetComponent<GameManager>().bgColor = this.bgColor;
+            //g.GetComponent<GameManager>().setColor(this.bgColor);
+            Debug.Log("here: " + this.bgColor + ", " + g.GetComponent<GameManager>().bgColor);
+            //g.GetComponent<GameManager>().bgColorObj = this.bgColorObj;
+            /*if(g.GetComponent<GameManager>().bgColor == null) {
+                Debug.Log("here");
+                g.GetComponent<GameManager>().bgColorObj = bgColorObj;//new Color32(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
+                g.GetComponent<GameManager>().setColor(this.bgColor);
+            }*/
+        }
+        
+        
     }
 
     public void StartGame(string type) {
@@ -89,5 +123,41 @@ public class GameManager : MonoBehaviour
         gamesWon = 0;
         currentGameNum = 0;
         currentGameName = "";
+    }
+
+    public void setColor(string col) {
+        if(col == "lightBlue") { bgColor = lightBlue; }
+        else if(col == "lightPink") { bgColor = lightPink; }
+        else if(col == "lightGreen") { bgColor = lightGreen; }
+        else if(col == "lightOrange") { bgColor = lightOrange; }
+        
+
+        GameObject camParent = GameObject.FindWithTag("Cameras");
+        camParent.transform.GetChild(0).gameObject.GetComponent<Camera>().backgroundColor = bgColor;
+    }
+
+    public void setColor(Color col) {
+        bgColor = col;
+
+        GameObject camParent = GameObject.FindWithTag("Cameras");
+        camParent.transform.GetChild(0).gameObject.GetComponent<Camera>().backgroundColor = bgColor;
+    }
+
+    public void setColor(GameObject colObj) {
+        if(bgColorObj != null) {
+            bgColorObj.transform.GetChild(0).gameObject.GetComponent<SVGImage>().color = new Color32(0, 0, 0, 50);
+        }
+
+        bgColor = colObj.transform.GetChild(1).gameObject.GetComponent<SVGImage>().color;
+        bgColorObj = colObj;
+
+        GameObject camParent = GameObject.FindWithTag("Cameras");
+        camParent.transform.GetChild(0).gameObject.GetComponent<Camera>().backgroundColor = bgColor;
+
+        colObj.transform.GetChild(0).gameObject.GetComponent<SVGImage>().color = Color.white;
+    }
+
+    public Color32 GetColor() {
+        return bgColor;
     }
 }

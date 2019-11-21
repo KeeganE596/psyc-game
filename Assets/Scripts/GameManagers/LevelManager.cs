@@ -52,6 +52,9 @@ public class LevelManager : MonoBehaviour
         pauseButton.SetActive(false);
         pausePanel.SetActive(false);
 
+        panelBackground.GetComponent<Image>().color = gameManager.GetColor();
+        gameManager.setColor(gameManager.GetColor());
+        
         //Setup text panels
         if(gameManager.isPlayingChooseGame() && gameManager.NumberOfGamesWon() > 0) {
             instructionsPanel.SetActive(false);
@@ -60,7 +63,7 @@ public class LevelManager : MonoBehaviour
         else { instructionsPanel.SetActive(true); }
         winPanel.SetActive(false);
         losePanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(166, 203, 209, 255);
+        //panelBackground.GetComponent<Image>().color = new Color32(166, 203, 209, 255);
         setFontSizes();
         setupAssets();
     }

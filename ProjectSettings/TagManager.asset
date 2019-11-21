@@ -26,6 +26,8 @@ TagManager:
   - Lose
   - LevelManager
   - Thought
+  - Cameras
+  - SelectedColor
   layers:
   - Default
   - TransparentFX

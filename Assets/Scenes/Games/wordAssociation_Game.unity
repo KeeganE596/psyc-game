@@ -255,7 +255,7 @@ MonoBehaviour:
   winAmount: 8
   sparkParticle: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
     type: 3}
---- !u!84 &1103773568
+--- !u!84 &874486705
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -830,3 +830,22 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 2763469133071742067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2763469133071742069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2763469131691886339, guid: 9828a6919e76bf14b82a49d52c92e127,
+    type: 3}
+  m_PrefabInstance: {fileID: 2763469133071742067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2763469133071742070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763469133071742069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a78ff5724635642b1068a092f81ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touch_blob: {fileID: 647612069}

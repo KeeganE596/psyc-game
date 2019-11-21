@@ -10,9 +10,12 @@ public class Inspection_TouchDetection : MonoBehaviour
     Vector3 screenPos;
     RaycastHit2D hit;
     GameObject currentThought;
+    public GameObject thoughtsControllerObj;
+    Inspection_ThoughtsController thoughtsController;
 
     void Awake() {
         thoughtTextArea = thoughtTextObj.GetComponent<TextMeshPro>();
+        thoughtsController = thoughtsControllerObj.GetComponent<Inspection_ThoughtsController>();
     }
     // Start is called before the first frame update
     void Start() {
@@ -26,11 +29,13 @@ public class Inspection_TouchDetection : MonoBehaviour
             hit = Physics2D.Raycast(screenPos,Vector2.zero);
 
             if(hit && hit.collider.gameObject.CompareTag("Thought")) {
-                currentThought = hit.collider.gameObject;
+                thoughtsController.clickedThought();
 
+                currentThought = hit.collider.gameObject;
                 thoughtTextArea.text = currentThought.GetComponent<Inspection_ThoughtObject>().getThought();
             }
             else {
+                thoughtsController.clickedThought(false);
                 thoughtTextArea.text = "...";
                 currentThought = null;
             }
@@ -38,14 +43,22 @@ public class Inspection_TouchDetection : MonoBehaviour
     }
 
     public void ClickGoodButton() {
-        if(currentThought.GetComponent<Inspection_ThoughtObject>().getIfPositive()) {
-            Debug.Log("Yay");
+        if(currentThought != null && currentThought.GetComponent<Inspection_ThoughtObject>().getIfPositive()) {
+            currentThought.GetComponent<Inspection_ThoughtObject>().turnGreen();
         }
+        else if(currentThought != null) {
+            currentThought.GetComponent<Inspection_ThoughtObject>().turnRed();
+        }
+        thoughtsController.clickedThought();
     }
 
     public void ClickBadButon() {
-        if(!currentThought.GetComponent<Inspection_ThoughtObject>().getIfPositive()) {
-            Debug.Log("Yas");
+        if(currentThought != null && !currentThought.GetComponent<Inspection_ThoughtObject>().getIfPositive()) {
+            thoughtsController.RemoveThought(currentThought);
         }
+        else if(currentThought != null) {
+            currentThought.GetComponent<Inspection_ThoughtObject>().turnRed();
+        }
+        thoughtsController.clickedThought();
     }
 }

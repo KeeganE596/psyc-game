@@ -2029,10 +2029,10 @@ public class Reporter : MonoBehaviour
 
 #if UNITY_CHANGE3
 		currentScene = SceneManager.GetActiveScene().name ;
-		Debug.Log( "Scene " + SceneManager.GetActiveScene().name + " is loaded");
+		//Debug.Log( "Scene " + SceneManager.GetActiveScene().name + " is loaded");
 #else
 		currentScene = Application.loadedLevelName;
-		Debug.Log("Scene " + Application.loadedLevelName + " is loaded");
+		//Debug.Log("Scene " + Application.loadedLevelName + " is loaded");
 #endif
 	}
 
