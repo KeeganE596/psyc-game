@@ -20,8 +20,9 @@ public class LevelManager : MonoBehaviour
     //Game Points Setup
     public bool usingPoints = false;
 
-    //Referencing Game Manager
+    //Referencing Game Manager and Color Manager
     GameManager gameManager;
+    ColorManager colorManager;
 
     //Referencing text panels
     public GameObject instructionsPanel;
@@ -41,6 +42,7 @@ public class LevelManager : MonoBehaviour
 
     void Awake() {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
     }
 
     // Start is called before the first frame update
@@ -52,8 +54,8 @@ public class LevelManager : MonoBehaviour
         pauseButton.SetActive(false);
         pausePanel.SetActive(false);
 
-        panelBackground.GetComponent<Image>().color = gameManager.GetColor();
-        gameManager.setColor(gameManager.GetColor());
+        panelBackground.GetComponent<Image>().color = colorManager.GetColor();
+        colorManager.setCameraBackground();
         
         //Setup text panels
         if(gameManager.isPlayingChooseGame() && gameManager.NumberOfGamesWon() > 0) {
@@ -63,7 +65,7 @@ public class LevelManager : MonoBehaviour
         else { instructionsPanel.SetActive(true); }
         winPanel.SetActive(false);
         losePanel.SetActive(false);
-        //panelBackground.GetComponent<Image>().color = new Color32(166, 203, 209, 255);
+        
         setFontSizes();
         setupAssets();
     }
@@ -148,6 +150,17 @@ public class LevelManager : MonoBehaviour
         NextGame();
     }
 
+    public void PlayAgain() {
+        if(gameManager.isPlayingChooseGame()) {
+            gameManager.PlayAgain();
+            NextGame();
+        }
+        else {
+            gameManager.ResetGame();
+            NextGame();
+        }
+    }
+
     public void ToMainMenu() {
         gameManager.ToMainMenu();
     }
@@ -220,7 +233,7 @@ public class LevelManager : MonoBehaviour
     public void TurnOffInstructions() {
         panelBackground.SetActive(false);
         menuButton.SetActive(false);
-        instructionsPanel.SetActive(false); //Turn instructions off
+        instructionsPanel.SetActive(false);
     }
 
     public void EndGame() {

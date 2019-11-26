@@ -28,6 +28,7 @@ TagManager:
   - Thought
   - Cameras
   - SelectedColor
+  - ColorManager
   layers:
   - Default
   - TransparentFX

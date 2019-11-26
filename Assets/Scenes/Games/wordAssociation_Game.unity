@@ -255,7 +255,7 @@ MonoBehaviour:
   winAmount: 8
   sparkParticle: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
     type: 3}
---- !u!84 &874486705
+--- !u!84 &686546709
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 1285794829}
   - component: {fileID: 1285794831}
   - component: {fileID: 1285794832}
+  - component: {fileID: 1285794833}
   m_Layer: 11
   m_Name: middle_blob
   m_TagString: Untagged
@@ -365,7 +366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285794828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
@@ -403,6 +404,25 @@ MonoBehaviour:
   canvas: {fileID: 1483041175}
   word: {fileID: 3798821379865118558, guid: cae2c2ec253e22e498c54af3a1fdf4eb, type: 3}
   badword: {fileID: 3798821379865118558, guid: ffd4b486ec7804a8e80bc93c53149e94, type: 3}
+--- !u!95 &1285794833
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285794828}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf3c4bce67230954dbbb81f0d17fd454, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!84 &1392324049
 RenderTexture:
   m_ObjectHideFlags: 0
@@ -449,6 +469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608952030246854049, guid: 28eb35c16ff30cd41985841eab22716f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5608952030246854055, guid: 28eb35c16ff30cd41985841eab22716f,
         type: 3}
@@ -812,16 +837,16 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 1392324049}
-    - target: {fileID: 2763469131691886342, guid: 9828a6919e76bf14b82a49d52c92e127,
-        type: 3}
-      propertyPath: touch_blob
-      value: 
-      objectReference: {fileID: 647612069}
     - target: {fileID: 2763469131772837210, guid: 9828a6919e76bf14b82a49d52c92e127,
         type: 3}
       propertyPath: bgCamera
       value: 
       objectReference: {fileID: 2763469133071742068}
+    - target: {fileID: 2763469131691886342, guid: 9828a6919e76bf14b82a49d52c92e127,
+        type: 3}
+      propertyPath: touch_blob
+      value: 
+      objectReference: {fileID: 647612069}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9828a6919e76bf14b82a49d52c92e127, type: 3}
 --- !u!20 &2763469133071742068 stripped

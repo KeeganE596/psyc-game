@@ -15,6 +15,8 @@ public class Breathing_Touch : MonoBehaviour
     float innerAreaMin;
 
     Vector3 worldScale;
+    float SCREEN_WIDTH = Screen.width;
+    float SCREEN_HEIGHT = Screen.height;
 
     public GameObject countCircle;
     Color offColor = new Color32(150, 150, 150, 255);
@@ -73,20 +75,23 @@ public class Breathing_Touch : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if(levelManager.isPlaying()) {
-            if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) {
-                if(expandBlobTransform.localScale.x >= outerAreaMin && expandBlobTransform.localScale.x <= outerAreaMax && !isHolding) {
+            if(Input.GetMouseButtonDown(0) && checkInGrey() && !checkClickInMenuButton()) {
+                setNotHolding();
+            }
+            else if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) {
+                if(checkInOuterGreen() && !isHolding) {
                     setHolding(4);
                     wasLastBreathingIn = true;
                 }
-                else if(expandBlobTransform.localScale.x > innerAreaMin && expandBlobTransform.localScale.x <= innerAreaMax && !isHolding) {
+                else if(checkInInnerGreen() && !isHolding) {
                     setHolding(3);
                     wasLastBreathingIn = false;
                 }
-                else if(!isHolding) {
+            }
+            else if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) ) {
+                if(holdTimer > 1 && isHolding && !checkClickInMenuButton()) {
                     setNotHolding();
                 }
-            }
-            else if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))) {
                 if(wasLastBreathingIn) {
                     breatheTimer = 6;
                 }
@@ -105,12 +110,6 @@ public class Breathing_Touch : MonoBehaviour
                     else { isBreathingIn = 1; }
                 }
 
-                if(expandBlobTransform.localScale.x >= outerAreaMax + 0.2f || 
-                        (expandBlobTransform.localScale.x > outerAreaMin && expandBlobTransform.localScale.x <= outerAreaMax && isHolding) ||
-                        (expandBlobTransform.localScale.x > innerAreaMin && expandBlobTransform.localScale.x <= innerAreaMax && isHolding)) {
-                    setNotHolding();
-                }
-
                 if(isBreathingIn==1 && !isHolding) {
                     expandBlobTransform.localScale += new Vector3(expandSpeed, expandSpeed, 0);
                     breatheTimer -= Time.deltaTime;
@@ -126,7 +125,7 @@ public class Breathing_Touch : MonoBehaviour
             }
 
             setBreatheText();
-            //Debug.Log(isHolding);
+            //Debug.Log(breatheCount);
             if(breatheCount == maxPoints-1) {
                 levelManager.GameWon();
             }
@@ -161,7 +160,14 @@ public class Breathing_Touch : MonoBehaviour
     }
 
     void setScoreCounters() {
-        scoreCounters[breatheCount].GetComponent<SpriteRenderer>().color = onColor;
+        for(int i=0; i<maxPoints; i++) {
+            if(i <= breatheCount) {
+                scoreCounters[i].GetComponent<SpriteRenderer>().color = onColor;
+            }
+            else {
+                scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
+            }
+        }
     }
 
     void setHolding(int holdTime) {
@@ -170,13 +176,54 @@ public class Breathing_Touch : MonoBehaviour
         holdTimer = holdTime;
     }
 
-    void setNotHolding() {        
-        setupScoreCounters();
+    void setNotHolding() {  
+        if(breatheCount > -1) { breatheCount -= 1; }
+        setScoreCounters();
         expandBlob.transform.localScale = new Vector3(innerAreaMin, innerAreaMin, 0);
         isBreathingIn = 1;
         isHolding = false;
         holdTimer = 0;
         wasLastBreathingIn = false;
-        breatheCount = -1;
     }
+
+    bool checkClickInMenuButton() {
+        float mXPos = -(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.06f);
+        float mYPos = (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.9f);
+        float size = SCREEN_HEIGHT*0.08f;
+        if(Input.mousePosition.x >= mXPos-(size/2) && Input.mousePosition.x <= mXPos+(size/2) &&
+                Input.mousePosition.y <= mYPos-(size/2) && Input.mousePosition.y >= mXPos+(size/2)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    bool checkInInnerGreen() {
+        if(expandBlobTransform.localScale.x >= innerAreaMin && expandBlobTransform.localScale.x <= innerAreaMax) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    bool checkInOuterGreen() {
+        if(expandBlobTransform.localScale.x >= outerAreaMin && expandBlobTransform.localScale.x <= outerAreaMax) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    bool checkInGrey() {
+        if((expandBlobTransform.localScale.x > innerAreaMax && expandBlobTransform.localScale.x < outerAreaMin) ||
+                expandBlobTransform.localScale.x > outerAreaMax+0.1f) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
 }

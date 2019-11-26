@@ -18,9 +18,12 @@ public class Swipey_ScoreManager : MonoBehaviour
     public GameObject Rings;
     Object_Spawner spawner;
 
-    //public Spark Spark;
+    public GameObject scoreMarker;
+    List<GameObject> scoreMarkers;
+    int maxPoints = 10;
+    Vector3 worldScale;
 
-     CameraShake cameraShake;
+    CameraShake cameraShake;
 
     [HideInInspector]
     public Camera effectCamera;
@@ -32,44 +35,43 @@ public class Swipey_ScoreManager : MonoBehaviour
     }
 
     private void Start() {
+        worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+
         score = 0; 
         Rings.SetActive(false);
         anim = gameObject.GetComponent<Animator>();
         m_SpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-        //alpha = 0.1f;
-        //m_SpriteRenderer.color = new Color(1, 1, 1, alpha);
         
         levelEnded = false;
+
+        setupScoreMarkers();
     }
 
     public void addScore() {
-        score = score + 10;
-        //alpha += 0.1f;
-        //m_SpriteRenderer.color = new Color(1, 1, 1, alpha);
+        score += 1;
+        setScoreMarkers();
     }
     public void minusScore() {
         //StartCoroutine(cameraShake.Shake(0.1f, 0.2f));
         //cameraShake.transform.position = new Vector3 (0,0,0);
-        score = score - 10;
+        score -= 1;
+        setScoreMarkers();
 
         if (score >= 0 && score < 50) {
             anim.SetTrigger("Hurt_1");
             anim.ResetTrigger("Hurt_2");
             anim.ResetTrigger("Hurt_3");
         }
-        if (score >= 50 && score < 100) {
+        if (score >= 5 && score < 10) {
             anim.ResetTrigger("Hurt_1");
             anim.SetTrigger("Hurt_2");
             anim.ResetTrigger("Hurt_3");
         }
-        if (score >= 100 && score < 150)
-        {
+        if (score >= 10 && score < 15) {
             anim.ResetTrigger("Hurt_1");
             anim.ResetTrigger("Hurt_2");
             anim.SetTrigger("Hurt_3");
         }
-        //alpha -= 0.1f;
-        //m_SpriteRenderer.color = new Color(1, 1, 1, alpha);
     }
     IEnumerator flashHurt() {
         m_SpriteRenderer.enabled = true;
@@ -108,31 +110,30 @@ public class Swipey_ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update() {
         //scoreText.text = score.ToString();
-        if (score < 50) {
+        if (score < 5) {
             anim.SetBool("50 Points", false);
             anim.SetBool("100 Points", false);
             anim.SetBool("150 Points", false);
         }
-        else if (score >= 50 && score < 100) {
+        else if (score >= 5 && score < 10) {
             anim.SetBool("50 Points", true);
             anim.SetBool("100 Points", false);
             anim.SetBool("150 Points", false);
         }
-        else if (score >= 100 && score < 150) {
+        else if (score >= 10 && score < 15) {
             anim.SetBool("50 Points", true);
             anim.SetBool("100 Points", true);
             anim.SetBool("150 Points", false);
         }
-        else if (score >= 150 && score < 200) {
+        else if (score >= 15 && score < 20) {
             anim.SetBool("50 Points", true);
             anim.SetBool("100 Points", true);
             anim.SetBool("150 Points", true);
         }
         
-        if (score >= 90 && !levelEnded) {
+        if (score >= maxPoints && !levelEnded) {
             levelEnded = true;
             endLevel();
-            //scoreText.text = "Level Complete";
         }
 
         if (ishurt) {
@@ -155,6 +156,26 @@ public class Swipey_ScoreManager : MonoBehaviour
         }
     }
 
+    void setupScoreMarkers() {
+        scoreMarkers = new List<GameObject>();
 
+        float yPos = (0+worldScale.y)-((worldScale.y*2)*0.08f);
+        float xPos = (0-worldScale.x)+((worldScale.x*2)*0.03f);
+        for(int i=0; i<maxPoints; i++) {
+            scoreMarkers.Add(Instantiate(scoreMarker, new Vector2(xPos, yPos), Quaternion.identity));
+            xPos += ((worldScale.x*2)*0.035f);
+        }
+    }
+
+    void setScoreMarkers() {
+        for(int i=0; i<maxPoints; i++) {
+            if(i<score) {
+                scoreMarkers[i].transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else {
+                scoreMarkers[i].transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+    }
 
 }

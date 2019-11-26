@@ -6,14 +6,16 @@ using TMPro;
 //Scale Choose Game Screen: properly scale and control the choose game screen
 public class ScaleChooseGameScreen : MonoBehaviour
 {
-    //Referencing Game Manager
+    //Referencing Game Manager and Color Manager
     GameManager gameManager;
+    ColorManager colorManager;
     public GameObject canvas;
     private float SCREEN_WIDTH = Screen.width;
     private float SCREEN_HEIGHT = Screen.height;
 
     void Awake() {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
     }
     // Start is called before the first frame update
     void Start() {
@@ -21,6 +23,7 @@ public class ScaleChooseGameScreen : MonoBehaviour
     }
 
     public void scaleScreen() {
+        GameObject.FindWithTag("MainCamera").GetComponent<Camera>().backgroundColor = colorManager.GetColor();
         GameObject menuButton = GameObject.FindWithTag("MenuButton");
         menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
         menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = SCREEN_HEIGHT/20.5f;
@@ -43,6 +46,9 @@ public class ScaleChooseGameScreen : MonoBehaviour
             }
             else if(count == 3) {
                 b.GetComponent<RectTransform>().localPosition = new Vector2(SCREEN_WIDTH*0.25f, SCREEN_HEIGHT*0);
+            }
+            else if(count == 4) {
+                b.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.25f), 0-SCREEN_HEIGHT*0.25f);
             }
             count++;
         }

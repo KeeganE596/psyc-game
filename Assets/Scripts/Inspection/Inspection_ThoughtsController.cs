@@ -14,7 +14,7 @@ public class Inspection_ThoughtsController : MonoBehaviour
     float SCREEN_WIDTH = Screen.width;
     float SCREEN_HEIGHT = Screen.height;
     float xPos;
-    float yPos = -2;
+    float yPos = 2;
     float xShift;
     float thoughtSpeed;
     bool isClicked;
@@ -27,9 +27,12 @@ public class Inspection_ThoughtsController : MonoBehaviour
         negativeThoughts = new List<string>();
         thoughts = new List<GameObject>();
 
-        positiveThoughts.Add("positive1"); positiveThoughts.Add("positive2"); positiveThoughts.Add("positive3");
+        positiveThoughts.Add("I can give this a try"); positiveThoughts.Add("I have done it before"); positiveThoughts.Add("Thoughts are just thoughts");
+        positiveThoughts.Add("I will take it slow"); positiveThoughts.Add("It is normal to feel upset sometimes"); positiveThoughts.Add("I see problems as challenges");
+        positiveThoughts.Add("It happened, what will I do next time?");
 
-        negativeThoughts.Add("negative1"); negativeThoughts.Add("negative2"); negativeThoughts.Add("negative3");
+        negativeThoughts.Add("This happens to me all the time"); negativeThoughts.Add("I can never do anything right"); negativeThoughts.Add("I should have done this");
+        negativeThoughts.Add("I could have done that");
 
         xShift = (worldScale.x*2)/4;
         xPos = (0-worldScale.x) - xShift*2;
@@ -58,7 +61,7 @@ public class Inspection_ThoughtsController : MonoBehaviour
     }
 
     public void spawnThoughts() {
-        while(positiveThoughts.Count > 0 || negativeThoughts.Count > 0) {
+        while(thoughts.Count < 6) {
             int thoughtType = Random.Range(0, 2);
 
             if((thoughtType == 0 && positiveThoughts.Count > 0) || (thoughtType == 1 && negativeThoughts.Count > 0)) {  //positve thought
@@ -92,5 +95,14 @@ public class Inspection_ThoughtsController : MonoBehaviour
 
     public void clickedThought(bool b) {
         isClicked = b;
+    }
+
+    public bool CheckIfWin() {
+        foreach(GameObject t in thoughts) {
+            if(!t.GetComponent<Inspection_ThoughtObject>().GetIfChecked()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
