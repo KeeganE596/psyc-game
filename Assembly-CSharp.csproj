@@ -100,10 +100,11 @@
      <Compile Include="Assets\Scripts\Breathing\Breathing_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\ChooseGameScreen\ChooseGameController.cs" />
+     <Compile Include="Assets\Scripts\ChooseGameScreen\ScaleChooseGameScreen.cs" />
      <Compile Include="Assets\Scripts\GameManagers\ColorManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\GameManagers\ScaleChooseGameScreen.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Gnatt.cs" />
      <Compile Include="Assets\Scripts\GameObjects\ParticleSystemAutoDestroy.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Spark.cs" />

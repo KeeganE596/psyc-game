@@ -101,7 +101,7 @@ public class LevelManager : MonoBehaviour
         EndGame();
         winPanel.SetActive(true);
         losePanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(74, 156, 48, 255);
+        panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
         
         gameManager.AddToGamesWon();
         int wins = gameManager.NumberOfGamesWon();
@@ -120,7 +120,7 @@ public class LevelManager : MonoBehaviour
         EndGame();
         losePanel.SetActive(true);
         winPanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(70, 120, 138, 255);
+        panelBackground.GetComponent<Image>().color = colorManager.GetDarkColor();
 
         int wins = gameManager.NumberOfGamesWon();
         string loseText;
