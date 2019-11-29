@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 //GameManager: holds the list of games and tally of number of games won. It is used to change scenes,
 //load the next game and keep track of the previous game for the different play types.
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject CMPrefab;
     ColorManager colorManager;
+
+    int sparksScore;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
@@ -42,6 +45,9 @@ public class GameManager : MonoBehaviour
         gamesList.Add("inspection_Game");
 
         colorManager.setCameraBackground();
+
+        LoadSparksScore();
+        SetSparksScoreText();
     }
 
     public void NextGame() {
@@ -60,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenu() {
         SceneManager.LoadScene("Menu");
-        Destroy(this.gameObject);   //Destroy this gameobject as new GameManager will instantiate on menu load
+        DestroyImmediate(this.gameObject, true);   //Destroy this gameobject as new GameManager will instantiate on menu load
     }
 
     public void StartGame(string type) {
@@ -90,6 +96,8 @@ public class GameManager : MonoBehaviour
 
     public void AddToGamesWon() {
         gamesWon++;
+        sparksScore++;
+        SaveSparksScore();
     }
 
     public bool isPlayingChooseGame() {
@@ -110,5 +118,39 @@ public class GameManager : MonoBehaviour
 
     public void SetColor(GameObject colObj) {
         colorManager.SetColor(colObj);
+    }
+
+    void LoadSparksScore() {
+        if(PlayerPrefs.HasKey("sparksScore")) {
+            sparksScore = PlayerPrefs.GetInt("sparksScore");
+        }
+        else {
+            sparksScore = 0;
+        }
+    }
+
+    public void SaveSparksScore() {
+        PlayerPrefs.SetInt("sparksScore", sparksScore);
+        PlayerPrefs.Save();
+    }
+
+    public int GetSparksScore() {
+        return sparksScore;
+    }
+
+    public void SetSparksScoreText() {
+        GameObject.FindWithTag("SparksScore").GetComponent<TextMeshProUGUI>().text = sparksScore.ToString() + " x";
+    }
+
+    public void UnlockAll() {
+        sparksScore = 100;
+        SaveSparksScore();
+        SetSparksScoreText();
+    }
+
+    public void ResetScore() {
+        sparksScore = 0;
+        SaveSparksScore();
+        SetSparksScoreText();
     }
 }

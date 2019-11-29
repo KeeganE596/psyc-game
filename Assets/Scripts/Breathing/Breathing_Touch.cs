@@ -55,10 +55,10 @@ public class Breathing_Touch : MonoBehaviour
         expandBlobTransform = expandBlob.GetComponent<Transform>();
         breatheText = breatheTextObj.GetComponent<TextMeshPro>();
 
-        outerAreaMax = breatheLimitParent.transform.GetChild(0).gameObject.transform.localScale.x;
-        outerAreaMin = breatheLimitParent.transform.GetChild(1).gameObject.transform.localScale.x;
-        innerAreaMax = breatheLimitParent.transform.GetChild(2).gameObject.transform.localScale.x;
-        innerAreaMin = breatheLimitParent.transform.GetChild(3).gameObject.transform.localScale.x;
+        outerAreaMax = breatheLimitParent.transform.GetChild(1).gameObject.transform.localScale.x;
+        outerAreaMin = breatheLimitParent.transform.GetChild(2).gameObject.transform.localScale.x;
+        innerAreaMax = breatheLimitParent.transform.GetChild(3).gameObject.transform.localScale.x;
+        innerAreaMin = breatheLimitParent.transform.GetChild(4).gameObject.transform.localScale.x;
 
         isBreathingIn = 1;
         holdTimer = 0;
@@ -153,19 +153,22 @@ public class Breathing_Touch : MonoBehaviour
     void setupScoreCounters() {
         scoreCounters = new List<GameObject>();
         for(int i=0; i<maxPoints; i++) {
-            Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+worldScale.y)-((worldScale.y*2)/(maxPoints+1))*(i+1), 0);
+            //Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+worldScale.y)-((worldScale.y*2)/(maxPoints+1))*(i+1), 0);
+            Vector3 pos = new Vector3(0-2*(worldScale.x/3), (0+(worldScale.y/2))-((worldScale.y)/(maxPoints-1))*(i), 0);
             scoreCounters.Add(Instantiate(countCircle, pos, Quaternion.identity));
-            scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
+            //scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
         }
     }
 
     void setScoreCounters() {
         for(int i=0; i<maxPoints; i++) {
             if(i <= breatheCount) {
-                scoreCounters[i].GetComponent<SpriteRenderer>().color = onColor;
+                //scoreCounters[i].GetComponent<SpriteRenderer>().color = onColor;
+                scoreCounters[i].transform.GetChild(1).gameObject.SetActive(true);
             }
             else {
-                scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
+                //scoreCounters[i].GetComponent<SpriteRenderer>().color = offColor;
+                scoreCounters[i].transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }

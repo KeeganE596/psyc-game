@@ -22,7 +22,7 @@ public class ColorManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        currentBgColor = lightBlue;
+        LoadColor();
 
         GameObject camParent = GameObject.FindWithTag("Cameras");
         camParent.transform.GetChild(0).gameObject.GetComponent<Camera>().backgroundColor = currentBgColor;
@@ -39,6 +39,7 @@ public class ColorManager : MonoBehaviour
         colObj.transform.GetChild(0).gameObject.GetComponent<SVGImage>().color = Color.white;
 
         setCameraBackground();
+        SaveColor();
     }
 
     public void setCameraBackground() {
@@ -68,5 +69,21 @@ public class ColorManager : MonoBehaviour
 
     public bool ColorsMatch(Color32 c1, Color32 c2) {
         return (c1.r == c2.r && c1.g == c2.g && c1.b == c2.b);
+    }
+
+    void LoadColor() {
+        if(PlayerPrefs.HasKey("bgColorR") && PlayerPrefs.HasKey("bgColorG") && PlayerPrefs.HasKey("bgColorB")) {
+            currentBgColor = new Color(PlayerPrefs.GetFloat("bgColorR"), PlayerPrefs.GetFloat("bgColorG"), PlayerPrefs.GetFloat("bgColorB"), 255);
+        }
+        else {
+            currentBgColor = lightBlue;
+        }
+    }
+
+    void SaveColor() {
+        PlayerPrefs.SetFloat("bgColorR", currentBgColor.r);
+        PlayerPrefs.SetFloat("bgColorG", currentBgColor.g);
+        PlayerPrefs.SetFloat("bgColorB", currentBgColor.b);
+        PlayerPrefs.Save();
     }
 }

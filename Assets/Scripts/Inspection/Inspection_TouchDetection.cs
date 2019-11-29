@@ -39,8 +39,9 @@ public class Inspection_TouchDetection : MonoBehaviour
             hit = Physics2D.Raycast(screenPos,Vector2.zero);
 
             if(hit && hit.collider.gameObject.CompareTag("Thought")) {
-                thoughtsController.clickedThought();
+                thoughtsController.clickedThought(true);
 
+                if(currentThought != null) { currentThought.GetComponent<Inspection_ThoughtObject>().HideFocusRing(); }
                 currentThought = hit.collider.gameObject;
                 thoughtTextArea.text = currentThought.GetComponent<Inspection_ThoughtObject>().getThought();
                 currentThought.GetComponent<Inspection_ThoughtObject>().ShowFocusRing();

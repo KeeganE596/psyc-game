@@ -39,6 +39,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8539079499741817339}
     m_Modifications:
+    - target: {fileID: -8560224862885997783, guid: dcc23bf9305ed7c45bec87520ab0343d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
     - target: {fileID: -8245669421478493358, guid: dcc23bf9305ed7c45bec87520ab0343d,
         type: 3}
       propertyPath: m_Name
@@ -57,7 +62,7 @@ PrefabInstance:
     - target: {fileID: 8797652496183264131, guid: dcc23bf9305ed7c45bec87520ab0343d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8797652496183264131, guid: dcc23bf9305ed7c45bec87520ab0343d,
         type: 3}
@@ -98,11 +103,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8560224862885997783, guid: dcc23bf9305ed7c45bec87520ab0343d,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.5882353
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 7243324766535440047, guid: dcc23bf9305ed7c45bec87520ab0343d,
@@ -120,15 +120,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8539079499741817339}
     m_Modifications:
-    - target: {fileID: 6212113675366876581, guid: bfa2a4086b50845469c14eea9b249fdd,
+    - target: {fileID: -3108148930224600850, guid: bfa2a4086b50845469c14eea9b249fdd,
         type: 3}
-      propertyPath: m_Name
-      value: Spark_Exposed
-      objectReference: {fileID: 0}
-    - target: {fileID: 6212113675366876581, guid: bfa2a4086b50845469c14eea9b249fdd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Color.a
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 925209385104916110, guid: bfa2a4086b50845469c14eea9b249fdd,
         type: 3}
@@ -143,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 925209385104916110, guid: bfa2a4086b50845469c14eea9b249fdd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 925209385104916110, guid: bfa2a4086b50845469c14eea9b249fdd,
         type: 3}
@@ -185,10 +180,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -3108148930224600850, guid: bfa2a4086b50845469c14eea9b249fdd,
+    - target: {fileID: 6212113675366876581, guid: bfa2a4086b50845469c14eea9b249fdd,
         type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
+      propertyPath: m_Name
+      value: Spark_Exposed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212113675366876581, guid: bfa2a4086b50845469c14eea9b249fdd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 7243324766535440047, guid: bfa2a4086b50845469c14eea9b249fdd,

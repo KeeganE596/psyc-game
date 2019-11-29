@@ -29,6 +29,7 @@ TagManager:
   - Cameras
   - SelectedColor
   - ColorManager
+  - SparksScore
   layers:
   - Default
   - TransparentFX

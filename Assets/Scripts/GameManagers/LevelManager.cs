@@ -114,6 +114,8 @@ public class LevelManager : MonoBehaviour
         }
 
         winPanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = winText;
+
+        gameManager.SetSparksScoreText();
     }
 
     public void GameLost() {

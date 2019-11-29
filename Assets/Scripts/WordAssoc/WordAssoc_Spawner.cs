@@ -39,10 +39,13 @@ public class WordAssoc_Spawner : MonoBehaviour
         words.Add("courage");   words.Add("caring");   words.Add("excitement");
         words.Add("encourage");   words.Add("fun");   words.Add("humour");
         words.Add("gratitude");   words.Add("patience");   words.Add("persistence");
+        words.Add("kindness");  words.Add("leadership"); words.Add("creativity");
+        words.Add("honesty");   words.Add("hope");  words.Add("thankful");
+        words.Add("respect");
 
         badWords.Add("impatient"); badWords.Add("anger"); badWords.Add("disrespect");
         badWords.Add("can't"); badWords.Add("dishonest"); badWords.Add("impossible");
-        badWords.Add("hate");
+        badWords.Add("hate");   words.Add("lieing");    words.Add("give up");
 
         timer = 0.5f;
         badtimer = 0.25f;

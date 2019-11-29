@@ -31,7 +31,7 @@ public class ScaleChooseGameScreen : MonoBehaviour
 
         GameObject titleText = canvas.transform.GetChild(0).gameObject;
         titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
-        titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, (SCREEN_HEIGHT*0.5f)-SCREEN_HEIGHT*0.25f);
+        titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0+SCREEN_HEIGHT*0.33f);
         titleText.GetComponent<TextMeshProUGUI>().fontSize = SCREEN_HEIGHT/15f;
 
         // GameObject[] buttons = GameObject.FindGameObjectsWithTag("ChooseButton");

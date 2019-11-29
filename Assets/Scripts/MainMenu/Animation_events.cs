@@ -11,7 +11,6 @@ public class Animation_events : MonoBehaviour
     public void showPlayTextEvent(){
         PlayText.SetActive(true);
         StartGameButton.SetActive(true);
-
     }
 
 
