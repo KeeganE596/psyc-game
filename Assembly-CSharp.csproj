@@ -112,11 +112,11 @@
      <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtsController.cs" />
      <Compile Include="Assets\Scripts\Inspection\Inspection_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\MainMenu\Animation_events.cs" />
-     <Compile Include="Assets\Scripts\MainMenu\MainMenu_Animations.cs" />
      <Compile Include="Assets\Scripts\MainMenu\MenuBlob.cs" />
      <Compile Include="Assets\Scripts\MainMenu\OpenURL.cs" />
-     <Compile Include="Assets\Scripts\Swipey\Object_Spawner.cs" />
+     <Compile Include="Assets\Scripts\Swipey\REDUNDANT_Object_Spawner.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_AoeSwipe.cs" />
+     <Compile Include="Assets\Scripts\Swipey\Swipey_MessageController.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_ScoreManager.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_Spawner.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_TouchDetection.cs" />

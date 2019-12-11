@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     int currentGameNum;
     string currentGameName;
+    
     int gamesWon;
 
     public GameObject CMPrefab;
@@ -139,7 +140,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetSparksScoreText() {
-        GameObject.FindWithTag("SparksScore").GetComponent<TextMeshProUGUI>().text = sparksScore.ToString() + " x";
+        GameObject.FindWithTag("SparksScore").GetComponent<TextMeshProUGUI>().text = sparksScore.ToString();
     }
 
     public void UnlockAll() {

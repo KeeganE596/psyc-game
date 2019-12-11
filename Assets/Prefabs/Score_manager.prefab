@@ -227,7 +227,6 @@ GameObject:
   - component: {fileID: 1046516466}
   - component: {fileID: 1046516467}
   - component: {fileID: 1046516468}
-  - component: {fileID: 1104484946977117850}
   - component: {fileID: 1046516465}
   m_Layer: 0
   m_Name: Score_manager
@@ -308,24 +307,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1104484946977117850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6879173214019899750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac56f9555953ec48bb7012a80a0f027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeedAngle: 45
-  minSquishX: 0.5
-  maxSquishX: 1
-  minSquishY: 0.5
-  maxSquishY: 1
-  movementSpeedRange: {x: 10, y: 10}
 --- !u!114 &1046516465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,10 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdba90c09a7d324a8d58ce2699c7548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  score: 0
   vulnerable: 1
   Rings: {fileID: 877154804105352520}
+  scoreMarker: {fileID: 0}
   effectCamera: {fileID: 0}
 --- !u!1 &7168412023762058526
 GameObject:

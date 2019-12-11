@@ -35,36 +35,13 @@ public class Swipey_Spawner : MonoBehaviour
         playing = levelManager.isPlaying();
         levelScaler = levelManager.getNumberGamesWon();
 
-        sparkTimer = 0;
-        sparkSpawnTime = levelManager.maxTime/15;   //maxtime/neededpoints(10)*1.5
-        sparks = new List<GameObject>();
-        int sparkNum = 0;
-        for(int i=0; i<20; i++) {
-            sparkNum = Random.Range(0, 2);
-            if(sparkNum == 0) { sparks.Add(Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity)); }
-            else if(sparkNum == 1) { sparks.Add(Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity)); }
-
-            sparks[i].SetActive(false);
+        
+        if(levelManager.getIfPlayingChooseGame()) {
+            setupChooseGameSpawn();
         }
-        sparkIndex = 0;
-
-        gnattTimer = 0;
-        if(levelScaler < 10) {  //scale gnatt spawn speed depending on level number
-            gnattSpawnTime = 2 - ((2*0.9f)*(levelScaler*0.1f));
+        else {
+            setupRandomGameSpawn();
         }
-        else { 
-            gnattSpawnTime = 2 - ((2*0.9f)*(9.5f*0.1f)); 
-        }
-        gnatts = new List<GameObject>();
-        int gnattNum = 0;
-        for(int i=0; i<(levelManager.maxTime/gnattSpawnTime); i++) {
-            gnattNum = Random.Range(0, 2);
-            if(gnattNum == 0) { gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity)); }
-            else if(gnattNum == 1) { gnatts.Add(Instantiate(gnatt_2, new Vector2(0, 0), Quaternion.identity)); }
-    
-            gnatts[i].SetActive(false);
-        }
-        gnattIndex = 0;
     }
 
     // Update is called once per frame
@@ -134,5 +111,89 @@ public class Swipey_Spawner : MonoBehaviour
         gn.transform.position = spawnPos;
         gn.SetActive(true);
         gnattIndex++;
+    }
+
+    void setupRandomGameSpawn() {
+        sparkTimer = 0;
+        sparkSpawnTime = levelManager.maxTime/15;   //maxtime/neededpoints(10)*1.5
+        sparks = new List<GameObject>();
+        int sparkNum = 0;
+        for(int i=0; i<20; i++) {
+            sparkNum = Random.Range(0, 2);
+            if(sparkNum == 0) { sparks.Add(Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity)); }
+            else if(sparkNum == 1) { sparks.Add(Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity)); }
+
+            sparks[i].SetActive(false);
+        }
+        sparkIndex = 0;
+
+        gnattTimer = 0;
+        if(levelScaler < 10) {  //scale gnatt spawn speed depending on level number
+            gnattSpawnTime = 2 - ((2*0.9f)*(levelScaler*0.1f));
+        }
+        else { 
+            gnattSpawnTime = 2 - ((2*0.9f)*(9.5f*0.1f)); 
+        }
+        gnatts = new List<GameObject>();
+        int gnattNum = 0;
+        for(int i=0; i<(levelManager.maxTime/gnattSpawnTime); i++) {
+            gnattNum = Random.Range(0, 2);
+            if(gnattNum == 0) { gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity)); }
+            else if(gnattNum == 1) { gnatts.Add(Instantiate(gnatt_2, new Vector2(0, 0), Quaternion.identity)); }
+    
+            gnatts[i].SetActive(false);
+        }
+        gnattIndex = 0;
+    }
+
+    void setupChooseGameSpawn() {
+        if(levelManager.getGamesWon() < 4) {    //Just spawn gnatts for first 4 levels
+            levelManager.setToWinOnTimeOut();
+
+            //Do not spawn sparks
+            sparkTimer = 0;
+            sparkSpawnTime = Mathf.Infinity;
+
+            //Gnatt spawn
+            gnattTimer = (1.5f - ((levelScaler+1)*0.2f)) - 0.2f;
+            gnattSpawnTime = 1.5f - ((levelScaler+1)*0.2f);
+            //Instantiate Gnatts
+            gnatts = new List<GameObject>();
+            int gnattNum = 0;
+            for(int i=0; i<(levelManager.maxTime/gnattSpawnTime); i++) {
+                gnattNum = Random.Range(0, 2);
+                if(gnattNum == 0) { gnatts.Add(Instantiate(gnatt_1, new Vector2(0, 0), Quaternion.identity)); }
+                else if(gnattNum == 1) { gnatts.Add(Instantiate(gnatt_2, new Vector2(0, 0), Quaternion.identity)); }
+        
+                gnatts[i].SetActive(false);
+            }
+            gnattIndex = 0;
+        }
+        else if(levelManager.getGamesWon() >= 4 && levelManager.getGamesWon() < 8) {    //Just spawn sparks for next 4 levels
+            levelManager.setToWinOnTimeOut();
+            
+            //Do not spawn gnatts
+            gnattTimer = 0;
+            gnattSpawnTime = Mathf.Infinity;
+
+            //Sparks spawn
+            sparkTimer = 0;
+            sparkSpawnTime = 2f - ((levelScaler+1)*0.1f);
+            //Instantiate Sparks
+            sparks = new List<GameObject>();
+            int sparkNum = 0;
+            for(int i=0; i<(levelManager.maxTime/sparkSpawnTime); i++) {
+                sparkNum = Random.Range(0, 2);
+                if(sparkNum == 0) { sparks.Add(Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity)); }
+                else if(sparkNum == 1) { sparks.Add(Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity)); }
+
+                sparks[i].SetActive(false);
+            }
+            sparkIndex = 0;
+        }
+        else {  //Spawn both for rest of games
+            levelScaler = levelScaler/2;
+            setupRandomGameSpawn();
+        }
     }
 }

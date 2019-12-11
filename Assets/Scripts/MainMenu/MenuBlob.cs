@@ -10,54 +10,51 @@ public class MenuBlob : MonoBehaviour
     public GameObject PlayText;
     public GameObject SettingsText;
     public GameObject Toggle_allButton;
-    public GameObject settingsPanel;
+    public GameObject customizePanel;
+    public GameObject aboutPanel;
 
     public GameObject startGameButton;
     public GameObject startChooseGameButton;
-    public GameObject settingsButton;
+    public GameObject customizeButton;
+    public GameObject aboutButton;
     public GameObject settingsText;
     public GameObject informationPanel;
 
 
 
 
-    private void Awake()
-    {
+    private void Awake() {
         PlayText.SetActive(false);
         startGameButton.SetActive(false);
         startChooseGameButton.SetActive(false);
         SettingsText.SetActive(false);
         Toggle_allButton.SetActive(false);
-        settingsButton.SetActive(false);
+        customizeButton.SetActive(false);
+        aboutButton.SetActive(false);
     }
 
 
-    private void Start()
-    {
+    private void Start() {
         anim = blob.GetComponent<Animator>();
     }
 
-    public void Toggle_changedL(bool newValue) {
-        anim.SetBool("leftblob", newValue);
-        if(newValue)
-        {
+    public void TogglePlay(bool newValue) {
+        anim.SetBool("playblob", newValue);
+        if(newValue) {
             StartCoroutine("playTextDisplay");
             Toggle_allButton.SetActive(true);
         }
-        else
-        {
+        else {
+            PlayText.SetActive(false);
             Toggle_allButton.SetActive(false);
             startGameButton.SetActive(false);
             startChooseGameButton.SetActive(false);
-            settingsButton.SetActive(false);
-            PlayText.SetActive(false);
         }    
     }
 
-    public void Toggle_changedR(bool newValue) {
-        anim.SetBool("rightblob", newValue);
-        if (newValue)
-        {
+    public void ToggleCustomize(bool newValue) {
+        anim.SetBool("customizeblob", newValue);
+        if (newValue) {
             StartCoroutine("settingsTextDisplay");
             Toggle_allButton.SetActive(true);
 
@@ -65,14 +62,27 @@ public class MenuBlob : MonoBehaviour
         else {
             SettingsText.SetActive(false);
             Toggle_allButton.SetActive(false);
-            settingsButton.SetActive(false);
+            customizeButton.SetActive(false);
+        }
+
+    }
+
+    public void ToggleAbout(bool newValue) {
+        anim.SetBool("aboutblob", newValue);
+        if (newValue) {
+            StartCoroutine("aboutTextDisplay");
+            Toggle_allButton.SetActive(true);
+        }
+        else {
+            Toggle_allButton.SetActive(false);
+            aboutButton.SetActive(false);
         }
 
     }
 
     IEnumerator playTextDisplay()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         startGameButton.SetActive(true);
         startChooseGameButton.SetActive(true);
         //PlayText.SetActive(true);
@@ -80,50 +90,59 @@ public class MenuBlob : MonoBehaviour
 
     IEnumerator settingsTextDisplay()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         SettingsText.SetActive(true);
-        settingsButton.SetActive(true);
+        customizeButton.SetActive(true);
+    }
+
+    IEnumerator aboutTextDisplay()
+    {
+        yield return new WaitForSeconds(0.3f);
+        //SettingsText.SetActive(true);
+        aboutButton.SetActive(true);
     }
 
     public void toggle_all(bool newValue) {
-            anim.SetBool("rightblob", !newValue);
-            anim.SetBool("leftblob", !newValue);
+            anim.SetBool("customizeblob", !newValue);
+            anim.SetBool("playblob", !newValue);
             anim.SetBool("centerblob", !newValue);
+            anim.SetBool("aboutblob", !newValue);
+            Toggle_allButton.SetActive(false);
             startGameButton.SetActive(false);
             startChooseGameButton.SetActive(false);
+            customizeButton.SetActive(false);
+            aboutButton.SetActive(false);
             SettingsText.SetActive(false);
             PlayText.SetActive(false);
-            Toggle_allButton.SetActive(false);
-            settingsButton.SetActive(false);
-            settingsPanel.SetActive(false);
-
-
-
+            customizePanel.SetActive(false);
+            aboutPanel.SetActive(false);
     }
 
-    public void toggleSettingsPanel(bool newValue)
-    {
+    public void toggleCustomizePanel(bool newValue) {
+        Toggle_allButton.SetActive(true);
         anim.SetBool("centerblob", newValue);
-        settingsButton.SetActive(false);
+        customizeButton.SetActive(false);
         SettingsText.SetActive(false);
-        settingsPanel.SetActive(true);
-
+        customizePanel.SetActive(true);
     }
 
+    public void toggleAboutPanel(bool newValue) {
+        Toggle_allButton.SetActive(true);
+        anim.SetBool("centerblob", newValue);
+        aboutButton.SetActive(false);
+        //SettingsText.SetActive(false);
+        aboutPanel.SetActive(true);
+    }
 
-    public void Toggle_InformationPanel(bool newValue)
-    {
-
+    public void Toggle_InformationPanel(bool newValue) {
         anim.SetBool("showInfo", newValue);
     }
-    public void Close_InformationPanel(bool newValue)
-    {
+    public void Close_InformationPanel(bool newValue) {
         anim.SetBool("showInfo", newValue);
     }
 
-    public void showSettingsPanel(bool newValue)
-    {
-        settingsPanel.SetActive(newValue);
+    public void showSettingsPanel(bool newValue) {
+        customizePanel.SetActive(newValue);
         informationPanel.SetActive(newValue);
 
     }

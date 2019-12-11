@@ -14,6 +14,8 @@ public class Breathing_Touch : MonoBehaviour
     float innerAreaMax;
     float innerAreaMin;
 
+    Animator circleColorAnimator;
+
     Vector3 worldScale;
     float SCREEN_WIDTH = Screen.width;
     float SCREEN_HEIGHT = Screen.height;
@@ -55,6 +57,10 @@ public class Breathing_Touch : MonoBehaviour
         expandBlobTransform = expandBlob.GetComponent<Transform>();
         breatheText = breatheTextObj.GetComponent<TextMeshPro>();
 
+        circleColorAnimator = breatheLimitParent.GetComponent<Animator>();
+        circleColorAnimator.SetBool("outerGreen", true);
+        //circleColorAnimator.SetBool("innerGreen", false);
+
         outerAreaMax = breatheLimitParent.transform.GetChild(1).gameObject.transform.localScale.x;
         outerAreaMin = breatheLimitParent.transform.GetChild(2).gameObject.transform.localScale.x;
         innerAreaMax = breatheLimitParent.transform.GetChild(3).gameObject.transform.localScale.x;
@@ -75,8 +81,13 @@ public class Breathing_Touch : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if(levelManager.isPlaying()) {
-            if(Input.GetMouseButtonDown(0) && checkInGrey() && !checkClickInMenuButton()) {
-                setNotHolding();
+            if(Input.GetMouseButtonDown(0) && !checkClickInMenuButton()) {
+                if(checkInGrey()) {
+                    setNotHolding();
+                }
+                else if(checkInInnerGreen() && breatheTimer > 3.5f) {
+                    setNotHolding();
+                }
             }
             else if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) {
                 if(checkInOuterGreen() && !isHolding) {
@@ -94,6 +105,7 @@ public class Breathing_Touch : MonoBehaviour
                 }
                 if(wasLastBreathingIn) {
                     breatheTimer = 6;
+                    circleColorAnimator.SetBool("outerGreen", false);
                 }
                 else {
                     breatheTimer = 4;
@@ -101,6 +113,7 @@ public class Breathing_Touch : MonoBehaviour
                         breatheCount++;
                         setScoreCounters();
                     }
+                    circleColorAnimator.SetBool("outerGreen", true);
                 }
             }
             else {

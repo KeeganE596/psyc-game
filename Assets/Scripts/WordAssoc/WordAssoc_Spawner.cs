@@ -45,7 +45,7 @@ public class WordAssoc_Spawner : MonoBehaviour
 
         badWords.Add("impatient"); badWords.Add("anger"); badWords.Add("disrespect");
         badWords.Add("can't"); badWords.Add("dishonest"); badWords.Add("impossible");
-        badWords.Add("hate");   words.Add("lieing");    words.Add("give up");
+        badWords.Add("hate");   badWords.Add("lieing");    badWords.Add("give up");
 
         timer = 0.5f;
         badtimer = 0.25f;
@@ -72,7 +72,12 @@ public class WordAssoc_Spawner : MonoBehaviour
                     //spawn word object and picks word from list, remove from list after spawn so no duplicates
                     obj = Instantiate(word, spawnPos, Quaternion.identity);
                     int wordNum = Random.Range(0, words.Count);
+                    //Vector2 wordSize = obj.GetComponent<TextMeshPro>().GetPreferredValues(words[wordNum]);
+                    //Vector2 wordSize = new Vector2(obj.GetComponent<TextMeshPro>().preferredWidth, obj.GetComponent<TextMeshPro>().preferredHeight);
                     obj.GetComponent<TextMeshPro>().text = words[wordNum];
+                    //obj.transform.localScale = wordSize;
+                    //Debug.Log(wordSize);
+                    //obj.GetComponentInChildren<BoxCollider2D>().size = wordSize;//new Vector3(wordSize.x, wordSize.y, 0);
                     words.RemoveAt(wordNum);
 
                     timer = 0;

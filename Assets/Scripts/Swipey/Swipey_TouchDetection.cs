@@ -21,6 +21,8 @@ public class Swipey_TouchDetection : MonoBehaviour
     RaycastHit2D hit;
 
     LevelManager levelManager;
+
+    public Swipey_MessageController messageController;
     
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -56,6 +58,7 @@ public class Swipey_TouchDetection : MonoBehaviour
             if (hit && hit.collider.gameObject.CompareTag("Spark")) {
                 //if raycast hits gameobject with tag "Spark" Run this code.
                 hit.collider.GetComponent<Spark>().Activate();
+                messageController.MaybeSaySomething();
             }
 
             //get touch position and mark time when screen is touched
@@ -76,6 +79,7 @@ public class Swipey_TouchDetection : MonoBehaviour
             //Flick gnatts away
             if(startPos != endPos && !aoeScript.isGnattsEmpty()) {
                 aoeScript.flickGnatts((startPos - endPos), (touchTimeFinish - touchTimeStart), throwForce);
+                messageController.MaybeSaySomething();
             }
             aoeObject.SetActive(false);
         }

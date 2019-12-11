@@ -13,7 +13,6 @@ public class ChooseGameController : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start() {
-        Debug.Log(gameManager.GetSparksScore());
         if(gameManager.GetSparksScore() < 30) {
             GameObject inspectGame = GameObject.Find("gameButton_Inspect");
             inspectGame.GetComponentInChildren<TextMeshPro>().text = "30 x";
