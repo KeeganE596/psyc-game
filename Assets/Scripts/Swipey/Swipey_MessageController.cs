@@ -48,8 +48,8 @@ public class Swipey_MessageController : MonoBehaviour
         maybeTextAnimator = maybeTextObj.GetComponent<Animator>();
         maybeTextAnimator.SetBool("textVisible", false);
         maybeTextPositions = new List<Vector3>();
-        maybeTextPositions.Add(new Vector3(0-worldScale.x*0.45f, 0+worldScale.y*0.4f, -4));
-        maybeTextPositions.Add(new Vector3(0+worldScale.x*0.45f, 0+worldScale.y*0.4f, -4));
+        maybeTextPositions.Add(new Vector3(0-worldScale.x*0.4f, 0+worldScale.y*0.4f, -4));
+        maybeTextPositions.Add(new Vector3(0+worldScale.x*0.4f, 0+worldScale.y*0.4f, -4));
         maybeTextPositions.Add(new Vector3(0-worldScale.x*0.3f, 0+worldScale.y*0.6f, -4));
         maybeTextPositions.Add(new Vector3(0+worldScale.x*0.3f, 0+worldScale.y*0.6f, -4));
 
@@ -183,7 +183,7 @@ public class Swipey_MessageController : MonoBehaviour
     public void MaybeSaySomething() {
         int rand = Random.Range(0, 100);
 
-        if(rand <= 20 && !maybeTextAnimator.GetBool("textVisible")) {
+        if(rand <= 30 && !maybeTextAnimator.GetBool("textVisible")) {
             maybeText.transform.position = maybeTextPositions[Random.Range(0, maybeTextPositions.Count)];
             maybeText.text = gameMessages[Random.Range(0, gameMessages.Count)];
             StartCoroutine("showMessage");

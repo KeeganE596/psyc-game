@@ -70,7 +70,7 @@ public class Swipey_Spawner : MonoBehaviour
         Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-300), Random.Range(50, Screen.height-100)));
 
         //check position isnt too close to middle
-        if((spawnPos.x < -0.75 || spawnPos.x > 0.75) && (spawnPos.y < -0.75 || spawnPos.y > 0.75)) {
+        if((spawnPos.x < -2.5 || spawnPos.x > 2.5) && (spawnPos.y < -2.5 || spawnPos.y > 2.5)) {
             if(sparks[sparkIndex].activeSelf) {
                 sparkIndex++;
                 spawnSpark();
