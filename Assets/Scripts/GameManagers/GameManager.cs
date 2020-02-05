@@ -16,12 +16,14 @@ public class GameManager : MonoBehaviour
     int currentGameNum;
     string currentGameName;
     
-    int gamesWon;
+    public static int gamesWon;
 
     public GameObject CMPrefab;
     ColorManager colorManager;
 
     int sparksScore;
+
+    public static string swipeType; //For testing declare spawn type
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
 
         colorManager.setCameraBackground();
 
+        swipeType = "default";
+
         LoadSparksScore();
         SetSparksScoreText();
     }
@@ -56,6 +60,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("chooseGame");
         }
         else {
+            //SceneManager.LoadScene("swipeAway_Game");
             int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
             if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
             else {
@@ -68,6 +73,10 @@ public class GameManager : MonoBehaviour
     public void ToMainMenu() {
         SceneManager.LoadScene("Menu");
         DestroyImmediate(this.gameObject, true);   //Destroy this gameobject as new GameManager will instantiate on menu load
+    }
+    
+    public void ToLeaderboard() {
+        SceneManager.LoadScene("Leaderboard");
     }
 
     public void StartGame(string type) {
@@ -112,7 +121,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayAgain() {
-        gamesWon = 0;
+        //gamesWon = 0;
         currentGameNum = 0;
         currentGameName = "";
     }
@@ -153,5 +162,11 @@ public class GameManager : MonoBehaviour
         sparksScore = 0;
         SaveSparksScore();
         SetSparksScoreText();
+    }
+
+    public void setSwipeType(string type) {
+        playingChooseGame = false;
+        swipeType = type;
+        SceneManager.LoadScene("swipeAway_Game");
     }
 }

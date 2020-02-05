@@ -51,6 +51,10 @@ public class LevelManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        if(GameManager.swipeType != "default") {
+            playingChooseGame = false;
+        }
+
         timeSlider.gameObject.SetActive(false);
         playing = false;
         timeRemaining = maxTime;
@@ -108,44 +112,11 @@ public class LevelManager : MonoBehaviour
     }
 
     public void GameWon() {
-        EndGame();
-        winPanel.SetActive(true);
-        losePanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
-        
-        gameManager.AddToGamesWon();
-        int wins = gameManager.NumberOfGamesWon();
-        string winText;
-        if(wins == 1) {
-            winText = "You've won 1 game!";
-        }
-        else {
-            winText = "You've won " + wins + " games in a row!";
-        }
-
-        winPanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = winText;
-
-        gameManager.SetSparksScoreText();
+        StartCoroutine("WaitAtEndGameWon");
     }
 
     public void GameLost() {
-        EndGame();
-        losePanel.SetActive(true);
-        winPanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = colorManager.GetDarkColor();
-
-        int wins = gameManager.NumberOfGamesWon();
-        string loseText;
-        if(wins == 0) {
-            loseText = "You won no games this time.";
-        }
-        else if(wins == 1) {
-            loseText = "You won 1 game this time.";
-        }
-        else {
-            loseText = "You won " + wins + " games this time.";
-        }
-        losePanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = loseText;
+        StartCoroutine("WaitAtEndOfGameLost");
     }
 
     public void NextGame() {
@@ -261,7 +232,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void EndGame() {
-        playing = false;
+        //playing = false;
         pauseButton.SetActive(false);
         panelBackground.SetActive(true);
         menuButton.SetActive(true);
@@ -295,5 +266,57 @@ public class LevelManager : MonoBehaviour
 
     public bool getIfWinOnTimeOut() {
         return winOnTimeOut;
+    }
+
+    IEnumerator WaitAtEndGameWon() {
+        playing = false;
+
+        yield return new WaitForSeconds(0.4f);
+
+        EndGame();
+        winPanel.SetActive(true);
+        losePanel.SetActive(false);
+        panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
+        
+        gameManager.AddToGamesWon();
+        int wins = gameManager.NumberOfGamesWon();
+        string winText;
+        if(wins == 1) {
+            winText = "You've won 1 game!";
+        }
+        else {
+            winText = "You've won " + wins + " games in a row!";
+        }
+
+        winPanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = winText;
+
+        gameManager.SetSparksScoreText();
+
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, wins);
+        PlayerPrefs.Save();
+    }
+    
+    IEnumerator WaitAtEndOfGameLost() {
+        playing = false;
+        
+        yield return new WaitForSeconds(0.4f);
+
+        EndGame();
+        losePanel.SetActive(true);
+        winPanel.SetActive(false);
+        panelBackground.GetComponent<Image>().color = colorManager.GetDarkColor();
+
+        int wins = gameManager.NumberOfGamesWon();
+        string loseText;
+        if(wins == 0) {
+            loseText = "You won no games this time.";
+        }
+        else if(wins == 1) {
+            loseText = "You won 1 game this time.";
+        }
+        else {
+            loseText = "You won " + wins + " games this time.";
+        }
+        losePanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = loseText;
     }
 }

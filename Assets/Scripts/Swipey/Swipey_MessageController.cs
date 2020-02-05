@@ -76,7 +76,7 @@ public class Swipey_MessageController : MonoBehaviour
         gameMessages.Add("Phew");   gameMessages.Add("Isn't it nice to relax"); gameMessages.Add("Chill Out");
         gameMessages.Add("Take a break sometimes");  gameMessages.Add("Uplift your brain");   gameMessages.Add("Do just one thing");
         gameMessages.Add("Sometimes it's hard to see the SPARX"); //Sometimes it's hard to see the SPARX amongst the GNATs
-        gameMessages.Add("Grow the SPARX!");
+        gameMessages.Add("Grow the SPARX!");    gameMessages.Add("Nice job!");
 
         timer = 0;
         messageText = messageTextObj.GetComponent<TextMeshPro>();
@@ -186,6 +186,14 @@ public class Swipey_MessageController : MonoBehaviour
         if(rand <= 30 && !maybeTextAnimator.GetBool("textVisible")) {
             maybeText.transform.position = maybeTextPositions[Random.Range(0, maybeTextPositions.Count)];
             maybeText.text = gameMessages[Random.Range(0, gameMessages.Count)];
+
+            maybeText.transform.GetChild(0).gameObject.SetActive(true);
+            Vector2 textSize = maybeText.GetPreferredValues();
+            if(textSize.x > 2.6f) {
+                textSize.x = 2.6f;
+            }
+            maybeText.transform.GetChild(0).gameObject.transform.localScale = textSize;
+            
             StartCoroutine("showMessage");
         }
     }
@@ -194,5 +202,6 @@ public class Swipey_MessageController : MonoBehaviour
         maybeTextAnimator.SetBool("textVisible", true);
         yield return new WaitForSeconds(4);
         maybeTextAnimator.SetBool("textVisible", false);
+        maybeText.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

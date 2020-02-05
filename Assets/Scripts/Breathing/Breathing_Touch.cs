@@ -139,7 +139,7 @@ public class Breathing_Touch : MonoBehaviour
 
             setBreatheText();
             //Debug.Log(breatheCount);
-            if(breatheCount == maxPoints-1) {
+            if(breatheCount == maxPoints-1 && levelManager.isPlaying()) {
                 levelManager.GameWon();
             }
         }

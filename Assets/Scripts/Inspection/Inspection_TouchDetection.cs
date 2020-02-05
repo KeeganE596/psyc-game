@@ -101,7 +101,7 @@ public class Inspection_TouchDetection : MonoBehaviour
 
         Vector3 worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         thoughtTextObj.transform.position = new Vector2(0, (0-worldScale.y*0.50f));
-        thoughtTextObj.GetComponent<TextMeshPro>().fontSize = 25;
+        thoughtTextObj.GetComponent<TextMeshPro>().fontSize = 23;
     }
 
     public void CheckWin() {

@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 9073909324329278015}
   - component: {fileID: 2074947722}
   - component: {fileID: 2074947721}
-  - component: {fileID: 6139994589047375705}
+  - component: {fileID: 3737989687771145537}
   m_Layer: 14
   m_Name: Gnatt_Lonely
   m_TagString: Gnatt
@@ -171,7 +171,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6139994589047375705
+--- !u!114 &3737989687771145537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,6 +180,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5454380852869289296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb38e8da9ebbe543b91352bfdd3a8d8, type: 3}
+  m_Script: {fileID: 11500000, guid: b4a84df0c7c38224894d9348b6f3f310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

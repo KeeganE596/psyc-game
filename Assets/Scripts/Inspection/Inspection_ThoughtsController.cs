@@ -29,15 +29,21 @@ public class Inspection_ThoughtsController : MonoBehaviour
 
         positiveThoughts.Add("I can give this a try"); positiveThoughts.Add("I have done it before"); positiveThoughts.Add("Thoughts are just thoughts");
         positiveThoughts.Add("I will take it slow"); positiveThoughts.Add("It is normal to feel upset sometimes"); positiveThoughts.Add("I see problems as challenges");
-        positiveThoughts.Add("It happened, what will I do next time?");
+        positiveThoughts.Add("It happened, what will I do next time?"); positiveThoughts.Add("I am happy with my self"); positiveThoughts.Add("It's okay, this will pass");
+        positiveThoughts.Add("I am open to new things"); positiveThoughts.Add("Emotions are harmless, even though they can be unpleasant"); positiveThoughts.Add("I trust myself");
+        positiveThoughts.Add("Thoughts are thoughts, they are not true or false"); positiveThoughts.Add("I can ask for help if I need to");
+        positiveThoughts.Add("I will do the best I can"); positiveThoughts.Add("I will try my best"); positiveThoughts.Add("I can not predict the future");
+        positiveThoughts.Add("I have the skills to cope with setbacks");
 
-        negativeThoughts.Add("This happens to me all the time"); negativeThoughts.Add("I can never do anything right"); negativeThoughts.Add("I should have done this");
-        negativeThoughts.Add("I could have done that");
+        negativeThoughts.Add("This happens to me <b>all</b> the time"); negativeThoughts.Add("I can never do anything right"); negativeThoughts.Add("I should have done this");
+        negativeThoughts.Add("<b>I</b> could have done that"); negativeThoughts.Add("I'm not as good as others"); negativeThoughts.Add("What if something goes wrong?");
+        negativeThoughts.Add("What are they thinking about me?"); negativeThoughts.Add("I need to look a certain way"); negativeThoughts.Add("I need to fit in");
+        negativeThoughts.Add("I have to be liked by everyone"); negativeThoughts.Add("What if I fail my test?"); 
 
         xShift = (worldScale.x*2)/4;
         xPos = (0-worldScale.x) - xShift*2;
 
-        thoughtSpeed = 0.05f;
+        thoughtSpeed = 0.04f;
 
         isClicked = false;
 
