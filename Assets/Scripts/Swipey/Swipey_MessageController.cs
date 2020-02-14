@@ -3,58 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Swipey_MessageController : MonoBehaviour
+public class Swipey_MessageController : MessageController
 {
-    Animator textAnimator;
-    LevelManager levelManager;
-    public GameObject messageTextObj;
-    TextMeshPro messageText;
-    //public GameObject textBackground;
-
     public GameObject maybeTextObj;
     TextMeshPro maybeText;
     Animator maybeTextAnimator;
     List<Vector3> maybeTextPositions;
-
-    bool playingChooseGame;
-    bool textVisible;
-    bool doubleText;
 
     List<string> gnattMessages;
     List<string> sparkMessages;
     List<string> bothMessages;
     List<string> gameMessages;
 
-    float timer;
-
-    Vector3 worldScale;
-    float SCREEN_WIDTH = Screen.width;
-    float SCREEN_HEIGHT = Screen.height;
-
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
+
     // Start is called before the first frame update
-    void Start() {
-        worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+    protected override void Start() {
+        base.Start();
 
-        playingChooseGame = levelManager.getIfPlayingChooseGame();
-        textVisible = false;
-
-        textAnimator = messageTextObj.GetComponent<Animator>();
-        textAnimator.SetBool("textVisible", false);
-
-        maybeText = maybeTextObj.GetComponent<TextMeshPro>();
-        maybeTextAnimator = maybeTextObj.GetComponent<Animator>();
-        maybeTextAnimator.SetBool("textVisible", false);
-        maybeTextPositions = new List<Vector3>();
-        maybeTextPositions.Add(new Vector3(0-worldScale.x*0.4f, 0+worldScale.y*0.4f, -4));
-        maybeTextPositions.Add(new Vector3(0+worldScale.x*0.4f, 0+worldScale.y*0.4f, -4));
-        maybeTextPositions.Add(new Vector3(0-worldScale.x*0.3f, 0+worldScale.y*0.6f, -4));
-        maybeTextPositions.Add(new Vector3(0+worldScale.x*0.3f, 0+worldScale.y*0.6f, -4));
-
-        doubleText = false;
-
+        //fill arrays for game bar text instructions
         gnattMessages = new List<string>();
         gnattMessages.Add("Gnats are like gloomy thoughts"); 
         gnattMessages.Add("Swipe away the gnats to help calm the brain");
@@ -72,111 +41,62 @@ public class Swipey_MessageController : MonoBehaviour
         bothMessages.Add("Find the SPARX amongst the GNATs"); 
         bothMessages.Add("Focusing your attention on the SPARX helps grow them");
 
+        //get positions and fill array for maybe text
+        maybeText = maybeTextObj.GetComponent<TextMeshPro>();
+        maybeTextAnimator = maybeTextObj.GetComponent<Animator>();
+        maybeTextAnimator.SetBool("textVisible", false);
+        maybeTextPositions = new List<Vector3>();
+        maybeTextPositions.Add(new Vector3(0-worldScale.x*0.4f, 0+worldScale.y*0.4f, -4));
+        maybeTextPositions.Add(new Vector3(0+worldScale.x*0.4f, 0+worldScale.y*0.4f, -4));
+        maybeTextPositions.Add(new Vector3(0-worldScale.x*0.3f, 0+worldScale.y*0.6f, -4));
+        maybeTextPositions.Add(new Vector3(0+worldScale.x*0.3f, 0+worldScale.y*0.6f, -4));
+
         gameMessages = new List<string>();
         gameMessages.Add("Phew");   gameMessages.Add("Isn't it nice to relax"); gameMessages.Add("Chill Out");
         gameMessages.Add("Take a break sometimes");  gameMessages.Add("Uplift your brain");   gameMessages.Add("Do just one thing");
         gameMessages.Add("Sometimes it's hard to see the SPARX"); //Sometimes it's hard to see the SPARX amongst the GNATs
         gameMessages.Add("Grow the SPARX!");    gameMessages.Add("Nice job!");
 
-        timer = 0;
-        messageText = messageTextObj.GetComponent<TextMeshPro>();
+        maybeText.fontSize = SCREEN_HEIGHT/275f;
 
-        scaleText();
+        messageTextObj.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.getIfPlayingChooseGame() && levelManager.isPlaying()) {
-            
-            timer += Time.deltaTime;
+        if(levelManager.getIfPlayingChooseGame() && levelManager.isPlaying() && !hasStarted) {
+            hasStarted = true;
+
             //gnatt messages
             if(levelManager.getGamesWon() == 0) {
-                doubleText = true;
-                if(timer < 6.5) {
-                    messageText.text = gnattMessages[0];
-                }
-                else {
-                    messageText.text = gnattMessages[1];
-                }
+                StartCoroutine(CycleGameTextDouble(gnattMessages[0], gnattMessages[1]));
             }
             else if(levelManager.getGamesWon() == 1) {
-                messageText.text = gnattMessages[2];
+                StartCoroutine(CycleGameTextSingle(gnattMessages[2]));
             }
             else if(levelManager.getGamesWon() == 2) {
-                messageText.text = gnattMessages[3];
+                StartCoroutine(CycleGameTextSingle(gnattMessages[3]));
             }
             else if(levelManager.getGamesWon() == 3) {
-                messageText.text = gnattMessages[4];
+                StartCoroutine(CycleGameTextSingle(gnattMessages[4]));
             }
             //spark messages
             else if(levelManager.getGamesWon() == 4) {
-                doubleText = true;
-                if(timer < 6.5) {
-                    messageText.text = sparkMessages[0];
-                }
-                else {
-                    messageText.text = sparkMessages[1];
-                }
+                StartCoroutine(CycleGameTextDouble(sparkMessages[0], sparkMessages[1]));
             }
             else if(levelManager.getGamesWon() == 5) {
-                messageText.text = sparkMessages[2];
+                StartCoroutine(CycleGameTextSingle(sparkMessages[2]));
             }
             else if(levelManager.getGamesWon() == 6) {
-                messageText.text = sparkMessages[3];
+                StartCoroutine(CycleGameTextSingle(sparkMessages[3]));
             }
             //messages for both spawning
             else if(levelManager.getGamesWon() == 8) {
-                messageText.text = bothMessages[0];
+                StartCoroutine(CycleGameTextSingle(bothMessages[0]));
             }
             else if(levelManager.getGamesWon() == 9) {
-                messageText.text = bothMessages[1];
+                StartCoroutine(CycleGameTextSingle(bothMessages[1]));
             }
-            else {
-                timer = 15;
-            }
-
-            //Debug.Log(messageText.preferredWidth + ", " + (worldScale.x*2)*0.85f);
-            if(messageText.preferredWidth >= (worldScale.x*2)*0.8f) {
-                DoubleBackgroundSize(true);
-            }
-            else {
-                DoubleBackgroundSize(false);
-            }
-
-            if(timer <= 5) {
-                textVisible = true;
-            }
-            else if(doubleText && timer >= 6.5 && timer <= 13){
-                textVisible = true;
-            }
-            else {
-                textVisible = false;
-            }
-
-            //Debug.Log(timer);
-            textAnimator.SetBool("textVisible", textVisible);
-        }
-        else {
-            textVisible = false;
-        }
-    }
-
-    void scaleText() {
-        messageText.fontSize = SCREEN_HEIGHT/190f;
-        messageTextObj.GetComponent<RectTransform>().localPosition = new Vector2(0, (0+worldScale.y)-(worldScale.y*2)*0.85f);
-
-        DoubleBackgroundSize(false);
-
-        maybeText.fontSize = SCREEN_HEIGHT/275f;
-    }
-
-    void DoubleBackgroundSize(bool isDouble) {
-        GameObject textBackground = messageTextObj.transform.GetChild(0).gameObject;
-        if(isDouble == true) {
-            textBackground.transform.localScale = new Vector2((worldScale.x)*0.9f, (worldScale.y)*0.18f);
-        }
-        else {
-            textBackground.transform.localScale = new Vector2((worldScale.x)*0.9f, (worldScale.y)*0.09f);
         }
     }
 
@@ -204,4 +124,32 @@ public class Swipey_MessageController : MonoBehaviour
         maybeTextAnimator.SetBool("textVisible", false);
         maybeText.transform.GetChild(0).gameObject.SetActive(false);
     }
+
+    IEnumerator CycleGameTextSingle(string gameText) {
+        messageTextObj.SetActive(true);
+        messageText.text = gameText;
+        textAnimator.SetTrigger("showText");
+        yield return new WaitForSeconds(6f);
+
+        textAnimator.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        messageTextObj.SetActive(false);
+    }
+
+    IEnumerator CycleGameTextDouble(string gameText_1, string gameText_2) {
+        messageTextObj.SetActive(true);
+        messageText.text = gameText_1;
+        textAnimator.SetTrigger("showText");
+        yield return new WaitForSeconds(6f);
+
+        messageText.text = gameText_2;
+        textAnimator.SetTrigger("showText");
+        yield return new WaitForSeconds(6f);
+        
+        textAnimator.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        messageTextObj.SetActive(false);
+    }
+
+
 }

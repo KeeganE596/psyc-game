@@ -208,7 +208,6 @@ public class LevelManager : MonoBehaviour
     }
 
     void scalePausePanel() {
-        //pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.06f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.9f));
         pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.465f), 0+SCREEN_HEIGHT*0.45f);
         pauseButton.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.07f, SCREEN_HEIGHT*0.07f);
         pauseButton.transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.05f, SCREEN_HEIGHT*0.05f);
@@ -232,7 +231,6 @@ public class LevelManager : MonoBehaviour
     }
 
     public void EndGame() {
-        //playing = false;
         pauseButton.SetActive(false);
         panelBackground.SetActive(true);
         menuButton.SetActive(true);
@@ -288,7 +286,7 @@ public class LevelManager : MonoBehaviour
             winText = "You've won " + wins + " games in a row!";
         }
 
-        winPanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = winText;
+        winPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = winText;
 
         gameManager.SetSparksScoreText();
 
@@ -317,6 +315,8 @@ public class LevelManager : MonoBehaviour
         else {
             loseText = "You won " + wins + " games this time.";
         }
-        losePanel.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = loseText;
+        losePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = loseText;
+        GameObject loseButton = losePanel.transform.GetChild(2).gameObject;
+        loseButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "from level " + wins;
     }
 }

@@ -51,6 +51,7 @@ public class Inspection_ThoughtObject : MonoBehaviour
     public void turnToSpark() {
         sprite.enabled = false;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("SparkPrefab_02");
         gameObject.GetComponent<Collider2D>().enabled = false;
         isChecked = true;
     }

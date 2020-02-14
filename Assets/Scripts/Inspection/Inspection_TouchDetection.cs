@@ -93,11 +93,11 @@ public class Inspection_TouchDetection : MonoBehaviour
     }
 
     public void ScaleButtons() {
-        GameObject badButton = canvas.transform.GetChild(8).gameObject;
-        badButton.GetComponent<RectTransform>().localPosition = new Vector2(0-SCREEN_WIDTH*0.33f, (0-SCREEN_HEIGHT*0.25f));
+        // GameObject badButton = canvas.transform.GetChild(8).gameObject;
+        // badButton.GetComponent<RectTransform>().localPosition = new Vector2(0-SCREEN_WIDTH*0.33f, (0-SCREEN_HEIGHT*0.25f));
 
-        GameObject goodButton = canvas.transform.GetChild(9).gameObject;
-        goodButton.GetComponent<RectTransform>().localPosition = new Vector2(0+SCREEN_WIDTH*0.33f, (0-SCREEN_HEIGHT*0.25f));
+        // GameObject goodButton = canvas.transform.GetChild(9).gameObject;
+        // goodButton.GetComponent<RectTransform>().localPosition = new Vector2(0+SCREEN_WIDTH*0.33f, (0-SCREEN_HEIGHT*0.25f));
 
         Vector3 worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         thoughtTextObj.transform.position = new Vector2(0, (0-worldScale.y*0.50f));
