@@ -102,6 +102,7 @@
      <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\ChooseGameScreen\ChooseGameController.cs" />
+     <Compile Include="Assets\Scripts\ChooseGameScreen\GameBlobController.cs" />
      <Compile Include="Assets\Scripts\ChooseGameScreen\ScaleChooseGameScreen.cs" />
      <Compile Include="Assets\Scripts\GameManagers\ColorManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />

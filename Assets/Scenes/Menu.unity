@@ -1441,7 +1441,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
+  m_Color: {r: 0.24860218, g: 0.7075472, b: 0.24363652, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2505,41 +2505,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7749748135804088627}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &435737626
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 1920
-  m_Height: 1080
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 2
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &445954188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3951,7 +3916,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
+  m_Color: {r: 0.24860218, g: 0.7075472, b: 0.24363652, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4351,7 +4316,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
+  m_Color: {r: 0.24860218, g: 0.7075472, b: 0.24363652, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4626,7 +4591,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
+  m_Color: {r: 0.24860218, g: 0.7075472, b: 0.24363652, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5409,6 +5374,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155270211}
   m_CullTransparentMesh: 0
+--- !u!84 &1166615055
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 1920
+  m_Height: 1080
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 2
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &1169535033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6974,7 +6974,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
+  m_Color: {r: 0.24860218, g: 0.7075472, b: 0.24363652, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
