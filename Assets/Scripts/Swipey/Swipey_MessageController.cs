@@ -58,8 +58,6 @@ public class Swipey_MessageController : MessageController
         gameMessages.Add("Grow the SPARX!");    gameMessages.Add("Nice job!");
 
         maybeText.fontSize = SCREEN_HEIGHT/275f;
-
-        messageTextObj.SetActive(false);
     }
 
     // Update is called once per frame

@@ -96,10 +96,12 @@
      <Compile Include="Assets\Metaball stuff\Scripts\Spawner.cs" />
      <Compile Include="Assets\Metaball stuff\Scripts\SquishAndRotate.cs" />
      <Compile Include="Assets\Scripts\AnimationHierarchyEditor.cs" />
+     <Compile Include="Assets\Scripts\Breathing\Breathing_MessageController.cs" />
      <Compile Include="Assets\Scripts\Breathing\Breathing_ObjectScaler.cs" />
      <Compile Include="Assets\Scripts\Breathing\Breathing_Touch.cs" />
      <Compile Include="Assets\Scripts\Breathing\Breathing_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
+     <Compile Include="Assets\Scripts\buttonTest.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\ChooseGameScreen\ChooseGameController.cs" />
      <Compile Include="Assets\Scripts\ChooseGameScreen\GameBlobController.cs" />
@@ -131,6 +133,9 @@
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_Spawner.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchBlob.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchDetection.cs" />
+     <Compile Include="Assets\Scripts\WordFind\WordFind_MainGame.cs" />
+     <Compile Include="Assets\Scripts\WordFind\WordFind_SelectWords.cs" />
+     <Compile Include="Assets\Scripts\WordFind\WordFind_WordObject.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Reporter.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\ReporterGUI.cs" />

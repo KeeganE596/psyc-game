@@ -60,12 +60,12 @@ public class GameBlobController : MonoBehaviour
     }
 
     public void UnclickGameBlob() {
-        Debug.Log("unclick");
+        //Debug.Log("unclick");
         anim.SetBool("gameBlobClicked", false);
     }
 
     public void PlayGame() {
-        Debug.Log("play");
+        //Debug.Log("play");
         gameManager.PickGame(currentGame);
     }
 }

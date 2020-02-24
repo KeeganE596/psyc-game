@@ -13,6 +13,8 @@ public class Breathing_Touch : MonoBehaviour
     float outerAreaMin;
     float innerAreaMax;
     float innerAreaMin;
+    float outerAreaMidPoint;
+    float innerAreaMidPoint;
 
     Animator circleColorAnimator;
 
@@ -27,8 +29,8 @@ public class Breathing_Touch : MonoBehaviour
     int maxPoints;
     List<GameObject> scoreCounters;
 
-    public float expandSpeed = 0.003f;
-    public float compressSpeed = 0.002f;
+    float expandSpeed;
+    float compressSpeed;
 
     public GameObject breatheTextObj;
     TextMeshPro breatheText; 
@@ -44,6 +46,9 @@ public class Breathing_Touch : MonoBehaviour
     bool isHolding = false;
 
     int levelScaler;
+
+    public float breatheInTime = 4;
+    public float breatheOutTime = 6;
 
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -65,6 +70,8 @@ public class Breathing_Touch : MonoBehaviour
         outerAreaMin = breatheLimitParent.transform.GetChild(2).gameObject.transform.localScale.x;
         innerAreaMax = breatheLimitParent.transform.GetChild(3).gameObject.transform.localScale.x;
         innerAreaMin = breatheLimitParent.transform.GetChild(4).gameObject.transform.localScale.x;
+        outerAreaMidPoint = (outerAreaMax + outerAreaMin)/2;
+        innerAreaMidPoint = (innerAreaMax + innerAreaMin)/2;
 
         isBreathingIn = 1;
         holdTimer = 0;
@@ -74,6 +81,8 @@ public class Breathing_Touch : MonoBehaviour
         if(levelScaler < 3) { maxPoints = 3; }
         else if(levelScaler < 6) { maxPoints = 4; }
         else { maxPoints = 5; }
+
+        expandSpeed = ((outerAreaMidPoint - expandBlobTransform.localScale.x)/breatheInTime)/(1.0f / Time.deltaTime);
 
         setupScoreCounters();
     }
@@ -104,11 +113,13 @@ public class Breathing_Touch : MonoBehaviour
                     setNotHolding();
                 }
                 if(wasLastBreathingIn) {
-                    breatheTimer = 6;
+                    breatheTimer = breatheOutTime+1;
+                    compressSpeed = ((expandBlobTransform.localScale.x - innerAreaMidPoint)/breatheOutTime)/(1.0f / Time.deltaTime); //calculate compressSpeed based on distance and bretahe out time
                     circleColorAnimator.SetBool("outerGreen", false);
                 }
                 else {
-                    breatheTimer = 4;
+                    breatheTimer = breatheInTime+1;
+                    expandSpeed = ((outerAreaMidPoint - expandBlobTransform.localScale.x)/breatheInTime)/(1.0f / Time.deltaTime); //calculate expandSpeed based on distance and breathe in time
                     if(isHolding) {
                         breatheCount++;
                         setScoreCounters();
@@ -124,10 +135,12 @@ public class Breathing_Touch : MonoBehaviour
                 }
 
                 if(isBreathingIn==1 && !isHolding) {
+                    
                     expandBlobTransform.localScale += new Vector3(expandSpeed, expandSpeed, 0);
                     breatheTimer -= Time.deltaTime;
                 }
                 else if(isBreathingIn==-1 && !isHolding) {
+                    
                     expandBlobTransform.localScale -= new Vector3(compressSpeed, compressSpeed, 0);
                     breatheTimer -= Time.deltaTime;
                 }

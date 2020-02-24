@@ -30,6 +30,7 @@ TagManager:
   - SelectedColor
   - ColorManager
   - SparksScore
+  - SelectedWords
   layers:
   - Default
   - TransparentFX
@@ -43,7 +44,7 @@ TagManager:
   - Gnatt Layer
   - Spawn Colliders
   - Metaball_1
-  - Metaball_2
+  - 
   - Background
   - Gnatts
   - Sparks

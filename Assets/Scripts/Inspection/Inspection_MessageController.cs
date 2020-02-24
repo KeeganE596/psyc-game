@@ -7,8 +7,6 @@ public class Inspection_MessageController : MessageController
     // Start is called before the first frame updat
     protected override void Start() {
         base.Start();
-
-        messageTextObj.SetActive(false);
     }
 
     // Update is called once per frame

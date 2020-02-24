@@ -23,12 +23,12 @@ public class MessageController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start() {
         worldScale = Camera.main.ScreenToWorldPoint(new Vector3(SCREEN_WIDTH, SCREEN_HEIGHT, 0f));
-
         textAnimator = messageTextObj.GetComponent<Animator>();
-
         messageText = messageTextObj.GetComponentInChildren<TextMeshProUGUI>();
 
         scaleText();
+
+        messageTextObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,11 +40,11 @@ public class MessageController : MonoBehaviour
         //messageTextObj.GetComponent<RectTransform>().localPosition = new Vector2(0, (0+SCREEN_HEIGHT)-(SCREEN_HEIGHT)*0.85f);
 
         //messageText.fontSize = SCREEN_HEIGHT/190f;
-        messageTextObj.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.30f));
+        messageTextObj.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.35f));
 
         //DoubleBackgroundSize(false);
         RectTransform textBackground = messageTextObj.transform.GetChild(0).GetComponent<RectTransform>();
-        textBackground.sizeDelta = new Vector2((SCREEN_WIDTH)*0.9f, (SCREEN_HEIGHT)*0.16f);
+        textBackground.sizeDelta = new Vector2((SCREEN_WIDTH)*0.9f, (SCREEN_HEIGHT)*0.15f);
     }
 
     void DoubleBackgroundSize(bool isDouble) {
@@ -54,7 +54,6 @@ public class MessageController : MonoBehaviour
         }
         else {
             textBackground.sizeDelta = new Vector2((SCREEN_WIDTH)*0.9f, (SCREEN_HEIGHT)*0.16f);
-            //Debug.Log(SCREEN_WIDTH + ", " + SCREEN_HEIGHT);
         }
     }
 }

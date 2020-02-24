@@ -145,6 +145,9 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ToMainMenu() {
+        if(GameObject.FindGameObjectsWithTag("SelectedWords").Length < 1) {
+            DestroyImmediate(GameObject.FindWithTag("SelectedWords"), true);
+        }
         gameManager.ToMainMenu();
     }
 
@@ -318,5 +321,10 @@ public class LevelManager : MonoBehaviour
         losePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = loseText;
         GameObject loseButton = losePanel.transform.GetChild(2).gameObject;
         loseButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "from level " + wins;
+    }
+
+    public void StartTimer() {
+        timeSlider.gameObject.SetActive(true);   //Turn slider on
+        usingTimer = true;
     }
 }
