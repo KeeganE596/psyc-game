@@ -130,6 +130,10 @@ public class GameManager : MonoBehaviour
         colorManager.SetColor(colObj);
     }
 
+    public void SetBackground(string type) {
+        colorManager.SetBackground(type);
+    }
+
     void LoadSparksScore() {
         if(PlayerPrefs.HasKey("sparksScore")) {
             sparksScore = PlayerPrefs.GetInt("sparksScore");

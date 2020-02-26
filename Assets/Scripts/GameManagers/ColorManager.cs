@@ -15,6 +15,8 @@ public class ColorManager : MonoBehaviour
     Color darkPink = new Color32(180, 120, 165, 255);
     Color darkGreen = new Color32(140, 175, 120, 255);
     Color darkOrange = new Color32(210, 150, 100, 255);
+    public GameObject mountainsBg;
+    public GameObject oceansBg;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
@@ -23,6 +25,9 @@ public class ColorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         LoadColor();
+
+        mountainsBg.SetActive(false);
+        oceansBg.SetActive(true);
 
         GameObject camParent = GameObject.FindWithTag("Cameras");
         camParent.transform.GetChild(0).gameObject.GetComponent<Camera>().backgroundColor = currentBgColor;
@@ -85,5 +90,18 @@ public class ColorManager : MonoBehaviour
         PlayerPrefs.SetFloat("bgColorG", currentBgColor.g);
         PlayerPrefs.SetFloat("bgColorB", currentBgColor.b);
         PlayerPrefs.Save();
+    }
+
+    public void SetBackground(string type) {
+        switch (type){
+            case "mountains":
+                mountainsBg.SetActive(true);
+                oceansBg.SetActive(false);
+                break;
+            case "ocean":
+                mountainsBg.SetActive(false);
+                oceansBg.SetActive(true);
+                break;
+        }
     }
 }
