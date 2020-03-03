@@ -56,21 +56,23 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextGame() {
+        colorManager.HideBackground();
         if(playingChooseGame) {
             SceneManager.LoadScene("chooseGame");
         }
         else {
-            //SceneManager.LoadScene("swipeAway_Game");
-            int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
-            if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
-            else {
-                currentGameNum = nextGame;
-                SceneManager.LoadScene(gamesList[nextGame]);
-            }
+            SceneManager.LoadScene("swipeAway_Game");   //FOR TESTING set to any game to play just this in random, comment out all below
+            // int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
+            // if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
+            // else {
+            //     currentGameNum = nextGame;
+            //     SceneManager.LoadScene(gamesList[nextGame]);
+            // }
         }
     }
 
     public void ToMainMenu() {
+        colorManager.SetBackground("ocean");
         SceneManager.LoadScene("Menu");
         DestroyImmediate(this.gameObject, true);   //Destroy this gameobject as new GameManager will instantiate on menu load
     }
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame(string type) {
+        colorManager.HideBackground();
         gamesWon = 0;
 
         if(type == "random") {

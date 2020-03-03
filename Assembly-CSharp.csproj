@@ -113,8 +113,11 @@
      <Compile Include="Assets\Scripts\GameObjects\Gnatts\Gnatt_Fast.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Gnatts\Gnatt_Normal.cs" />
      <Compile Include="Assets\Scripts\GameObjects\Gnatts\Gnatt_Tank.cs" />
+     <Compile Include="Assets\Scripts\GameObjects\Gnatts\Gnatt_Text.cs" />
      <Compile Include="Assets\Scripts\GameObjects\ParticleSystemAutoDestroy.cs" />
-     <Compile Include="Assets\Scripts\GameObjects\Spark.cs" />
+     <Compile Include="Assets\Scripts\GameObjects\Sparks\Spark.cs" />
+     <Compile Include="Assets\Scripts\GameObjects\Sparks\Spark_Normal.cs" />
+     <Compile Include="Assets\Scripts\GameObjects\Sparks\Spark_Text.cs" />
      <Compile Include="Assets\Scripts\Inspection\Inspection_MessageController.cs" />
      <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtObject.cs" />
      <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtsController.cs" />

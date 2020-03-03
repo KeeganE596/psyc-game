@@ -39,7 +39,7 @@ public class Swipey_AoeSwipe : MonoBehaviour
                 Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
                 rb.AddForce(-direction / timeInterval * throwForce);
 
-                g.GetComponent<CircleCollider2D>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
             }
 
             g.GetComponent<Gnatt>().Despawn();

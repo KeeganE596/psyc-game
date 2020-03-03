@@ -104,4 +104,10 @@ public class ColorManager : MonoBehaviour
                 break;
         }
     }
+
+    public void HideBackground() {
+        mountainsBg.SetActive(false);
+        oceansBg.SetActive(false);
+    }
+    
 }

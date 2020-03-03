@@ -62,40 +62,40 @@ public class Swipey_MessageController : MessageController
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.getIfPlayingChooseGame() && levelManager.isPlaying() && !hasStarted) {
-            hasStarted = true;
+        // if(levelManager.getIfPlayingChooseGame() && levelManager.isPlaying() && !hasStarted) {
+        //     hasStarted = true;
 
-            //gnatt messages
-            if(levelManager.getGamesWon() == 0) {
-                StartCoroutine(CycleGameTextDouble(gnattMessages[0], gnattMessages[1]));
-            }
-            else if(levelManager.getGamesWon() == 1) {
-                StartCoroutine(CycleGameTextSingle(gnattMessages[2]));
-            }
-            else if(levelManager.getGamesWon() == 2) {
-                StartCoroutine(CycleGameTextSingle(gnattMessages[3]));
-            }
-            else if(levelManager.getGamesWon() == 3) {
-                StartCoroutine(CycleGameTextSingle(gnattMessages[4]));
-            }
-            //spark messages
-            else if(levelManager.getGamesWon() == 4) {
-                StartCoroutine(CycleGameTextDouble(sparkMessages[0], sparkMessages[1]));
-            }
-            else if(levelManager.getGamesWon() == 5) {
-                StartCoroutine(CycleGameTextSingle(sparkMessages[2]));
-            }
-            else if(levelManager.getGamesWon() == 6) {
-                StartCoroutine(CycleGameTextSingle(sparkMessages[3]));
-            }
-            //messages for both spawning
-            else if(levelManager.getGamesWon() == 8) {
-                StartCoroutine(CycleGameTextSingle(bothMessages[0]));
-            }
-            else if(levelManager.getGamesWon() == 9) {
-                StartCoroutine(CycleGameTextSingle(bothMessages[1]));
-            }
-        }
+        //     //gnatt messages
+        //     if(levelManager.getGamesWon() == 0) {
+        //         StartCoroutine(CycleGameTextDouble(gnattMessages[0], gnattMessages[1]));
+        //     }
+        //     else if(levelManager.getGamesWon() == 1) {
+        //         StartCoroutine(CycleGameTextSingle(gnattMessages[2]));
+        //     }
+        //     else if(levelManager.getGamesWon() == 2) {
+        //         StartCoroutine(CycleGameTextSingle(gnattMessages[3]));
+        //     }
+        //     else if(levelManager.getGamesWon() == 3) {
+        //         StartCoroutine(CycleGameTextSingle(gnattMessages[4]));
+        //     }
+        //     //spark messages
+        //     else if(levelManager.getGamesWon() == 4) {
+        //         StartCoroutine(CycleGameTextDouble(sparkMessages[0], sparkMessages[1]));
+        //     }
+        //     else if(levelManager.getGamesWon() == 5) {
+        //         StartCoroutine(CycleGameTextSingle(sparkMessages[2]));
+        //     }
+        //     else if(levelManager.getGamesWon() == 6) {
+        //         StartCoroutine(CycleGameTextSingle(sparkMessages[3]));
+        //     }
+        //     //messages for both spawning
+        //     else if(levelManager.getGamesWon() == 8) {
+        //         StartCoroutine(CycleGameTextSingle(bothMessages[0]));
+        //     }
+        //     else if(levelManager.getGamesWon() == 9) {
+        //         StartCoroutine(CycleGameTextSingle(bothMessages[1]));
+        //     }
+        // }
     }
 
     public void MaybeSaySomething() {
