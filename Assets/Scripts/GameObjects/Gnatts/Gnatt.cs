@@ -39,25 +39,18 @@ public class Gnatt : MonoBehaviour
         if(levelManager.isPlaying()) {
             this.transform.position = Vector2.MoveTowards(transform.position, target, velocity * Time.deltaTime);
         }
-        if(doDespawn) {
-            //Debug.Log("here");
-            timer += Time.deltaTime;
-            //Fade out sprite
-            // alpha -= 0.035f;
-            // sprite.color = new Color(1, 1, 1, alpha);
-
-            if(timer > 2f) {
-                this.gameObject.SetActive(false);
-                this.gameObject.GetComponent<Collider2D>().enabled = true;
-                timer = 0;
-                doDespawn = false;
-            }
-        }
     }
 
     public virtual void Despawn() {
-        doDespawn = true;
-        sprite.color = new Color(0, 0, 0, alpha);
+        //this.GetComponentInChildren<AudioSource>().Play(0);
+        StartCoroutine("EndGnat");
+    }
+
+    IEnumerator EndGnat() {
+        yield return new WaitForSeconds(2);
+        this.gameObject.SetActive(false);
+        this.gameObject.GetComponent<Collider2D>().enabled = true;
+        doDespawn = false;
     }
 
     public virtual int GetLives() {

@@ -61,13 +61,13 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("chooseGame");
         }
         else {
-            SceneManager.LoadScene("swipeAway_Game");   //FOR TESTING set to any game to play just this in random, comment out all below
-            // int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
-            // if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
-            // else {
-            //     currentGameNum = nextGame;
-            //     SceneManager.LoadScene(gamesList[nextGame]);
-            // }
+            //SceneManager.LoadScene("swipeAway_Game");   //FOR TESTING set to any game to play just this in random, comment out all below
+            int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
+            if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
+            else {
+                currentGameNum = nextGame;
+                SceneManager.LoadScene(gamesList[nextGame]);
+            }
         }
     }
 

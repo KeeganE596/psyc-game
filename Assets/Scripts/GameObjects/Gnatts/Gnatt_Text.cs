@@ -24,9 +24,8 @@ public class Gnatt_Text : Gnatt
     }
 
     public override void Despawn() {
-        doDespawn = true;
-        Debug.Log("here");
         anim.SetTrigger("destroy");
+        base.Despawn();
     }
 
     public override void FlipSprite() {

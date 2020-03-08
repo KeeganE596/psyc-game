@@ -13,7 +13,7 @@ public class Inspection_MessageController : MessageController
     void Update() {
         if(levelManager.isPlaying() && levelManager.getGamesWon() < 1 && !hasStarted) {
             hasStarted = true;
-            StartCoroutine("CycleGameText");
+            //StartCoroutine("CycleGameText");
         }
     }
 

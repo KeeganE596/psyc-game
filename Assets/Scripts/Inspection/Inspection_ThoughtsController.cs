@@ -14,7 +14,7 @@ public class Inspection_ThoughtsController : MonoBehaviour
     float SCREEN_WIDTH = Screen.width;
     float SCREEN_HEIGHT = Screen.height;
     float xPos;
-    float yPos = 2;
+    //float yPos = 2;
     float xShift;
     float thoughtSpeed;
     bool isClicked;
@@ -52,33 +52,35 @@ public class Inspection_ThoughtsController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(!isClicked) {
-            foreach(GameObject t in thoughts) {
-                t.transform.position = new Vector2(t.transform.position.x + thoughtSpeed, yPos);
-                if(t.transform.position.x > (worldScale.x + 0.5f)) {
-                    t.SetActive(false);
-                    t.transform.position = new Vector2((0-worldScale.x) - xShift*2, yPos);
-                }
-                if(t.transform.position.x > (0-worldScale.x - 0.5f)) {
-                    t.SetActive(true);
-                }
-            }
-        }
+        // if(!isClicked) {
+        //     foreach(GameObject t in thoughts) {
+        //         t.transform.position = new Vector2(t.transform.position.x + thoughtSpeed, yPos);
+        //         if(t.transform.position.x > (worldScale.x + 0.5f)) {
+        //             t.SetActive(false);
+        //             t.transform.position = new Vector2((0-worldScale.x) - xShift*2, yPos);
+        //         }
+        //         if(t.transform.position.x > (0-worldScale.x - 0.5f)) {
+        //             t.SetActive(true);
+        //         }
+        //     }
+        // }
     }
 
     public void spawnThoughts() {
-        while(thoughts.Count < 6) {
+        //while(thoughts.Count < 6) {
+        foreach(GameObject thought in GameObject.FindGameObjectsWithTag("Thought")) {
+            Debug.Log("here");
             int thoughtType = Random.Range(0, 2);
 
-            if((thoughtType == 0 && positiveThoughts.Count > 0) || (thoughtType == 1 && negativeThoughts.Count > 0)) {  //positve thought
-                GameObject thought = Instantiate(thoughtObj, new Vector2(xPos, yPos), Quaternion.identity);
+            if((thoughtType == 0 && positiveThoughts.Count > 0) || (thoughtType == 1 && negativeThoughts.Count > 0)) {
+                //GameObject thought = Instantiate(thoughtObj, new Vector2(xPos, yPos), Quaternion.identity);
                 
-                if(thoughtType == 0) {
+                if(thoughtType == 0) {  //positive thought
                     int thoughtIndex = Random.Range(0, positiveThoughts.Count);
                     thought.GetComponent<Inspection_ThoughtObject>().setThought(positiveThoughts[thoughtIndex], true);
                     positiveThoughts.RemoveAt(thoughtIndex);
                 }
-                if(thoughtType == 1) {
+                if(thoughtType == 1) {  //negative thought
                     int thoughtIndex = Random.Range(0, negativeThoughts.Count);
                     thought.GetComponent<Inspection_ThoughtObject>().setThought(negativeThoughts[thoughtIndex], false);
                     negativeThoughts.RemoveAt(thoughtIndex);
@@ -88,6 +90,7 @@ public class Inspection_ThoughtsController : MonoBehaviour
                 thoughts.Add(thought);
             }
         }
+        Debug.Log(thoughts.Count);
     }
 
     public void RemoveThought(GameObject thought) {

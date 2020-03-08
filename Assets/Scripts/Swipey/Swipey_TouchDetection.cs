@@ -23,6 +23,9 @@ public class Swipey_TouchDetection : MonoBehaviour
     LevelManager levelManager;
 
     public Swipey_MessageController messageController;
+
+    bool clickedGnat;
+    GameObject clickedGnatObject;
     
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -32,6 +35,8 @@ public class Swipey_TouchDetection : MonoBehaviour
         aoeObject = Instantiate(aoePrefab, new Vector2(0, 0), Quaternion.identity);
         aoeScript = aoeObject.GetComponent<Swipey_AoeSwipe>();
         aoeObject.SetActive(false);
+
+        clickedGnat = false;
     }
 
     private void Update() {
@@ -60,14 +65,18 @@ public class Swipey_TouchDetection : MonoBehaviour
                 hit.collider.GetComponent<Spark>().Activate();
                 //messageController.MaybeSaySomething();
             }
+            else if (hit && hit.collider.gameObject.CompareTag("Gnatt")) {
+                clickedGnat = true;
+                clickedGnatObject = hit.collider.gameObject;
+            }
 
             //get touch position and mark time when screen is touched
             touchTimeStart = Time.time;
 
             //Move aoeObject for detecting gnatts in swipe
-            aoeObject.SetActive(true);
-            aoeScript.clearGnatts();
-            aoeObject.transform.position = Camera.main.ScreenToWorldPoint(startPos);
+            //aoeObject.SetActive(true);
+            //aoeScript.clearGnatts();
+            //aoeObject.transform.position = Camera.main.ScreenToWorldPoint(startPos);
         }
     }
 
@@ -76,12 +85,20 @@ public class Swipey_TouchDetection : MonoBehaviour
             //get time when released
             touchTimeFinish = Time.time;
 
-            //Flick gnatts away
-            if(startPos != endPos && !aoeScript.isGnattsEmpty()) {
-                aoeScript.flickGnatts((startPos - endPos), (touchTimeFinish - touchTimeStart), throwForce);
-                //messageController.MaybeSaySomething();
+            if(clickedGnat) {
+                clickedGnatObject.GetComponent<Rigidbody2D>().AddForce(-(startPos - endPos) / (touchTimeFinish - touchTimeStart) * throwForce); //(direction/timeInterval*throwforce)
+                clickedGnatObject.GetComponent<Collider2D>().enabled = false;
+                clickedGnatObject.GetComponent<Gnatt>().Despawn();
             }
-            aoeObject.SetActive(false);
+
+            clickedGnat = false;
+
+            // //Flick gnatts away
+            // if(startPos != endPos && !aoeScript.isGnattsEmpty()) {
+            //     aoeScript.flickGnatts((startPos - endPos), (touchTimeFinish - touchTimeStart), throwForce);
+            //     //messageController.MaybeSaySomething();
+            // }
+            // aoeObject.SetActive(false);
         }
     }
 }
