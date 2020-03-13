@@ -15,6 +15,9 @@ public class Breathing_MessageController : MessageController
             hasStarted = true;
             StartCoroutine("CycleGameText");
         }
+        if(levelManager.isPlaying()) {
+            monkMessageObject.SetActive(false);
+        }
     }
 
     IEnumerator CycleGameText() {

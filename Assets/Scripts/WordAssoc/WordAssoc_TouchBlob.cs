@@ -16,6 +16,7 @@ public class WordAssoc_TouchBlob : MonoBehaviour
     List<GameObject> caughtWords;
 
     public GameObject sparkParticle;
+    public Material lineMat;
 
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -53,7 +54,8 @@ public class WordAssoc_TouchBlob : MonoBehaviour
         line.endWidth = (0.05f);
         line.SetPosition(1, new Vector2(0, 0));
         line.SetPosition(0, word.transform.position);
-        line.gameObject.layer = 11;
+        line.material = lineMat;
+        //line.gameObject.layer = 11;
 
         wordsCaught++;
         caughtWords.Add(word);

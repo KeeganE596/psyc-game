@@ -13,7 +13,6 @@ public class Gnatt : MonoBehaviour
     readonly Vector2 target = new Vector2(0, 0);
 
     protected bool doDespawn;
-    float timer;
 
     protected SpriteRenderer sprite;
     protected float alpha = 1;
@@ -28,11 +27,10 @@ public class Gnatt : MonoBehaviour
 
     public virtual void Start() {
         doDespawn = false;
-        timer = 0;
         sprite = this.GetComponentInChildren<SpriteRenderer>();
         
         //Set movement velocity to scale with level number
-        velocity = 1 + speedMultiplier;
+        //velocity = 1 + speedMultiplier;
     }
 
     void Update() {
@@ -47,7 +45,7 @@ public class Gnatt : MonoBehaviour
     }
 
     IEnumerator EndGnat() {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         this.gameObject.SetActive(false);
         this.gameObject.GetComponent<Collider2D>().enabled = true;
         doDespawn = false;
@@ -59,5 +57,9 @@ public class Gnatt : MonoBehaviour
 
     public virtual void FlipSprite() {
         this.transform.localScale = new Vector3(-(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+    }
+
+    public void SetSpeed(float speed) {
+        velocity = 1 + speed;
     }
 }

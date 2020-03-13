@@ -9,12 +9,16 @@ public class MessageController : MonoBehaviour
     protected LevelManager levelManager;
     public GameObject messageTextObj;
     protected TextMeshProUGUI messageText;
+    public GameObject monkMessageObject;
+    protected TextMeshPro monkMessageText;
 
     protected Vector3 worldScale;
     protected float SCREEN_WIDTH = Screen.width;
     protected float SCREEN_HEIGHT = Screen.height;
 
     protected bool hasStarted = false;
+
+    protected int currentGamesWon;
 
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -26,9 +30,14 @@ public class MessageController : MonoBehaviour
         textAnimator = messageTextObj.GetComponent<Animator>();
         messageText = messageTextObj.GetComponentInChildren<TextMeshProUGUI>();
 
+        currentGamesWon = levelManager.getGamesWon();
+
         scaleText();
 
         messageTextObj.SetActive(false);
+        
+        monkMessageText = monkMessageObject.GetComponentInChildren<TextMeshPro>();
+        monkMessageObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,5 +64,37 @@ public class MessageController : MonoBehaviour
         else {
             textBackground.sizeDelta = new Vector2((SCREEN_WIDTH)*0.9f, (SCREEN_HEIGHT)*0.16f);
         }
+    }
+
+    public void ContinueGame() {
+        levelManager.StartPlaying();
+        monkMessageObject.SetActive(false);
+    }
+
+    protected IEnumerator CycleGameTextSingle(string gameText) {
+        // messageTextObj.SetActive(true);
+        // messageText.text = gameText;
+        // textAnimator.SetTrigger("showText");
+        monkMessageText.text = gameText;
+        yield return new WaitForSeconds(6f);
+
+        //textAnimator.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        //messageTextObj.SetActive(false);
+    }
+
+    protected IEnumerator CycleGameTextDouble(string gameText_1, string gameText_2) {
+        messageTextObj.SetActive(true);
+        messageText.text = gameText_1;
+        textAnimator.SetTrigger("showText");
+        yield return new WaitForSeconds(6f);
+
+        messageText.text = gameText_2;
+        textAnimator.SetTrigger("showText");
+        yield return new WaitForSeconds(6f);
+        
+        textAnimator.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        messageTextObj.SetActive(false);
     }
 }

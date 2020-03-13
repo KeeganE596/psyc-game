@@ -10,9 +10,9 @@ public class Swipey_MessageController : MessageController
     Animator maybeTextAnimator;
     List<Vector3> maybeTextPositions;
 
-    List<string> gnattMessages;
-    List<string> sparkMessages;
-    List<string> bothMessages;
+    List<string> monkMessages;
+    // List<string> sparkMessages;
+    // List<string> bothMessages;
     List<string> gameMessages;
 
     void Awake() {
@@ -24,22 +24,27 @@ public class Swipey_MessageController : MessageController
         base.Start();
 
         //fill arrays for game bar text instructions
-        gnattMessages = new List<string>();
-        gnattMessages.Add("Gnats are like gloomy thoughts"); 
-        gnattMessages.Add("Swipe away the gnats to help calm the brain");
-        gnattMessages.Add("GNAT stands for Gloomy Negative Automatic Thoughts");
-        gnattMessages.Add("They can come fast and automatically, so you don’t even notice and the day gets gloomy");
-        gnattMessages.Add("Flick them away to reveal the calm");
+        monkMessages = new List<string>();
+        // gnattMessages.Add("Gnats are like gloomy thoughts"); 
+        // gnattMessages.Add("Swipe away the gnats to help calm the brain");
+        // gnattMessages.Add("GNAT stands for Gloomy Negative Automatic Thoughts");
+        // gnattMessages.Add("They can come fast and automatically, so you don’t even notice and the day gets gloomy");
+        // gnattMessages.Add("Flick them away to reveal the calm");
+        monkMessages.Add("<b>GNAT</b> stands for <b>Gloomy Negative Automatic Thoughts</b>. Swipe them away to relax the Zen Ninja"); 
+        monkMessages.Add("<b>SPARX</b> stand for <b>Smart Positive Automatic Realistic X Factor</b> thoughts. Tap to collect them and relax the Zen Ninja");
+        monkMessages.Add("<b>SPARX</b> and <b>GNATs</b> can come at the same time, try to find the <b>SPARX</b> amongst the <b>GNATs</b>");
+        monkMessages.Add("<b>GNATs</b> can come fast, automatic and in all shapes and forms. Try find their new form and swipe them away");
+        monkMessages.Add("<b>SPARX</b> can also come fast, automatic and in all shapes and forms. Try find their new form and tap them");
 
-        sparkMessages = new List<string>();
-        sparkMessages.Add("SPARX are like positive thoughts"); 
-        sparkMessages.Add("Tap the SPARX to calm the brain");
-        sparkMessages.Add("In facts SPARX stands for Smart Relastic X factor thoughts");
-        sparkMessages.Add("Focusing on the SPARX helps grow them");
+        // sparkMessages = new List<string>();
+        // sparkMessages.Add("SPARX are like positive thoughts"); 
+        // sparkMessages.Add("Tap the SPARX to calm the brain");
+        // sparkMessages.Add("In facts SPARX stands for Smart Relastic X factor thoughts");
+        // sparkMessages.Add("Focusing on the SPARX helps grow them");
 
-        bothMessages = new List<string>();
-        bothMessages.Add("Find the SPARX amongst the GNATs"); 
-        bothMessages.Add("Focusing your attention on the SPARX helps grow them");
+        // bothMessages = new List<string>();
+        // bothMessages.Add("Find the SPARX amongst the GNATs"); 
+        // bothMessages.Add("Focusing your attention on the SPARX helps grow them");
 
         //get positions and fill array for maybe text
         maybeText = maybeTextObj.GetComponent<TextMeshPro>();
@@ -96,6 +101,35 @@ public class Swipey_MessageController : MessageController
         //         StartCoroutine(CycleGameTextSingle(bothMessages[1]));
         //     }
         // }
+        if(!levelManager.getIfPlayingChooseGame() && hasStarted) {
+            if(currentGamesWon == 0) {
+                StartCoroutine(CycleGameTextSingle(monkMessages[0]));
+            }
+            else if(currentGamesWon == 3) {
+                StartCoroutine(CycleGameTextSingle(monkMessages[1]));
+            }
+            else if(currentGamesWon == 6) {
+                StartCoroutine(CycleGameTextSingle(monkMessages[2]));
+            }
+            else if(currentGamesWon == 11) {
+                StartCoroutine(CycleGameTextSingle(monkMessages[3]));
+            }
+            else if(currentGamesWon == 14) {
+                StartCoroutine(CycleGameTextSingle(monkMessages[4]));
+            }
+        }
+        if(!hasStarted && GameObject.FindGameObjectsWithTag("Instructions").Length == 0) {
+            if(currentGamesWon == 0 || currentGamesWon == 3 || currentGamesWon == 6 || currentGamesWon == 11 || currentGamesWon == 14) {
+                monkMessageObject.SetActive(true);
+            }
+            else {
+                ContinueGame();
+            }
+            hasStarted = true;
+        }
+        if(levelManager.isPlaying()) {
+            monkMessageObject.SetActive(false);
+        }
     }
 
     public void MaybeSaySomething() {
@@ -122,32 +156,4 @@ public class Swipey_MessageController : MessageController
         maybeTextAnimator.SetBool("textVisible", false);
         maybeText.transform.GetChild(0).gameObject.SetActive(false);
     }
-
-    IEnumerator CycleGameTextSingle(string gameText) {
-        messageTextObj.SetActive(true);
-        messageText.text = gameText;
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
-
-        textAnimator.SetTrigger("fadeOut");
-        yield return new WaitForSeconds(1f);
-        messageTextObj.SetActive(false);
-    }
-
-    IEnumerator CycleGameTextDouble(string gameText_1, string gameText_2) {
-        messageTextObj.SetActive(true);
-        messageText.text = gameText_1;
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
-
-        messageText.text = gameText_2;
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
-        
-        textAnimator.SetTrigger("fadeOut");
-        yield return new WaitForSeconds(1f);
-        messageTextObj.SetActive(false);
-    }
-
-
 }

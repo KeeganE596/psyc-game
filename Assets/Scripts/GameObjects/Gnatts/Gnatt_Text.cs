@@ -15,7 +15,7 @@ public class Gnatt_Text : Gnatt
     }
 
     public override void Start() {
-        speedMultiplier = (GameManager.gamesWon + 1) * 0.1f;
+        //speedMultiplier = 0;//(GameManager.gamesWon + 1) * 0.1f;
         base.Start();
     }
 

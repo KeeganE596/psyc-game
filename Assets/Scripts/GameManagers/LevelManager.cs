@@ -11,6 +11,8 @@ using TMPro;
 //In game scripts can reference this to start/end games and get information about the game type
 public class LevelManager : MonoBehaviour
 {
+    public GameObject GMPrefab;
+    
     //Game Slider Setup
     public bool usingTimer = false;
     float timeRemaining;
@@ -43,6 +45,9 @@ public class LevelManager : MonoBehaviour
     float SCREEN_HEIGHT = Screen.height;
 
     void Awake() {
+        if(GameObject.FindGameObjectsWithTag("GameManager").Length < 1) {
+            Instantiate(GMPrefab);
+        }
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
 
@@ -66,11 +71,13 @@ public class LevelManager : MonoBehaviour
         colorManager.setCameraBackground();
         
         //Setup text panels
-        if(playingChooseGame && gameManager.NumberOfGamesWon() > 0) {
-            instructionsPanel.SetActive(false);
-            StartGame();
+        if(playingChooseGame && gameManager.NumberOfGamesWon() == 0) {     
+            instructionsPanel.SetActive(true);
         }
-        else { instructionsPanel.SetActive(true); }
+        else { 
+            instructionsPanel.SetActive(false);
+            StartGame(); 
+        }
         winPanel.SetActive(false);
         losePanel.SetActive(false);
         
@@ -104,7 +111,15 @@ public class LevelManager : MonoBehaviour
             timeSlider.gameObject.SetActive(true);   //Turn slider on
         }
         pauseButton.SetActive(true);    //Turn on pause button
+    }
+
+    public void StartPlaying() {
         playing = true;
+    }
+
+    public void StartGameAndPlay() {
+        StartGame();
+        StartPlaying();
     }
 
     float CalculateSliderValue() {
@@ -214,6 +229,7 @@ public class LevelManager : MonoBehaviour
         pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.465f), 0+SCREEN_HEIGHT*0.45f);
         pauseButton.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.07f, SCREEN_HEIGHT*0.07f);
         pauseButton.transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.05f, SCREEN_HEIGHT*0.05f);
+        pauseButton.transform.GetChild(1).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.04f, SCREEN_HEIGHT*0.04f);
 
         pausePanel.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
         pausePanel.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);

@@ -13,6 +13,7 @@ public class MenuBlob : MonoBehaviour
     public GameObject customizePanel;
     public GameObject aboutPanel;
     public GameObject leaderboardPanel;
+    public GameObject playPanel;
 
     public GameObject startGameButton;
     public GameObject startChooseGameButton;
@@ -38,6 +39,7 @@ public class MenuBlob : MonoBehaviour
 
     private void Start() {
         anim = blob.GetComponent<Animator>();
+        //toggle_all(false);
     }
 
     public void TogglePlay(bool newValue) {
@@ -74,9 +76,11 @@ public class MenuBlob : MonoBehaviour
             aboutButton.SetActive(false);
             SettingsText.SetActive(false);
             PlayText.SetActive(false);
+            
             customizePanel.SetActive(false);
             aboutPanel.SetActive(false);
             leaderboardPanel.SetActive(false);
+            playPanel.SetActive(false);
     }
 
     public void toggleCustomizePanel(bool newValue) {
@@ -97,6 +101,16 @@ public class MenuBlob : MonoBehaviour
         StartCoroutine("WaitToDisplayLeaderboard");
     }
 
+    public void togglePlayPanel(bool newValue) {
+        Toggle_allButton.SetActive(true);
+        anim.SetBool("centerblob", newValue);
+        StartCoroutine("WaitToDisplayPlay");
+    }
+
+    public void StartGame(string type) {
+        StartCoroutine(WaitToStartGame(type));
+    }
+
     IEnumerator WaitToDisplayCustomize() {
         yield return new WaitForSeconds(0.4f);
         customizeButton.SetActive(false);
@@ -114,6 +128,18 @@ public class MenuBlob : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         leaderboardButton.SetActive(false);
         leaderboardPanel.SetActive(true);
+    }
+
+    IEnumerator WaitToDisplayPlay() {
+        yield return new WaitForSeconds(0.4f);
+        playPanel.SetActive(true);
+    }
+
+    IEnumerator WaitToStartGame(string type) {
+        anim.SetTrigger("exitblob");
+        playPanel.SetActive(false);
+        yield return new WaitForSeconds(0.7f);
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().StartGame(type);
     }
 }
 

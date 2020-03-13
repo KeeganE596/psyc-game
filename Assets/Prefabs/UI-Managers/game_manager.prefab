@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c252987cee6fb4b9d4c12ff173e5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CMPrefab: {fileID: 4996259326351844718, guid: 21a9bb0759ac1534caf2f61a8184097c,
+    type: 3}

@@ -38,7 +38,7 @@ public class Swipey_ScoreManager : MonoBehaviour
         scoreIndicator = gameObject.transform.GetChild(1).gameObject;
         backgroundIndicator = gameObject.transform.GetChild(0).gameObject;
         
-        scoreScaleAmount = (backgroundIndicator.transform.localScale.x - scoreIndicator.transform.localScale.x)/maxPoints;
+        scoreScaleAmount = (backgroundIndicator.transform.localScale.x - scoreIndicator.transform.localScale.x)/(maxPoints-score);
     }
 
     public void addScore() {

@@ -16,7 +16,7 @@ public class Inspection_ThoughtsController : MonoBehaviour
     float xPos;
     //float yPos = 2;
     float xShift;
-    float thoughtSpeed;
+    //float thoughtSpeed;
     bool isClicked;
 
     // Start is called before the first frame update
@@ -43,7 +43,7 @@ public class Inspection_ThoughtsController : MonoBehaviour
         xShift = (worldScale.x*2)/4;
         xPos = (0-worldScale.x) - xShift*2;
 
-        thoughtSpeed = 0.04f;
+        //thoughtSpeed = 0.04f;
 
         isClicked = false;
 
@@ -69,7 +69,6 @@ public class Inspection_ThoughtsController : MonoBehaviour
     public void spawnThoughts() {
         //while(thoughts.Count < 6) {
         foreach(GameObject thought in GameObject.FindGameObjectsWithTag("Thought")) {
-            Debug.Log("here");
             int thoughtType = Random.Range(0, 2);
 
             if((thoughtType == 0 && positiveThoughts.Count > 0) || (thoughtType == 1 && negativeThoughts.Count > 0)) {
@@ -90,7 +89,6 @@ public class Inspection_ThoughtsController : MonoBehaviour
                 thoughts.Add(thought);
             }
         }
-        Debug.Log(thoughts.Count);
     }
 
     public void RemoveThought(GameObject thought) {

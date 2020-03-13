@@ -28,7 +28,7 @@ public class Swipey_Spawner : MonoBehaviour
     float gnatTimer;
     float gnatSpawnTime;
 
-    int levelScaler;
+    int currentLevel;
 
     bool spawnSparks;
     bool spawnGnats;
@@ -43,7 +43,7 @@ public class Swipey_Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         playing = levelManager.isPlaying();
-        levelScaler = levelManager.getNumberGamesWon();
+        currentLevel = levelManager.getNumberGamesWon();
 
         goodWords = new List<string>();
         goodWords.Add("Adventure"); goodWords.Add("Beauty"); goodWords.Add("Caring");
@@ -60,10 +60,11 @@ public class Swipey_Spawner : MonoBehaviour
 
         // if(GameManager.swipeType == "default") {
             if(levelManager.getIfPlayingChooseGame()) {
-                SetupChooseGameSpawn();
+                SetupRandomGameSpawn();
             }
             else {
-                ChooseRandomGameType();
+                SetupChooseGameSpawn();
+                //ChooseRandomGameType();
             }
         // }
         // else if(GameManager.swipeType == "fast") {
@@ -171,41 +172,41 @@ public class Swipey_Spawner : MonoBehaviour
             SetupSparkPool(true, "text");
         }
         if(Random.Range(0, 2) == 0) {   //Choose gnat type
-            SetupGnatPool(true, "normal");
+            SetupGnatPool(true, "normal", 18);
         }
         else {
-            SetupGnatPool(true, "text");
+            SetupGnatPool(true, "text", 18);
         }
     }
 
     void SetupChooseGameSpawn() {
-        if(levelManager.getGamesWon() < 3) {    //Just spawn gnatts for first 3 levels (1-3)
+        if(currentLevel < 3) {    //Just spawn gnatts for first 3 levels (1-3)
             levelManager.setToWinOnTimeOut();
             SetupSparkPool(false, "none");
-            SetupGnatPool(true, "normal");
+            SetupGnatPool(true, "normal", (15 + (currentLevel*2)));
         }
-        else if(levelManager.getGamesWon() < 6) {    //Just spawn sparks for next 3 levels (4-6)
-            levelManager.setToWinOnTimeOut();
+        else if(currentLevel < 6) {    //Just spawn sparks for next 3 levels (4-6)
+            //levelManager.setToWinOnTimeOut();
             SetupSparkPool(true, "normal");
-            SetupGnatPool(false, "none");
+            SetupGnatPool(false, "none", 0);
         }
-        else if(levelManager.getGamesWon() < 9) {  //Spawn both for 3 levels (7-9)
+        else if(currentLevel < 11) {  //Spawn both for 5 levels (7-11)
             SetupSparkPool(true, "normal");
-            SetupGnatPool(true, "normal");
+            SetupGnatPool(true, "normal", (5 + currentLevel));
         }
-        else if(levelManager.getGamesWon() < 12) {   //Just spawn text gnatts for 3 levels (10-12)
+        else if(currentLevel < 14) {   //Just spawn text gnats for 3 levels (12-14)
             levelManager.setToWinOnTimeOut();
             SetupSparkPool(false, "none");
-            SetupGnatPool(true, "text");
+            SetupGnatPool(true, "text", (3 + currentLevel));
         }
-        else if(levelManager.getGamesWon() < 15) {    //Just spawn text sparks for next 3 levels (13-15)
-            levelManager.setToWinOnTimeOut();
+        else if(currentLevel < 17) {    //Just spawn text sparks for next 3 levels (15-17)
+            //levelManager.setToWinOnTimeOut();
             SetupSparkPool(true, "text");
-            SetupGnatPool(false, "none");
+            SetupGnatPool(false, "none", 0);
         }
-        else if(levelManager.getGamesWon() < 18) {  //Spawn both text types for 3 levels (16-18)
+        else if(currentLevel < 18) {  //Spawn both text types for 3 levels (16-18)
             SetupSparkPool(true, "text");
-            SetupGnatPool(true, "text");
+            SetupGnatPool(true, "text", (currentLevel));
         }
         else {
             SetupRandomGameSpawn();
@@ -215,16 +216,16 @@ public class Swipey_Spawner : MonoBehaviour
     void SetupFastGnattSpawn() {
         levelManager.setToWinOnTimeOut();
         SetupSparkPool(false, "normal");
-        SetupGnatPool(true, "fast");
+        SetupGnatPool(true, "fast", 15);
     }
 
     void SetupTankGnattSpawn() {
         levelManager.setToWinOnTimeOut();
         SetupSparkPool(false, "normal");
-        SetupGnatPool(true, "tank");
+        SetupGnatPool(true, "tank", 15);
     }
 
-    void SetupGnatPool(bool spawningGnats, string gnatType) {
+    void SetupGnatPool(bool spawningGnats, string gnatType, int numOfGnats) {
         
         if(!spawningGnats || gnatType == "none") {
             //Do not spawn gnatts
@@ -237,11 +238,14 @@ public class Swipey_Spawner : MonoBehaviour
         //Gnats spawn intialise settings
         spawnGnats = true;
         gnatTimer = 0.1f;
-        gnatSpawnTime = (1.5f - ((levelScaler+1)*0.1f)) >= 0.35f ? 1.5f - ((levelScaler+1)*0.1f) : 0.35f;  //scale gnatt spawn speed depending on level number
-        
+        //gnatSpawnTime = (1.5f - ((currentLevel+1)*0.1f)) >= 0.35f ? 1.5f - ((currentLevel+1)*0.1f) : 0.35f;  //scale gnatt spawn speed depending on level number
+        gnatSpawnTime = levelManager.maxTime/numOfGnats;
+        float gnatSpeed = PickGnatSpeed();
+
         //Instantiate gnats to fill object pool with appropriate gnat for the level
         gnatPool = new List<GameObject>();
-        for(int i=0; i<(levelManager.maxTime/gnatSpawnTime); i++) {
+        //for(int i=0; i<(levelManager.maxTime/gnatSpawnTime); i++) {
+        for(int i=0; i<numOfGnats; i++) {
             if(gnatType == "normal") {
                 if(Random.Range(0, 2) == 0) { 
                     gnatPool.Add(Instantiate(gnat_1, new Vector2(0, 0), Quaternion.identity)); 
@@ -249,15 +253,19 @@ public class Swipey_Spawner : MonoBehaviour
                 else { 
                     gnatPool.Add(Instantiate(gnat_2, new Vector2(0, 0), Quaternion.identity)); 
                 }
+                
             }
             else if(gnatType == "text") {
                 gnatPool.Add(Instantiate(gnat_text, new Vector2(0, 0), Quaternion.identity)); 
                 gnatPool[i].GetComponent<Gnatt_Text>().SetText(badWords[Random.Range(0, badWords.Count)]);
+                
             }
-
+            gnatPool[i].GetComponent<Gnatt>().SetSpeed(gnatSpeed);
             gnatPool[i].SetActive(false);
         }
         gnatIndex = 0;
+
+        //Debug.Log("Gnats: " + gnatPool.Count);
     }
     
     void SetupSparkPool(bool spawningSparks, string sparkType) {
@@ -293,5 +301,34 @@ public class Swipey_Spawner : MonoBehaviour
             sparkPool[i].SetActive(false);
         }
         sparkIndex = 0;
+    }
+
+    float PickGnatSpeed() {
+        switch (currentLevel) {
+            case 0:
+                return 0f;
+            case 1:
+                return 0.2f;
+            case 2:
+                return 0.4f;
+            case 6:
+                return 0.2f;
+            case 7:
+                return 0.4f;
+            case 8:
+                return 0.6f;
+            case 9:
+                return 0.8f;
+            case 10:
+                return 1f;
+            case 11:
+                return 0.4f;
+            case 12:
+                return 0.6f;
+            case 13:
+                return 0.8f;
+            default:
+                return currentLevel/10f <= 1.5f ? currentLevel/10f : 1.5f;
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gnatt_Normal : Gnatt
 {
     public override void Start() {
-        speedMultiplier = (GameManager.gamesWon + 1) * 0.1f;
+        //speedMultiplier = 0;//(GameManager.gamesWon + 1) * 0.1f;
         base.Start();
     }
 
@@ -20,6 +20,9 @@ public class Gnatt_Normal : Gnatt
             alpha -= 0.04f;
             sprite.color = new Color(1, 1, 1, alpha);
             yield return new WaitForSeconds(0.01f);
-        } 
+        }
+        yield return new WaitForSeconds(1f);
+        alpha = 1;
+        sprite.color = new Color(1, 1, 1, alpha);
     }
 }

@@ -32,7 +32,6 @@ public class GameBlobController : MonoBehaviour
     }
 
     public void GameBlobClicked(string name) {
-        //blobClicked = true;
         anim.SetBool("gameBlobClicked", true);
         currentGame = name;
         switch(name) {
@@ -60,12 +59,20 @@ public class GameBlobController : MonoBehaviour
     }
 
     public void UnclickGameBlob() {
-        //Debug.Log("unclick");
         anim.SetBool("gameBlobClicked", false);
     }
 
     public void PlayGame() {
-        //Debug.Log("play");
         gameManager.PickGame(currentGame);
+    }
+
+    public void ToMainMenu() {
+        StartCoroutine("WaitToGoToMenu");
+    }
+
+    IEnumerator WaitToGoToMenu() {
+        anim.SetTrigger("despawnBlob");
+        yield return new WaitForSeconds(0.7f);
+        gameManager.ToMainMenu();
     }
 }

@@ -84,21 +84,21 @@ public class WordAssoc_Spawner : MonoBehaviour
                 }
             }
             //Bad words spawning timer logic
-            if (badtimer > badSpawnTime && badWords.Count > 0) {
-                //Get rendom position to spawn word at
-                Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width - 300), Random.Range(50, Screen.height - 100)));
+            // if (badtimer > badSpawnTime && badWords.Count > 0) {
+            //     //Get rendom position to spawn word at
+            //     Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width - 300), Random.Range(50, Screen.height - 100)));
 
-                //check position isnt too close to middle
-                if (CheckPos(spawnPos)) {
-                    //spawn badword object and picks word from list, remove from list after spawn so no duplicates
-                    obj = Instantiate(badword, spawnPos, Quaternion.identity);
-                    int wordNum = Random.Range(0, badWords.Count);
-                    obj.GetComponent<TextMeshPro>().text = badWords[wordNum];
-                    badWords.RemoveAt(wordNum);
+            //     //check position isnt too close to middle
+            //     if (CheckPos(spawnPos)) {
+            //         //spawn badword object and picks word from list, remove from list after spawn so no duplicates
+            //         obj = Instantiate(badword, spawnPos, Quaternion.identity);
+            //         int wordNum = Random.Range(0, badWords.Count);
+            //         obj.GetComponent<TextMeshPro>().text = badWords[wordNum];
+            //         badWords.RemoveAt(wordNum);
 
-                    badtimer = 0;
-                }
-            }
+            //         badtimer = 0;
+            //     }
+            // }
         }
     }
 

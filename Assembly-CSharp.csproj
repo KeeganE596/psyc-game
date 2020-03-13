@@ -133,6 +133,7 @@
      <Compile Include="Assets\Scripts\Swipey\Swipey_ScoreManager.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_Spawner.cs" />
      <Compile Include="Assets\Scripts\Swipey\Swipey_TouchDetection.cs" />
+     <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_MessageController.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_Spawner.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchBlob.cs" />
      <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchDetection.cs" />
