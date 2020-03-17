@@ -20,7 +20,7 @@ public class WordAssoc_MessageController : MessageController
             //}
         //}
         if(!hasStarted && GameObject.FindGameObjectsWithTag("Instructions").Length == 0) {
-            if(!levelManager.getIfPlayingChooseGame() && currentGamesWon == 31) {
+            if(!levelManager.getIfPlayingChooseGame() && currentGamesWon == 25) {
                 monkMessageObject.SetActive(true);
                 StartCoroutine(CycleGameTextSingle("There are things we can do to help chill the Zen Ninja. Connect strategies that can help the Zen Ninja relax"));
             }

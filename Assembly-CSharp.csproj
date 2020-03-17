@@ -106,6 +106,8 @@
      <Compile Include="Assets\Scripts\ChooseGameScreen\ChooseGameController.cs" />
      <Compile Include="Assets\Scripts\ChooseGameScreen\GameBlobController.cs" />
      <Compile Include="Assets\Scripts\ChooseGameScreen\ScaleChooseGameScreen.cs" />
+     <Compile Include="Assets\Scripts\Clouds\Clouds_Spawner.cs" />
+     <Compile Include="Assets\Scripts\Clouds\Clouds_TouchDetection.cs" />
      <Compile Include="Assets\Scripts\GameManagers\ColorManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\LevelManager.cs" />

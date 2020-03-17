@@ -7,6 +7,8 @@ using UnityEngine;
 //Ability to have different spark and gnatt types
 public class Swipey_Spawner : MonoBehaviour
 {
+    LevelManager levelManager;
+    
     List<GameObject> sparkPool;
     public GameObject spark_1;
     public GameObject spark_2;
@@ -21,7 +23,6 @@ public class Swipey_Spawner : MonoBehaviour
     public GameObject gnat_text;
     int gnatIndex;
 
-    LevelManager levelManager;
     bool playing;
     float sparkTimer;
     float sparkSpawnTime;
@@ -314,21 +315,21 @@ public class Swipey_Spawner : MonoBehaviour
             case 6:
                 return 0.2f;
             case 7:
-                return 0.4f;
+                return 0.3f;
             case 8:
-                return 0.6f;
+                return 0.4f;
             case 9:
-                return 0.8f;
+                return 0.5f;
             case 10:
-                return 1f;
+                return 6f;
             case 11:
                 return 0.4f;
             case 12:
-                return 0.6f;
+                return 0.5f;
             case 13:
-                return 0.8f;
+                return 0.6f;
             default:
-                return currentLevel/10f <= 1.5f ? currentLevel/10f : 1.5f;
+                return currentLevel/10f <= 0.8f ? currentLevel/10f : 0.8f;
         }
     }
 }

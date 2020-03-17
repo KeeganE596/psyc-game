@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 //if touch was on a spark or swipe occured
 public class Swipey_TouchDetection : MonoBehaviour
 {
+    LevelManager levelManager;
+    
     Vector2 startPos, endPos;
     float touchTimeStart, touchTimeFinish;
 
@@ -19,8 +21,6 @@ public class Swipey_TouchDetection : MonoBehaviour
 
     Vector3 mousePos;
     RaycastHit2D hit;
-
-    LevelManager levelManager;
 
     public Swipey_MessageController messageController;
 

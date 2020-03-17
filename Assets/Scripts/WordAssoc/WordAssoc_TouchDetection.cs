@@ -21,6 +21,12 @@ public class WordAssoc_TouchDetection : MonoBehaviour
 
     GameObject currentWord;
     LineRenderer currentLine;
+
+    int score;
+    public GameObject scoreObject;
+    GameObject backgroundIndicator;
+    GameObject scoreIndicator;
+    float scoreScaleAmount;
     
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -28,15 +34,11 @@ public class WordAssoc_TouchDetection : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        // Add a Line Renderer to the GameObject
-        //  line = this.gameObject.AddComponent<LineRenderer>();
-        //  line.startWidth = (0.04f);
-        //  line.endWidth = (0.05f);
-        //  line.SetPosition(0, new Vector2(0, 0));
-        //  line.startColor = new Color(1, 1, 1, 1);
-        //  line.endColor = new Color(1, 1, 1, 1);
-        //  line.material = lineMat;
-         //line.gameObject.layer = 11;    //add to metaball layer
+        score = 0;
+
+        backgroundIndicator = scoreObject.transform.GetChild(0).gameObject;
+        scoreIndicator = scoreObject.transform.GetChild(1).gameObject;
+        scoreScaleAmount = (backgroundIndicator.transform.localScale.x - scoreIndicator.transform.localScale.x)/(8);
     }
     
     // Update is called once per frame
@@ -46,10 +48,6 @@ public class WordAssoc_TouchDetection : MonoBehaviour
             screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             hit = Physics2D.Raycast(screenPos,Vector2.zero);
 
-            //Raycast from camera
-            // if (hit && hit.collider.gameObject.tag == "TouchBlob")  {
-            //     hitObj = true;
-            // }
             if (hit && hit.collider.CompareTag("Word") && (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))  {
                 hitObj = true;
                 currentWord = hit.collider.gameObject;
@@ -61,28 +59,32 @@ public class WordAssoc_TouchDetection : MonoBehaviour
             if(hitObj && (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))) {
                 Vector2 toPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 currentLine.SetPosition(1, toPos);
-                //touch_blob.SetActive(true);
-                //touch_blob.transform.position = toPos;
-                //line.SetPosition(1, toPos);
             }
-            // else{
-                // Vector2 newPos = 
-                //         Vector2.MoveTowards(new Vector2(touch_blob.transform.position.x, touch_blob.transform.position.y), new Vector2(0,0), (25 * Time.deltaTime));
-                // touch_blob.transform.position = newPos;
-                // line.SetPosition(1, newPos);
-                // touch_blob.SetActive(false);
-            // }
 
             if(Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) {
                 hitObj = false;
                 if(hit && hit.collider.CompareTag("Player")) {
                     currentLine.SetPosition(1, new Vector2(0,0));
                     currentWord.GetComponent<Collider2D>().enabled = false;
+                    
+                    score++;
+                    scoreIndicator.transform.localScale += new Vector3(scoreScaleAmount, scoreScaleAmount, 0);
                 }
-                else if(currentWord) {
-                    currentLine.enabled = false;
-                }
+                currentWord = null;
+                currentLine = null;
+            }
+
+            if(score >= 8) {
+                levelManager.GameWon();
             }
         }
+        Debug.Log(score);
+    }
+
+    void UpdateScoreCircle() {
+        //scoreIndicatorTargetSize = scoreIndicator.transform.localScale.x + scoreScaleAmount;
+        //while(scoreIndicator.transform.localScale.x < scoreIndicatorTargetSize) {
+            scoreIndicator.transform.localScale += new Vector3(scoreScaleAmount, scoreScaleAmount, 0);
+        //}
     }
 }

@@ -77,6 +77,9 @@ public class GameManager : MonoBehaviour
             else if(gamesWon < 31) {
                 SceneManager.LoadScene("wordAssociation_Game");
             }
+            else {
+                SceneManager.LoadScene("clouds_Game");
+            }
         }
     }
 
