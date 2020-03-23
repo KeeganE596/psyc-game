@@ -42,10 +42,10 @@ public class WordAssoc_Spawner : MonoBehaviour
         // words.Add("kindness");  words.Add("leadership"); words.Add("creativity");
         // words.Add("honesty");   words.Add("hope");  words.Add("thankful");
         // words.Add("respect");
-        words.Add("Going for a walk");  words.Add("Talking with a friend");  words.Add("Reading a book");
-        words.Add("Exercising");  words.Add("Slow breathing");  words.Add("Getting enough sleep");
-        words.Add("Cooking");  words.Add("Playing music");  words.Add("Time with family");
-        words.Add("A balanced diet");
+        words.Add("Going for a\nwalk");  words.Add("Talking with a\nfriend");  words.Add("Reading a\nbook");
+        words.Add("Exercising");  words.Add("Slow breathing");  words.Add("Getting enough\nsleep");
+        words.Add("Cooking");  words.Add("Playing music");  words.Add("Time with\nfamily");
+        words.Add("A balanced\ndiet");
 
         badWords.Add("impatient"); badWords.Add("anger"); badWords.Add("disrespect");
         badWords.Add("can't"); badWords.Add("dishonest"); badWords.Add("impossible");
@@ -69,7 +69,7 @@ public class WordAssoc_Spawner : MonoBehaviour
             //Good words spawning timer logic
             if(timer > 1.2f && words.Count > 0) {
                 //Get random position to spawn word at
-                Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(175, Screen.width-175), Random.Range(50, Screen.height-50)));
+                Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(185, Screen.width-185), Random.Range(50, Screen.height-100)));
     
                 //check position isnt too close to middle
                 if(CheckPos(spawnPos)) {
@@ -116,7 +116,7 @@ public class WordAssoc_Spawner : MonoBehaviour
             bool check = true;
             foreach (Vector2 p in wordPositions) {  //Check all positions of current words, if to close check=false
                 if ((pos.x - p.x < 3.25) && (pos.x - p.x > -3.25)) {
-                    if ((pos.y - p.y < 1.25) && (pos.y - p.y > -1.25)) {
+                    if ((pos.y - p.y < 1.4) && (pos.y - p.y > -1.4)) {
                         check = false;
                     }
                 }

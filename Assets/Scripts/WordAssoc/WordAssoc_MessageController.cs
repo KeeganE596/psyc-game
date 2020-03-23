@@ -22,7 +22,8 @@ public class WordAssoc_MessageController : MessageController
         if(!hasStarted && GameObject.FindGameObjectsWithTag("Instructions").Length == 0) {
             if(!levelManager.getIfPlayingChooseGame() && currentGamesWon == 25) {
                 monkMessageObject.SetActive(true);
-                StartCoroutine(CycleGameTextSingle("There are things we can do to help chill the Zen Ninja. Connect strategies that can help the Zen Ninja relax"));
+                StartCoroutine(CycleGameTextDouble("There are things we can do to help chill the Zen Ninja, doing something enjoyable helps our mental health...",
+                                                    "Tap and drag to connect strategies to the Zen Ninja that can help him relax"));
             }
             else {
                 ContinueGame();

@@ -21,21 +21,21 @@ public class Breathing_MessageController : MessageController
     }
 
     IEnumerator CycleGameText() {
-        messageTextObj.SetActive(true);
-        messageText.text = "Breathe in as the circle expands, hold your finger down and your breathe when it's in the green";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageTextObj.SetActive(true);
+        // messageText.text = "Breathe in as the circle expands, hold your finger down and your breathe when it's in the green";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        messageText.text = "Let go and breathe out as the circle contracts, hold down again when it's in the green";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageText.text = "Let go and breathe out as the circle contracts, hold down again when it's in the green";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        messageText.text = "Continue your steady breathing to help calm your body";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageText.text = "Continue your steady breathing to help calm your body";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        textAnimator.SetTrigger("fadeOut");
-        yield return new WaitForSeconds(1f);
-        messageTextObj.SetActive(false);
+        // textAnimator.SetTrigger("fadeOut");
+         yield return new WaitForSeconds(1f);
+        // messageTextObj.SetActive(false);
     }
 }

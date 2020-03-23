@@ -182,39 +182,39 @@ public class LevelManager : MonoBehaviour
 
     //Scale instructions/win/lose text panels
     void setupAssets() {
-        panelBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
-        panelBackground.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
+        // panelBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
+        // panelBackground.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
 
         timeSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH*0.85f, SCREEN_HEIGHT*0.06f);
         timeSlider.GetComponent<RectTransform>().localPosition = new Vector2(0, 0+SCREEN_HEIGHT*0.45f);
 
-        menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
-        menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = mainTextSize;
+        // menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
+        // menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = mainTextSize;
 
         scalePausePanel();
-        scaleInstructions(instructionsPanel);
-        scaleInstructions(winPanel);
-        scaleInstructions(losePanel);
+        // scaleInstructions(instructionsPanel);
+         scaleInstructions(winPanel);
+        // scaleInstructions(losePanel);
     }
 
     //Do the scaling transformations for the panels
     void scaleInstructions(GameObject panel) {
-        GameObject titleText = panel.transform.GetChild(0).gameObject;
-        titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
-        titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0+(SCREEN_HEIGHT*0.25f));
-        titleText.GetComponent<TextMeshProUGUI>().fontSize = titleTextSize;
+        // GameObject titleText = panel.transform.GetChild(0).gameObject;
+        // titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
+        // titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0+(SCREEN_HEIGHT*0.25f));
+        // titleText.GetComponent<TextMeshProUGUI>().fontSize = titleTextSize;
 
-        GameObject mainText = panel.transform.GetChild(1).gameObject;
-        mainText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH*0.75f, SCREEN_HEIGHT*0.25f);
-        mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
-        mainText.GetComponent<TextMeshProUGUI>().fontSize = mainTextSize;
+        // GameObject mainText = panel.transform.GetChild(1).gameObject;
+        // mainText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH*0.75f, SCREEN_HEIGHT*0.25f);
+        // mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
+        // mainText.GetComponent<TextMeshProUGUI>().fontSize = mainTextSize;
 
-        GameObject playButton = panel.transform.GetChild(2).gameObject;
-        playButton.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.25f));
-        playButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
+        // GameObject playButton = panel.transform.GetChild(2).gameObject;
+        // playButton.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.25f));
+        // playButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
 
         if(panel.transform.childCount > 3) {
-            mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.1f));
+            //mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.1f));
 
             GameObject sparksScore = panel.transform.GetChild(3).gameObject;
             sparksScore.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.05f), 0+(SCREEN_HEIGHT*0.1f));
@@ -226,7 +226,7 @@ public class LevelManager : MonoBehaviour
     }
 
     void scalePausePanel() {
-        pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.465f), 0+SCREEN_HEIGHT*0.45f);
+        //pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.465f), 0+SCREEN_HEIGHT*0.45f);
         pauseButton.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.07f, SCREEN_HEIGHT*0.07f);
         pauseButton.transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.05f, SCREEN_HEIGHT*0.05f);
         pauseButton.transform.GetChild(1).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.04f, SCREEN_HEIGHT*0.04f);

@@ -25,9 +25,9 @@ public class ScaleChooseGameScreen : MonoBehaviour
         //GameObject.FindWithTag("MainCamera").GetComponent<Camera>().backgroundColor = colorManager.GetColor();
         colorManager.setCameraBackground();
 
-        GameObject menuButton = GameObject.FindWithTag("MenuButton");
-        menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
-        menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = SCREEN_HEIGHT/20.5f;
+        // GameObject menuButton = GameObject.FindWithTag("MenuButton");
+        // menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
+        // menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = SCREEN_HEIGHT/20.5f;
 
         GameObject titleText = canvas.transform.GetChild(0).gameObject;
         titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);

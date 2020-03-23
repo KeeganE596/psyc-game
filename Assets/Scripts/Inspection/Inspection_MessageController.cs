@@ -18,25 +18,25 @@ public class Inspection_MessageController : MessageController
     }
 
     IEnumerator CycleGameText() {
-        messageTextObj.SetActive(true);
-        messageText.text = "Thoughts come and go";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageTextObj.SetActive(true);
+        // messageText.text = "Thoughts come and go";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        messageText.text = "Some thoughts are helpful and some are not so helpful...this is normal";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageText.text = "Some thoughts are helpful and some are not so helpful...this is normal";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        messageText.text = "Try stepping back and having a look at these ones";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageText.text = "Try stepping back and having a look at these ones";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        messageText.text = "Decide which thoughts are helpful by using the buttons";
-        textAnimator.SetTrigger("showText");
-        yield return new WaitForSeconds(6f);
+        // messageText.text = "Decide which thoughts are helpful by using the buttons";
+        // textAnimator.SetTrigger("showText");
+        // yield return new WaitForSeconds(6f);
 
-        textAnimator.SetTrigger("fadeOut");
-        yield return new WaitForSeconds(1f);
-        messageTextObj.SetActive(false);
+        // textAnimator.SetTrigger("fadeOut");
+         yield return new WaitForSeconds(1f);
+        // messageTextObj.SetActive(false);
     }
 }

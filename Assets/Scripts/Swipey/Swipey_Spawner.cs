@@ -106,7 +106,7 @@ public class Swipey_Spawner : MonoBehaviour
             sparkIndex = 0;
         }
         //Get random position to spawn spark at
-        Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-300), Random.Range(50, Screen.height-100)));
+        Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(100, Screen.width-100), Random.Range(75, Screen.height-120)));
 
         //check position isnt too close to middle
         if((spawnPos.x < -2.5 || spawnPos.x > 2.5) && (spawnPos.y < -2.5 || spawnPos.y > 2.5)) {

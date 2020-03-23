@@ -70,6 +70,9 @@ public class WordAssoc_TouchDetection : MonoBehaviour
                     score++;
                     scoreIndicator.transform.localScale += new Vector3(scoreScaleAmount, scoreScaleAmount, 0);
                 }
+                else if(currentWord) {
+                    currentLine.SetPosition(1, currentWord.transform.position);
+                }
                 currentWord = null;
                 currentLine = null;
             }
@@ -78,7 +81,6 @@ public class WordAssoc_TouchDetection : MonoBehaviour
                 levelManager.GameWon();
             }
         }
-        Debug.Log(score);
     }
 
     void UpdateScoreCircle() {

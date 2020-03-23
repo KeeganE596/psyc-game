@@ -22,6 +22,7 @@ public class Clouds_Spawner : MonoBehaviour
     float sparkSpawnTime;
     int sparkIndex;
 
+
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
@@ -84,8 +85,8 @@ public class Clouds_Spawner : MonoBehaviour
             sparkIndex = 0;
         }
         //Get random position to spawn spark at
-        Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(150, Screen.width-150), Random.Range(50, Screen.height-50)));
-
+        Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(100, Screen.width-100), Random.Range(75, Screen.height-120)));
+    
         //check position isnt too close to middle
         if((spawnPos.x < -2.5 || spawnPos.x > 2.5) && (spawnPos.y < -2.5 || spawnPos.y > 2.5)) {
             if(sparkPool[sparkIndex].activeSelf) {
