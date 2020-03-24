@@ -15,6 +15,8 @@ public class Swipey_MessageController : MessageController
     // List<string> bothMessages;
     List<string> gameMessages;
 
+    bool displayedText = false;
+
     void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
@@ -30,11 +32,11 @@ public class Swipey_MessageController : MessageController
         // gnattMessages.Add("GNAT stands for Gloomy Negative Automatic Thoughts");
         // gnattMessages.Add("They can come fast and automatically, so you don’t even notice and the day gets gloomy");
         // gnattMessages.Add("Flick them away to reveal the calm");
-        monkMessages.Add("<b>GNAT</b> stands for <b>Gloomy Negative Automatic Thoughts</b>. Swipe them away to relax the Zen Ninja"); 
-        monkMessages.Add("<b>SPARX</b> stand for <b>Smart Positive Automatic Realistic X Factor</b> thoughts. Tap to collect them and relax the Zen Ninja");
-        monkMessages.Add("<b>SPARX</b> and <b>GNATs</b> can come at the same time, try to find the <b>SPARX</b> amongst the <b>GNATs</b>");
-        monkMessages.Add("<b>GNATs</b> can come fast, automatic and in all shapes and forms. Try find their new form and swipe them away");
-        monkMessages.Add("<b>SPARX</b> can also come fast, automatic and in all shapes and forms. Try find their new form and tap them");
+        monkMessages.Add("<b>GNAT</b> stands for <b>Gloomy Negative Automatic Thoughts</b>. Swipe them away to relax the Zen Ninja."); 
+        monkMessages.Add("<b>SPARX</b> stand for <b>Smart Positive Automatic Realistic X Factor</b> thoughts. Tap to collect them and relax the Zen Ninja.");
+        monkMessages.Add("<b>SPARX</b> and <b>GNATs</b> can come at the same time. Stand back and try to find the <b>SPARX</b> amongst the <b>GNATs</b>.");
+        monkMessages.Add("<b>GNATs</b> can come fast, automatic and in all shapes and forms. Try find their new form and swipe them away.");
+        monkMessages.Add("<b>SPARX</b> can also come fast, automatic and in all shapes and forms. Try find their new form and tap them.");
 
         // sparkMessages = new List<string>();
         // sparkMessages.Add("SPARX are like positive thoughts"); 
@@ -101,9 +103,16 @@ public class Swipey_MessageController : MessageController
         //         StartCoroutine(CycleGameTextSingle(bothMessages[1]));
         //     }
         // }
-        if(!levelManager.getIfPlayingChooseGame() && hasStarted) {
+        if(!levelManager.getIfPlayingChooseGame() && hasStarted && !displayedText) {
+           displayedText = true;
             if(currentGamesWon == 0) {
-                StartCoroutine(CycleGameTextSingle(monkMessages[0]));
+                List<string> textList = new List<string>();
+                textList.Add("Our brain is like a problem-solving machine where thoughts come and go all day long...");
+                textList.Add("Some thoughts are helpful and some thoughts are not so helpful...");
+                textList.Add("<b>GNAT</b> stands for <b>Gloomy Negative Automatic Thoughts</b>.\nSwipe the <b>GNATs</b> away to relax the Zen Ninja.");
+                StartCoroutine(CycleGameText(textList));
+                //StartCoroutine(CycleGameTextDouble("poop", "anus"));
+                //StartCoroutine(CycleGameTextSingle(monkMessages[0]));
             }
             else if(currentGamesWon == 3) {
                 StartCoroutine(CycleGameTextSingle(monkMessages[1]));

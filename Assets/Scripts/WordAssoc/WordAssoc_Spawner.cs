@@ -69,7 +69,7 @@ public class WordAssoc_Spawner : MonoBehaviour
             //Good words spawning timer logic
             if(timer > 1.2f && words.Count > 0) {
                 //Get random position to spawn word at
-                Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(185, Screen.width-185), Random.Range(50, Screen.height-100)));
+                Vector2 spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(185, Screen.width-185), Random.Range(70, Screen.height-120)));
     
                 //check position isnt too close to middle
                 if(CheckPos(spawnPos)) {

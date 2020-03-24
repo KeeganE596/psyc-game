@@ -112,4 +112,19 @@ public class MessageController : MonoBehaviour
         //textAnimator.SetTrigger("fadeOut");
         //yield return new WaitForSeconds(1f);
     }
+
+    protected IEnumerator CycleGameText(List<string> textList) {
+        GameObject button = monkMessageObject.GetComponentInChildren<Button>().gameObject;
+        GameObject playText = monkMessageObject.transform.GetChild(3).gameObject;
+        button.SetActive(false);
+        playText.SetActive(false);
+
+        foreach(string text in textList) {
+            monkMessageText.text = text;
+            yield return new WaitForSeconds(4.5f);
+        }
+        
+        button.SetActive(true);
+        playText.SetActive(true);
+    }
 }

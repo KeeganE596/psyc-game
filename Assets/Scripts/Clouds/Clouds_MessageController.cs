@@ -14,8 +14,12 @@ public class Clouds_MessageController : MessageController
         if(!hasStarted && GameObject.FindGameObjectsWithTag("Instructions").Length == 0) {
             if(!levelManager.getIfPlayingChooseGame() && currentGamesWon == 31) {
                 monkMessageObject.SetActive(true);
-                StartCoroutine(CycleGameTextDouble("When things are bit grey in our life…it can affect our thoughts, feelings and behaviours...",
-                                                    "Collect the SPARX and connect the strategies to lighten up the day!"));
+                // StartCoroutine(CycleGameTextDouble("When things are bit grey in our life…it can affect our thoughts, feelings and behaviours...",
+                //                                     "Collect the SPARX and connect the strategies to lighten up the day!"));
+                List<string> textList = new List<string>();
+                textList.Add("When things are bit grey in our life it can affect our thoughts, feelings and behaviours...");
+                textList.Add("Collect the SPARX and connect the strategies to lighten up the day!");
+                StartCoroutine(CycleGameText(textList));
             }
             else {
                 ContinueGame();

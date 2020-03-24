@@ -193,7 +193,7 @@ public class Swipey_Spawner : MonoBehaviour
         }
         else if(currentLevel < 11) {  //Spawn both for 5 levels (7-11)
             SetupSparkPool(true, "normal");
-            SetupGnatPool(true, "normal", (5 + currentLevel));
+            SetupGnatPool(true, "normal", (4 + currentLevel));
         }
         else if(currentLevel < 14) {   //Just spawn text gnats for 3 levels (12-14)
             levelManager.setToWinOnTimeOut();
@@ -321,7 +321,7 @@ public class Swipey_Spawner : MonoBehaviour
             case 9:
                 return 0.5f;
             case 10:
-                return 6f;
+                return 0.6f;
             case 11:
                 return 0.4f;
             case 12:
@@ -329,7 +329,7 @@ public class Swipey_Spawner : MonoBehaviour
             case 13:
                 return 0.6f;
             default:
-                return currentLevel/10f <= 0.8f ? currentLevel/10f : 0.8f;
+                return currentLevel/10f <= 0.7f ? currentLevel/10f : 0.7f;
         }
     }
 }
