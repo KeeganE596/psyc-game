@@ -13,7 +13,7 @@ public class Swipey_TouchDetection : MonoBehaviour
     float touchTimeStart, touchTimeFinish;
 
     [Range(0.05f, 1f)] //slider in inspector
-    public float throwForce = 0.3f;
+    public float throwForce = 0.2f;
 
     public GameObject aoePrefab;
     GameObject aoeObject;

@@ -24,12 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Games/inspection_Game.unity
     guid: 7a78f278beb6e0f449faf869bc8ece22
   - enabled: 1
-    path: Assets/Scenes/Leaderboard.unity
-    guid: 0d206288b58196f4f975078b4c61d77e
-  - enabled: 1
     path: Assets/Scenes/Games/wordFind_Game.unity
     guid: 8ce79e39ac7af9c4db7a9c34d9408399
   - enabled: 1
     path: Assets/Scenes/Games/clouds_Game.unity
     guid: f84afaea3ed51cf4d850b4336cbe0da3
+  - enabled: 1
+    path: Assets/Scenes/GameIntro.unity
+    guid: f0c24ffc4b2b13b49ada27c9cadda97c
   m_configObjects: {}

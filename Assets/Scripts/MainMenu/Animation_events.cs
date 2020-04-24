@@ -12,6 +12,4 @@ public class Animation_events : MonoBehaviour
         PlayText.SetActive(true);
         StartGameButton.SetActive(true);
     }
-
-
 }

@@ -107,9 +107,10 @@ public class Swipey_MessageController : MessageController
            displayedText = true;
             if(currentGamesWon == 0) {
                 List<string> textList = new List<string>();
-                textList.Add("Our brain is like a problem-solving machine where thoughts come and go all day long...");
-                textList.Add("Some thoughts are helpful and some thoughts are not so helpful...");
-                textList.Add("<b>GNAT</b> stands for <b>Gloomy Negative Automatic Thoughts</b>.\nSwipe the <b>GNATs</b> away to relax the Zen Ninja.");
+                // textList.Add("Our brain is like a problem-solving machine where thoughts come and go all day long...");
+                // textList.Add("Some thoughts are helpful and some thoughts are not so helpful...");
+                // textList.Add("<b>GNAT</b> stands for <b>Gloomy Negative Automatic Thoughts</b>.\nSwipe the <b>GNATs</b> away to relax the Zen Ninja.");
+                textList.Add("Swipe the <b>GNATs</b> away to relax your Brain.");
                 StartCoroutine(CycleGameText(textList));
                 //StartCoroutine(CycleGameTextDouble("poop", "anus"));
                 //StartCoroutine(CycleGameTextSingle(monkMessages[0]));

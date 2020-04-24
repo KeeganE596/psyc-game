@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Gnatt_Normal : Gnatt
 {
+    Animator anim;
+    public GameObject destroyParticle;
     public override void Start() {
         //speedMultiplier = 0;//(GameManager.gamesWon + 1) * 0.1f;
+        anim = this.GetComponentInChildren<Animator>();
         base.Start();
     }
 
     public override void Despawn() {
-        StartCoroutine("FadeOut");
+        //StartCoroutine("FadeOut");
+        Instantiate(destroyParticle, gameObject.transform.position, Quaternion.identity);
+        anim.SetTrigger("destroy");
         base.Despawn();
     }
 

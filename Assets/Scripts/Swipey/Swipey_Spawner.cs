@@ -16,11 +16,15 @@ public class Swipey_Spawner : MonoBehaviour
     int sparkIndex;
 
     List<GameObject> gnatPool;
-    public GameObject gnat_1;
-    public GameObject gnat_2;
-    public GameObject gnat_fast;
-    public GameObject gnat_tank;
+    public GameObject gnat_frustrated;
+    public GameObject gnat_sad;
+    public GameObject gnat_angry;
+    public GameObject gnat_lonely;
+    //public GameObject gnat_fast;
+    //public GameObject gnat_tank;
     public GameObject gnat_text;
+    GameObject gnat_1;
+    GameObject gnat_2;
     int gnatIndex;
 
     bool playing;
@@ -45,6 +49,9 @@ public class Swipey_Spawner : MonoBehaviour
     void Start() {
         playing = levelManager.isPlaying();
         currentLevel = levelManager.getNumberGamesWon();
+
+        gnat_1 = GetGnats(PlayerPrefs.GetString("gnat1"));
+        gnat_2 = GetGnats(PlayerPrefs.GetString("gnat2"));
 
         goodWords = new List<string>();
         goodWords.Add("Adventure"); goodWords.Add("Beauty"); goodWords.Add("Caring");
@@ -98,6 +105,22 @@ public class Swipey_Spawner : MonoBehaviour
                     gnatTimer = 0;
                 }
             }
+        }
+    }
+
+    GameObject GetGnats(string type) {
+        switch (type) {
+            case "frustrated":
+                return gnat_frustrated;
+            case "sad":
+                return gnat_sad;
+            case "angry":
+                return gnat_angry;
+            case "lonely":
+                return gnat_lonely;
+            default:
+                Debug.Log("no gnat found");
+                return gnat_angry;
         }
     }
 

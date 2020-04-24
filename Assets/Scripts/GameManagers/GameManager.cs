@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     List<string> gamesList;
 
-    int currentGameNum;
+    //int currentGameNum;
     string currentGameName;
     
     public static int gamesWon;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         playingChooseGame = false;
 
         gamesWon = 0;
-        currentGameNum = 0;
+        //currentGameNum = 0;
         currentGameName = "";
 
         gamesList = new List<string>();
@@ -71,7 +71,10 @@ public class GameManager : MonoBehaviour
             // }
 
             //PLAYING LEVELS THROUGH
-            if(gamesWon < 25) {
+            if(gamesWon == 0) {
+                SceneManager.LoadScene("GameIntro");
+            }
+            else if(gamesWon < 25) {
                 SceneManager.LoadScene("swipeAway_Game");
             }
             else if(gamesWon < 31) {
@@ -131,13 +134,13 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame() {
         //gamesWon = 0;
-        currentGameNum = 0;
+        //currentGameNum = 0;
         currentGameName = "";
     }
 
     public void PlayAgain() {
         //gamesWon = 0;
-        currentGameNum = 0;
+        //currentGameNum = 0;
         currentGameName = "";
     }
 

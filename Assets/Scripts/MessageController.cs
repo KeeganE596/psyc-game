@@ -121,10 +121,11 @@ public class MessageController : MonoBehaviour
 
         foreach(string text in textList) {
             monkMessageText.text = text;
-            yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(3.5f);
         }
         
-        button.SetActive(true);
-        playText.SetActive(true);
+        ContinueGame();
+        //button.SetActive(true);
+        //playText.SetActive(true);
     }
 }
