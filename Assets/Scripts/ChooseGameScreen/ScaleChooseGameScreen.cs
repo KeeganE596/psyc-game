@@ -18,7 +18,7 @@ public class ScaleChooseGameScreen : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start() {
-        scaleScreen();
+        //scaleScreen();
     }
 
     public void scaleScreen() {

@@ -6,6 +6,8 @@ using UnityEngine;
 //when swiped despawn is called and gnatt will fade away over a couple seconds
 public class Gnatt : MonoBehaviour
 {
+     LevelManager levelManager;
+
     protected float velocity = 1;
     protected float speedMultiplier = 0;
     //int lives = 0;
@@ -17,9 +19,13 @@ public class Gnatt : MonoBehaviour
     protected SpriteRenderer sprite;
     protected float alpha = 1;
 
-    
+    protected Animator anim;
+    public GameObject destroyParticle;
 
-    LevelManager levelManager;
+    private Color32 angryColor = new Color32(62, 7, 7, 255);
+    private Color32 frustratedColor = new Color32(32, 23, 47, 255);
+    private Color32 lonelyColor = new Color32(43, 43, 43, 255);
+    private Color32 sadColor = new Color32(5, 17, 54, 255);
     
     protected virtual void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -28,6 +34,7 @@ public class Gnatt : MonoBehaviour
     public virtual void Start() {
         doDespawn = false;
         sprite = this.GetComponentInChildren<SpriteRenderer>();
+        anim = this.GetComponentInChildren<Animator>();
         
         //Set movement velocity to scale with level number
         //velocity = 1 + speedMultiplier;
@@ -40,12 +47,15 @@ public class Gnatt : MonoBehaviour
     }
 
     public virtual void Despawn() {
-        //this.GetComponentInChildren<AudioSource>().Play(0);
+        this.GetComponentInChildren<AudioSource>().Play(0);
+        anim.SetTrigger("destroy");
         StartCoroutine("EndGnat");
     }
 
     IEnumerator EndGnat() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.15f);
+        SpawnParticles();
+        yield return new WaitForSeconds(0.85f);
         this.gameObject.SetActive(false);
         this.gameObject.GetComponent<Collider2D>().enabled = true;
         doDespawn = false;
@@ -61,5 +71,21 @@ public class Gnatt : MonoBehaviour
 
     public void SetSpeed(float speed) {
         velocity = 1 + speed;
+    }
+
+    private void SpawnParticles() {
+        GameObject ps = Instantiate(destroyParticle, gameObject.transform.position, Quaternion.identity);
+        if (gameObject.name == "Gnat_Angry_Red(Clone)") {
+            ps.GetComponent<ParticleSystem>().startColor = angryColor;
+        }
+        else if (gameObject.name == "Gnat_Frustrated(Clone)") {
+            ps.GetComponent<ParticleSystem>().startColor = frustratedColor;
+        }
+        else if (gameObject.name == "Gnat_Sad(Clone)") {
+            ps.GetComponent<ParticleSystem>().startColor = sadColor;
+        }
+        else if (gameObject.name == "Gnat_Lonely(Clone)") {
+            ps.GetComponent<ParticleSystem>().startColor = lonelyColor;
+        }
     }
 }

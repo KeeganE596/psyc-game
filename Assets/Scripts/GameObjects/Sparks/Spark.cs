@@ -9,7 +9,8 @@ public class Spark : MonoBehaviour
     float velocity = 1;
     public float acceleration = 0.1f;
     float velocityMultiplier;
-    public GameObject sparkParticle;
+    public GameObject sparkParticle_yellow;
+    public GameObject sparkParticle_green;
     protected Animator anim;
     bool isActive;
     readonly Vector2 target = new Vector2(0, 0);
@@ -38,7 +39,16 @@ public class Spark : MonoBehaviour
             StartCoroutine("Pause"); //pause movement so animation can finish 
             anim = this.gameObject.GetComponent<Animator>();
             anim.SetTrigger("Activate");
-            Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
+
+            GameObject ps = Instantiate(sparkParticle_yellow, gameObject.transform.position, Quaternion.identity);
+            ps.GetComponent<ParticleSystem>().startColor = GetComponentInChildren<SpriteRenderer>().color;
+            // if (gameObject.name == "Spark_01(Clone)") {
+            //     ParticleSystem ps = Instantiate(sparkParticle_yellow, gameObject.transform.position, Quaternion.identity);
+            //     ps.startCoolor = GetComponentInChildren<SpriteRenderer>().color;
+            // }
+            // else if (gameObject.name == "Spark_03(Clone)") {
+            //  Instantiate(sparkParticle_green, gameObject.transform.position, Quaternion.identity);
+            // }
         }
     }
 

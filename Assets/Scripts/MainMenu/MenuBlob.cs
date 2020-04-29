@@ -27,13 +27,13 @@ public class MenuBlob : MonoBehaviour
 
 
     private void Awake() {
-        PlayText.SetActive(false);
-        startGameButton.SetActive(false);
-        startChooseGameButton.SetActive(false);
-        SettingsText.SetActive(false);
+        //PlayText.SetActive(false);
+        //startGameButton.SetActive(false);
+        //startChooseGameButton.SetActive(false);
+        //SettingsText.SetActive(false);
         Toggle_allButton.SetActive(false);
-        customizeButton.SetActive(false);
-        aboutButton.SetActive(false);
+        //customizeButton.SetActive(false);
+        //aboutButton.SetActive(false);
     }
 
 
@@ -70,12 +70,12 @@ public class MenuBlob : MonoBehaviour
             anim.SetBool("centerblob", !newValue);
             anim.SetBool("aboutblob", !newValue);
             Toggle_allButton.SetActive(false);
-            startGameButton.SetActive(false);
-            startChooseGameButton.SetActive(false);
-            customizeButton.SetActive(false);
-            aboutButton.SetActive(false);
-            SettingsText.SetActive(false);
-            PlayText.SetActive(false);
+            // startGameButton.SetActive(false);
+            // startChooseGameButton.SetActive(false);
+            // customizeButton.SetActive(false);
+            // aboutButton.SetActive(false);
+            // SettingsText.SetActive(false);
+            // PlayText.SetActive(false);
             
             customizePanel.SetActive(false);
             aboutPanel.SetActive(false);
@@ -113,20 +113,20 @@ public class MenuBlob : MonoBehaviour
 
     IEnumerator WaitToDisplayCustomize() {
         yield return new WaitForSeconds(0.4f);
-        customizeButton.SetActive(false);
-        SettingsText.SetActive(false);
+        //customizeButton.SetActive(false);
+        //SettingsText.SetActive(false);
         customizePanel.SetActive(true);
     }
 
     IEnumerator WaitToDisplayAbout() {
         yield return new WaitForSeconds(0.4f);
-        aboutButton.SetActive(false);
+        //aboutButton.SetActive(false);
         aboutPanel.SetActive(true);
     }
 
     IEnumerator WaitToDisplayLeaderboard() {
         yield return new WaitForSeconds(0.4f);
-        leaderboardButton.SetActive(false);
+        //leaderboardButton.SetActive(false);
         leaderboardPanel.SetActive(true);
     }
 

@@ -6,11 +6,9 @@ using TMPro;
 public class Gnatt_Text : Gnatt
 {
     TextMeshPro word;
-    Animator anim;
 
     protected override void Awake() {
         word = this.GetComponentInChildren<TextMeshPro>();
-        anim = this.GetComponent<Animator>();
         base.Awake();
     }
 

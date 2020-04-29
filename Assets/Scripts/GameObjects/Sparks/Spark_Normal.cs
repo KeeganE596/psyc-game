@@ -11,7 +11,11 @@ public class Spark_Normal : Spark
             anim = this.gameObject.GetComponent<Animator>();
             anim.SetTrigger("SparkPrefab_01");
         }
-        if (gameObject.name == "Spark_02(Clone)") {
+        else if (gameObject.name == "Spark_02(Clone)") {
+            anim = this.gameObject.GetComponent<Animator>();
+            anim.SetTrigger("SparkPrefab_02");
+        }
+        else if (gameObject.name == "Spark_03(Clone)") {
             anim = this.gameObject.GetComponent<Animator>();
             anim.SetTrigger("SparkPrefab_02");
         } 

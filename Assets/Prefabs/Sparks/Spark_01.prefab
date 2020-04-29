@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0, g: 1, b: 0.49606538, a: 1}
+  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -154,7 +154,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0, g: 1, b: 0.49606538, a: 1}
+  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -527,7 +527,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0, g: 1, b: 0.49606538, a: 1}
+  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -730,7 +730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 0.1
-  sparkParticle: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
+  sparkParticle_yellow: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
+    type: 3}
+  sparkParticle_green: {fileID: 6811360371945675132, guid: f92399a7489c37a4c98ed263e8dcbb38,
     type: 3}
 --- !u!1 &5818579150821170134
 GameObject:
@@ -920,7 +922,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 3286163911610860551, guid: cdfe56a8988bc144d80cc80b07b3c96c,
     type: 3}
-  m_Color: {r: 0, g: 1, b: 0.49606538, a: 1}
+  m_Color: {r: 0.9725491, g: 0.78823537, b: 0.4666667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
