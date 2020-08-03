@@ -20,15 +20,15 @@ public class Breathing_ObjectScaler : MonoBehaviour
     void Start() {
         worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         
-        if(levelManager.getNumberGamesWon() < 6) {
-            levelScaler = levelManager.getNumberGamesWon()*0.02f;
+        if(GameManagerStatic.GetCurrentLevelNumber() < 6) {
+            levelScaler = GameManagerStatic.GetCurrentLevelNumber()*0.02f;
         }
         else { levelScaler = 6*0.02f; }
 
         ScaleObjects();
         ScaleScoreBar();
 
-        Color32 bgColor = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>().GetColor();
+        Color32 bgColor = ColorManager.GetColor();
         breatheLimitParent.transform.GetChild(4).gameObject.GetComponent<SpriteRenderer>().color = bgColor;
         breatheLimitParent.transform.GetChild(6).gameObject.GetComponent<SpriteRenderer>().color = bgColor;
     }

@@ -10,7 +10,7 @@ public class MessageController : MonoBehaviour
     protected LevelManager levelManager;
     //public GameObject messageTextObj;
     protected TextMeshProUGUI messageText;
-    public GameObject monkMessageObject;
+    protected GameObject monkMessageObject;
     protected TextMeshPro monkMessageText;
 
     protected Vector3 worldScale;
@@ -31,14 +31,14 @@ public class MessageController : MonoBehaviour
         //textAnimator = messageTextObj.GetComponent<Animator>();
         //messageText = messageTextObj.GetComponentInChildren<TextMeshProUGUI>();
 
-        currentGamesWon = levelManager.getGamesWon();
+        currentGamesWon = 999; //levelManager.getGamesWon();
 
-        scaleText();
+        //scaleText();
 
         //messageTextObj.SetActive(false);
         
-        monkMessageText = monkMessageObject.GetComponentInChildren<TextMeshPro>();
-        monkMessageObject.SetActive(false);
+        //monkMessageText = monkMessageObject.GetComponentInChildren<TextMeshPro>();
+        //monkMessageObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class MessageController : MonoBehaviour
 
     public void ContinueGame() {
         levelManager.StartPlaying();
-        monkMessageObject.SetActive(false);
+        //monkMessageObject.SetActive(false);
     }
 
     protected IEnumerator CycleGameTextSingle(string gameText) {

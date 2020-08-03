@@ -307,9 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 0.1
-  sparkParticle_yellow: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
-    type: 3}
-  sparkParticle_green: {fileID: 6811360371945675132, guid: f92399a7489c37a4c98ed263e8dcbb38,
+  sparkParticle: {fileID: 3974681866568240440, guid: da207da00f7e28c4f82a21963cd99cb1,
     type: 3}
 --- !u!95 &8749636291386412160
 Animator:

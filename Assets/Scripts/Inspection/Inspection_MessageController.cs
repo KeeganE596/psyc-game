@@ -11,7 +11,7 @@ public class Inspection_MessageController : MessageController
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.isPlaying() && levelManager.getGamesWon() < 1 && !hasStarted) {
+        if(levelManager.isPlaying() && GameManagerStatic.GetCurrentLevelNumber() < 1 && !hasStarted) {
             hasStarted = true;
             //StartCoroutine("CycleGameText");
         }

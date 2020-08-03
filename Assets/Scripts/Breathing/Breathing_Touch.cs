@@ -55,7 +55,7 @@ public class Breathing_Touch : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start() {
-        levelScaler = levelManager.getNumberGamesWon();
+        levelScaler = GameManagerStatic.GetCurrentLevelNumber();
 
         worldScale = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
 

@@ -8,13 +8,13 @@ using TMPro;
 public class ScaleChooseGameScreen : MonoBehaviour
 {
     //Referencing Color Manager
-    ColorManager colorManager;
+    //ColorManager colorManager;
     public GameObject canvas;
     private float SCREEN_WIDTH = Screen.width;
     private float SCREEN_HEIGHT = Screen.height;
 
     void Awake() {
-        colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
+       // colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
     }
     // Start is called before the first frame update
     void Start() {
@@ -23,7 +23,7 @@ public class ScaleChooseGameScreen : MonoBehaviour
 
     public void scaleScreen() {
         //GameObject.FindWithTag("MainCamera").GetComponent<Camera>().backgroundColor = colorManager.GetColor();
-        colorManager.setCameraBackground();
+        //colorManager.setCameraBackground();
 
         // GameObject menuButton = GameObject.FindWithTag("MenuButton");
         // menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));

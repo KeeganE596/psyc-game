@@ -26,4 +26,9 @@ public class Gnatt_Normal : Gnatt
         alpha = 1;
         sprite.color = new Color(1, 1, 1, alpha);
     }
+
+    public override void ChooseSprite() {
+        int num = Random.Range(0, 3);
+        this.transform.GetChild(num).gameObject.SetActive(true);
+    }
 }

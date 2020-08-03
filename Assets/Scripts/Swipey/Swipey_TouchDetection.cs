@@ -12,8 +12,9 @@ public class Swipey_TouchDetection : MonoBehaviour
     Vector2 startPos, endPos;
     float touchTimeStart, touchTimeFinish;
 
+    [SerializeField]
     [Range(0.05f, 1f)] //slider in inspector
-    public float throwForce = 0.2f;
+    private float throwForce = 0.2f;
 
     public GameObject aoePrefab;
     GameObject aoeObject;
@@ -22,7 +23,7 @@ public class Swipey_TouchDetection : MonoBehaviour
     Vector3 mousePos;
     RaycastHit2D hit;
 
-    public Swipey_MessageController messageController;
+    //public Swipey_MessageController messageController;
 
     bool clickedGnat;
     GameObject clickedGnatObject;

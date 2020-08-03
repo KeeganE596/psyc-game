@@ -11,13 +11,13 @@ public class Breathing_MessageController : MessageController
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.isPlaying() && levelManager.getGamesWon() < 1 && !hasStarted) {
-            hasStarted = true;
-            StartCoroutine("CycleGameText");
-        }
-        if(levelManager.isPlaying()) {
-            monkMessageObject.SetActive(false);
-        }
+        // if(levelManager.isPlaying() && levelManager.getGamesWon() < 1 && !hasStarted) {
+        //     hasStarted = true;
+        //     StartCoroutine("CycleGameText");
+        // }
+        // if(levelManager.isPlaying()) {
+        //     monkMessageObject.SetActive(false);
+        // }
     }
 
     IEnumerator CycleGameText() {

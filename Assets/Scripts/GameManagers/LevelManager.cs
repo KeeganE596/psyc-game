@@ -11,7 +11,7 @@ using TMPro;
 //In game scripts can reference this to start/end games and get information about the game type
 public class LevelManager : MonoBehaviour
 {
-    public GameObject GMPrefab;
+    //public GameObject GMPrefab;
     
     //Game Slider Setup
     public bool usingTimer = false;
@@ -24,8 +24,9 @@ public class LevelManager : MonoBehaviour
     bool winOnTimeOut = false;
 
     //Referencing Game Manager and Color Manager
-    GameManager gameManager;
-    ColorManager colorManager;
+    //GameManager gameManager;
+    //ColorManager colorManager;
+    public GameObject oceansBg;
     bool playingChooseGame;
 
     //Referencing text panels
@@ -44,21 +45,27 @@ public class LevelManager : MonoBehaviour
     float SCREEN_WIDTH = Screen.width;
     float SCREEN_HEIGHT = Screen.height;
 
-    void Awake() {
-        if(GameObject.FindGameObjectsWithTag("GameManager").Length < 1) {
-            Instantiate(GMPrefab);
-        }
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
+    int testNum {get;set;}
 
-        playingChooseGame = gameManager.isPlayingChooseGame();
+    void Awake() {
+        // if(GameObject.FindGameObjectsWithTag("GameManager").Length < 1) {
+        //     Instantiate(GMPrefab);
+        // }
+        // gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        //colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
+
+        //playingChooseGame = gameManager.isPlayingChooseGame();
+        //GameManagerStatic.GetPlayingRandomGame();
     }
 
     // Start is called before the first frame update
     void Start() {
-        if(GameManager.swipeType != "default") {
-            playingChooseGame = false;
-        }
+        
+        ColorManager.LoadBackground();
+
+        // if(GameManager.swipeType != "default") {
+        //     playingChooseGame = false;
+        // }
 
         timeSlider.gameObject.SetActive(false);
         playing = false;
@@ -67,19 +74,23 @@ public class LevelManager : MonoBehaviour
         pauseButton.SetActive(false);
         pausePanel.SetActive(false);
 
-        panelBackground.GetComponent<Image>().color = colorManager.GetColor();
-        colorManager.setCameraBackground();
+        panelBackground.GetComponent<Image>().color = ColorManager.GetColor();
+        ColorManager.setCameraBackground();
         
         //Setup text panels
-        if(playingChooseGame && gameManager.NumberOfGamesWon() == 0) {     
-            instructionsPanel.SetActive(true);
-        }
-        else { 
-            instructionsPanel.SetActive(false);
-            StartGame(); 
-        }
+        // if(playingChooseGame && gameManager.NumberOfGamesWon() == 0) {     
+        //     instructionsPanel.SetActive(true);
+        // }
+        // else { 
+           // instructionsPanel.SetActive(false);
+            //StartGameAndPlay(); 
+        //}
         winPanel.SetActive(false);
         losePanel.SetActive(false);
+        instructionsPanel.SetActive(false);
+        StartGameAndPlay(); 
+
+        //gameManager.SetSparksScoreText();
         
         //setFontSizes();
         //setupAssets();
@@ -134,40 +145,19 @@ public class LevelManager : MonoBehaviour
         StartCoroutine("WaitAtEndOfGameLost");
     }
 
-    public void NextGame() {
-        if(playingChooseGame) {
-            gameManager.PlaySameGame();
-        }
-        else {
-            gameManager.NextGame();
-        }
+    public void NextLevel() {
+        GameManagerStatic.NextGame();
     }
 
     public void RestartGame() {
-        gameManager.ResetGame();
-        NextGame();
-    }
-
-    public void PlayAgain() {
-        if(playingChooseGame) {
-            gameManager.PlayAgain();
-            NextGame();
-        }
-        else {
-            gameManager.ResetGame();
-            NextGame();
-        }
+        GameManagerStatic.PlaySameGame();
     }
 
     public void ToMainMenu() {
         if(GameObject.FindGameObjectsWithTag("SelectedWords").Length < 1) {
             DestroyImmediate(GameObject.FindWithTag("SelectedWords"), true);
         }
-        gameManager.ToMainMenu();
-    }
-
-    public int getNumberGamesWon() {
-        return gameManager.NumberOfGamesWon();
+        SceneLoadManager.ToMenu();
     }
 
     public bool isPlaying() {
@@ -269,19 +259,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public bool getIfPlayingChooseGame() {
-        return playingChooseGame;
+    // public bool GetIfPlayingChooseGame() {
+    //     return playingChooseGame;
+    // }
+
+    public int GetNumberOfGamesWon() {
+        //return gameManager.NumberOfGamesWon();
+        return 999;
     }
 
-    public int getGamesWon() {
-        return gameManager.NumberOfGamesWon();
-    }
-
-    public void setToWinOnTimeOut() {
+    public void SetToWinOnTimeOut() {
         winOnTimeOut = true;
     }
 
-    public bool getIfWinOnTimeOut() {
+    public bool GetIfWinOnTimeOut() {
         return winOnTimeOut;
     }
 
@@ -295,22 +286,30 @@ public class LevelManager : MonoBehaviour
         losePanel.SetActive(false);
         panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
         
-        gameManager.AddToGamesWon();
-        int wins = gameManager.NumberOfGamesWon();
+        // gameManager.AddToGamesWon();
+        // int wins = gameManager.NumberOfGamesWon();
         string winText;
-        if(wins == 1) {
-            winText = "You've won 1 game!";
-        }
-        else {
-            winText = "You've won " + wins + " games in a row!";
-        }
-
+        // if(wins == 1) {
+        //     //winText = "You've won 1 game!";
+        //     winText = 
+        // }
+        // else {
+        //     winText = "You've won " + wins + " games in a row!";
+        // }
+        winText = "You beat level " + GameManagerStatic.GetCurrentLevelNumber();
         winPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = winText;
 
-        gameManager.SetSparksScoreText();
+        //gameManager.SetSparksScoreText();
 
-        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, wins);
-        PlayerPrefs.Save();
+        int lvl = PlayerPrefs.GetInt("LevelUnlocked");
+        if(GameManagerStatic.GetCurrentLevelNumber() == lvl) {
+            Debug.Log("now unlocked: " + (lvl + 1));
+            SaveManager.SaveLevelUnlocked(lvl+1);
+        }
+        
+        // PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, wins);
+        // PlayerPrefs.Save();
+        //Debug.Log(PlayerPrefs.GetInt("LevelUnlocked"));
     }
     
     IEnumerator WaitAtEndOfGameLost() {
@@ -321,9 +320,9 @@ public class LevelManager : MonoBehaviour
         EndGame();
         losePanel.SetActive(true);
         winPanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = colorManager.GetDarkColor();
+        panelBackground.GetComponent<Image>().color = ColorManager.GetDarkColor();
 
-        int wins = gameManager.NumberOfGamesWon();
+        int wins = 999; //gameManager.NumberOfGamesWon();
         string loseText;
         if(wins == 0) {
             loseText = "You won no games this time.";
@@ -336,11 +335,11 @@ public class LevelManager : MonoBehaviour
         }
         losePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = loseText;
         GameObject loseButton = losePanel.transform.GetChild(2).gameObject;
-        loseButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "from level " + wins;
+        loseButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "from level " + GameManagerStatic.GetCurrentLevelNumber();
     }
 
     public void StartTimer() {
-        timeSlider.gameObject.SetActive(true);   //Turn slider on
+        timeSlider.gameObject.SetActive(true);   //Turn time slider on
         usingTimer = true;
     }
 }

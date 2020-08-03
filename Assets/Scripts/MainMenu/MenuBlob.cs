@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class MenuBlob : MonoBehaviour
 {
-    public GameObject blob;
+    [SerializeField] private GameObject blob;
     private Animator anim;
     public GameObject PlayText;
-    public GameObject SettingsText;
+    //public GameObject SettingsText;
     public GameObject Toggle_allButton;
     public GameObject customizePanel;
     public GameObject aboutPanel;
@@ -17,11 +17,11 @@ public class MenuBlob : MonoBehaviour
 
     public GameObject startGameButton;
     public GameObject startChooseGameButton;
-    public GameObject customizeButton;
-    public GameObject aboutButton;
-    public GameObject leaderboardButton;
-    public GameObject settingsText;
-    public GameObject informationPanel;
+    //public GameObject customizeButton;
+    //public GameObject aboutButton;
+    //public GameObject leaderboardButton;
+    //public GameObject settingsText;
+    //public GameObject informationPanel;
 
 
 
@@ -139,7 +139,8 @@ public class MenuBlob : MonoBehaviour
         anim.SetTrigger("exitblob");
         playPanel.SetActive(false);
         yield return new WaitForSeconds(0.7f);
-        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().StartGame(type);
+        //GameObject.FindWithTag("GameManager").GetComponent<GameManager>().StartGame(type);
+        GameManagerStatic.ChooseGameType(type);
     }
 }
 

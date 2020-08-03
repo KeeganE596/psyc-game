@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour
 
     //int currentGameNum;
     string currentGameName;
+    int currentLevel;
     
     public static int gamesWon;
 
     public GameObject CMPrefab;
-    ColorManager colorManager;
+    //ColorManager colorManager;
 
     int sparksScore;
 
@@ -28,10 +29,12 @@ public class GameManager : MonoBehaviour
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
 
-        if(GameObject.FindGameObjectsWithTag("ColorManager").Length < 1) {
-            Instantiate(CMPrefab);
-        }
-        colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
+        // if(GameObject.FindGameObjectsWithTag("ColorManager").Length < 1) {
+        //     Instantiate(CMPrefab);
+        // }
+        // colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
+
+        SaveManager.CheckForPlayerPrefs();
     }
     // Start is called before the first frame update
     void Start() {
@@ -47,8 +50,8 @@ public class GameManager : MonoBehaviour
         gamesList.Add("breathing_Game");
         gamesList.Add("inspection_Game");
 
-        colorManager.setCameraBackground();
-        colorManager.LoadBackground();
+        ColorManager.setCameraBackground();
+        ColorManager.LoadBackground();
 
         swipeType = "default";
 
@@ -56,44 +59,15 @@ public class GameManager : MonoBehaviour
         SetSparksScoreText();
     }
 
-    public void NextGame() {
-        //colorManager.HideBackground();
-        if(playingChooseGame) {
-            SceneManager.LoadScene("chooseGame");
-        }
-        else {
-            //SceneManager.LoadScene("swipeAway_Game");   //FOR TESTING set to any game to play just this in random, comment out all below
-            // int nextGame = Random.Range(0, gamesList.Count);    //Pick a random game from list
-            // if(nextGame == currentGameNum) { NextGame(); } //Choose another game if the current game (just played) is picked
-            // else {
-            //     currentGameNum = nextGame;
-            //     SceneManager.LoadScene(gamesList[nextGame]);
-            // }
-
-            //PLAYING LEVELS THROUGH
-            if(gamesWon == 0) {
-                SceneManager.LoadScene("GameIntro");
-            }
-            else if(gamesWon < 25) {
-                SceneManager.LoadScene("swipeAway_Game");
-            }
-            else if(gamesWon < 31) {
-                SceneManager.LoadScene("wordAssociation_Game");
-            }
-            else {
-                SceneManager.LoadScene("clouds_Game");
-            }
-        }
+    public void RandomGame() {
+        int nextGame = Random.Range(0, gamesList.Count);
+        SceneLoadManager.LoadGame(gamesList[nextGame]);
     }
 
     public void ToMainMenu() {
-        colorManager.LoadBackground();
-        SceneManager.LoadScene("Menu");
+        ColorManager.LoadBackground();
+        SceneLoadManager.ToMenu();
         DestroyImmediate(this.gameObject, true);   //Destroy this gameobject as new GameManager will instantiate on menu load
-    }
-    
-    public void ToLeaderboard() {
-        SceneManager.LoadScene("Leaderboard");
     }
 
     public void StartGame(string type) {
@@ -101,25 +75,47 @@ public class GameManager : MonoBehaviour
         gamesWon = 0;
 
         if(type == "random") {
-            NextGame();
+            RandomGame();
+            return;
         }
-        if(type == "choose") {
+        else if(type == "choose") {
             playingChooseGame = true;
-            SceneManager.LoadScene("chooseGame");
+            SceneLoadManager.ToChooseGame();
+            //SceneManager.LoadScene("chooseGame");
+            return;
         }
+        else if(type == "map") {
+            SceneLoadManager.ToMap();
+            //SceneManager.LoadScene("Map");
+            return;
+        }
+    }
+
+    public void NextGame() {
+        PickGame(currentGameName, (currentLevel++));
+    }
+
+    public void PickGame(string gameName, int lvl) {
+        currentGameName = gameName;
+        currentLevel = lvl;
+        SceneLoadManager.LoadGame(gameName);
+        //SceneManager.LoadScene(gameName + "_Game");
     }
 
     public void PickGame(string gameName) {
         currentGameName = gameName;
-        SceneManager.LoadScene(gameName + "_Game");
+        SceneLoadManager.LoadGame(gameName);
+        //SceneManager.LoadScene(gameName + "_Game");
     }
 
+
     public void PlaySameGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneLoadManager.LoadSameGame();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public int NumberOfGamesWon() {
-        return gamesWon;
+        return currentLevel;
     }
 
     public void AddToGamesWon() {
@@ -145,11 +141,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetColor(GameObject colObj) {
-        colorManager.SetColor(colObj);
+        ColorManager.SetColor(colObj);
     }
 
     public void SetBackground(string type) {
-        colorManager.SetBackground(type);
+        ColorManager.SetBackground(type);
     }
 
     void LoadSparksScore() {
@@ -191,6 +187,11 @@ public class GameManager : MonoBehaviour
     public void setSwipeType(string type) {
         playingChooseGame = false;
         swipeType = type;
-        SceneManager.LoadScene("swipeAway_Game");
+        SceneLoadManager.LoadGame("swipeAway");
+        //SceneManager.LoadScene("swipeAway_Game");
+    }
+
+    public int GetCurrentLevelNumber() {
+        return currentLevel;
     }
 }

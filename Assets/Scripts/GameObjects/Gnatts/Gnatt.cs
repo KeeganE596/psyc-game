@@ -22,10 +22,10 @@ public class Gnatt : MonoBehaviour
     protected Animator anim;
     public GameObject destroyParticle;
 
-    private Color32 angryColor = new Color32(62, 7, 7, 255);
-    private Color32 frustratedColor = new Color32(32, 23, 47, 255);
-    private Color32 lonelyColor = new Color32(43, 43, 43, 255);
-    private Color32 sadColor = new Color32(5, 17, 54, 255);
+    private Color angryColor = new Color32(62, 7, 7, 255);
+    private Color frustratedColor = new Color32(32, 23, 47, 255);
+    private Color lonelyColor = new Color32(43, 43, 43, 255);
+    private Color sadColor = new Color32(5, 17, 54, 255);
     
     protected virtual void Awake() {
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
@@ -75,17 +75,22 @@ public class Gnatt : MonoBehaviour
 
     private void SpawnParticles() {
         GameObject ps = Instantiate(destroyParticle, gameObject.transform.position, Quaternion.identity);
+        ParticleSystem.MainModule pModule = ps.GetComponent<ParticleSystem>().main;
         if (gameObject.name == "Gnat_Angry_Red(Clone)") {
-            ps.GetComponent<ParticleSystem>().startColor = angryColor;
+            pModule.startColor = angryColor;
         }
         else if (gameObject.name == "Gnat_Frustrated(Clone)") {
-            ps.GetComponent<ParticleSystem>().startColor = frustratedColor;
+            pModule.startColor = frustratedColor;
         }
         else if (gameObject.name == "Gnat_Sad(Clone)") {
-            ps.GetComponent<ParticleSystem>().startColor = sadColor;
+            pModule.startColor = sadColor;
         }
         else if (gameObject.name == "Gnat_Lonely(Clone)") {
-            ps.GetComponent<ParticleSystem>().startColor = lonelyColor;
+            pModule.startColor = lonelyColor;
         }
+    }
+
+    public virtual void ChooseSprite() {
+        return;
     }
 }

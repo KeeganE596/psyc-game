@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameIntro.unity
     guid: f0c24ffc4b2b13b49ada27c9cadda97c
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: bc3790416d7488a4e806c0e8bca749f3
+  - enabled: 1
+    path: Assets/Scenes/Games/intro.unity
+    guid: 3d7eeee37d6fedc4d8112b81a54110fc
   m_configObjects: {}
