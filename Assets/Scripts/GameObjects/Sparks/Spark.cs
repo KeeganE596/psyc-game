@@ -6,43 +6,33 @@ using UnityEngine;
 //then it will 'pop' and move towards the center
 public class Spark : MonoBehaviour
 {
-    float velocity = 1;
+    protected float velocity = 1;
     public float acceleration = 0.1f;
-    float velocityMultiplier;
+    protected float velocityMultiplier = 1;
     public GameObject sparkParticle;
     protected Animator anim;
-    bool isActive;
+    protected bool isActive = false;
     readonly Vector2 target = new Vector2(0, 0);
 
-    LevelManager levelManager;
-    
-    protected virtual void Awake() {
-        levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
-    }
-    protected virtual void Start() {
-        isActive = false;
-        velocityMultiplier = 1;
-    }
-
     void Update() {
-        if (isActive && levelManager.isPlaying()) {
+        if (isActive) {// && LevelManager.Instance.GetIfGameIsPlaying()) {
             velocityMultiplier += acceleration;
             transform.position = Vector2.MoveTowards(transform.position, target, ((velocity * Time.deltaTime) * velocityMultiplier));
         }
     }
 
     //Activate Spark when it is clicked/tapped, called from Swipey_TouchDetection
-    public void Activate() {  
-        if(!isActive && levelManager.isPlaying()) {
+    public virtual void Activate() {  
+        if(!isActive) {// && LevelManager.Instance.GetIfGameIsPlaying()) {
             Despawn();
         }
     }
 
-    public void Deactivate() {    
+    public void Deactivate() {
         isActive = false;
     }
 
-    void Despawn() {
+    protected void Despawn() {
         gameObject.GetComponentInChildren<AudioSource>().Play(0);
         StartCoroutine("Pause"); //pause movement so animation can finish 
         anim = this.gameObject.GetComponent<Animator>();

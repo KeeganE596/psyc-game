@@ -137,7 +137,7 @@ public class Swipey_MessageController_old : MessageController
             }
             hasStarted = true;
         }
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             monkMessageObject.SetActive(false);
         }
     }

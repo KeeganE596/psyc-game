@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Score_Circle
   - Spark
-  - Gnatt
   - Rings
   - QuadMetaBall
   - AOESwipe
@@ -32,6 +31,7 @@ TagManager:
   - SparksScore
   - SelectedWords
   - LevelButton
+  - Gnat
   layers:
   - Default
   - TransparentFX

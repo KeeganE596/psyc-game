@@ -19,9 +19,6 @@ public static class ColorManager
     static public GameObject oceansBg;
     static string backgroundType;
 
-    // void Awake() {
-    //     DontDestroyOnLoad(this.gameObject);
-    // }
 
     // // Start is called before the first frame update
     // void Start() {

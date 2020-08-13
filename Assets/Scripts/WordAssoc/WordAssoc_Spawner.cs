@@ -29,7 +29,7 @@ public class WordAssoc_Spawner : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start() {
-        playing = levelManager.isPlaying();
+        playing = LevelManager.Instance.GetIfGameIsPlaying();
         levelScaler = GameManagerStatic.GetCurrentLevelNumber();
 
         words = new List<string>();
@@ -62,7 +62,7 @@ public class WordAssoc_Spawner : MonoBehaviour
     // Update is called once per frame
     void Update() {
         //Check player isn't on instruction screen
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             timer += Time.deltaTime;
             badtimer += Time.deltaTime;
 

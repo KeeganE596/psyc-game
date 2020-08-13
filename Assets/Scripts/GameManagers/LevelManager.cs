@@ -2,98 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
-//LevelManager: each level has a canvas with this levelmanager script.
-//This controls the text panels before and after games - also scaling them to fit the device resolution,
-//It also controls the game time slider and whether the game is playing or not. 
+//LevelManager: each level has a canvas with this levelmanager script
+//It is a singleton so can be referenced with LevelManager.Instance
+//This controls the text panels before and after games and the pasue menu
+//It controls the game time slider and whether the game is playing or not
 //In game scripts can reference this to start/end games and get information about the game type
 public class LevelManager : MonoBehaviour
 {
-    //public GameObject GMPrefab;
+    public static LevelManager Instance { get; private set;}
     
-    //Game Slider Setup
-    public bool usingTimer = false;
-    float timeRemaining;
+    Slider timeSlider;
+    [SerializeField] private bool usingTimer = false;
     public float maxTime = 15f;
-    public Slider timeSlider;
-    bool playing;
-    //Game Points Setup
+    float timeRemaining;
+    bool playing = false;
     public bool usingPoints = false;
     bool winOnTimeOut = false;
 
-    //Referencing Game Manager and Color Manager
-    //GameManager gameManager;
-    //ColorManager colorManager;
-    public GameObject oceansBg;
-    bool playingChooseGame;
-
-    //Referencing text panels
-    public GameObject instructionsPanel;
-    public GameObject winPanel;
-    public GameObject losePanel;
-    public GameObject menuButton;
-    public GameObject panelBackground;
-
-    //Referencing pause objects
-    public GameObject pausePanel;
-    public GameObject pauseButton;
-    float mainTextSize;
-    float titleTextSize;
-    float buttonTextSize;
-    float SCREEN_WIDTH = Screen.width;
-    float SCREEN_HEIGHT = Screen.height;
-
-    int testNum {get;set;}
+    //Referencing canvas objects
+    [SerializeField] private GameObject inGameUIObjects;
+    [SerializeField] private GameObject instructionsPanel;
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject menuButton;
+    [SerializeField] private GameObject panelBackground;
+    [SerializeField] private GameObject pausePanel;
 
     void Awake() {
-        // if(GameObject.FindGameObjectsWithTag("GameManager").Length < 1) {
-        //     Instantiate(GMPrefab);
-        // }
-        // gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        //colorManager = GameObject.FindWithTag("ColorManager").GetComponent<ColorManager>();
+        if(Instance == null) {
+            Instance = this;
+        }
+        else {
+            Debug.Log("Destroying LevelManager duplicate");
+            Destroy(gameObject); //Don't allow two LevelManagers
+        }
 
-        //playingChooseGame = gameManager.isPlayingChooseGame();
-        //GameManagerStatic.GetPlayingRandomGame();
+        timeSlider = inGameUIObjects.GetComponentInChildren<Slider>();
     }
 
     // Start is called before the first frame update
     void Start() {
-        
-        ColorManager.LoadBackground();
-
-        // if(GameManager.swipeType != "default") {
-        //     playingChooseGame = false;
-        // }
-
-        timeSlider.gameObject.SetActive(false);
-        playing = false;
         timeRemaining = maxTime;
-
-        pauseButton.SetActive(false);
-        pausePanel.SetActive(false);
 
         panelBackground.GetComponent<Image>().color = ColorManager.GetColor();
         ColorManager.setCameraBackground();
+        ColorManager.LoadBackground();
         
-        //Setup text panels
-        // if(playingChooseGame && gameManager.NumberOfGamesWon() == 0) {     
-        //     instructionsPanel.SetActive(true);
-        // }
-        // else { 
-           // instructionsPanel.SetActive(false);
-            //StartGameAndPlay(); 
-        //}
+        inGameUIObjects.SetActive(false);
+        pausePanel.SetActive(false);
         winPanel.SetActive(false);
         losePanel.SetActive(false);
         instructionsPanel.SetActive(false);
-        StartGameAndPlay(); 
-
-        //gameManager.SetSparksScoreText();
-        
-        //setFontSizes();
-        //setupAssets();
+        StartGame(); 
     }
 
     // Update is called once per frame
@@ -118,23 +80,12 @@ public class LevelManager : MonoBehaviour
     
     public void StartGame() {
         TurnOffInstructions();
-        if(usingTimer) {
-            timeSlider.gameObject.SetActive(true);   //Turn slider on
-        }
-        pauseButton.SetActive(true);    //Turn on pause button
-    }
-
-    public void StartPlaying() {
+        inGameUIObjects.SetActive(true);
         playing = true;
     }
 
-    public void StartGameAndPlay() {
-        StartGame();
-        StartPlaying();
-    }
-
     float CalculateSliderValue() {
-        return timeRemaining/ maxTime;
+        return timeRemaining/maxTime;
     }
 
     public void GameWon() {
@@ -154,83 +105,20 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ToMainMenu() {
-        if(GameObject.FindGameObjectsWithTag("SelectedWords").Length < 1) {
-            DestroyImmediate(GameObject.FindWithTag("SelectedWords"), true);
-        }
+        // if(GameObject.FindGameObjectsWithTag("SelectedWords").Length < 1) {
+        //     DestroyImmediate(GameObject.FindWithTag("SelectedWords"), true);
+        // }
+        PauseGame(false);
         SceneLoadManager.ToMenu();
     }
 
-    public bool isPlaying() {
+    public void ToMap() {
+        PauseGame(false);
+        SceneLoadManager.ToMap();
+    }
+
+    public bool GetIfGameIsPlaying() {
         return playing;
-    }
-
-    public void setFontSizes() {
-        mainTextSize = SCREEN_HEIGHT/20.5f;
-        titleTextSize = SCREEN_HEIGHT/15f;
-        buttonTextSize = SCREEN_HEIGHT/19f;
-    }
-
-    //Scale instructions/win/lose text panels
-    void setupAssets() {
-        // panelBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
-        // panelBackground.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
-
-        // timeSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH*0.85f, SCREEN_HEIGHT*0.06f);
-        // timeSlider.GetComponent<RectTransform>().localPosition = new Vector2(0, 0+SCREEN_HEIGHT*0.45f);
-
-        // menuButton.GetComponent<RectTransform>().localPosition = new Vector2(-(SCREEN_WIDTH*0.5f)+(SCREEN_WIDTH*0.1f), (SCREEN_HEIGHT*0.5f)-(SCREEN_HEIGHT*0.1f));
-        // menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = mainTextSize;
-
-        //scalePausePanel();
-        // scaleInstructions(instructionsPanel);
-         //scaleInstructions(winPanel);
-        // scaleInstructions(losePanel);
-    }
-
-    //Do the scaling transformations for the panels
-    void scaleInstructions(GameObject panel) {
-        // GameObject titleText = panel.transform.GetChild(0).gameObject;
-        // titleText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT*0.1f);
-        // titleText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0+(SCREEN_HEIGHT*0.25f));
-        // titleText.GetComponent<TextMeshProUGUI>().fontSize = titleTextSize;
-
-        // GameObject mainText = panel.transform.GetChild(1).gameObject;
-        // mainText.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH*0.75f, SCREEN_HEIGHT*0.25f);
-        // mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
-        // mainText.GetComponent<TextMeshProUGUI>().fontSize = mainTextSize;
-
-        // GameObject playButton = panel.transform.GetChild(2).gameObject;
-        // playButton.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.25f));
-        // playButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
-
-        // if(panel.transform.childCount > 3) {
-        //     //mainText.GetComponent<RectTransform>().localPosition = new Vector2(0, 0-(SCREEN_HEIGHT*0.1f));
-
-        //     GameObject sparksScore = panel.transform.GetChild(3).gameObject;
-        //     sparksScore.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.05f), 0+(SCREEN_HEIGHT*0.1f));
-        //     sparksScore.GetComponent<TextMeshProUGUI>().fontSize = mainTextSize;
-            
-        //     sparksScore.transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.07f, SCREEN_HEIGHT*0.07f);
-        //     sparksScore.transform.GetChild(1).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.05f, SCREEN_HEIGHT*0.05f);
-        // }
-    }
-
-    void scalePausePanel() {
-        //pauseButton.GetComponent<RectTransform>().localPosition = new Vector2(0-(SCREEN_WIDTH*0.465f), 0+SCREEN_HEIGHT*0.45f);
-        // pauseButton.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.07f, SCREEN_HEIGHT*0.07f);
-        // pauseButton.transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.05f, SCREEN_HEIGHT*0.05f);
-        // pauseButton.transform.GetChild(1).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_HEIGHT*0.04f, SCREEN_HEIGHT*0.04f);
-
-        // pausePanel.GetComponent<RectTransform>().sizeDelta = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT); //background
-        // pausePanel.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
-
-        // GameObject contButton = pausePanel.transform.GetChild(0).gameObject;
-        // contButton.GetComponent<RectTransform>().localPosition = new Vector2(0, -(SCREEN_HEIGHT*0.2f));
-        // contButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
-
-        // GameObject menuButton = pausePanel.transform.GetChild(1).gameObject;
-        // menuButton.GetComponent<RectTransform>().localPosition = new Vector2(0, (SCREEN_HEIGHT*0.2f));
-        // menuButton.GetComponentInChildren<TextMeshProUGUI>().fontSize = buttonTextSize;
     }
 
     public void TurnOffInstructions() {
@@ -240,22 +128,19 @@ public class LevelManager : MonoBehaviour
     }
 
     public void EndGame() {
-        pauseButton.SetActive(false);
+        inGameUIObjects.SetActive(false);
         panelBackground.SetActive(true);
         menuButton.SetActive(true);
-        timeSlider.gameObject.SetActive(false);
     }
 
-    public void PauseGame() {
-        playing = !playing;
-
-        if(playing) {
-            pausePanel.SetActive(false);
-            pauseButton.SetActive(true);
+    public void PauseGame(bool paused) {
+        if(paused) {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
         }
         else {
-            pausePanel.SetActive(true);
-            pauseButton.SetActive(false);
+            pausePanel.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 
@@ -278,6 +163,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator WaitAtEndGameWon() {
         playing = false;
+        SaveManager.AddToSparxScore();
 
         yield return new WaitForSeconds(0.4f);
 
@@ -286,30 +172,13 @@ public class LevelManager : MonoBehaviour
         losePanel.SetActive(false);
         panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
         
-        // gameManager.AddToGamesWon();
-        // int wins = gameManager.NumberOfGamesWon();
-        string winText;
-        // if(wins == 1) {
-        //     //winText = "You've won 1 game!";
-        //     winText = 
-        // }
-        // else {
-        //     winText = "You've won " + wins + " games in a row!";
-        // }
-        winText = "You beat level " + GameManagerStatic.GetCurrentLevelNumber();
+        string winText = "You beat level " + GameManagerStatic.GetCurrentLevelNumber();
         winPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = winText;
-
-        //gameManager.SetSparksScoreText();
 
         int lvl = PlayerPrefs.GetInt("LevelUnlocked");
         if(GameManagerStatic.GetCurrentLevelNumber() == lvl) {
-            Debug.Log("now unlocked: " + (lvl + 1));
             SaveManager.SaveLevelUnlocked(lvl+1);
         }
-        
-        // PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, wins);
-        // PlayerPrefs.Save();
-        //Debug.Log(PlayerPrefs.GetInt("LevelUnlocked"));
     }
     
     IEnumerator WaitAtEndOfGameLost() {
@@ -339,7 +208,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void StartTimer() {
-        timeSlider.gameObject.SetActive(true);   //Turn time slider on
+        inGameUIObjects.SetActive(true);
         usingTimer = true;
     }
 }

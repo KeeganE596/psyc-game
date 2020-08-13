@@ -41,6 +41,7 @@ public class MainMenuManager : MonoBehaviour
     }
 
     public void StartGame(string type) {
+        anim.SetBool("centerblob", true);
         StartCoroutine(WaitToStartGame(type));
     }
 

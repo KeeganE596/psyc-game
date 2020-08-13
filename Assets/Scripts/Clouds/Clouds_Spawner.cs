@@ -34,7 +34,7 @@ public class Clouds_Spawner : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             if(spawnSparks) {
                 sparkTimer += Time.deltaTime;
                 if(sparkTimer > sparkSpawnTime) {
@@ -45,21 +45,21 @@ public class Clouds_Spawner : MonoBehaviour
             if(spawnGnats) {
                 gnatTimer += Time.deltaTime;
                 if(gnatTimer > gnatSpawnTime) {
-                    spawnGnatt();
+                    spawnGnat();
                     gnatTimer = 0;
                 }
             }
         }
     }
 
-    void spawnGnatt() {
+    void spawnGnat() {
         if(gnatIndex >= gnatPool.Count) {
             gnatIndex = 0;
         }
         
         if(gnatPool[gnatIndex].activeSelf) {
             gnatIndex++;
-            spawnGnatt();
+            spawnGnat();
         }
         GameObject gn = gnatPool[gnatIndex];
         int side = Random.Range(0, 2);  //pick which side of screen to spawn on
@@ -72,7 +72,7 @@ public class Clouds_Spawner : MonoBehaviour
         else {  //if right side of screen
             float y = Random.Range(0, Screen.height);
             spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width+10, y));
-            gn.GetComponent<Gnatt>().FlipSprite();
+            gn.GetComponent<Gnat>().FlipSprite();
         }
 
         gn.transform.position = spawnPos;
@@ -106,7 +106,7 @@ public class Clouds_Spawner : MonoBehaviour
     void SetupGnatPool(bool spawningGnats, string gnatType, int numOfGnats) {
         
         if(!spawningGnats || gnatType == "none") {
-            //Do not spawn gnatts
+            //Do not spawn gnats
             spawnGnats = false;
             gnatTimer = 0;
             gnatSpawnTime = Mathf.Infinity;
@@ -116,8 +116,8 @@ public class Clouds_Spawner : MonoBehaviour
         //Gnats spawn intialise settings
         spawnGnats = true;
         gnatTimer = 0.1f;
-        //gnatSpawnTime = (1.5f - ((currentLevel+1)*0.1f)) >= 0.35f ? 1.5f - ((currentLevel+1)*0.1f) : 0.35f;  //scale gnatt spawn speed depending on level number
-        gnatSpawnTime = levelManager.maxTime/numOfGnats;
+        //gnatSpawnTime = (1.5f - ((currentLevel+1)*0.1f)) >= 0.35f ? 1.5f - ((currentLevel+1)*0.1f) : 0.35f;  //scale gnat spawn speed depending on level number
+        gnatSpawnTime = LevelManager.Instance.maxTime/numOfGnats;
         float gnatSpeed = 0.3f;//PickGnatSpeed();
 
         //Instantiate gnats to fill object pool with appropriate gnat for the level
@@ -135,10 +135,10 @@ public class Clouds_Spawner : MonoBehaviour
             }
             // else if(gnatType == "text") {
             //     gnatPool.Add(Instantiate(gnat_text, new Vector2(0, 0), Quaternion.identity)); 
-            //     gnatPool[i].GetComponent<Gnatt_Text>().SetText(badWords[Random.Range(0, badWords.Count)]);
+            //     gnatPool[i].GetComponent<Gnat_Text>().SetText(badWords[Random.Range(0, badWords.Count)]);
                 
             // }
-            gnatPool[i].GetComponent<Gnatt>().SetSpeed(gnatSpeed);
+            gnatPool[i].GetComponent<Gnat>().SetSpeed(gnatSpeed);
             gnatPool[i].SetActive(false);
         }
         gnatIndex = 0;
@@ -158,7 +158,7 @@ public class Clouds_Spawner : MonoBehaviour
         //Sparks spawn intialise settings
         spawnSparks = true;
         sparkTimer = 0.1f;
-        sparkSpawnTime = levelManager.maxTime/15;
+        sparkSpawnTime = LevelManager.Instance.maxTime/15;
         
         //Instantiate sparks to fill object pool with appropriate sparks for the level
         sparkPool = new List<GameObject>();

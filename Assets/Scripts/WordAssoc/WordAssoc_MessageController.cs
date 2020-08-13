@@ -35,7 +35,7 @@ public class WordAssoc_MessageController : MessageController
             }
             hasStarted = true;
         }
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             monkMessageObject.SetActive(false);
         }
     }

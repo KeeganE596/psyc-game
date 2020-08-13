@@ -54,7 +54,7 @@ public class Inspection_TouchDetection : MonoBehaviour
             }
         }
 
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             canvas.transform.GetChild(8).gameObject.SetActive(true);
             canvas.transform.GetChild(9).gameObject.SetActive(true);
             thoughtTextObj.SetActive(true);

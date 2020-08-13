@@ -48,7 +48,7 @@ public class WordFind_MainGame : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.isPlaying() && selectWordsScript.GetIfSelectedWords() && selectWordsScript.screenClear) {
+        if(LevelManager.Instance.GetIfGameIsPlaying() && selectWordsScript.GetIfSelectedWords() && selectWordsScript.screenClear) {
             if(wordObjs.Count == 0) {
                 SpawnAllWords();
                 levelManager.StartTimer();

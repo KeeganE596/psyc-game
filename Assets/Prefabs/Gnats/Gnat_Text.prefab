@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5877743226817940950}
   m_Layer: 14
   m_Name: Gnat_Text
-  m_TagString: Gnatt
+  m_TagString: Gnat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

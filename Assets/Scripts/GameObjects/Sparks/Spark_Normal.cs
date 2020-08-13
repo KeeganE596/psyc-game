@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class Spark_Normal : Spark
 {
-    protected override void Start() {
+    void Awake() {
+        anim = this.gameObject.GetComponent<Animator>();
+    }
+
+    void Start() {
         //plays correct spawn animation based off instantiated name
-        if (gameObject.name == "Spark_01(Clone)")
-        {
-            anim = this.gameObject.GetComponent<Animator>();
+        if (gameObject.name == "Spark_01(Clone)") {
             anim.SetTrigger("SparkPrefab_01");
         }
         else if (gameObject.name == "Spark_02(Clone)") {
-            anim = this.gameObject.GetComponent<Animator>();
             anim.SetTrigger("SparkPrefab_02");
         }
         else if (gameObject.name == "Spark_03(Clone)") {
-            anim = this.gameObject.GetComponent<Animator>();
             anim.SetTrigger("SparkPrefab_02");
-        } 
-
-        base.Start();
+        }
     }
 }

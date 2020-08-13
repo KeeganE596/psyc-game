@@ -7,10 +7,9 @@ using UnityEngine.UI;
 //ends the game when score is reached
 public class Swipey_ScoreManager : MonoBehaviour
 {
-    LevelManager levelManager;
+    //LevelManager levelManager;
     int score = 5;
     Text scoreText;
-    private bool ishurt = false;
     public bool vulnerable = true;
 
     int maxPoints = 15;
@@ -25,7 +24,7 @@ public class Swipey_ScoreManager : MonoBehaviour
     float scoreIndicatorTargetSize;
 
     void Awake() {
-        levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
+        //levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
     private void Start() {
@@ -60,10 +59,10 @@ public class Swipey_ScoreManager : MonoBehaviour
         vulnerable = false;
 
         if(wonGame) {
-            levelManager.GameWon();
+            LevelManager.Instance.GameWon();
         }
         else {
-            levelManager.GameLost();
+            LevelManager.Instance.GameLost();
         }
         
     }
@@ -78,21 +77,17 @@ public class Swipey_ScoreManager : MonoBehaviour
             levelEnded = true;
             EndLevel(true);
         }
-
-        if (ishurt) {
-            ishurt = false;
-        }
     }
 
     public void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.tag == "Spark" && vulnerable == true && levelManager.isPlaying()) {          
+        if (col.gameObject.tag == "Spark" && vulnerable == true){// && LevelManager.Instance.GetIfGameIsPlaying()) {          
             addScore();
             col.gameObject.GetComponent<Spark>().Deactivate();
             col.gameObject.SetActive(false);
         }
-        if(col.gameObject.tag == "Gnatt" && vulnerable == true && levelManager.isPlaying()) {
+        if(col.gameObject.tag == "Gnat" && vulnerable == true) {// && LevelManager.Instance.GetIfGameIsPlaying()) {
             minusScore();
-            ishurt = true;
+            //col.gameObject.GetComponent<Gnat>().Despawn();
             col.gameObject.SetActive(false);
         }
     }

@@ -89,7 +89,7 @@ public class Breathing_Touch : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             if(Input.GetMouseButtonDown(0) && !checkClickInMenuButton()) {
                 if(checkInGrey()) {
                     setNotHolding();
@@ -152,7 +152,7 @@ public class Breathing_Touch : MonoBehaviour
 
             setBreatheText();
             //Debug.Log(breatheCount);
-            if(breatheCount == maxPoints-1 && levelManager.isPlaying()) {
+            if(breatheCount == maxPoints-1 && LevelManager.Instance.GetIfGameIsPlaying()) {
                 levelManager.GameWon();
             }
         }

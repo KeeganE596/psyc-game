@@ -43,7 +43,7 @@ public class WordAssoc_TouchDetection : MonoBehaviour
     
     // Update is called once per frame
     void Update() {
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             mousePos = Input.mousePosition;
             screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             hit = Physics2D.Raycast(screenPos,Vector2.zero);

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7797830757977501830}
   - component: {fileID: 1978910450959156882}
   m_Layer: 14
-  m_Name: Gnatt_Tank
-  m_TagString: Gnatt
+  m_Name: Gnat_Tank
+  m_TagString: Gnat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d85cba2caed654698e180a57d0297c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyParticle: {fileID: 0}
 --- !u!1 &6889888507150110814
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +130,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -161,7 +164,7 @@ SpriteRenderer:
   m_Size: {x: 5, y: 5.001221}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &471953476946470703
@@ -174,7 +177,7 @@ Animator:
   m_GameObject: {fileID: 6889888507150110814}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dc470c47afe06ec48b41e75155a7320c, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

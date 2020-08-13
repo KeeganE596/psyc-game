@@ -68,7 +68,7 @@ public class MessageController : MonoBehaviour
     }
 
     public void ContinueGame() {
-        levelManager.StartPlaying();
+        LevelManager.Instance.StartGame();
         //monkMessageObject.SetActive(false);
     }
 

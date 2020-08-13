@@ -45,7 +45,7 @@ public class Clouds_TouchDetection : MonoBehaviour
     }
 
     void doClick() {
-        if(levelManager.isPlaying()) {
+        if(LevelManager.Instance.GetIfGameIsPlaying()) {
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(startPos), Vector2.zero);
 
             //Raycast from camera

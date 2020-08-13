@@ -39,7 +39,7 @@ public class MapManager : MonoBehaviour
         GameObject[] buttons = GameObject.FindGameObjectsWithTag("LevelButton");
         for(int i=0; i<buttons.Length; i++) {
             GameObject b = GetButton(i);
-            b.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
+            //b.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
             // buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
             if(i > currentLevelUnlocked) { //For locked levels
                 b.GetComponent<Button>().enabled = false;
