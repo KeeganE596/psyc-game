@@ -4,32 +4,27 @@ using UnityEngine;
 
 public class PickBackgroundButtons : MonoBehaviour
 {
-    [SerializeField] private GameObject bgButton_1;
-    [SerializeField] private GameObject bgButton_2;
-
-    [SerializeField] private GetBackgroundType setBackgroundScript;
+    [SerializeField] private List<GameObject> backgroundButtons;
+    [SerializeField] private GetBackgroundType GetBackgroundType;
 
     void Start() {
-        HighlightButton(PlayerPrefs.GetString("background"));
+        HighlightButton(PlayerPrefs.GetInt("background"));
     }
 
-    public void PickBackgroundButton(string bg) {
-        SaveManager.SaveBackground(bg);
-        HighlightButton(bg);
-        setBackgroundScript.GetBackground();
+    public void PickBackgroundButton(int bgNum) {
+        SaveManager.SaveBackground(bgNum);
+        HighlightButton(bgNum);
+        GetBackgroundType.GetBackground();
     }
 
-    void HighlightButton(string bg) {
-        bgButton_1.SetActive(false);
-        bgButton_2.SetActive(false);
-
-        switch(bg) {
-            case "ocean":
-                bgButton_1.SetActive(true);
-                break;
-            case "mountains":
-                bgButton_2.SetActive(true);
-                break;
+    void HighlightButton(int bgNum) {
+        for(int i=0; i<backgroundButtons.Count; i++) {
+            if(bgNum == i) {
+                backgroundButtons[i].transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else {
+                backgroundButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
         }
     }
 }

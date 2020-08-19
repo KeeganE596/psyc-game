@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject instructionsPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
-    [SerializeField] private GameObject menuButton;
     [SerializeField] private GameObject panelBackground;
     [SerializeField] private GameObject pausePanel;
 
@@ -79,6 +78,7 @@ public class LevelManager : MonoBehaviour
     }
     
     public void StartGame() {
+        Time.timeScale = 1;
         TurnOffInstructions();
         inGameUIObjects.SetActive(true);
         playing = true;
@@ -105,9 +105,6 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ToMainMenu() {
-        // if(GameObject.FindGameObjectsWithTag("SelectedWords").Length < 1) {
-        //     DestroyImmediate(GameObject.FindWithTag("SelectedWords"), true);
-        // }
         PauseGame(false);
         SceneLoadManager.ToMenu();
     }
@@ -123,14 +120,13 @@ public class LevelManager : MonoBehaviour
 
     public void TurnOffInstructions() {
         panelBackground.SetActive(false);
-        menuButton.SetActive(false);
         instructionsPanel.SetActive(false);
     }
 
     public void EndGame() {
+        Time.timeScale = 0;
         inGameUIObjects.SetActive(false);
         panelBackground.SetActive(true);
-        menuButton.SetActive(true);
     }
 
     public void PauseGame(bool paused) {
@@ -142,15 +138,6 @@ public class LevelManager : MonoBehaviour
             pausePanel.SetActive(false);
             Time.timeScale = 1;
         }
-    }
-
-    // public bool GetIfPlayingChooseGame() {
-    //     return playingChooseGame;
-    // }
-
-    public int GetNumberOfGamesWon() {
-        //return gameManager.NumberOfGamesWon();
-        return 999;
     }
 
     public void SetToWinOnTimeOut() {
@@ -170,10 +157,7 @@ public class LevelManager : MonoBehaviour
         EndGame();
         winPanel.SetActive(true);
         losePanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
-        
-        string winText = "You beat level " + GameManagerStatic.GetCurrentLevelNumber();
-        winPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = winText;
+        //panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
 
         int lvl = PlayerPrefs.GetInt("LevelUnlocked");
         if(GameManagerStatic.GetCurrentLevelNumber() == lvl) {
@@ -189,22 +173,7 @@ public class LevelManager : MonoBehaviour
         EndGame();
         losePanel.SetActive(true);
         winPanel.SetActive(false);
-        panelBackground.GetComponent<Image>().color = ColorManager.GetDarkColor();
-
-        int wins = 999; //gameManager.NumberOfGamesWon();
-        string loseText;
-        if(wins == 0) {
-            loseText = "You won no games this time.";
-        }
-        else if(wins == 1) {
-            loseText = "You won 1 game this time.";
-        }
-        else {
-            loseText = "You won " + wins + " games this time.";
-        }
-        losePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = loseText;
-        GameObject loseButton = losePanel.transform.GetChild(2).gameObject;
-        loseButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "from level " + GameManagerStatic.GetCurrentLevelNumber();
+        //panelBackground.GetComponent<Image>().color = ColorManager.GetDarkColor();
     }
 
     public void StartTimer() {

@@ -4,50 +4,40 @@ using UnityEngine;
 
 public class IntroductionManager : MonoBehaviour
 {
-    [SerializeField] private IntroductionGameManager IntroGameManager;
-    [SerializeField] private GameObject scene_1;
-    [SerializeField] private GameObject scene_2;
-    [SerializeField] private GameObject scene_3;
-    [SerializeField] private GameObject scene_3_gnats;
-    [SerializeField] private GameObject scene_4;
-    [SerializeField] private GameObject scene_4_sparx;
-    [SerializeField] private GameObject scene_5;
+    [SerializeField] private IntroductionGameManager IntroductionGameManager;
+    [SerializeField] private List<GameObject> scenes;
+    [SerializeField] private GameObject scene_2_gnats;
+    [SerializeField] private GameObject scene_3_sparx;
     [SerializeField] private GameObject player;
 
     void Start() {
-        NextScene(1);
+        scene_2_gnats.SetActive(false);
+        scene_3_sparx.SetActive(false);
+        player.SetActive(false);
+        NextScene(0);
     }
 
     public void NextScene(int num) {
-        scene_1.SetActive(false);
-        scene_2.SetActive(false);
-        scene_3.SetActive(false);
-        scene_3_gnats.SetActive(false);
-        scene_4.SetActive(false);
-        scene_4_sparx.SetActive(false);
-        scene_5.SetActive(false);
-        player.SetActive(false);
+        for(int i=0; i<scenes.Count; i++) {
+            if(i == num) {
+                scenes[i].SetActive(true);
 
-        switch(num) {
-            case 1:
-                scene_1.SetActive(true);
-                break;
-            case 2:
-                scene_2.SetActive(true);
-                break;
-            case 3:
-                scene_3.SetActive(true);
-                scene_3_gnats.SetActive(true);
-                break;
-            case 4:
-                scene_4.SetActive(true);
-                scene_4_sparx.SetActive(true);
-                break;
-            case 5:
-                scene_5.SetActive(true);
-                player.SetActive(true);
-                IntroGameManager.StartPlaying();
-                break;
-        }   
+                if(num == 2)
+                    scene_2_gnats.SetActive(true);
+                if(num == 3) {
+                    scene_2_gnats.SetActive(false);
+                    scene_3_sparx.SetActive(true);
+                }
+                if(num == 4) {
+                    scene_3_sparx.SetActive(false);
+                    player.SetActive(true);
+                    IntroductionGameManager.StartPlaying();
+                }
+            }
+            else {
+                scenes[i].SetActive(false);
+                player.SetActive(false);
+            }
+        }
     }
 }

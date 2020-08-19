@@ -9,23 +9,13 @@ public class GetBackgroundType : MonoBehaviour
     }
 
     public void GetBackground() {
-        string bg = "ocean";
+        int bg = 0;
         
-        if(PlayerPrefs.HasKey("background")) {
-            bg = PlayerPrefs.GetString("background");
-        }
+        if(PlayerPrefs.HasKey("background"))
+            bg = PlayerPrefs.GetInt("background");
 
-        this.transform.GetChild(0).gameObject.SetActive(false);
-        this.transform.GetChild(1).gameObject.SetActive(false);
-
-        switch (bg) {
-            case "ocean":
-                this.transform.GetChild(0).gameObject.SetActive(true);
-                break;
-            case "mountains":
-                this.transform.GetChild(1).gameObject.SetActive(true);
-                break;
-        }
-        
+        foreach(Transform child in transform)
+            child.gameObject.SetActive(false);
+        transform.GetChild(bg).gameObject.SetActive(true);
     }
 }

@@ -190,10 +190,12 @@ public class IntroductionGameManager : MonoBehaviour
     }
 
     public void ToMainMenu() {
+        PauseGame(false);
         SceneLoadManager.ToMenu();
     }
 
     public void ToMap() {
+        PauseGame(false);
         SceneLoadManager.ToMap();
     }
 

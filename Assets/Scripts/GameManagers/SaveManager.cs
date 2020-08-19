@@ -12,7 +12,7 @@ public static class SaveManager
             PlayerPrefs.SetInt("LevelUnlocked", 0);
         }
         if(!PlayerPrefs.HasKey("background")) {
-            PlayerPrefs.SetString("background", "ocean");
+            PlayerPrefs.SetInt("background", 0);
         }
         if(!PlayerPrefs.HasKey("playerCharacter")) {
             PlayerPrefs.SetInt("playerCharacter", 0);
@@ -24,7 +24,7 @@ public static class SaveManager
     public static void ResetAllPlayerPrefs() {
         PlayerPrefs.SetInt("sparxScore", 0);
         PlayerPrefs.SetInt("LevelUnlocked", 0);
-        PlayerPrefs.SetString("background", "ocean");
+        PlayerPrefs.SetInt("background", 0);
 
         PlayerPrefs.Save();
     }
@@ -48,8 +48,14 @@ public static class SaveManager
         PlayerPrefs.Save();
     }
 
-    public static void SaveBackground(string bg) {
-        PlayerPrefs.SetString("background", bg);
+    // public static void SaveBackground(string bg) {
+    //     PlayerPrefs.SetString("background", bg);
+        
+    //     PlayerPrefs.Save();
+    // }
+
+    public static void SaveBackground(int bgNum) {
+        PlayerPrefs.SetInt("background", bgNum);
         
         PlayerPrefs.Save();
     }
