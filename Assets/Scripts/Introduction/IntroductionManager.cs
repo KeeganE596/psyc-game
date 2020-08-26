@@ -6,30 +6,32 @@ public class IntroductionManager : MonoBehaviour
 {
     [SerializeField] private IntroductionGameManager IntroductionGameManager;
     [SerializeField] private List<GameObject> scenes;
-    [SerializeField] private GameObject scene_2_gnats;
-    [SerializeField] private GameObject scene_3_sparx;
+    [SerializeField] private GameObject scene_3_gnats;
+    [SerializeField] private GameObject scene_4_sparx;
     [SerializeField] private GameObject player;
 
+    private int currentScene = 0;
+
     void Start() {
-        scene_2_gnats.SetActive(false);
-        scene_3_sparx.SetActive(false);
+        scene_3_gnats.SetActive(false);
+        scene_4_sparx.SetActive(false);
         player.SetActive(false);
-        NextScene(0);
+        NextScene();
     }
 
-    public void NextScene(int num) {
+    public void NextScene() {
         for(int i=0; i<scenes.Count; i++) {
-            if(i == num) {
+            if(i == currentScene) {
                 scenes[i].SetActive(true);
 
-                if(num == 2)
-                    scene_2_gnats.SetActive(true);
-                if(num == 3) {
-                    scene_2_gnats.SetActive(false);
-                    scene_3_sparx.SetActive(true);
+                if(currentScene == 3)
+                    scene_3_gnats.SetActive(true);
+                if(currentScene == 4) {
+                    scene_3_gnats.SetActive(false);
+                    scene_4_sparx.SetActive(true);
                 }
-                if(num == 4) {
-                    scene_3_sparx.SetActive(false);
+                if(currentScene == 5) {
+                    scene_4_sparx.SetActive(false);
                     player.SetActive(true);
                     IntroductionGameManager.StartPlaying();
                 }
@@ -39,5 +41,6 @@ public class IntroductionManager : MonoBehaviour
                 player.SetActive(false);
             }
         }
+        currentScene++;
     }
 }

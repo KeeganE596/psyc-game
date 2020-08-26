@@ -39,8 +39,8 @@ public class Spark : MonoBehaviour
         anim.SetTrigger("Activate");
 
         GameObject ps = Instantiate(sparkParticle, gameObject.transform.position, Quaternion.identity);
-        ParticleSystem.MainModule pModule = ps.GetComponent<ParticleSystem>().main;
-        pModule.startColor = GetComponentInChildren<SpriteRenderer>().color;
+        // ParticleSystem.MainModule pModule = ps.GetComponent<ParticleSystem>().main;
+        // pModule.startColor = GetComponentInChildren<SpriteRenderer>().color;
     }
 
     IEnumerator Pause() {

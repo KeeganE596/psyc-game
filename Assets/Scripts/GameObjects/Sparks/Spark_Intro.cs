@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spark_Intro : Spark
-{
-    public Vector2 target = new Vector2(0, 0);
-    
+{    
     void Awake() {
         anim = this.gameObject.GetComponent<Animator>();
     }
@@ -15,5 +13,6 @@ public class Spark_Intro : Spark
     }
 
     void Update() {
+        //do nothing
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gnat_Normal : Gnat
 {   
-    public override void Start() {
+    private void Start() {
         //speedMultiplier = 0;//(GameManager.gamesWon + 1) * 0.1f;
         base.Start();
     }

@@ -20,10 +20,10 @@ public class PickBackgroundButtons : MonoBehaviour
     void HighlightButton(int bgNum) {
         for(int i=0; i<backgroundButtons.Count; i++) {
             if(bgNum == i) {
-                backgroundButtons[i].transform.GetChild(0).gameObject.SetActive(true);
+                backgroundButtons[i].transform.GetChild(1).gameObject.SetActive(true);
             }
             else {
-                backgroundButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+                backgroundButtons[i].transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }

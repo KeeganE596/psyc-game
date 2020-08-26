@@ -7,7 +7,7 @@ public class Gnat_Text : Gnat
 {
     TextMeshPro word;
 
-    protected override void Awake() {
+    private void Awake() {
         word = this.GetComponentInChildren<TextMeshPro>();
         base.Awake();
     }
@@ -29,4 +29,6 @@ public class Gnat_Text : Gnat
     public override void FlipSprite() {
         return;
     }
+
+    
 }

@@ -62,6 +62,7 @@ public class Swipey_TouchDetection : MonoBehaviour
             touchTimeFinish = Time.time;
 
             if(clickedGnat) {
+                clickedGnatObject.GetComponent<Rigidbody2D>().isKinematic = false;
                 clickedGnatObject.GetComponent<Rigidbody2D>().AddForce(-(startPos - endPos) / (touchTimeFinish - touchTimeStart) * throwForce); //(direction/timeInterval*throwforce)
                 clickedGnatObject.GetComponent<Collider2D>().enabled = false;
                 clickedGnatObject.GetComponent<Gnat>().Despawn();

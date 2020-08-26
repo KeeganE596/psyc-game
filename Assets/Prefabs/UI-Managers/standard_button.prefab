@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4259642803397113725}
   - component: {fileID: 470331327078849026}
   m_Layer: 5
-  m_Name: mainMenu_button
+  m_Name: standard_button
   m_TagString: MenuButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 100, y: -90}
-  m_SizeDelta: {x: 201.68994, y: 80}
+  m_SizeDelta: {x: 255, y: 95}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &773577296090364745
 CanvasRenderer:

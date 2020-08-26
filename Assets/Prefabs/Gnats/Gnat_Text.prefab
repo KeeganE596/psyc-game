@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4739430227779223226}
   - component: {fileID: 5877743226817940950}
   m_Layer: 14
-  m_Name: Gnat_Text
+  m_Name: Gnat_text
   m_TagString: Gnat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,9 +31,9 @@ Transform:
   m_LocalPosition: {x: -8.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5457754388748113620}
   - {fileID: 55754340583391618}
   - {fileID: 4508657629036003445}
+  - {fileID: 5457754388748113620}
   - {fileID: 671055315361785185}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3803557064970936933}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -229,7 +229,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6026573783837287842}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &4546407774688884185
 AudioSource:
@@ -357,7 +357,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6026573783837287842}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 9215840462576682096}
   - component: {fileID: 493806936030560066}
   m_Layer: 0
-  m_Name: Text
+  m_Name: text_lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -527,7 +527,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6026573783837287842}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -553,7 +553,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 9063914145161547885, guid: 83e74e061244eb7458d1bd102dc698b2, type: 2}
+  - {fileID: 4482072292530450937, guid: db219ba6a223f7c458619e12e07b06cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -597,8 +597,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Word
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 83e74e061244eb7458d1bd102dc698b2, type: 2}
-  m_sharedMaterial: {fileID: 9063914145161547885, guid: 83e74e061244eb7458d1bd102dc698b2,
+  m_fontAsset: {fileID: 11400000, guid: db219ba6a223f7c458619e12e07b06cf, type: 2}
+  m_sharedMaterial: {fileID: 4482072292530450937, guid: db219ba6a223f7c458619e12e07b06cf,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

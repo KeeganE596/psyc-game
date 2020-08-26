@@ -19,43 +19,20 @@ public class Swipey_Spawner : MonoBehaviour
     [SerializeField] private GameObject gnat_normal;
     [SerializeField] private GameObject gnat_text;
 
-    bool playing;
-
     //Spawn timings
     float nextSparkSpawnTime;
     float sparkSpawnOffset;
     float nextGnatSpawnTime;
     float gnatSpawnOffset;
 
-    int currentLevel;
-
     bool spawnSparks;
     bool spawnGnats;
 
-    List<string> goodWords;
-    List<string> badWords;
+    [SerializeField] private List<string> goodWords;
+    [SerializeField] private List<string> badWords;
 
-    void Awake() {
-    }
     
-    // Start is called before the first frame update
     void Start() {
-        playing = LevelManager.Instance.GetIfGameIsPlaying();
-        currentLevel = GameManagerStatic.GetCurrentLevelNumber();
-
-        goodWords = new List<string>();
-        goodWords.Add("Adventure"); goodWords.Add("Beauty"); goodWords.Add("Caring");
-        goodWords.Add("Challenge"); goodWords.Add("Compassion"); goodWords.Add("Connection");
-        goodWords.Add("Courage"); goodWords.Add("Creativity"); goodWords.Add("Curiosity");
-        goodWords.Add("Encourage"); goodWords.Add("Friendly"); goodWords.Add("Fun");
-        goodWords.Add("Excitement"); goodWords.Add("Gratitude"); goodWords.Add("Honesty");
-        goodWords.Add("Fitness"); goodWords.Add("Humour"); goodWords.Add("Self-Care");
-
-        badWords = new List<string>();
-        badWords.Add("Impatient"); badWords.Add("Anger"); badWords.Add("Disrespect");
-        badWords.Add("Can't"); badWords.Add("Dishonest"); badWords.Add("Impossible");
-        badWords.Add("Hate");   badWords.Add("Lieing");    badWords.Add("Give-Up");
-
         if(GameManagerStatic.GetPlayingRandomGame()) {
             SetupRandomGameSpawn();
         }
@@ -64,10 +41,8 @@ public class Swipey_Spawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update() {
-        //Check player isn't on instruction screen
-        if(LevelManager.Instance.GetIfGameIsPlaying()) {
+        //if(LevelManager.Instance.GetIfGameIsPlaying()) {
             if(spawnSparks) {
                 if(Time.time >= nextSparkSpawnTime) {
                     spawnSpark();
@@ -80,12 +55,13 @@ public class Swipey_Spawner : MonoBehaviour
                     nextGnatSpawnTime = Time.time + gnatSpawnOffset;
                 }
             }
-        }
+        //}
     }
 
 
     void spawnSpark() {
         if(sparkPoolQu.Count == 0) {
+            Debug.Log("No Sparx to spawn");
             return;
         }
         //Get random position to spawn spark at
@@ -127,10 +103,6 @@ public class Swipey_Spawner : MonoBehaviour
         gn.GetComponent<Gnat>().ChooseSprite();
     }
 
-    void ChooseRandomGameType() {
-             SetupRandomGameSpawn();
-    }
-
     void SetupRandomGameSpawn() {
         if(Random.Range(0, 2) == 0) {   //Choose spark type
             SetupSparkPool(true, "normal");
@@ -147,19 +119,16 @@ public class Swipey_Spawner : MonoBehaviour
     }
 
     void GetLevelSpawns() {
-        switch (currentLevel) {
+        switch (GameManagerStatic.GetCurrentLevelNumber()) {
             case 1:
-                LevelManager.Instance.SetToWinOnTimeOut();
                 SetupSparkPool(false, "none");
                 SetupGnatPool(true, "normal", 14);
                 return;
             case 2:
-                LevelManager.Instance.SetToWinOnTimeOut();
                 SetupSparkPool(false, "none");
                 SetupGnatPool(true, "normal", 16);
                 return;
             case 3:
-                LevelManager.Instance.SetToWinOnTimeOut();
                 SetupSparkPool(false, "none");
                 SetupGnatPool(true, "normal", 18);
                 return;
@@ -188,8 +157,28 @@ public class Swipey_Spawner : MonoBehaviour
                 SetupGnatPool(true, "normal", 14);
                 return;
             case 10:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(true, "normal", 16);
+                SetupSparkPool(false, "none");
+                SetupGnatPool(true, "text", 16);
+                return;
+            case 11:
+                SetupSparkPool(false, "none");
+                SetupGnatPool(true, "text", 16);
+                return;
+            case 12:
+                SetupSparkPool(false, "none");
+                SetupGnatPool(true, "text", 16);
+                return;
+            case 13:
+                SetupSparkPool(true, "text");
+                SetupGnatPool(false, "none", 0);
+                return;
+            case 14:
+                SetupSparkPool(true, "text");
+                SetupGnatPool(false, "none", 0);
+                return;
+            case 15:
+                SetupSparkPool(true, "text");
+                SetupGnatPool(false, "none", 0);
                 return;
             default:
                 SetupSparkPool(true, "normal");
@@ -238,6 +227,7 @@ public class Swipey_Spawner : MonoBehaviour
             //Do not spawn sparks
             spawnSparks = false;
             sparkSpawnOffset = Mathf.Infinity;
+            LevelManager.Instance.SetToWinOnTimeOut();
             return;
         }
 
