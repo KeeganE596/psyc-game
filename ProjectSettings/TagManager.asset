@@ -32,6 +32,7 @@ TagManager:
   - SelectedWords
   - LevelButton
   - Gnat
+  - GnatSwap
   layers:
   - Default
   - TransparentFX

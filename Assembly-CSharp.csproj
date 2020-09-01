@@ -159,6 +159,7 @@
      <Compile Include="Assets\Metaball\PostProcessing\Runtime\Models\AmbientOcclusionModel.cs" />
      <Compile Include="Assets\Metaball\Scripts\QuitInput.cs" />
      <Compile Include="Assets\Scripts\MainMenu\OpenURL.cs" />
+     <Compile Include="Assets\Scripts\GnatSwapTouchDetection.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\Metaball\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
