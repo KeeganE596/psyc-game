@@ -200,7 +200,7 @@ public class IntroductionGameManager : MonoBehaviour
     }
 
     public void NextLevel() {
-        GameManagerStatic.PickGame("swipeAway", 1);
+        GameManagerStatic.PickGame(1);
     }
 
     public void RestartGame() {

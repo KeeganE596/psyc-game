@@ -3,32 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gnat_Normal : Gnat
-{   
-    private void Start() {
-        //speedMultiplier = 0;//(GameManager.gamesWon + 1) * 0.1f;
-        base.Start();
+{
+    private int gnatSpriteNumber;
+    private Color angryColor = new Color32(62, 7, 7, 200);
+    private Color frustratedColor = new Color32(32, 23, 47, 200);
+    private Color lonelyColor = new Color32(43, 43, 43, 200);
+    private Color sadColor = new Color32(5, 17, 54, 200);
+
+    public override void ChooseSprite() 
+    {
+        gnatSpriteNumber = Random.Range(0, 3);
+        transform.GetChild(gnatSpriteNumber).gameObject.SetActive(true);
     }
 
-    public override void Despawn() {
-        //StartCoroutine("FadeOut");
-        
-        base.Despawn();
+    protected override void ResetGnat()
+    {
+        transform.GetChild(gnatSpriteNumber).gameObject.SetActive(false);
+        base.ResetGnat();
     }
 
-    IEnumerator FadeOut() {
-        sprite.color = new Color(1, 1, 1, alpha);
-        while(alpha > 0) {
-            alpha -= 0.04f;
-            sprite.color = new Color(1, 1, 1, alpha);
-            yield return new WaitForSeconds(0.01f);
+    protected override void SpawnParticles()
+    {
+        GameObject ps = Instantiate(destroyParticle, gameObject.transform.position, Quaternion.identity);
+        ParticleSystem.MainModule pModule = ps.GetComponent<ParticleSystem>().main;
+        if (gnatSpriteNumber == 0)
+        {
+            pModule.startColor = sadColor;
         }
-        yield return new WaitForSeconds(1f);
-        alpha = 1;
-        sprite.color = new Color(1, 1, 1, alpha);
-    }
-
-    public override void ChooseSprite() {
-        int num = Random.Range(0, 3);
-        this.transform.GetChild(num).gameObject.SetActive(true);
+        else if (gnatSpriteNumber == 1)
+        {
+            pModule.startColor = frustratedColor;
+        }
+        else if (gnatSpriteNumber == 2)
+        {
+            pModule.startColor = angryColor;
+        }
     }
 }

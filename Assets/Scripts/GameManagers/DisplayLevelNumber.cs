@@ -5,7 +5,8 @@ using TMPro;
 
 public class DisplayLevelNumber : MonoBehaviour
 {
-    void Awake() {
-        gameObject.GetComponent<TextMeshProUGUI>().text = "Lvl " + GameManagerStatic.GetCurrentLevelNumber();
+    void Awake()
+    {
+        GetComponent<TextMeshProUGUI>().text = "Lvl " + (GameManagerStatic.GetCurrentLevelNumber() + 1);
     }
 }

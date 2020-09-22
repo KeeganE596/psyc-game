@@ -29,7 +29,10 @@ public static class SaveManager
         PlayerPrefs.Save();
     }
 
-    public static void SaveLevelUnlocked(int lvl) {
+    public static void SaveLevelUnlocked(int lvl)
+    {
+        lvl = (lvl + (20 * GameManagerStatic.GetCurrentLevelSetNumber()));
+        Debug.Log(lvl + " unlocking");
         PlayerPrefs.SetInt("LevelUnlocked", lvl);
 
         PlayerPrefs.Save();
@@ -57,6 +60,12 @@ public static class SaveManager
     public static void SaveBackground(int bgNum) {
         PlayerPrefs.SetInt("background", bgNum);
         
+        PlayerPrefs.Save();
+    }
+
+    public static void ResetLevelunlock() {
+        PlayerPrefs.SetInt("LevelUnlocked", 20);
+
         PlayerPrefs.Save();
     }
 }

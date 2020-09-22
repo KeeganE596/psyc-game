@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class Gnat_Tank : Gnat
 {
-    int lives = 1;
+    [SerializeField] private SpriteRenderer shieldImage;
+    private int lives = 1;
 
-    public override void Start() {
-        speedMultiplier = (GameManager.gamesWon + 1) * 0.2f;
-        base.Start();
+    void Start() {
+        velocity = 0.8f;
     }
 
-    public override void Despawn() {
+    public override void Despawn(Vector2 gnatThrow) {
         if(lives > 0){
             lives--;
-            velocity = velocity * 1.1f;
             sprite.color = new Color(1, 1, 1, alpha);
             sprite.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            shieldImage.enabled = false;
         }
         else {
-            base.Despawn();
+            base.Despawn(gnatThrow);
         }
-    }
-
-    public override int GetLives() {
-        return lives;
     }
 }

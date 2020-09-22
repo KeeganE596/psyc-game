@@ -34,15 +34,15 @@ public class Swipey_AoeSwipe : MonoBehaviour
     //Apply force to all gantts that have been 'hit' and call their despawn method
      public void flickGnats(Vector2 direction, float timeInterval, float throwForce) {
         foreach(GameObject g in gnats) {
-            if(g.GetComponent<Gnat>().GetLives() <= 0) {
-                //add force onto rigid body depending on swipe time, direction and throw force.
-                Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
-                rb.AddForce(-direction / timeInterval * throwForce);
+            //if(g.GetComponent<Gnat>().GetLives() <= 0) {
+            //    //add force onto rigid body depending on swipe time, direction and throw force.
+            //    Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
+            //    rb.AddForce(-direction / timeInterval * throwForce);
 
-                g.GetComponent<Collider2D>().enabled = false;
-            }
+            //    g.GetComponent<Collider2D>().enabled = false;
+            //}
 
-            g.GetComponent<Gnat>().Despawn();
+            //g.GetComponent<Gnat>().Despawn();
         }
         gnats.Clear();
     }

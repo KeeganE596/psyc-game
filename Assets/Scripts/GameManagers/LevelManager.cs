@@ -14,11 +14,12 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set;}
     
     Slider timeSlider;
-    [SerializeField] private bool usingTimer = false;
+    private bool usingTimer = true;
     public float maxTime = 15f;
+    //public float maxtime { get { return _maxTime; } }
     float timeRemaining;
     bool playing = false;
-    public bool usingPoints = false;
+    // [SerializeField] private bool usingPoints = false;
     bool winOnTimeOut = false;
 
     //Referencing canvas objects
@@ -159,9 +160,10 @@ public class LevelManager : MonoBehaviour
         losePanel.SetActive(false);
         //panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
 
-        int lvl = PlayerPrefs.GetInt("LevelUnlocked");
-        if(GameManagerStatic.GetCurrentLevelNumber() == lvl) {
-            SaveManager.SaveLevelUnlocked(lvl+1);
+        int lvlunlocked = PlayerPrefs.GetInt("LevelUnlocked");
+        if((GameManagerStatic.GetCurrentRealLevelNumber()) == lvlunlocked) 
+        {
+            SaveManager.SaveLevelUnlocked(GameManagerStatic.GetCurrentLevelNumber() + 1);
         }
     }
     

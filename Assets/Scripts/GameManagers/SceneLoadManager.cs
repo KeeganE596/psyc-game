@@ -23,7 +23,7 @@ public static class SceneLoadManager
     }
 
     public static void ToIntro() {
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene("Introduction_Level");
     }
 
     public static void ToMenu() {

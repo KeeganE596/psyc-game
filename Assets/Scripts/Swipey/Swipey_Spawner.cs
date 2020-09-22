@@ -6,11 +6,13 @@ using UnityEngine;
 //Stores sparks and Gnats in object pools to mitigate need to instantiate/destroy objects all the time
 //Ability to have different spark and gnat types
 public class Swipey_Spawner : MonoBehaviour
-{    
+{
+    public static Swipey_Spawner Instance { get; private set; }
+
     [SerializeField] private Camera mainCam;
 
     //Sparx
-    Queue<GameObject> sparkPoolQu;
+    Queue<GameObject> sparkPool;
     [SerializeField] private GameObject spark_1;
     [SerializeField] private GameObject spark_text;
 
@@ -31,20 +33,34 @@ public class Swipey_Spawner : MonoBehaviour
     [SerializeField] private List<string> goodWords;
     [SerializeField] private List<string> badWords;
 
-    
-    void Start() {
-        if(GameManagerStatic.GetPlayingRandomGame()) {
-            SetupRandomGameSpawn();
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
         }
-        else {
-            GetLevelSpawns();
+        else
+        {
+            Debug.Log("Destroying Spawner duplicate");
+            Destroy(gameObject); //Don't allow two LevelManagers
         }
     }
 
-    void Update() {
+    void Start() 
+    {
+        if (GameManagerStatic.GetPlayingRandomGame())
+            SetupRandomGameSpawn();
+        else 
+            GetLevelSpawns();
+    }
+
+    void Update() 
+    {
         //if(LevelManager.Instance.GetIfGameIsPlaying()) {
-            if(spawnSparks) {
-                if(Time.time >= nextSparkSpawnTime) {
+            if(spawnSparks) 
+            {
+                if(Time.time >= nextSparkSpawnTime) 
+                {
                     spawnSpark();
                     nextSparkSpawnTime = Time.time + sparkSpawnOffset;
                 }
@@ -60,7 +76,7 @@ public class Swipey_Spawner : MonoBehaviour
 
 
     void spawnSpark() {
-        if(sparkPoolQu.Count == 0) {
+        if(sparkPool.Count == 0) {
             Debug.Log("No Sparx to spawn");
             return;
         }
@@ -69,7 +85,7 @@ public class Swipey_Spawner : MonoBehaviour
 
         //check position isnt too close to middle
         if((spawnPos.x < -2.5 || spawnPos.x > 2.5) && (spawnPos.y < -2.5 || spawnPos.y > 2.5)) {
-            GameObject sp = sparkPoolQu.Dequeue();
+            GameObject sp = sparkPool.Dequeue();
             sp.transform.position = spawnPos;
             sp.SetActive(true);
         }
@@ -84,23 +100,21 @@ public class Swipey_Spawner : MonoBehaviour
             return;
         }
 
-        GameObject gn = gnatPool.Dequeue();
+        GameObject gnat = gnatPool.Dequeue();
         int side = Random.Range(0, 2);  //pick which side of screen to spawn on
         Vector2 spawnPos;
-
-        if(side == 0) { //if left side of screen
-            float y = Random.Range(0, Screen.height);
+        float y = Random.Range(0, Screen.height);
+        if (side == 0) { //if left side of screen
             spawnPos = mainCam.ScreenToWorldPoint(new Vector2(-10, y));
         }
         else {  //if right side of screen
-            float y = Random.Range(0, Screen.height);
             spawnPos = mainCam.ScreenToWorldPoint(new Vector2(Screen.width+10, y));
-            gn.GetComponent<Gnat>().FlipSprite();
+            gnat.GetComponent<Gnat>().FlipSprite();
         }
 
-        gn.transform.position = spawnPos;
-        gn.SetActive(true);
-        gn.GetComponent<Gnat>().ChooseSprite();
+        gnat.transform.position = spawnPos;
+        gnat.SetActive(true);
+        gnat.GetComponent<Gnat>().ChooseSprite();
     }
 
     void SetupRandomGameSpawn() {
@@ -119,72 +133,77 @@ public class Swipey_Spawner : MonoBehaviour
     }
 
     void GetLevelSpawns() {
-        switch (GameManagerStatic.GetCurrentLevelNumber()) {
-            case 1:
-                SetupSparkPool(false, "none");
-                SetupGnatPool(true, "normal", 14);
-                return;
-            case 2:
-                SetupSparkPool(false, "none");
-                SetupGnatPool(true, "normal", 16);
-                return;
-            case 3:
-                SetupSparkPool(false, "none");
-                SetupGnatPool(true, "normal", 18);
-                return;
-            case 4:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(false, "none", 0);
-                return;
-            case 5:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(false, "none", 0);
-                return;
-            case 6:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(false, "none", 0);
-                return;
-            case 7:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(true, "normal", 10);
-                return;
-            case 8:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(true, "normal`", 12);
-                return;
-            case 9:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(true, "normal", 14);
-                return;
-            case 10:
-                SetupSparkPool(false, "none");
-                SetupGnatPool(true, "text", 16);
-                return;
-            case 11:
-                SetupSparkPool(false, "none");
-                SetupGnatPool(true, "text", 16);
-                return;
-            case 12:
-                SetupSparkPool(false, "none");
-                SetupGnatPool(true, "text", 16);
-                return;
-            case 13:
-                SetupSparkPool(true, "text");
-                SetupGnatPool(false, "none", 0);
-                return;
-            case 14:
-                SetupSparkPool(true, "text");
-                SetupGnatPool(false, "none", 0);
-                return;
-            case 15:
-                SetupSparkPool(true, "text");
-                SetupGnatPool(false, "none", 0);
-                return;
-            default:
-                SetupSparkPool(true, "normal");
-                SetupGnatPool(true, "normal", 16);
-                return;
-        }
+        LevelSettings levelSettings = GameManagerStatic.GetCurrentLevelSettings();
+        SetupSparkPool(levelSettings.GetIfHasSparks(), levelSettings.GetSparkType());
+        SetupGnatPool(levelSettings.GetIfHasGnats(), levelSettings.GetGnatType(), levelSettings.GetNumberOfGnats());
+        //Debug.Log(levelSettings.ToString());
+
+        //switch (GameManagerStatic.GetCurrentLevelNumber()) {
+        //    case 1:
+        //        SetupSparkPool(false, "none");
+        //        SetupGnatPool(true, "normal", 14);
+        //        return;
+        //    case 2:
+        //        SetupSparkPool(false, "none");
+        //        SetupGnatPool(true, "normal", 16);
+        //        return;
+        //    case 3:
+        //        SetupSparkPool(false, "none");
+        //        SetupGnatPool(true, "normal", 18);
+        //        return;
+        //    case 4:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(false, "none", 0);
+        //        return;
+        //    case 5:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(false, "none", 0);
+        //        return;
+        //    case 6:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(false, "none", 0);
+        //        return;
+        //    case 7:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(true, "normal", 10);
+        //        return;
+        //    case 8:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(true, "normal`", 12);
+        //        return;
+        //    case 9:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(true, "normal", 14);
+        //        return;
+        //    case 10:
+        //        SetupSparkPool(false, "none");
+        //        SetupGnatPool(true, "text", 16);
+        //        return;
+        //    case 11:
+        //        SetupSparkPool(false, "none");
+        //        SetupGnatPool(true, "text", 16);
+        //        return;
+        //    case 12:
+        //        SetupSparkPool(false, "none");
+        //        SetupGnatPool(true, "text", 16);
+        //        return;
+        //    case 13:
+        //        SetupSparkPool(true, "text");
+        //        SetupGnatPool(false, "none", 0);
+        //        return;
+        //    case 14:
+        //        SetupSparkPool(true, "text");
+        //        SetupGnatPool(false, "none", 0);
+        //        return;
+        //    case 15:
+        //        SetupSparkPool(true, "text");
+        //        SetupGnatPool(false, "none", 0);
+        //        return;
+        //    default:
+        //        SetupSparkPool(true, "normal");
+        //        SetupGnatPool(true, "normal", 16);
+        //        return;
+        //}
     }
 
     void SetupGnatPool(bool spawningGnats, string gnatType, int numOfGnats) {
@@ -193,6 +212,15 @@ public class Swipey_Spawner : MonoBehaviour
             spawnGnats = false;
             gnatSpawnOffset = Mathf.Infinity;
             return;
+        }
+
+        if(gnatType == "random")
+        {
+            int rand = Random.Range(0, 2);
+            if (rand == 1)
+                gnatType = "normal";
+            else
+                gnatType = "text";
         }
 
         //Gnats spawn intialise settings
@@ -231,22 +259,31 @@ public class Swipey_Spawner : MonoBehaviour
             return;
         }
 
+        if (sparkType == "random")
+        {
+            int rand = Random.Range(0, 2);
+            if (rand == 1)
+                sparkType = "normal";
+            else
+                sparkType = "text";
+        }
+
         //Sparks spawn intialise settings
         spawnSparks = true;
         sparkSpawnOffset = LevelManager.Instance.maxTime/15;
         nextSparkSpawnTime = sparkSpawnOffset;
         
         //Instantiate sparks to fill object pool with appropriate sparks for the level
-        sparkPoolQu = new Queue<GameObject>();
+        sparkPool = new Queue<GameObject>();
         for(int i=0; i<20; i++) {
             GameObject spark = null;
             if(sparkType == "normal") {
                 spark = Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity);
-                sparkPoolQu.Enqueue(spark);
+                sparkPool.Enqueue(spark);
             }
             else if(sparkType == "text") {
                 spark = Instantiate(spark_text, new Vector2(0, 0), Quaternion.identity);
-                sparkPoolQu.Enqueue(spark);
+                sparkPool.Enqueue(spark);
                 spark.GetComponent<Spark_Text>().SetText(goodWords[Random.Range(0, goodWords.Count)]);
             }
 
@@ -284,5 +321,15 @@ public class Swipey_Spawner : MonoBehaviour
         //     default:
         //         return currentLevel/10f <= 0.7f ? currentLevel/10f : 0.7f;
         // }
+    }
+
+    public void AddGnatToQueue(GameObject gnat)
+    {
+        gnatPool.Enqueue(gnat);
+    }
+
+    public void AddSparkToQueue(GameObject spark)
+    {
+        sparkPool.Enqueue(spark);
     }
 }

@@ -9,33 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: dca1670fbf735dc4ea8494c03f2161d7
   - enabled: 1
-    path: Assets/Scenes/Games/swipeAway_Game.unity
+    path: Assets/Scenes/Main_Game.unity
     guid: b68413b7a045ea44f9ab219a1e6bfce7
-  - enabled: 1
-    path: Assets/Scenes/Games/wordAssociation_Game.unity
+  - enabled: 0
+    path: Assets/Scenes/Other/Unused/wordAssociation_Game.unity
     guid: 9223cda5c8f85384a87298d283ffa3bb
-  - enabled: 1
-    path: Assets/Scenes/Games/breathing_Game.unity
+  - enabled: 0
+    path: Assets/Scenes/Other/Unused/breathing_Game.unity
     guid: 503ed124b354e4f5e873684182007a47
-  - enabled: 1
-    path: Assets/Scenes/chooseGame.unity
+  - enabled: 0
+    path: Assets/Scenes/Other/chooseGame.unity
     guid: 9a2825809eae19f43bd8fbe83603e76f
-  - enabled: 1
-    path: Assets/Scenes/Games/inspection_Game.unity
+  - enabled: 0
+    path: Assets/Scenes/Other/Unused/inspection_Game.unity
     guid: 7a78f278beb6e0f449faf869bc8ece22
-  - enabled: 1
-    path: Assets/Scenes/Games/wordFind_Game.unity
+  - enabled: 0
+    path: Assets/Scenes/Other/Unused/wordFind_Game.unity
     guid: 8ce79e39ac7af9c4db7a9c34d9408399
-  - enabled: 1
-    path: Assets/Scenes/Games/clouds_Game.unity
+  - enabled: 0
+    path: Assets/Scenes/Other/Unused/clouds_Game.unity
     guid: f84afaea3ed51cf4d850b4336cbe0da3
   - enabled: 0
-    path: Assets/Scenes/GameIntro.unity
-    guid: f0c24ffc4b2b13b49ada27c9cadda97c
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: bc3790416d7488a4e806c0e8bca749f3
   - enabled: 1
-    path: Assets/Scenes/Games/intro.unity
+    path: Assets/Scenes/Introduction_Level.unity
     guid: 3d7eeee37d6fedc4d8112b81a54110fc
   m_configObjects: {}

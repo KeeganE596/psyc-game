@@ -7,8 +7,9 @@ public class Spark_Text : Spark
 {
     TextMeshPro word;
 
-    void Awake() {
-        word = this.GetComponentInChildren<TextMeshPro>();
+    protected override void Awake() {
+        word = GetComponentInChildren<TextMeshPro>();
+        base.Awake();
     }
 
     public void SetText(string setWord) {

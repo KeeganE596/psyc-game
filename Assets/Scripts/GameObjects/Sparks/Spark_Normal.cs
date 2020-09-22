@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Spark_Normal : Spark
 {
-    void Awake() {
-        anim = this.gameObject.GetComponent<Animator>();
-    }
-
-    void Start() {
+    void OnEnable() {
         //plays correct spawn animation based off instantiated name
         if (gameObject.name == "Spark_01(Clone)") {
             anim.SetTrigger("SparkPrefab_01");

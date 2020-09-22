@@ -63,14 +63,17 @@ public class GnatSwapTouchDetection : MonoBehaviour
             touchTimeFinish = Time.time;
             Debug.Log(clickedGnatObject.name);
             if(clickedGnat) {
-                clickedGnatObject.GetComponent<Rigidbody2D>().isKinematic = false;
-                clickedGnatObject.GetComponent<Rigidbody2D>().AddForce(-(startPos - endPos) / (touchTimeFinish - touchTimeStart) * throwForce); //(direction/timeInterval*throwforce)
-                clickedGnatObject.GetComponent<Collider2D>().enabled = false;
-                clickedGnatObject.GetComponent<Gnat>().Despawn();
+                //clickedGnatObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                //clickedGnatObject.GetComponent<Rigidbody2D>().AddForce(-(startPos - endPos) / (touchTimeFinish - touchTimeStart) * throwForce); //(direction/timeInterval*throwforce)
+                //clickedGnatObject.GetComponent<Collider2D>().enabled = false;
+                //clickedGnatObject.GetComponent<Gnat>().Despawn();
+
+                Vector2 gnatThrow = (-(startPos - endPos) / (touchTimeFinish - touchTimeStart) * throwForce);
+                clickedGnatObject.GetComponent<Gnat>().Despawn(gnatThrow);
             }
 
-            clickedGnatObject.transform.GetChild(2).gameObject.SetActive(true);
-            clickedGnatObject.transform.GetChild(2).transform.SetParent(clickedGnatObject.transform.parent);
+            //clickedGnatObject.transform.GetChild(2).gameObject.SetActive(true);
+            //clickedGnatObject.transform.GetChild(2).transform.SetParent(clickedGnatObject.transform.parent);
 
             clickedGnat = false;
         //}
