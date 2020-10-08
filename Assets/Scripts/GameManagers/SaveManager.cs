@@ -64,7 +64,7 @@ public static class SaveManager
     }
 
     public static void ResetLevelunlock() {
-        PlayerPrefs.SetInt("LevelUnlocked", 20);
+        PlayerPrefs.SetInt("LevelUnlocked", 45);
 
         PlayerPrefs.Save();
     }

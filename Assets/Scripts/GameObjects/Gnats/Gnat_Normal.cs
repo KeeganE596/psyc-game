@@ -12,8 +12,9 @@ public class Gnat_Normal : Gnat
 
     public override void ChooseSprite() 
     {
-        gnatSpriteNumber = Random.Range(0, 3);
-        transform.GetChild(gnatSpriteNumber).gameObject.SetActive(true);
+        //gnatSpriteNumber = Random.Range(0, 3);
+        //transform.GetChild(gnatSpriteNumber).gameObject.SetActive(true);
+        return;
     }
 
     protected override void ResetGnat()

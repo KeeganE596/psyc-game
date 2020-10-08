@@ -11,7 +11,7 @@ public class Gnat : MonoBehaviour
 
     [SerializeField] protected GameObject destroyParticle;
 
-    protected float velocity = 1.0f;
+    protected float velocity = 1.2f;
     protected bool doDespawn = false;
     protected SpriteRenderer sprite;
     protected float alpha = 1.0f;
@@ -20,7 +20,7 @@ public class Gnat : MonoBehaviour
     private bool isFlipped = false;
     
 
-    private void Start() {
+    protected virtual void Start() {
         sprite = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
     }

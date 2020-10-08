@@ -4,21 +4,14 @@ using UnityEngine;
 
 public class MapButton : MonoBehaviour
 {
-    [SerializeField] private int _levelNumber = 0;
-    private int _levelSetNumber = 0;
-
     public void ChooseLevel()
     {
-        GameManagerStatic.PickGame(_levelNumber, _levelSetNumber);
+        LevelSettings ls = GetComponent<LevelSettings>();
+        GameManagerStatic.PickGame(ls.GetLevelNumber(), ls.GetLevelSetNumber());
     }
 
     public void ChooseIntro()
     {
         SceneLoadManager.ToIntro();
-    }
-
-    public void SetLevelSetNumber(int num)
-    {
-        _levelSetNumber = num;
     }
 }

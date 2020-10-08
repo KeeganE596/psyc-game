@@ -124,7 +124,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &486271931
+--- !u!84 &247782825
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,8 +137,8 @@ RenderTexture:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 3
-  m_Width: 1481
-  m_Height: 279
+  m_Width: 640
+  m_Height: 480
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthFormat: 2
@@ -1303,6 +1303,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7760134658839543746, guid: 28eb35c16ff30cd41985841eab22716f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28eb35c16ff30cd41985841eab22716f, type: 3}
 --- !u!1 &2114506258
@@ -1452,11 +1457,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 1037092610}
   spark_1: {fileID: 5454380852869289296, guid: e39a7cca5662a8e41a471b512ee425f4, type: 3}
+  spark_2: {fileID: 5454380852869289296, guid: 431f94e39a0fe2a4dacce5e29dfe7d27, type: 3}
   spark_text: {fileID: 7763823797986048612, guid: a7e1ab83606ea974a8ba3e14371a9ca4,
     type: 3}
   gnat_normal: {fileID: 7384595901177733761, guid: b410b7f909fd5304f91edeba7e304924,
     type: 3}
   gnat_text: {fileID: 3803557064970936933, guid: 5fb2f61978133494188c9d570c716230,
+    type: 3}
+  gnat_fast: {fileID: 2478593432937868024, guid: c09416bc38076674a8a15a313a285b70,
+    type: 3}
+  gnat_tank: {fileID: 4608846159629264036, guid: 81c3d1cb6da3b0b41998e67f8023af7c,
     type: 3}
   goodWords:
   - Adventure

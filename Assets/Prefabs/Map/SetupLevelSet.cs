@@ -21,7 +21,7 @@ public class SetupLevelSet : MonoBehaviour
             if (b.gameObject == this)
                 continue;
             b.GetChild(0).GetComponent<Image>().color = _levelSetColor;
-            b.GetComponent<MapButton>().SetLevelSetNumber(_levelSetNumber);
+            b.GetComponent<LevelSettings>().SetLevelSetNumber(_levelSetNumber);
         }
 
         GetComponentInChildren<Scrollbar>().transform.GetChild(0).GetChild(0).GetComponent<Image>().color = _levelSetColor;

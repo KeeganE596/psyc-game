@@ -96,11 +96,13 @@
     <Compile Include="Assets\Scripts\Map\MapButton.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\SetWinSetPanelText.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\PostProcessingContext.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Models\UserLutModel.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameManagerStatic.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
     <Compile Include="Assets\Metaball\Scripts\SquishAndRotate.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\InstructionsManager.cs" />
     <Compile Include="Assets\Scripts\GameManagers\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\DisplayLevelunlock.cs" />
     <Compile Include="Assets\Scripts\WordAssoc\WordAssoc_TouchDetection.cs" />
@@ -108,7 +110,7 @@
     <Compile Include="Assets\Scripts\GameObjects\Sparks\Spark.cs" />
     <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtsController.cs" />
     <Compile Include="Assets\Scripts\GameObjects\ParticleSystemAutoDestroy.cs" />
-    <Compile Include="Assets\Scripts\GameObjects\Gnats\Unused\Gnat_Fast.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Gnats\Gnat_Fast.cs" />
     <Compile Include="Assets\Scripts\Swipey\Swipey_TouchDetection.cs" />
     <Compile Include="Assets\Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Map\ShowLevelSetNumber.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\Components\VignetteComponent.cs" />
     <Compile Include="Assets\Scripts\GameManagers\LevelManager.cs" />
     <Compile Include="Assets\Metaball\PostProcessing\Runtime\PostProcessingComponent.cs" />
@@ -138,7 +141,7 @@
     <Compile Include="Assets\Scripts\Leaderboard\GetGameScores.cs" />
     <Compile Include="Assets\Scripts\ButtonFunctionality.cs" />
     <Compile Include="Assets\Scripts\Inspection\Inspection_ThoughtObject.cs" />
-    <Compile Include="Assets\Scripts\GameObjects\Gnats\Unused\Gnat_Tank.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Gnats\Gnat_Tank.cs" />
     <Compile Include="Assets\Scripts\Swipey\Swipey_Spawner.cs" />
     <Compile Include="Assets\Scripts\WordFind\WordFind_MainGame.cs" />
     <Compile Include="Assets\Scripts\ChooseGameScreen\GameBlobController.cs" />

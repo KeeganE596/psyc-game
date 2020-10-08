@@ -72,10 +72,10 @@ public class GnatSwapTouchDetection : MonoBehaviour
                 clickedGnatObject.GetComponent<Gnat>().Despawn(gnatThrow);
             }
 
-            //clickedGnatObject.transform.GetChild(2).gameObject.SetActive(true);
-            //clickedGnatObject.transform.GetChild(2).transform.SetParent(clickedGnatObject.transform.parent);
+        clickedGnatObject.transform.GetChild(2).gameObject.SetActive(true);
+        clickedGnatObject.transform.GetChild(2).transform.SetParent(clickedGnatObject.transform.parent);
 
-            clickedGnat = false;
+        clickedGnat = false;
         //}
     }
 }

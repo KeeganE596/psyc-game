@@ -53,7 +53,7 @@ public static class GameManagerStatic
     public static void PickGame(int lvl) 
     {
         _currentLevel = lvl;
-        _currentLevelSettings = _levelSettingsArray[(lvl-1)];
+        _currentLevelSettings = _levelSettingsArray[lvl];
         SceneLoadManager.LoadGame("Main");
     }
 

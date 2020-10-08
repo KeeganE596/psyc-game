@@ -5,44 +5,85 @@ using UnityEngine;
 public class LevelSettings : MonoBehaviour
 {
     [SerializeField] private int _levelNumber = 0;
-    [SerializeField] private bool _hasSparks = false;
-    [SerializeField] private bool _hasGnats = false;
-    [SerializeField] private string _sparkType = "none";
-    [SerializeField] private string _gnatType = "none";
+
+    [Header("Spark Types")]
+    [SerializeField] private bool _normalSparx = false;
+    [SerializeField] private bool _textSparx = false;
+
+    [Header("Gnat Types")]
     [SerializeField] private int _numberOfGnats = 0;
+    [SerializeField] private bool _normalGnat = false;
+    [SerializeField] private bool _textGnat = false;
+    [SerializeField] private bool _fastGnat = false;
+    [SerializeField] private bool _tankGnat = false;
 
-    public LevelSettings(int levelNumber, bool hasSparks, bool hasGnats, string sparkType, string gnatType, int numberOfGnats)
+    [Header("Level Instructions")]
+    [SerializeField] private bool _hasInstructions = false;
+    [SerializeField] private int _instructionsNumber = 0;
+
+    private List<string> _gnatTypes;
+    private List<string> _sparkTypes;
+
+    // Dictionary<string, bool> _gnatTypes;
+
+    private int _levelSet = 0;
+
+    //public LevelSettings(int levelNumber, bool hasSparks, bool hasGnats, string sparkType, string gnatType, int numberOfGnats)
+    //{
+    //    _levelNumber = levelNumber;
+    //    _hasSparks = hasSparks;
+    //    _hasGnats = hasGnats;
+    //    _sparkType = sparkType;
+    //    _gnatType = gnatType;
+    //    _numberOfGnats = numberOfGnats;
+    //}
+
+    public int GetLevelNumber()
     {
-        _levelNumber = levelNumber;
-        _hasSparks = hasSparks;
-        _hasGnats = hasGnats;
-        _sparkType = sparkType;
-        _gnatType = gnatType;
-        _numberOfGnats = numberOfGnats;
-    }
-
-    public int GetLevelNumber() {
         return _levelNumber;
     }
 
-    public bool GetIfHasSparks()
+    public int GetLevelSetNumber()
     {
-        return _hasSparks;
+        return _levelSet;
     }
 
-    public bool GetIfHasGnats()
+    public bool GetIfHasInstructions()
     {
-        return _hasGnats;
+        return _hasInstructions;
     }
 
-    public string GetSparkType()
+    public int GetInstructionsNumber()
     {
-        return _sparkType;
+        return _instructionsNumber;
     }
 
-    public string GetGnatType()
+    public List<string> GetSparkTypes()
     {
-        return _gnatType;
+        _sparkTypes = new List<string>();
+
+        if (_normalSparx)
+            _sparkTypes.Add("normal");
+        if (_textSparx)
+            _sparkTypes.Add("text");
+
+        return _sparkTypes;
+    }
+
+    public List<string> GetGnatTypes()
+    {
+        _gnatTypes = new List<string>();
+
+        if (_normalGnat)
+            _gnatTypes.Add("normal");
+        if (_textGnat)
+            _gnatTypes.Add("text");
+        if (_fastGnat)
+            _gnatTypes.Add("fast");
+        if (_tankGnat)
+            _gnatTypes.Add("tank");
+
+        return _gnatTypes;
     }
 
     public int GetNumberOfGnats()
@@ -52,6 +93,11 @@ public class LevelSettings : MonoBehaviour
 
     public override string ToString()
     {
-        return _levelNumber + ", " + _hasSparks + ", " + _hasGnats + ", " + _sparkType + ", " + _gnatType + ", " + _numberOfGnats;
+        return _levelNumber + ", " + _numberOfGnats;
+    }
+
+    public void SetLevelSetNumber(int num)
+    {
+        _levelSet = num;
     }
 }

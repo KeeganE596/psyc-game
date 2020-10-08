@@ -14,12 +14,15 @@ public class Swipey_Spawner : MonoBehaviour
     //Sparx
     Queue<GameObject> sparkPool;
     [SerializeField] private GameObject spark_1;
+    [SerializeField] private GameObject spark_2;
     [SerializeField] private GameObject spark_text;
 
     //Gnats
     Queue<GameObject> gnatPool;
     [SerializeField] private GameObject gnat_normal;
     [SerializeField] private GameObject gnat_text;
+    [SerializeField] private GameObject gnat_fast;
+    [SerializeField] private GameObject gnat_tank;
 
     //Spawn timings
     float nextSparkSpawnTime;
@@ -48,9 +51,9 @@ public class Swipey_Spawner : MonoBehaviour
 
     void Start() 
     {
-        if (GameManagerStatic.GetPlayingRandomGame())
-            SetupRandomGameSpawn();
-        else 
+        //if (GameManagerStatic.GetPlayingRandomGame())
+        //    //SetupRandomGameSpawn();
+        //else 
             GetLevelSpawns();
     }
 
@@ -117,210 +120,121 @@ public class Swipey_Spawner : MonoBehaviour
         gnat.GetComponent<Gnat>().ChooseSprite();
     }
 
-    void SetupRandomGameSpawn() {
-        if(Random.Range(0, 2) == 0) {   //Choose spark type
-            SetupSparkPool(true, "normal");
-        }
-        else {
-            SetupSparkPool(true, "text");
-        }
-        if(Random.Range(0, 2) == 0) {   //Choose gnat type
-            SetupGnatPool(true, "normal", 18);
-        }
-        else {
-            SetupGnatPool(true, "text", 18);
-        }
-    }
+    //void SetupRandomGameSpawn() {
+    //    if(Random.Range(0, 2) == 0) {   //Choose spark type
+    //        SetupSparkPool(true, "normal");
+    //    }
+    //    else {
+    //        SetupSparkPool(true, "text");
+    //    }
+    //    if(Random.Range(0, 2) == 0) {   //Choose gnat type
+    //        SetupGnatPool(true, "normal", 18);
+    //    }
+    //    else {
+    //        SetupGnatPool(true, "text", 18);
+    //    }
+    //}
 
     void GetLevelSpawns() {
         LevelSettings levelSettings = GameManagerStatic.GetCurrentLevelSettings();
-        SetupSparkPool(levelSettings.GetIfHasSparks(), levelSettings.GetSparkType());
-        SetupGnatPool(levelSettings.GetIfHasGnats(), levelSettings.GetGnatType(), levelSettings.GetNumberOfGnats());
+        SetupSparkPool(levelSettings.GetSparkTypes());
+        SetupGnatPool(levelSettings.GetGnatTypes(), levelSettings.GetNumberOfGnats());
         //Debug.Log(levelSettings.ToString());
-
-        //switch (GameManagerStatic.GetCurrentLevelNumber()) {
-        //    case 1:
-        //        SetupSparkPool(false, "none");
-        //        SetupGnatPool(true, "normal", 14);
-        //        return;
-        //    case 2:
-        //        SetupSparkPool(false, "none");
-        //        SetupGnatPool(true, "normal", 16);
-        //        return;
-        //    case 3:
-        //        SetupSparkPool(false, "none");
-        //        SetupGnatPool(true, "normal", 18);
-        //        return;
-        //    case 4:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(false, "none", 0);
-        //        return;
-        //    case 5:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(false, "none", 0);
-        //        return;
-        //    case 6:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(false, "none", 0);
-        //        return;
-        //    case 7:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(true, "normal", 10);
-        //        return;
-        //    case 8:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(true, "normal`", 12);
-        //        return;
-        //    case 9:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(true, "normal", 14);
-        //        return;
-        //    case 10:
-        //        SetupSparkPool(false, "none");
-        //        SetupGnatPool(true, "text", 16);
-        //        return;
-        //    case 11:
-        //        SetupSparkPool(false, "none");
-        //        SetupGnatPool(true, "text", 16);
-        //        return;
-        //    case 12:
-        //        SetupSparkPool(false, "none");
-        //        SetupGnatPool(true, "text", 16);
-        //        return;
-        //    case 13:
-        //        SetupSparkPool(true, "text");
-        //        SetupGnatPool(false, "none", 0);
-        //        return;
-        //    case 14:
-        //        SetupSparkPool(true, "text");
-        //        SetupGnatPool(false, "none", 0);
-        //        return;
-        //    case 15:
-        //        SetupSparkPool(true, "text");
-        //        SetupGnatPool(false, "none", 0);
-        //        return;
-        //    default:
-        //        SetupSparkPool(true, "normal");
-        //        SetupGnatPool(true, "normal", 16);
-        //        return;
-        //}
     }
 
-    void SetupGnatPool(bool spawningGnats, string gnatType, int numOfGnats) {
-        if(!spawningGnats || gnatType == "none") {
-            //Do not spawn gnats
+    void SetupGnatPool(List<string> gnatTypes, int numOfGnats)
+    {
+        if (gnatTypes.Count == 0)   //Don't spawn any gnats
+        {
             spawnGnats = false;
             gnatSpawnOffset = Mathf.Infinity;
             return;
         }
 
-        if(gnatType == "random")
-        {
-            int rand = Random.Range(0, 2);
-            if (rand == 1)
-                gnatType = "normal";
-            else
-                gnatType = "text";
-        }
-
         //Gnats spawn intialise settings
         spawnGnats = true;
-        gnatSpawnOffset = LevelManager.Instance.maxTime/numOfGnats;
+        gnatSpawnOffset = LevelManager.Instance.maxTime / numOfGnats;
         nextGnatSpawnTime = gnatSpawnOffset;
-        float gnatSpeed = PickGnatSpeed();
+
+        string gnatType = gnatType = gnatTypes[0];
 
         //Instantiate gnats to fill object pool with appropriate gnat for the level
         gnatPool = new Queue<GameObject>();
-        for(int i=0; i<numOfGnats; i++) {
+        for (int i = 0; i < numOfGnats; i++)
+        {
+            if (gnatTypes.Count > 1)
+                gnatType = gnatTypes[Random.Range(0, gnatTypes.Count)];
+
             GameObject gnat = null;
-            if(gnatType == "normal") {
+            if (gnatType == "normal")
+            {
                 gnat = Instantiate(gnat_normal, new Vector2(0, 0), Quaternion.identity);
-                gnatPool.Enqueue(gnat);
             }
-            else if(gnatType == "text") {
+            else if (gnatType == "text")
+            {
                 gnat = Instantiate(gnat_text, new Vector2(0, 0), Quaternion.identity);
                 gnat.GetComponent<Gnat_Text>().SetText(badWords[Random.Range(0, badWords.Count)]);
-                gnatPool.Enqueue(gnat);
             }
+            else if (gnatType == "fast")
+            {
+                gnat = Instantiate(gnat_fast, new Vector2(0, 0), Quaternion.identity);
+            }
+            else if (gnatType == "tank")
+            {
+                gnat = Instantiate(gnat_tank, new Vector2(0, 0), Quaternion.identity);
+            }
+            gnatPool.Enqueue(gnat);
 
-            if(gnat != null) {
-                gnat.GetComponent<Gnat>().SetSpeed(gnatSpeed);
+            if (gnat != null)
                 gnat.SetActive(false);
-            }
         }
     }
-    
-    void SetupSparkPool(bool spawningSparks, string sparkType) {
-        if(!spawningSparks || sparkType == "none") {
-            //Do not spawn sparks
+
+    void SetupSparkPool(List<string> sparkTypes)
+    {
+        if (sparkTypes.Count == 0)  //Don't spawn any sparks
+        {
             spawnSparks = false;
             sparkSpawnOffset = Mathf.Infinity;
             LevelManager.Instance.SetToWinOnTimeOut();
             return;
         }
 
-        if (sparkType == "random")
-        {
-            int rand = Random.Range(0, 2);
-            if (rand == 1)
-                sparkType = "normal";
-            else
-                sparkType = "text";
-        }
-
         //Sparks spawn intialise settings
         spawnSparks = true;
-        sparkSpawnOffset = LevelManager.Instance.maxTime/15;
+        sparkSpawnOffset = LevelManager.Instance.maxTime / 15;
         nextSparkSpawnTime = sparkSpawnOffset;
-        
+
+        string sparkType = sparkTypes[0];
+
         //Instantiate sparks to fill object pool with appropriate sparks for the level
         sparkPool = new Queue<GameObject>();
-        for(int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++)
+        {
+            if (sparkTypes.Count > 1)
+                sparkType = sparkTypes[Random.Range(0, sparkTypes.Count)];
+
             GameObject spark = null;
-            if(sparkType == "normal") {
-                spark = Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity);
-                sparkPool.Enqueue(spark);
+            if (sparkType == "normal")
+            {
+                if(Random.Range(0, 2) == 0)
+                    spark = Instantiate(spark_1, new Vector2(0, 0), Quaternion.identity);
+                else
+                    spark = Instantiate(spark_2, new Vector2(0, 0), Quaternion.identity);
+
             }
-            else if(sparkType == "text") {
+            else if (sparkType == "text")
+            {
                 spark = Instantiate(spark_text, new Vector2(0, 0), Quaternion.identity);
-                sparkPool.Enqueue(spark);
                 spark.GetComponent<Spark_Text>().SetText(goodWords[Random.Range(0, goodWords.Count)]);
             }
+            sparkPool.Enqueue(spark);
 
-            if(spark != null) {
+            if (spark != null)
+            {
                 spark.SetActive(false);
             }
         }
-    }
-
-    float PickGnatSpeed() {
-        return 0.2f;
-        // switch (currentLevel) {
-        //     case 0:
-        //         return 0f;
-        //     case 1:
-        //         return 0.2f;
-        //     case 2:
-        //         return 0.4f;
-        //     case 6:
-        //         return 0.2f;
-        //     case 7:
-        //         return 0.3f;
-        //     case 8:
-        //         return 0.4f;
-        //     case 9:
-        //         return 0.5f;
-        //     case 10:
-        //         return 0.6f;
-        //     case 11:
-        //         return 0.4f;
-        //     case 12:
-        //         return 0.5f;
-        //     case 13:
-        //         return 0.6f;
-        //     default:
-        //         return currentLevel/10f <= 0.7f ? currentLevel/10f : 0.7f;
-        // }
     }
 
     public void AddGnatToQueue(GameObject gnat)

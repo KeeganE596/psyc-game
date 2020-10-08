@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
 {
 
     [SerializeField] private List<GameObject> _levelSets;
+    [SerializeField] private ShowLevelSetNumber _showLevelSetNumberObj;
 
     private int _currentLevelSet = 0;
     private LevelSettings[] _levelSettings;
@@ -62,6 +63,7 @@ public class MapManager : MonoBehaviour
         _levelSets[_currentLevelSet].SetActive(false);
         _currentLevelSet++;
         _levelSets[_currentLevelSet].SetActive(true);
+        _showLevelSetNumberObj.SetNumber(_currentLevelSet);
         CheckLevelUnlock();
         GetAllCurrentLevelSettings();
     }
@@ -71,6 +73,7 @@ public class MapManager : MonoBehaviour
         _levelSets[_currentLevelSet].SetActive(false);
         _currentLevelSet--;
         _levelSets[_currentLevelSet].SetActive(true);
+        _showLevelSetNumberObj.SetNumber(_currentLevelSet);
         CheckLevelUnlock();
         GetAllCurrentLevelSettings();
     }

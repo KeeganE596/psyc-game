@@ -13,20 +13,19 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set;}
     
-    Slider timeSlider;
+    private Slider timeSlider;
     private bool usingTimer = true;
     public float maxTime = 15f;
-    //public float maxtime { get { return _maxTime; } }
-    float timeRemaining;
-    bool playing = false;
-    // [SerializeField] private bool usingPoints = false;
-    bool winOnTimeOut = false;
+    private float timeRemaining;
+    private bool playing = false;
+    private bool winOnTimeOut = false;
 
     //Referencing canvas objects
     [SerializeField] private GameObject inGameUIObjects;
     [SerializeField] private GameObject instructionsPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject winSetPanel;
     [SerializeField] private GameObject panelBackground;
     [SerializeField] private GameObject pausePanel;
 
@@ -54,8 +53,19 @@ public class LevelManager : MonoBehaviour
         pausePanel.SetActive(false);
         winPanel.SetActive(false);
         losePanel.SetActive(false);
-        instructionsPanel.SetActive(false);
-        StartGame(); 
+        winSetPanel.SetActive(false);
+
+        if (GameManagerStatic.GetCurrentLevelSettings().GetIfHasInstructions())
+        {
+            Time.timeScale = 0;
+            instructionsPanel.SetActive(true);
+            instructionsPanel.GetComponent<InstructionsManager>().ShowInstructions(GameManagerStatic.GetCurrentLevelSettings().GetInstructionsNumber());
+        }
+        else
+        {
+            instructionsPanel.SetActive(false);
+            StartGame();
+        }
     }
 
     // Update is called once per frame
@@ -156,12 +166,17 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         EndGame();
-        winPanel.SetActive(true);
+
+        int currentLvlNum = GameManagerStatic.GetCurrentRealLevelNumber();
+        if (currentLvlNum == 19 || currentLvlNum == 39 || currentLvlNum == 59 || currentLvlNum == 79 || currentLvlNum == 99)
+            winSetPanel.SetActive(true);
+        else
+            winPanel.SetActive(true);
         losePanel.SetActive(false);
         //panelBackground.GetComponent<Image>().color = new Color32(110, 190, 90, 255);
 
         int lvlunlocked = PlayerPrefs.GetInt("LevelUnlocked");
-        if((GameManagerStatic.GetCurrentRealLevelNumber()) == lvlunlocked) 
+        if(currentLvlNum == lvlunlocked) 
         {
             SaveManager.SaveLevelUnlocked(GameManagerStatic.GetCurrentLevelNumber() + 1);
         }
